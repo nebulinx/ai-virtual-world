@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "timestamp": "2026-03-08T00:39:44.663057",
+  "timestamp": "2026-03-08T01:55:12.345740+00:00",
   "physics": {
     "gravity": {
       "default": -9.8,
@@ -12,39 +12,7 @@
     },
     "dimensions": 4
   },
-  "entities": [
-    {
-      "id": "entity_0",
-      "type": "EnergyVortex",
-      "position": {
-        "x": 10,
-        "y": 0,
-        "z": 10,
-        "w": 0
-      },
-      "properties": {
-        "energy_level": 100.0,
-        "radius": 5.0,
-        "particles_spawned": 0
-      },
-      "age": 0
-    },
-    {
-      "id": "entity_1",
-      "type": "CrystalFormation",
-      "position": {
-        "x": -15,
-        "y": 5,
-        "z": -10,
-        "w": 2
-      },
-      "properties": {
-        "size": 1.0,
-        "growth_rate": 0.01
-      },
-      "age": 0
-    }
-  ],
+  "entities": [],
   "terrain": {},
   "events": [],
   "anomalies": []

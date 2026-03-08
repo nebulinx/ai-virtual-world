@@ -2,6 +2,7 @@
 
 from typing import Dict, Any
 from backend.agents.base_agent import BaseAgent
+from backend.agents.prompt_context import WORLD_SCHEMA_SUMMARY, WORLD_JSON_PATH
 from backend.ai.ollama_client import OllamaClient
 
 
@@ -16,29 +17,34 @@ class ProductManagerAgent(BaseAgent):
         world_state = context.get("world_state", {})
         entities = world_state.get("entities", [])
         events = world_state.get("events", [])
+        physics = world_state.get("physics", {})
+        gravity_zones = physics.get("gravity", {}).get("zones", [])
         
-        # Analyze current state
         analysis = {
             "entity_count": len(entities),
-            "recent_events": len([e for e in events[-10:]]),
-            "physics_zones": len(world_state.get("physics", {}).get("gravity", {}).get("zones", []))
+            "recent_events": len(events[-10:]) if events else 0,
+            "physics_zones": len(gravity_zones),
+            "dimensions": physics.get("dimensions", 4),
         }
         
-        # Generate challenge using AI
-        prompt = f"""Analyze the current virtual world state and generate a new challenge for the development team.
+        prompt = f"""You are the Product Manager for an autonomous AI virtual world simulation. Your job is to output exactly ONE concrete challenge per cycle for the developer to implement.
+
+World schema (stored at {WORLD_JSON_PATH}):
+{WORLD_SCHEMA_SUMMARY}
 
 Current world state:
-- Entities: {analysis['entity_count']}
-- Recent events: {analysis['recent_events']}
-- Physics zones: {analysis['physics_zones']}
+- Entity count: {analysis['entity_count']}
+- Recent events (last 10): {analysis['recent_events']}
+- Physics gravity zones: {analysis['physics_zones']}
+- Dimensions: {analysis['dimensions']}
 
-Generate a creative challenge that will evolve the world. Examples:
-- Create an entity that survives in negative gravity zones
-- Add a new physics rule for dimensional warping
-- Design an anomaly that affects time flow
-- Create a new type of energy field
+Rules:
+1. Output a single, actionable challenge in 1-2 clear sentences.
+2. Do not output multiple challenges or bullet lists—only one challenge.
+3. Prefer challenges that fit one of: new entity, new physics rule, or new event/anomaly type.
+4. Examples: "Create an entity that survives in negative gravity zones." / "Add a physics rule for dimensional warping near vortices." / "Design an anomaly that affects time flow in a zone."
 
-Provide a clear, actionable challenge description."""
+Reply with only the challenge text (1-2 sentences). Optionally end with a line "implementation_hint: entity" or "implementation_hint: physics" or "implementation_hint: event" to guide the developer."""
         
         challenge_text = self.ollama.generate(
             prompt,
@@ -47,10 +53,17 @@ Provide a clear, actionable challenge description."""
             max_tokens=500
         )
         
+        impl_hint = "general"
+        for hint in ("entity", "physics", "event"):
+            if f"implementation_hint: {hint}" in challenge_text.lower():
+                impl_hint = hint
+                challenge_text = challenge_text.replace(f"implementation_hint: {hint}", "").strip()
+        
         return {
             "analysis": analysis,
             "challenge": challenge_text.strip(),
-            "priority": "medium"
+            "priority": "medium",
+            "implementation_hint": impl_hint,
         }
     
     def act(self, context: Dict[str, Any]) -> Dict[str, Any]:
@@ -63,5 +76,6 @@ Provide a clear, actionable challenge description."""
             "agent": self.name,
             "challenge": challenge,
             "analysis": thoughts.get("analysis", {}),
+            "implementation_hint": thoughts.get("implementation_hint", "general"),
             "next_agent": "developer"
         }

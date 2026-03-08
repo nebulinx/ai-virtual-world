@@ -1,34 +1,3 @@
 {
-  "latest": [
-    {
-      "timestamp": "2024-01-01T00:00:00.000000",
-      "headline": "Virtual World Initialized",
-      "body": "The autonomous AI virtual world experiment has begun. Initial entities have been spawned and the world is ready for evolution.",
-      "category": "entity"
-    },
-    {
-      "timestamp": "2026-03-08T00:30:37.599495",
-      "headline": "World Status Update",
-      "body": "The virtual world continues to evolve with 2 active entities.",
-      "category": "entity"
-    },
-    {
-      "timestamp": "2026-03-08T00:33:39.524732",
-      "headline": "World Status Update",
-      "body": "The virtual world continues to evolve with 2 active entities.",
-      "category": "entity"
-    },
-    {
-      "timestamp": "2026-03-08T00:36:43.882828",
-      "headline": "World Status Update",
-      "body": "The virtual world continues to evolve with 2 active entities.",
-      "category": "entity"
-    },
-    {
-      "timestamp": "2026-03-08T00:39:44.574887",
-      "headline": "World Status Update",
-      "body": "The virtual world continues to evolve with 2 active entities.",
-      "category": "entity"
-    }
-  ]
+  "latest": []
 }

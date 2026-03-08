@@ -2,6 +2,7 @@
 
 from typing import Dict, Any
 from backend.agents.base_agent import BaseAgent
+from backend.agents.prompt_context import WORLD_SCHEMA_SUMMARY, ENTITY_TYPES_LIST
 from backend.ai.ollama_client import OllamaClient
 from backend.world.schemas import validate_world_json, validate_news_json
 import json
@@ -15,38 +16,34 @@ class TesterAgent(BaseAgent):
         super().__init__("Tester", ollama_client)
     
     def think(self, context: Dict[str, Any]) -> Dict[str, Any]:
-        """Analyze world state for validation."""
+        """Analyze world state and code for validation."""
         world_state = context.get("world_state", {})
         code_changes = context.get("code_changes", [])
         
-        # Validate world.json structure
         world_valid = validate_world_json(world_state)
-        
-        # Check for common issues
         issues = []
         
         if not world_valid:
             issues.append("World JSON schema validation failed")
         
-        # Check entities
         entities = world_state.get("entities", [])
         for entity in entities:
             if "id" not in entity or "type" not in entity:
                 issues.append(f"Entity missing required fields: {entity}")
             if "position" not in entity:
                 issues.append(f"Entity {entity.get('id')} missing position")
+            etype = entity.get("type")
+            if etype and etype not in ENTITY_TYPES_LIST:
+                issues.append(f"Entity type '{etype}' not in ENTITY_TYPES registry (known: {ENTITY_TYPES_LIST})")
         
-        # Check physics
         physics = world_state.get("physics", {})
         if "dimensions" not in physics:
             issues.append("Physics missing dimensions")
         
-        # Validate code changes if any
         code_issues = []
         if code_changes:
             for change in code_changes:
                 if "code" in change:
-                    # Basic syntax check
                     try:
                         compile(change["code"], "<string>", "exec")
                     except SyntaxError as e:

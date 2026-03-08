@@ -4,6 +4,7 @@ from typing import TypedDict, Annotated
 from langgraph.graph import StateGraph, END
 from backend.agents.product_manager import ProductManagerAgent
 from backend.agents.developer import DeveloperAgent
+from backend.agents.applier import ApplierAgent
 from backend.agents.refactor import RefactorAgent
 from backend.agents.tester import TesterAgent
 from backend.agents.news_agent import NewsAgent
@@ -19,6 +20,7 @@ class AgentState(TypedDict):
     news_items: list
     agent_results: dict
     current_agent: str
+    applier_result: dict
 
 
 class AgentWorkflow:
@@ -31,6 +33,7 @@ class AgentWorkflow:
         # Initialize agents
         self.product_manager = ProductManagerAgent(ollama_client)
         self.developer = DeveloperAgent(ollama_client)
+        self.applier = ApplierAgent()
         self.refactor = RefactorAgent(ollama_client)
         self.tester = TesterAgent(ollama_client)
         self.news_agent = NewsAgent(ollama_client)
@@ -45,6 +48,7 @@ class AgentWorkflow:
         # Add nodes
         workflow.add_node("product_manager", self._product_manager_node)
         workflow.add_node("developer", self._developer_node)
+        workflow.add_node("applier", self._applier_node)
         workflow.add_node("refactor", self._refactor_node)
         workflow.add_node("tester", self._tester_node)
         workflow.add_node("news_agent", self._news_agent_node)
@@ -52,9 +56,10 @@ class AgentWorkflow:
         # Set entry point
         workflow.set_entry_point("product_manager")
         
-        # Add edges
+        # Add edges: PM -> Developer -> Applier -> Refactor -> Tester -> News
         workflow.add_edge("product_manager", "developer")
-        workflow.add_edge("developer", "refactor")
+        workflow.add_edge("developer", "applier")
+        workflow.add_edge("applier", "refactor")
         workflow.add_edge("refactor", "tester")
         workflow.add_edge("tester", "news_agent")
         workflow.add_edge("news_agent", END)
@@ -75,9 +80,11 @@ class AgentWorkflow:
     
     def _developer_node(self, state: AgentState) -> AgentState:
         """Developer agent node."""
+        pm_result = state.get("agent_results", {}).get("product_manager", {})
         context = {
             "world_state": state.get("world_state", self.world_engine.get_world_state()),
-            "challenge": state.get("challenges", [""])[-1] if state.get("challenges") else ""
+            "challenge": state.get("challenges", [""])[-1] if state.get("challenges") else "",
+            "implementation_hint": pm_result.get("implementation_hint", ""),
         }
         result = self.developer.execute(context)
         state["code_changes"] = state.get("code_changes", []) + [result]
@@ -86,11 +93,25 @@ class AgentWorkflow:
         state["current_agent"] = "developer"
         return state
     
+    def _applier_node(self, state: AgentState) -> AgentState:
+        """Applier agent node: write generated code to files."""
+        context = {
+            "world_state": state.get("world_state", self.world_engine.get_world_state()),
+            "code_changes": state.get("code_changes", []),
+        }
+        result = self.applier.execute(context)
+        state["agent_results"] = state.get("agent_results", {})
+        state["agent_results"]["applier"] = result
+        state["applier_result"] = result
+        state["current_agent"] = "applier"
+        return state
+    
     def _refactor_node(self, state: AgentState) -> AgentState:
         """Refactor agent node."""
         context = {
             "world_state": state.get("world_state", self.world_engine.get_world_state()),
-            "code_changes": state.get("code_changes", [])
+            "code_changes": state.get("code_changes", []),
+            "applier_result": state.get("applier_result", {}),
         }
         result = self.refactor.execute(context)
         state["agent_results"] = state.get("agent_results", {})
@@ -130,7 +151,8 @@ class AgentWorkflow:
             "code_changes": [],
             "news_items": [],
             "agent_results": {},
-            "current_agent": ""
+            "current_agent": "",
+            "applier_result": {},
         }
         
         final_state = self.graph.invoke(initial_state)

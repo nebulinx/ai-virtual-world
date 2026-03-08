@@ -2,6 +2,14 @@
 
 from typing import Dict, Any
 from backend.agents.base_agent import BaseAgent
+from backend.agents.prompt_context import (
+    ENTITIES_MODULE_PATH,
+    PHYSICS_MODULE_PATH,
+    EVENTS_MODULE_PATH,
+    ENTITY_TYPES_LIST,
+    ENTITY_CONTRACT,
+    WORLD_SCHEMA_SUMMARY,
+)
 from backend.ai.ollama_client import OllamaClient
 
 
@@ -15,22 +23,27 @@ class DeveloperAgent(BaseAgent):
         """Plan implementation for challenge."""
         challenge = context.get("challenge", "")
         world_state = context.get("world_state", {})
+        impl_hint = context.get("implementation_hint", "")
         
-        # Analyze what needs to be implemented
-        prompt = f"""You are a developer implementing a feature for a virtual world simulation.
+        impl_type = impl_hint if impl_hint in ("entity", "physics", "event") else self._determine_type(challenge)
+        
+        prompt = f"""You are the Developer for an AI virtual world. You will implement the challenge by writing code that will be injected into this codebase.
 
 Challenge: {challenge}
 
-Current world state summary:
-- Entities: {len(world_state.get('entities', []))}
-- Physics dimensions: {world_state.get('physics', {}).get('dimensions', 4)}
+World schema summary:
+{WORLD_SCHEMA_SUMMARY}
 
-Plan the implementation:
-1. Determine if this requires a new entity, physics rule, or event
-2. Identify which files need to be modified
-3. Outline the code structure needed
+Codebase paths:
+- Entities (new entity classes): {ENTITIES_MODULE_PATH}
+- Physics rules: {PHYSICS_MODULE_PATH}
+- Events: {EVENTS_MODULE_PATH}
 
-Provide a clear implementation plan."""
+Current world: {len(world_state.get('entities', []))} entities, physics dimensions {world_state.get('physics', {}).get('dimensions', 4)}.
+
+Implementation type for this task: {impl_type}.
+
+Provide a short implementation plan (3-5 bullet points): which file to modify, what to add (e.g. new class name, method signatures), and how it fits the challenge."""
         
         plan_text = self.ollama.generate(
             prompt,
@@ -41,7 +54,7 @@ Provide a clear implementation plan."""
         
         return {
             "plan": plan_text.strip(),
-            "implementation_type": self._determine_type(challenge)
+            "implementation_type": impl_type,
         }
     
     def _determine_type(self, challenge: str) -> str:
@@ -79,40 +92,45 @@ Provide a clear implementation plan."""
             "implementation_type": impl_type,
             "code": code,
             "plan": plan,
-            "next_agent": "tester"
+            "next_agent": "applier"
         }
     
     def _generate_entity_code(self, challenge: str, plan: str) -> str:
-        """Generate entity class code."""
-        prompt = f"""Generate Python code for a new entity class based on this challenge:
+        """Generate entity class code plus ENTITY_TYPES entry."""
+        prompt = f"""Generate runnable Python code for a NEW entity class. File: {ENTITIES_MODULE_PATH}.
 
 Challenge: {challenge}
 Plan: {plan}
 
-Create a new entity class that:
-1. Inherits from Entity base class
-2. Has an update() method
-3. Has a to_dict() method
-4. Implements unique behavior based on the challenge
+Existing entity types in this file: {', '.join(ENTITY_TYPES_LIST)}. Do not duplicate them.
 
-Return only the class code, no explanations."""
+Entity contract (you must follow this):
+{ENTITY_CONTRACT}
+
+Requirements:
+1. Define exactly one new class that inherits from Entity (import from the same module or use Entity from typing if needed—in this codebase Entity is in the same file).
+2. Constructor: __init__(self, entity_id: str, position: Dict[str, float], properties: Dict[str, Any] = None), call super().__init__(entity_id, position, properties), then set any custom attributes from self.properties.
+3. Implement update(self, world_state: Dict[str, Any]) -> Dict[str, Any]: update self.age and self.properties as needed, return a dict with at least position, properties.
+4. to_dict() is inherited; ensure your class has id, position, properties, age (base class provides these).
+5. At the end of your response, add the ENTITY_TYPES registration line. Format: ENTITY_TYPES["YourClassName"] = YourClassName (so the applier can add it to the dict). Output as a single block: first the full class code, then a blank line, then the single line for ENTITY_TYPES.
+
+Output ONLY valid Python. No markdown code fences, no explanations, no triple backticks. Code only."""
         
         return self.ollama.generate(
             prompt,
             model=self.ollama.coder_model,
             temperature=0.7,
-            max_tokens=1500
+            max_tokens=2000
         )
     
     def _generate_physics_code(self, challenge: str, plan: str) -> str:
         """Generate physics rule code."""
-        prompt = f"""Generate Python code for a new physics rule based on this challenge:
+        prompt = f"""Generate runnable Python code for a physics rule. File: {PHYSICS_MODULE_PATH}.
 
 Challenge: {challenge}
 Plan: {plan}
 
-Create a function or method that implements the physics rule.
-Return only the code, no explanations."""
+Implement a function or method that applies the physics rule. It may read world_state["physics"] and optionally modify gravity/timeFlow zones. Output ONLY valid Python. No markdown, no explanations, no code fences."""
         
         return self.ollama.generate(
             prompt,
@@ -123,13 +141,12 @@ Return only the code, no explanations."""
     
     def _generate_event_code(self, challenge: str, plan: str) -> str:
         """Generate event code."""
-        prompt = f"""Generate Python code for a new event type based on this challenge:
+        prompt = f"""Generate runnable Python code for a new event type. File: {EVENTS_MODULE_PATH}.
 
 Challenge: {challenge}
 Plan: {plan}
 
-Create a function that generates this type of event.
-Return only the code, no explanations."""
+Create a function that generates this type of event (returns a dict with type, description, etc.). Output ONLY valid Python. No markdown, no explanations, no code fences."""
         
         return self.ollama.generate(
             prompt,
@@ -139,17 +156,21 @@ Return only the code, no explanations."""
         )
     
     def _generate_general_code(self, challenge: str, plan: str) -> str:
-        """Generate general implementation code."""
-        prompt = f"""Generate Python code to implement this challenge:
+        """Generate general implementation code (default: entity)."""
+        prompt = f"""Generate runnable Python code to implement this challenge. Prefer adding a new entity class to {ENTITIES_MODULE_PATH} if the challenge is ambiguous.
 
 Challenge: {challenge}
 Plan: {plan}
 
-Return only the code, no explanations."""
+Entity contract if adding an entity:
+{ENTITY_CONTRACT}
+Existing entity types: {', '.join(ENTITY_TYPES_LIST)}. Include ENTITY_TYPES registration if you add a new class.
+
+Output ONLY valid Python. No markdown, no explanations, no code fences."""
         
         return self.ollama.generate(
             prompt,
             model=self.ollama.coder_model,
             temperature=0.7,
-            max_tokens=1500
+            max_tokens=2000
         )

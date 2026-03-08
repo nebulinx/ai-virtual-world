@@ -1,5 +1,6 @@
 """News agent - generates news from world events."""
 
+import re
 from typing import Dict, Any, List
 from datetime import datetime
 from backend.agents.base_agent import BaseAgent
@@ -8,6 +9,12 @@ from backend.config import NEWS_JSON_PATH
 from backend.world.schemas import validate_news_json
 import json
 from pathlib import Path
+
+NEWS_JSON_FORMAT_INSTRUCTION = (
+    'You must respond with exactly a single JSON object with two keys: "headline" and "body". '
+    'Both must be non-empty strings. Headline: one short phrase. Body: 1-3 sentences. '
+    'No other text, no markdown, no code fences. Example: {"headline": "Title", "body": "Sentence one."}'
+)
 
 
 class NewsAgent(BaseAgent):
@@ -73,98 +80,75 @@ class NewsAgent(BaseAgent):
         }
     
     def _generate_news_for_event(self, event: Dict[str, Any]) -> Dict[str, Any]:
-        """Generate news article for a specific event."""
+        """Generate news article for a specific event. Never return empty headline/body."""
         event_type = event.get("type", "unknown")
-        description = event.get("description", "")
+        description = event.get("description", "") or "An event occurred in the virtual world."
         
-        prompt = f"""Write a news article in the style of "alien news" reporting about this virtual world event:
+        prompt = f"""Write a short "alien news" style article about this virtual world event.
 
 Event Type: {event_type}
 Description: {description}
 
-Write a creative, engaging news headline and body that describes this event in an interesting way.
-Format as JSON with "headline" and "body" fields. Keep it concise (2-3 sentences for body)."""
+{NEWS_JSON_FORMAT_INSTRUCTION}"""
         
-        try:
-            response = self.ollama.generate(
+        news_data = self._parse_news_response(
+            self.ollama.generate(
                 prompt,
                 model=self.ollama.reasoning_model,
                 temperature=0.8,
                 max_tokens=300
             )
-            
-            # Try to parse JSON from response
-            import re
-            json_match = re.search(r'\{[^}]+\}', response, re.DOTALL)
-            if json_match:
-                news_data = json.loads(json_match.group())
-            else:
-                # Fallback: create from response
-                lines = response.strip().split('\n')
-                headline = lines[0].replace('"', '').replace('headline:', '').strip()
-                body = ' '.join(lines[1:]).replace('body:', '').strip()
-                news_data = {"headline": headline, "body": body}
-            
-            return {
-                "timestamp": datetime.utcnow().isoformat(),
-                "headline": news_data.get("headline", f"Event: {event_type}"),
-                "body": news_data.get("body", description),
-                "category": self._categorize_event(event_type)
-            }
-        except Exception as e:
-            # Fallback news item
-            return {
-                "timestamp": datetime.utcnow().isoformat(),
-                "headline": f"World Event: {event_type}",
-                "body": description,
-                "category": self._categorize_event(event_type)
-            }
+        )
+        headline = (news_data.get("headline") or "").strip() or f"World Event: {event_type}"
+        body = (news_data.get("body") or "").strip() or description
+        return {
+            "timestamp": datetime.utcnow().isoformat(),
+            "headline": headline,
+            "body": body,
+            "category": self._categorize_event(event_type)
+        }
     
     def _generate_general_update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
-        """Generate general world update news."""
+        """Generate general world update news. Never return empty headline/body."""
         entity_count = len(world_state.get("entities", []))
         events_count = len(world_state.get("events", []))
         
-        prompt = f"""Write a brief news update about the virtual world:
+        prompt = f"""Write a brief news update about the virtual world.
 
-Current state:
-- Entities: {entity_count}
-- Total events: {events_count}
+Current state: {entity_count} entities, {events_count} total events.
 
-Write a creative headline and 2-3 sentence update about the world's current state.
-Format as JSON with "headline" and "body" fields."""
+{NEWS_JSON_FORMAT_INSTRUCTION}"""
         
-        try:
-            response = self.ollama.generate(
+        news_data = self._parse_news_response(
+            self.ollama.generate(
                 prompt,
                 model=self.ollama.reasoning_model,
                 temperature=0.7,
                 max_tokens=200
             )
-            
-            import re
-            json_match = re.search(r'\{[^}]+\}', response, re.DOTALL)
+        )
+        headline = (news_data.get("headline") or "").strip() or "World Update"
+        body = (news_data.get("body") or "").strip() or f"The virtual world has {entity_count} entities and {events_count} events."
+        return {
+            "timestamp": datetime.utcnow().isoformat(),
+            "headline": headline,
+            "body": body,
+            "category": "entity"
+        }
+
+    def _parse_news_response(self, response: str) -> Dict[str, str]:
+        """Parse LLM response into {headline, body}. Returns dict with at least empty values."""
+        try:
+            json_match = re.search(r'\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}', response, re.DOTALL)
             if json_match:
-                news_data = json.loads(json_match.group())
-            else:
-                lines = response.strip().split('\n')
-                headline = lines[0].replace('"', '').replace('headline:', '').strip()
-                body = ' '.join(lines[1:]).replace('body:', '').strip()
-                news_data = {"headline": headline, "body": body}
-            
-            return {
-                "timestamp": datetime.utcnow().isoformat(),
-                "headline": news_data.get("headline", "World Update"),
-                "body": news_data.get("body", f"The world currently has {entity_count} entities."),
-                "category": "entity"
-            }
-        except Exception:
-            return {
-                "timestamp": datetime.utcnow().isoformat(),
-                "headline": "World Status Update",
-                "body": f"The virtual world continues to evolve with {entity_count} active entities.",
-                "category": "entity"
-            }
+                data = json.loads(json_match.group())
+                return {"headline": data.get("headline", ""), "body": data.get("body", "")}
+        except (json.JSONDecodeError, TypeError):
+            pass
+        lines = [l.strip() for l in response.strip().split("\n") if l.strip()]
+        headline = lines[0].replace('"', "").replace("headline:", "").strip() if lines else ""
+        body = " ".join(l.replace("body:", "").strip() for l in lines[1:]) if len(lines) > 1 else ""
+        return {"headline": headline, "body": body}
     
     def _categorize_event(self, event_type: str) -> str:
         """Categorize event type."""
@@ -176,24 +160,23 @@ Format as JSON with "headline" and "body" fields."""
             return "anomaly"
     
     def _save_news(self, news_items: List[Dict[str, Any]]) -> None:
-        """Save news items to JSON file."""
-        # Load existing news
+        """Save news items to JSON file. Skip any item with empty headline or body."""
+        valid = [
+            n for n in news_items
+            if (n.get("headline") or "").strip() and (n.get("body") or "").strip()
+        ]
+        if not valid:
+            return
         existing_news = {"latest": []}
         if self.news_path.exists():
             try:
-                with open(self.news_path, 'r') as f:
+                with open(self.news_path, "r") as f:
                     existing_news = json.load(f)
             except (json.JSONDecodeError, IOError):
                 pass
-        
-        # Add new items
-        existing_news["latest"].extend(news_items)
-        
-        # Keep only last 50 items
+        existing_news["latest"] = (existing_news.get("latest") or []) + valid
         existing_news["latest"] = existing_news["latest"][-50:]
-        
-        # Validate before saving
         if validate_news_json(existing_news):
             self.news_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(self.news_path, 'w') as f:
+            with open(self.news_path, "w") as f:
                 json.dump(existing_news, f, indent=2)

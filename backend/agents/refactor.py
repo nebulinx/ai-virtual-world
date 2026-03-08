@@ -2,6 +2,7 @@
 
 from typing import Dict, Any
 from backend.agents.base_agent import BaseAgent
+from backend.agents.prompt_context import ENTITY_CONTRACT
 from backend.ai.ollama_client import OllamaClient
 
 
@@ -14,7 +15,7 @@ class RefactorAgent(BaseAgent):
     def think(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Analyze code for optimization opportunities."""
         code_changes = context.get("code_changes", [])
-        world_state = context.get("world_state", {})
+        applier_result = context.get("applier_result", {})
         
         if not code_changes:
             return {
@@ -22,19 +23,25 @@ class RefactorAgent(BaseAgent):
                 "optimizations": []
             }
         
-        # Analyze code quality
-        prompt = f"""Analyze the following code changes and suggest optimizations:
+        # Last change may have been applied to disk by Applier
+        last_change = code_changes[-1] if code_changes else {}
+        code = last_change.get("code", "")
+        applied = applier_result.get("applied", False)
+        
+        prompt = f"""You are the Refactor agent. The previous step (Developer) produced code that may have been applied to the codebase by an Applier step. Your job is to review that code for safety and correctness.
 
-Code changes: {code_changes}
+Code that was produced (and possibly applied):
+{code[:3000] if code else '(none)'}
 
-Consider:
-1. Performance improvements
-2. Code readability
-3. Error handling
-4. Code structure
-5. Best practices
+Context: This is a virtual world simulation. Entity code must respect the contract: {ENTITY_CONTRACT}
 
-Provide specific optimization suggestions."""
+Focus on:
+1. Safety: no unsafe eval/exec, imports are from the project.
+2. Schema: entities have update(world_state), to_dict(), position, properties, age.
+3. Concrete, line-level suggestions (e.g. "Line X: add bounds check for radius").
+4. Whether the code is ready to keep (approved) or should be improved.
+
+Provide specific optimization or correctness suggestions. If the code looks good, say so briefly."""
         
         suggestions = self.ollama.generate(
             prompt,
@@ -46,7 +53,8 @@ Provide specific optimization suggestions."""
         return {
             "analysis": "Code review completed",
             "suggestions": suggestions.strip(),
-            "optimizations": self._extract_optimizations(suggestions)
+            "optimizations": self._extract_optimizations(suggestions),
+            "approved_code": "looks good" in suggestions.lower() or "ready" in suggestions.lower(),
         }
     
     def _extract_optimizations(self, suggestions: str) -> list:
@@ -64,7 +72,7 @@ Provide specific optimization suggestions."""
         thoughts = context.get("thoughts", {})
         suggestions = thoughts.get("suggestions", "")
         
-        if not suggestions or "No code changes" in thoughts.get("analysis", ""):
+        if not suggestions or "No code changes" in str(thoughts.get("analysis", "")):
             return {
                 "status": "skipped",
                 "agent": self.name,
@@ -77,5 +85,6 @@ Provide specific optimization suggestions."""
             "agent": self.name,
             "optimizations": thoughts.get("optimizations", []),
             "suggestions": suggestions,
+            "approved_code": thoughts.get("approved_code", False),
             "next_agent": "tester"
         }
