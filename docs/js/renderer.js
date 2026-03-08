@@ -199,8 +199,7 @@ function updateEventsAndAnomalies(scene, events, anomalies) {
     });
 }
 
-// Expose to global scope
-window.scene = null;
+// Expose for main.js / global (do not overwrite window.scene - main.js sets it)
 window.updateRenderer = updateRenderer;
 
 // Initialize when scene is ready
