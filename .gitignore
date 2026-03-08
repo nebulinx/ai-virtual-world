@@ -51,6 +51,9 @@ yarn-error.log*
 # World state history (keep current world.json and news.json)
 backend/data/history/*.json
 
+# Code evolution backups (Applier rollback; local only)
+backend/data/backups/
+
 # Docker
 .dockerignore
 

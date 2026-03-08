@@ -154,3 +154,29 @@ def create_entity(entity_type: str, entity_id: str, position: Dict[str, float], 
     if entity_type not in ENTITY_TYPES:
         raise ValueError(f"Unknown entity type: {entity_type}")
     return ENTITY_TYPES[entity_type](entity_id, position, properties)
+
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class AdaptiveEntity(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic to adapt to varying dimensions
+        # Example: Adjust properties based on world_state
+        if 'dimension' in world_state:
+            if world_state['dimension'] == 'high':
+                self.properties['strength'] *= 1.1
+            elif world_state['dimension'] == 'low':
+                self.properties['strength'] *= 0.9
+        return super().update(world_state)
+
+    def to_dict(self) -> Dict[str, Any]:
+        # Ensure position, properties, age are set
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+# Register the new entity type
+ENTITY_TYPES["AdaptiveEntity"] = AdaptiveEntity
