@@ -162,10 +162,10 @@ Generates real-time news about world events. Converts world events into natural 
 
 ### Model Configuration
 
-- **qwen2.5-coder:7b-q8_0** (~8GB): Code generation tasks (Developer, Refactor agents)
-- **deepseek-r1:7b-q8_0** (~8GB): Reasoning tasks (Product Manager, News Agent, Tester)
+- **qwen2.5-coder:7b** (~14GB): Code generation tasks (Developer, Refactor agents)
+- **deepseek-r1:7b** (~14GB): Reasoning tasks (Product Manager, News Agent, Tester)
 
-INT8 quantization reduces memory from ~14GB (FP16) to ~8GB per model with minimal quality loss.
+**Note:** Base 7B models use ~14GB each. With 12GB allocated to Ollama, only one model can be loaded at a time. The system will automatically switch models as needed.
 
 ## 24x7 Operation
 
