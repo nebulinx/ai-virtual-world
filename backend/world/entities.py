@@ -544,3 +544,33 @@ ENTITY_TYPES = {
     "TemporalAnomaly": TemporalAnomaly,
     "QuantumParticle": QuantumParticle
 }
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class FifthDimensionalEntity(Entity):
+    def __init__(self, position, properties, age, time_state):
+        super().__init__(position, properties, age)
+        self.time_state = time_state
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement custom update logic here
+        # Example: Adjust position based on time_state
+        new_position = (self.position[0] + self.time_state, self.position[1], self.position[2])
+        return {
+            "position": new_position,
+            "properties": self.properties,
+            "age": self.age,
+            "time_state": self.time_state
+        }
+
+    def to_dict(self):
+        return {
+            "type": "FifthDimensionalEntity",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "time_state": self.time_state
+        }
+
+ENTITY_TYPES["FifthDimensionalEntity"] = FifthDimensionalEntity
