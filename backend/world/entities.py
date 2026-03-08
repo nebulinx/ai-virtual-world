@@ -279,3 +279,20 @@ class SocialNetworkMember(Entity):
         }
 
 ENTITY_TYPES["SocialNetworkMember"] = SocialNetworkMember
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeZoneEntity(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement your time zone entity logic here
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeZoneEntity"] = TimeZoneEntity
