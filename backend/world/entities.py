@@ -229,3 +229,29 @@ class DynamicTimeDilationEntity(Entity):
 ENTITY_TYPES = {
     "DynamicTimeDilationEntity": DynamicTimeDilationEntity
 }
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class AlternateVersionEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int, version: str):
+        super().__init__(position, properties, age)
+        self.version = version
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic based on the version
+        if self.version == "v1":
+            self.properties["power"] += 1
+        elif self.version == "v2":
+            self.properties["energy"] += 2
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "version": self.version
+        }
+
+ENTITY_TYPES["AlternateVersionEntity"] = AlternateVersionEntity
