@@ -1,0 +1,11 @@
+{
+  "name": "ai-virtual-world-frontend",
+  "version": "0.1.0",
+  "description": "Frontend for The Virtual World Experiment",
+  "private": true,
+  "scripts": {
+    "serve": "python3 -m http.server 8000"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

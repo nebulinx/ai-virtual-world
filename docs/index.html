@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Virtual World Experiment</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>The Virtual World Experiment</h1>
+            <p>Autonomous AI-driven world evolution</p>
+        </header>
+        
+        <div id="main-content">
+            <div id="canvas-container">
+                <canvas id="world-canvas"></canvas>
+                <div id="controls-info">
+                    <p>Click entities to see details</p>
+                    <p>Drag to rotate • Scroll to zoom</p>
+                </div>
+            </div>
+            
+            <div id="sidebar">
+                <div id="news-panel">
+                    <h2>World News</h2>
+                    <div id="news-feed"></div>
+                </div>
+                
+                <div id="entity-details" style="display: none;">
+                    <h2>Entity Details</h2>
+                    <div id="entity-info"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/news.js"></script>
+</body>
+</html>
