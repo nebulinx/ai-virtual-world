@@ -40,7 +40,6 @@ function init() {
     // Entity click: raycast and show entity details (properties, age, position including w)
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
-    const canvas = document.getElementById('world-canvas');
     canvas.addEventListener('click', onCanvasClick);
     
     // Handle window resize

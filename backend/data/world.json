@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "timestamp": "2026-03-08T22:02:16.755189+00:00",
+  "timestamp": "2026-03-08T22:32:40.579372+00:00",
   "physics": {
     "gravity": {
       "default": -9.8,
@@ -15,5 +15,6 @@
   "entities": [],
   "terrain": {},
   "events": [],
-  "anomalies": []
+  "anomalies": [],
+  "evolution_log": []
 }
