@@ -194,13 +194,13 @@ class GitUtils:
         changed_files = []
         
         for line in lines:
-            # Parse git status output: XY filename
-            # X = index status, Y = working tree status
+            # Parse git status output: XY filename (or " Y path" after strip when leading space)
+            # X = index status, Y = working tree status; path starts after first 2 chars
             if len(line) < 3:
                 continue
             
             status = line[:2]
-            file_path = line[3:].strip()
+            file_path = line[2:].strip()
             
             # Skip ignored files (!!)
             if status == "!!":
