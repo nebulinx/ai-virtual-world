@@ -23,6 +23,7 @@ def reset_world() -> None:
         "terrain": {},
         "events": [],
         "anomalies": [],
+        "evolution_log": [],
     }
     with open(world_path, "w") as f:
         json.dump(data, f, indent=2)

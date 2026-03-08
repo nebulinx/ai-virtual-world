@@ -50,9 +50,24 @@ class WorldEngine:
             "entities": [],
             "terrain": {},
             "events": [],
-            "anomalies": []
+            "anomalies": [],
+            "evolution_log": [],
         }
         self.save_world()
+
+    EVOLUTION_LOG_CAP = 50
+
+    def append_evolution_entry(self, cycle_index: int, summary: str) -> None:
+        """Append a per-cycle evolution entry so every commit has a real world change."""
+        from datetime import timezone
+        entry = {
+            "cycle": cycle_index,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "summary": (summary or "").strip() or f"Cycle {cycle_index}",
+        }
+        log = self.world_state.setdefault("evolution_log", [])
+        log.append(entry)
+        self.world_state["evolution_log"] = log[-self.EVOLUTION_LOG_CAP:]
     
     def save_world(self) -> None:
         """Save world state to JSON file."""

@@ -104,7 +104,6 @@ class VirtualWorldSystem:
                 
                 # Optional world tick: run entity updates so world state changes between cycles
                 self.world_engine.run_entity_tick()
-                self.world_engine.save_world()
                 
                 # Spawn one instance when Applier added a new entity type
                 applier_result = (final_state.get("agent_results") or {}).get("applier") or {}
@@ -119,6 +118,11 @@ class VirtualWorldSystem:
                         print(f"Spawned new entity type: {new_entity_type}")
                     except Exception as e:
                         print(f"Could not spawn {new_entity_type}: {e}")
+                
+                # Per-cycle evolution log so every commit has a real world change (not just timestamp)
+                summary = (final_state.get("agent_results") or {}).get("planner", {}).get("summary", "").strip()
+                self.world_engine.append_evolution_entry(cycle_count, summary or f"Cycle {cycle_count}")
+                self.world_engine.save_world()
                 
                 # Commit: every cycle (with Planner summary) or on interval
                 current_time = time.time()

@@ -33,7 +33,8 @@ WORLD_SCHEMA = {
         },
         "terrain": {"type": "object"},
         "events": {"type": "array"},
-        "anomalies": {"type": "array"}
+        "anomalies": {"type": "array"},
+        "evolution_log": {"type": "array"}
     }
 }
 
