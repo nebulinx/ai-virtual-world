@@ -255,3 +255,27 @@ class AlternateVersionEntity(Entity):
         }
 
 ENTITY_TYPES["AlternateVersionEntity"] = AlternateVersionEntity
+
+from world.entities import Entity, ENTITY_TYPES
+
+class SocialNetworkMember(Entity):
+    def __init__(self, position, properties=None, age=0, relationships=None):
+        super().__init__(position, properties, age)
+        self.relationships = relationships if relationships is not None else {}
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_properties = self.properties.copy()
+        for relationship, strength in self.relationships.items():
+            if relationship in world_state:
+                related_entity = world_state[relationship]
+                if related_entity.type == "SocialNetworkMember":
+                    new_properties["influence"] += strength * related_entity.properties["influence"]
+        return new_properties
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            "relationships": self.relationships
+        }
+
+ENTITY_TYPES["SocialNetworkMember"] = SocialNetworkMember
