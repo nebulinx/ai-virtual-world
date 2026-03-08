@@ -157,8 +157,12 @@ class GitUtils:
 
         return allowed
     
-    def _check_critical_file_deletions(self, changed_files: List[str]) -> tuple[bool, str]:
-        """Check if any critical files are being deleted."""
+    def _check_critical_file_deletions(
+        self, deleted_paths: List[str], staged_paths: List[str]
+    ) -> tuple[bool, str]:
+        """Block only if we are actually staging a deletion of a critical file.
+        In Docker, many paths show as deleted (not mounted); we only stage allowed_files,
+        so we must not block unless a critical path is in both deleted_paths and staged_paths."""
         critical_files = [
             "Dockerfile",
             "docker-compose.yml",
@@ -170,14 +174,13 @@ class GitUtils:
             "package.json",
             "pyproject.toml",
         ]
-        
-        deletions = [f for f in changed_files if f.startswith("D")]
-        for deletion in deletions:
-            file_path = deletion.split()[-1] if len(deletion.split()) > 1 else deletion
+        staged_set = set(staged_paths)
+        for file_path in deleted_paths:
+            if file_path not in staged_set:
+                continue
             for critical in critical_files:
                 if file_path.startswith(critical):
                     return False, f"Blocked: Attempt to delete critical file {file_path}"
-        
         return True, ""
     
     def commit_changes(self, message: Optional[str] = None) -> tuple[bool, str]:
@@ -192,6 +195,7 @@ class GitUtils:
         
         lines = [line.strip() for line in output.strip().split('\n') if line.strip()]
         changed_files = []
+        deleted_paths = []
         
         for line in lines:
             # Parse git status output: XY filename (or " Y path" after strip when leading space)
@@ -209,17 +213,19 @@ class GitUtils:
             # Only track modifications, additions, and deletions of tracked files
             if status[0] in ['M', 'A', 'D'] or status[1] in ['M', 'A', 'D']:
                 changed_files.append(file_path)
+                if status[0] == 'D' or status[1] == 'D':
+                    deleted_paths.append(file_path)
         
         if not changed_files:
             return False, "No changes to commit"
         
-        # Check for critical file deletions
-        check_ok, check_msg = self._check_critical_file_deletions(changed_files)
+        # Filter to only allowed files (we only ever stage these)
+        allowed_files = self._get_allowed_files(changed_files)
+        
+        # Block only if we would stage a deletion of a critical file (e.g. in Docker we do not stage Dockerfile)
+        check_ok, check_msg = self._check_critical_file_deletions(deleted_paths, allowed_files)
         if not check_ok:
             return False, check_msg
-        
-        # Filter to only allowed files
-        allowed_files = self._get_allowed_files(changed_files)
         
         if not allowed_files:
             sample = ", ".join(changed_files[:5])
