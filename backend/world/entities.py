@@ -440,3 +440,34 @@ class EvolutionCrystal(Entity):
         }
 
 ENTITY_TYPES["EvolutionCrystal"] = EvolutionCrystal
+
+from backend.world.entities import Entity, ENTITY_TYPES, Position
+import time
+
+class Zone:
+    def __init__(self, time_flow_speed: float):
+        self.time_flow_speed = time_flow_speed
+
+    def update_time_flow_speed(self, new_speed: float):
+        self.time_flow_speed = new_speed
+
+class EntityWithZoneSpeed(Entity):
+    def __init__(self, position: Position, properties: Dict[str, Any], zone_speed: float):
+        super().__init__(position, properties)
+        self.zone_speed = zone_speed
+        self.enter_time = time.time()
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        current_time = time.time()
+        time_passed = (current_time - self.enter_time) * self.zone_speed
+        self.age += time_passed
+        self.enter_time = current_time
+        return super().update(world_state)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "zone_speed": self.zone_speed
+        }
+
+ENTITY_TYPES["EntityWithZoneSpeed"] = EntityWithZoneSpeed
