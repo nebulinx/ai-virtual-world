@@ -7,11 +7,21 @@ from pathlib import Path
 from backend.config import GIT_USER_NAME, GIT_USER_EMAIL, GITHUB_TOKEN, GIT_REPO_URL, WORLD_JSON_PATH, NEWS_JSON_PATH
 
 
+def _find_repo_root() -> Path:
+    """Resolve repo root (directory containing .git) from this file's location."""
+    path = Path(__file__).resolve().parent
+    while path != path.parent:
+        if (path / ".git").exists():
+            return path
+        path = path.parent
+    return Path(".").resolve()
+
+
 class GitUtils:
     """Handles git operations with Conventional Commits."""
     
     def __init__(self):
-        self.repo_path = Path(".")
+        self.repo_path = _find_repo_root()
         self.git_user_name = GIT_USER_NAME
         self.git_user_email = GIT_USER_EMAIL
     
@@ -222,10 +232,16 @@ class GitUtils:
         return True, f"Committed: {message}"
     
     def push_changes(self) -> tuple[bool, str]:
-        """Push changes to remote repository."""
+        """Push changes to remote repository. Uses SSH by default; uses HTTPS with GITHUB_TOKEN if set."""
+        # If GITHUB_TOKEN is set, use HTTPS remote so push can authenticate
+        if GITHUB_TOKEN and GIT_REPO_URL.startswith("git@"):
+            # git@github.com:user/repo.git -> https://github.com/user/repo
+            parts = GIT_REPO_URL.replace("git@github.com:", "").replace(".git", "")
+            self._run_git(
+                ["remote", "set-url", "origin", f"https://x-access-token:{GITHUB_TOKEN}@github.com/{parts}.git"]
+            )
         success, output = self._run_git(["push", "origin", "main"])
         if not success:
-            # Try to set upstream if needed
             self._run_git(["push", "-u", "origin", "main"])
             success, output = self._run_git(["push", "origin", "main"])
         return success, output

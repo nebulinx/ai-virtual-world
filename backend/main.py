@@ -75,7 +75,8 @@ class VirtualWorldSystem:
                         print(f"✓ {message}")
                         self.last_commit_time = current_time
                     else:
-                        print(f"✗ Commit failed: {message}")
+                        print(f"✗ Commit/push failed: {message}")
+                        print("  (In Docker: set GITHUB_TOKEN for HTTPS push, or mount ~/.ssh for SSH.)")
                 
                 print(f"Cycle {cycle_count} completed. Waiting {AGENT_LOOP_INTERVAL}s...")
                 time.sleep(AGENT_LOOP_INTERVAL)
