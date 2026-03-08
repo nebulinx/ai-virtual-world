@@ -5,8 +5,8 @@ from typing import Optional
 
 # Ollama configuration
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
-OLLAMA_CODER_MODEL = "qwen2.5-coder:7b-q8_0"
-OLLAMA_REASONING_MODEL = "deepseek-r1:7b-q8_0"
+OLLAMA_CODER_MODEL = "qwen2.5-coder:7b"
+OLLAMA_REASONING_MODEL = "deepseek-r1:7b"
 
 # Git configuration
 GIT_USER_NAME = os.getenv("GIT_USER_NAME", "AI Virtual World")

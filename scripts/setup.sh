@@ -16,11 +16,11 @@ poetry install
 
 echo "Pulling Ollama models..."
 if command -v ollama &> /dev/null; then
-    echo "Pulling qwen2.5-coder:7b-q8_0..."
-    ollama pull qwen2.5-coder:7b-q8_0 || echo "Warning: Failed to pull coder model"
+    echo "Pulling qwen2.5-coder:7b..."
+    ollama pull qwen2.5-coder:7b || echo "Warning: Failed to pull coder model"
     
-    echo "Pulling deepseek-r1:7b-q8_0..."
-    ollama pull deepseek-r1:7b-q8_0 || echo "Warning: Failed to pull reasoning model"
+    echo "Pulling deepseek-r1:7b..."
+    ollama pull deepseek-r1:7b || echo "Warning: Failed to pull reasoning model"
 else
     echo "Warning: Ollama not found. Install Ollama to pull models."
 fi

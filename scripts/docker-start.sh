@@ -21,9 +21,9 @@ if command -v poetry &> /dev/null; then
     
     # Pull models if Ollama is available locally
     if command -v ollama &> /dev/null; then
-        echo "Pulling quantized models..."
-        ollama pull qwen2.5-coder:7b-q8_0 || echo "Warning: Failed to pull coder model"
-        ollama pull deepseek-r1:7b-q8_0 || echo "Warning: Failed to pull reasoning model"
+        echo "Pulling models..."
+        ollama pull qwen2.5-coder:7b || echo "Warning: Failed to pull coder model"
+        ollama pull deepseek-r1:7b || echo "Warning: Failed to pull reasoning model"
     else
         echo "Note: Ollama not found locally. Models will be pulled in Docker container."
     fi
@@ -55,8 +55,8 @@ if docker ps | grep -q ai-virtual-world-ollama; then
     
     # Pull models in container if needed
     echo "Ensuring models are available in Ollama container..."
-    docker exec ai-virtual-world-ollama ollama pull qwen2.5-coder:7b-q8_0 || true
-    docker exec ai-virtual-world-ollama ollama pull deepseek-r1:7b-q8_0 || true
+    docker exec ai-virtual-world-ollama ollama pull qwen2.5-coder:7b || true
+    docker exec ai-virtual-world-ollama ollama pull deepseek-r1:7b || true
 else
     echo "✗ Ollama service failed to start"
 fi

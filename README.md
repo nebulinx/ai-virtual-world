@@ -60,7 +60,7 @@ chmod +x scripts/setup.sh
 This will:
 - Install Poetry if not present
 - Install Python dependencies via Poetry
-- Pull quantized Ollama models (q8_0 versions for INT8)
+- Pull Ollama models
 - Set up git configuration
 - Create necessary directories
 
@@ -103,8 +103,8 @@ poetry shell
 ollama serve
 
 # Pull models
-ollama pull qwen2.5-coder:7b-q8_0
-ollama pull deepseek-r1:7b-q8_0
+ollama pull qwen2.5-coder:7b
+ollama pull deepseek-r1:7b
 
 # Run backend
 poetry run python backend/main.py
@@ -200,7 +200,7 @@ The system evolves autonomously:
 
 ## Important Notes
 
-- **Quantized models** (q8_0) are recommended for 16GB systems
+- **Model memory usage:** Base 7B models use ~14GB each. The system loads one model at a time and switches as needed.
 - **Frontend polling** is set to 30 seconds to respect GitHub rate limits
 - **Code evolution** includes safety checks - tester agent validates before commits
 - **Git authentication** required: either SSH keys or GitHub token must be configured
