@@ -1,3 +1,10 @@
 {
-  "latest": []
+  "latest": [
+    {
+      "timestamp": "2026-03-08T21:21:48.828131",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 0 recorded events, and 4 dimensions.",
+      "category": "entity"
+    }
+  ]
 }

@@ -181,3 +181,51 @@ class AdaptiveEntity(Entity):
 
 # Register the new entity type
 ENTITY_TYPES["AdaptiveEntity"] = AdaptiveEntity
+
+from typing import Dict, Any
+import time
+
+class Entity:
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        self.position = position
+        self.properties = properties
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def to_dict(self):
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class TimeDilationZone:
+    def __init__(self, time_rate: float):
+        self.time_rate = time_rate
+
+    def update_time(self, elapsed_time: float) -> float:
+        return elapsed_time * self.time_rate
+
+class DynamicTimeDilationEntity(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], zone: TimeDilationZone):
+        super().__init__(position, properties)
+        self.zone = zone
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        elapsed_time = time.time() - self.properties.get("last_update_time", 0)
+        actual_time_passed = self.zone.update_time(elapsed_time)
+        self.age += actual_time_passed
+        self.properties["last_update_time"] = time.time()
+        return self.to_dict()
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            "zone": self.zone.time_rate
+        }
+
+ENTITY_TYPES = {
+    "DynamicTimeDilationEntity": DynamicTimeDilationEntity
+}
