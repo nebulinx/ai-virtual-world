@@ -116,33 +116,40 @@ class GitUtils:
             "poetry.lock",
         ]
         
+        repo_path = Path(self.repo_path)
         allowed = []
-        for file_path in changed_files:
-            # Skip __pycache__ and other ignored files
+        for original_path in changed_files:
+            file_path = original_path.strip()
+            if file_path.startswith("./"):
+                file_path = file_path[2:]
+            # Normalize absolute paths to relative (e.g. Docker: /app/backend/data/world.json -> backend/data/world.json)
+            try:
+                p = Path(file_path)
+                if p.is_absolute() and str(p).startswith(str(repo_path)):
+                    file_path = str(p.relative_to(repo_path))
+            except (ValueError, TypeError):
+                pass
+
             if "__pycache__" in file_path or file_path.endswith(".pyc"):
                 continue
-            
-            # Check if file matches allowed patterns
+
             is_allowed = False
             for pattern in allowed_patterns:
                 if file_path.startswith(pattern):
                     is_allowed = True
                     break
-            
-            # Check if it's a critical file being deleted
+
             is_critical_deletion = False
             for critical in critical_files:
                 if file_path.startswith(critical):
                     is_critical_deletion = True
                     break
-            
+
             if is_allowed:
-                allowed.append(file_path)
+                allowed.append(original_path)
             elif is_critical_deletion:
-                # Warn but don't block - might be legitimate in some cases
-                # But we'll skip staging it to be safe
-                print(f"Warning: Critical file {file_path} detected in changes, skipping")
-        
+                print(f"Warning: Critical file {original_path} detected in changes, skipping")
+
         return allowed
     
     def _check_critical_file_deletions(self, changed_files: List[str]) -> tuple[bool, str]:
@@ -210,7 +217,10 @@ class GitUtils:
         allowed_files = self._get_allowed_files(changed_files)
         
         if not allowed_files:
-            return False, "No allowed files to commit (all changes are in ignored or critical files)"
+            sample = ", ".join(changed_files[:5])
+            if len(changed_files) > 5:
+                sample += ", ..."
+            return False, f"No allowed files to commit (all changes are in ignored or critical files). Changed: [{sample}]"
         
         # Stage only allowed files (respecting .gitignore)
         for file_path in allowed_files:
