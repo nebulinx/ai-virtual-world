@@ -296,3 +296,12 @@ class TimeZoneEntity(Entity):
         }
 
 ENTITY_TYPES["TimeZoneEntity"] = TimeZoneEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class NewEntityName(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic here
+        pass
+
+ENTITY_TYPES["NewEntityName"] = NewEntityName
