@@ -423,3 +423,20 @@ ENTITY_TYPES = {
     "TemporalAnomaly": TemporalAnomaly,
     "QuantumParticle": QuantumParticle
 }
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class EvolutionCrystal(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement your logic here
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["EvolutionCrystal"] = EvolutionCrystal
