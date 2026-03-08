@@ -18,7 +18,7 @@ class OllamaClient:
     def _check_connection(self) -> bool:
         """Check if Ollama service is available."""
         try:
-            response = requests.get(f"{self.base_url}/api/tags", timeout=5)
+            response = requests.get(f"{self.base_url}/api/tags", timeout=30)
             return response.status_code == 200
         except Exception:
             return False
@@ -49,7 +49,7 @@ class OllamaClient:
                     "stream": False,
                     "options": {"num_predict": 1}
                 },
-                timeout=30
+                timeout=300  # Increased to 5 minutes for large model loading
             )
             if response.status_code == 200:
                 self.current_model = model
@@ -66,7 +66,7 @@ class OllamaClient:
         system: Optional[str] = None,
         temperature: float = 0.7,
         max_tokens: int = 2000,
-        retries: int = 3
+        retries: int = 5
     ) -> str:
         """Generate text using Ollama API."""
         # Select model based on task type if not specified
@@ -99,7 +99,7 @@ class OllamaClient:
                 response = requests.post(
                     f"{self.base_url}/api/generate",
                     json=payload,
-                    timeout=120
+                    timeout=600  # Increased to 10 minutes for large model generation
                 )
                 response.raise_for_status()
                 data = response.json()
@@ -119,7 +119,7 @@ class OllamaClient:
         model: Optional[str] = None,
         temperature: float = 0.7,
         max_tokens: int = 2000,
-        retries: int = 3
+        retries: int = 5
     ) -> str:
         """Chat completion using Ollama API."""
         if model is None:
@@ -148,7 +148,7 @@ class OllamaClient:
                 response = requests.post(
                     f"{self.base_url}/api/chat",
                     json=payload,
-                    timeout=120
+                    timeout=600  # Increased to 10 minutes for large model chat
                 )
                 response.raise_for_status()
                 data = response.json()
@@ -165,7 +165,7 @@ class OllamaClient:
     def list_models(self) -> List[str]:
         """List available models."""
         try:
-            response = requests.get(f"{self.base_url}/api/tags", timeout=10)
+            response = requests.get(f"{self.base_url}/api/tags", timeout=30)
             response.raise_for_status()
             data = response.json()
             return [model["name"] for model in data.get("models", [])]
