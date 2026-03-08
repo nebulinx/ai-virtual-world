@@ -471,3 +471,76 @@ class EntityWithZoneSpeed(Entity):
         }
 
 ENTITY_TYPES["EntityWithZoneSpeed"] = EntityWithZoneSpeed
+
+from typing import Dict, Any
+import random
+
+class Entity:
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int = 0):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError("Subclasses should implement this!")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic: increase time flow rate in the zone
+        world_state["zones"][self.position["zone"]]["time_flow_rate"] += self.properties["intensity"]
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "type": "EnergyVortex"
+        }
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic: decrease time flow rate in the zone
+        world_state["zones"][self.position["zone"]]["time_flow_rate"] -= self.properties["stability"]
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "type": "CrystalFormation"
+        }
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic: randomize time flow rate in the zone
+        world_state["zones"][self.position["zone"]]["time_flow_rate"] = random.uniform(0.5, 1.5)
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "type": "TemporalAnomaly"
+        }
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic: no direct effect on time flow rate
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "type": "QuantumParticle"
+        }
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle
+}
