@@ -157,7 +157,7 @@ Generates real-time news about world events. Converts world events into natural 
 ### Resource Management
 
 - **Backend Service**: 2GB RAM / 1 core (lightweight Python code)
-- **Ollama Service**: 12GB RAM / 5 cores (for quantized 7B models)
+- **Ollama Service**: 12GB RAM / 5 cores (for 7B models - loads one at a time)
 - **Host System Buffer**: 2GB RAM / 2 cores (for OS and Docker overhead)
 
 ### Model Configuration
