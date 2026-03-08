@@ -4,7 +4,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from backend.config import WORLD_JSON_PATH, NEWS_JSON_PATH
+from backend.config import WORLD_JSON_PATH, NEWS_JSON_PATH, DIRECTION_JSON_PATH
 
 
 def reset_world() -> None:
@@ -39,10 +39,21 @@ def reset_news() -> None:
     print(f"Reset {news_path}")
 
 
+def reset_direction() -> None:
+    """Overwrite direction.json with empty latest and history."""
+    direction_path = Path(DIRECTION_JSON_PATH)
+    direction_path.parent.mkdir(parents=True, exist_ok=True)
+    data = {"latest": None, "history": []}
+    with open(direction_path, "w") as f:
+        json.dump(data, f, indent=2)
+    print(f"Reset {direction_path}")
+
+
 def main() -> None:
     reset_world()
     reset_news()
-    print("Done. World and news are blank.")
+    reset_direction()
+    print("Done. World, news, and direction are blank.")
 
 
 if __name__ == "__main__":

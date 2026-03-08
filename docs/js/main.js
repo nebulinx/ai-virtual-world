@@ -40,7 +40,7 @@ function init() {
     window.addEventListener('resize', onWindowResize);
     
     // Start API polling
-    api.startPolling(updateWorld, updateNews);
+    api.startPolling(updateWorld, updateNews, updateDirection);
     
     // Start render loop
     animate();
@@ -111,6 +111,10 @@ function updateWorld(data) {
 
 function updateNews(data) {
     newsFeed.update(data);
+}
+
+function updateDirection(data) {
+    if (window.directionPanel) window.directionPanel.update(data);
 }
 
 function animate() {

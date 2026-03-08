@@ -24,11 +24,18 @@
             </div>
             
             <div id="sidebar">
-                <div id="news-panel">
+                <div class="sidebar-tabs">
+                    <button type="button" class="tab-btn active" data-tab="news">News</button>
+                    <button type="button" class="tab-btn" data-tab="direction">Direction</button>
+                </div>
+                <div id="news-panel" class="tab-panel active">
                     <h2>World News</h2>
                     <div id="news-feed"></div>
                 </div>
-                
+                <div id="direction-panel" class="tab-panel">
+                    <h2>PM Direction</h2>
+                    <div id="direction-content"></div>
+                </div>
                 <div id="entity-details" style="display: none;">
                     <h2>Entity Details</h2>
                     <div id="entity-info"></div>
@@ -41,5 +48,6 @@
     <script src="js/main.js"></script>
     <script src="js/renderer.js"></script>
     <script src="js/news.js"></script>
+    <script src="js/direction.js"></script>
 </body>
 </html>

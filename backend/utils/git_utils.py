@@ -4,7 +4,7 @@ import subprocess
 import os
 from typing import List, Optional
 from pathlib import Path
-from backend.config import GIT_USER_NAME, GIT_USER_EMAIL, GITHUB_TOKEN, GIT_REPO_URL, WORLD_JSON_PATH, NEWS_JSON_PATH
+from backend.config import GIT_USER_NAME, GIT_USER_EMAIL, GITHUB_TOKEN, GIT_REPO_URL, WORLD_JSON_PATH, NEWS_JSON_PATH, DIRECTION_JSON_PATH
 
 
 def _find_repo_root() -> Path:
@@ -60,7 +60,7 @@ class GitUtils:
         if any("README" in f or "docs" in f.lower() for f in changed_files):
             return "docs"
         # World state updates
-        if any("world.json" in f or "news.json" in f for f in changed_files):
+        if any("world.json" in f or "news.json" in f or "direction.json" in f for f in changed_files):
             return "chore"
         return "chore"
     
@@ -73,6 +73,8 @@ class GitUtils:
             scope = "world"
         elif "news.json" in str(changed_files):
             scope = "news"
+        elif "direction.json" in str(changed_files):
+            scope = "direction"
         elif any("entities" in f for f in changed_files):
             scope = "entities"
         elif any("physics" in f for f in changed_files):
@@ -83,6 +85,8 @@ class GitUtils:
             desc = "update world state"
         elif "news.json" in str(changed_files):
             desc = "update news feed"
+        elif "direction.json" in str(changed_files):
+            desc = "update PM direction"
         elif len(changed_files) == 1:
             desc = f"update {Path(changed_files[0]).stem}"
         else:
@@ -98,6 +102,7 @@ class GitUtils:
         allowed_patterns = [
             "backend/data/world.json",
             "backend/data/news.json",
+            "backend/data/direction.json",
             "backend/data/history/",
             "backend/",
         ]

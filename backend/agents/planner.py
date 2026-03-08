@@ -28,7 +28,7 @@ class PlannerAgent(BaseAgent):
             "dimensions": physics.get("dimensions", 4),
         }
 
-        prompt = f"""You are the Planner for an autonomous AI virtual world. In one response, provide exactly three parts.
+        prompt = f"""You are the Planner for an autonomous AI virtual world. Your job is to invent unexpected, creative directions—new mechanics, entities, world rules, or narrative twists. Surprise the simulation. Do NOT limit yourself to obvious ideas; think out of the box (e.g. time flow per zone, entity–zone interactions, new dimensions, emergent behavior). Past ideas you should not copy: "entity in negative gravity", "physics for dimensional warping"—come up with something different.
 
 World schema (stored at {WORLD_JSON_PATH}):
 {WORLD_SCHEMA_SUMMARY}
@@ -40,10 +40,13 @@ Codebase paths: entities -> {ENTITIES_MODULE_PATH}, physics -> {PHYSICS_MODULE_P
 Reply in this exact format (no other text):
 
 Challenge:
-<one or two sentences describing a single concrete task, e.g. "Create an entity that survives in negative gravity zones." or "Add a physics rule for dimensional warping.">
+<one or two sentences: a single concrete, creative task. Be specific and novel.>
 
 implementation_hint: entity
 (or implementation_hint: physics  or  implementation_hint: event  — choose one)
+
+Summary:
+<one sentence: what this cycle aims to achieve.>
 
 Plan:
 - <bullet 1: which file to modify>
@@ -54,23 +57,25 @@ Plan:
         response = self.ollama.generate(
             prompt,
             model=self.ollama.reasoning_model,
-            temperature=0.8,
+            temperature=0.85,
             max_tokens=600,
         )
 
-        challenge, impl_hint, plan = self._parse_response(response)
+        challenge, impl_hint, plan, summary = self._parse_response(response)
         return {
             "challenge": challenge,
             "implementation_hint": impl_hint,
             "plan": plan,
+            "summary": summary,
         }
 
-    def _parse_response(self, text: str) -> tuple[str, str, str]:
-        """Extract challenge, implementation_hint, and plan from response."""
+    def _parse_response(self, text: str) -> tuple[str, str, str, str]:
+        """Extract challenge, implementation_hint, plan, and summary from response."""
         text = text.strip()
         challenge = ""
         impl_hint = "general"
         plan = ""
+        summary = ""
 
         # implementation_hint
         for hint in ("entity", "physics", "event"):
@@ -86,15 +91,27 @@ Plan:
             elif "event" in lower or "anomaly" in lower:
                 impl_hint = "event"
 
-        # Challenge: between "Challenge:" and "implementation_hint:" or "Plan:"
+        # Challenge: between "Challenge:" and "implementation_hint:" or "Summary:" or "Plan:"
         challenge_match = re.search(
-            r"Challenge\s*:\s*(.+?)(?=implementation_hint|Plan:|\Z)",
+            r"Challenge\s*:\s*(.+?)(?=implementation_hint|Summary:|Plan:|\Z)",
             text,
             re.DOTALL | re.I,
         )
         if challenge_match:
             challenge = challenge_match.group(1).strip()
             challenge = re.sub(r"\n+", " ", challenge)
+
+        # Summary: between "Summary:" and "Plan:"
+        summary_match = re.search(
+            r"Summary\s*:\s*(.+?)(?=Plan:|\Z)",
+            text,
+            re.DOTALL | re.I,
+        )
+        if summary_match:
+            summary = summary_match.group(1).strip()
+            summary = re.sub(r"\n+", " ", summary)
+        if not summary and challenge:
+            summary = challenge.split(".")[0].strip() + "."
 
         # Plan: after "Plan:"
         plan_match = re.search(r"Plan\s*:\s*(.+)", text, re.DOTALL | re.I)
@@ -106,7 +123,7 @@ Plan:
         if not plan:
             plan = f"- Implement in codebase (hint: {impl_hint})"
 
-        return challenge, impl_hint, plan
+        return challenge, impl_hint, plan, summary
 
     def act(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Pass through planner output for state."""
@@ -116,5 +133,6 @@ Plan:
             "challenge": context.get("challenge", ""),
             "plan": context.get("plan", ""),
             "implementation_hint": context.get("implementation_hint", "general"),
+            "summary": context.get("summary", ""),
             "next_agent": "developer",
         }

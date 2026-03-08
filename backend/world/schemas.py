@@ -57,6 +57,32 @@ NEWS_SCHEMA = {
     }
 }
 
+DIRECTION_ENTRY_SCHEMA = {
+    "type": "object",
+    "required": ["timestamp", "challenge", "plan", "implementation_hint"],
+    "properties": {
+        "timestamp": {"type": "string"},
+        "challenge": {"type": "string"},
+        "plan": {"type": "string"},
+        "implementation_hint": {"type": "string"},
+        "summary": {"type": "string"},
+    },
+}
+
+DIRECTION_SCHEMA = {
+    "type": "object",
+    "required": ["history"],
+    "properties": {
+        "latest": {
+            "oneOf": [{"type": "null"}, DIRECTION_ENTRY_SCHEMA],
+        },
+        "history": {
+            "type": "array",
+            "items": DIRECTION_ENTRY_SCHEMA,
+        },
+    },
+}
+
 
 def validate_world_json(data: Dict[str, Any]) -> bool:
     """Validate world.json structure."""
@@ -73,6 +99,16 @@ def validate_news_json(data: Dict[str, Any]) -> bool:
     try:
         import jsonschema
         jsonschema.validate(instance=data, schema=NEWS_SCHEMA)
+        return True
+    except (jsonschema.ValidationError, ImportError):
+        return False
+
+
+def validate_direction_json(data: Dict[str, Any]) -> bool:
+    """Validate direction.json structure."""
+    try:
+        import jsonschema
+        jsonschema.validate(instance=data, schema=DIRECTION_SCHEMA)
         return True
     except (jsonschema.ValidationError, ImportError):
         return False

@@ -1,15 +1,19 @@
 """Main entry point for AI Virtual World system."""
 
+import json
 import time
 import signal
-import sys
-from datetime import datetime
-from backend.config import AGENT_LOOP_INTERVAL, COMMIT_INTERVAL
+from pathlib import Path
+from datetime import datetime, timezone
+from backend.config import AGENT_LOOP_INTERVAL, COMMIT_INTERVAL, DIRECTION_JSON_PATH
 from backend.world.world_engine import WorldEngine
 from backend.world.events import EventGenerator
+from backend.world.schemas import validate_direction_json
 from backend.ai.ollama_client import OllamaClient
 from backend.workflow.agent_graph import AgentWorkflow
 from backend.utils.git_utils import GitUtils
+
+DIRECTION_HISTORY_CAP = 10
 
 
 class VirtualWorldSystem:
@@ -32,6 +36,38 @@ class VirtualWorldSystem:
         """Handle shutdown signals."""
         print(f"\nReceived signal {signum}, shutting down gracefully...")
         self.running = False
+
+    def _save_direction(self, final_state: dict) -> None:
+        """Write planner output to direction.json for the Direction tab."""
+        planner_result = (final_state.get("agent_results") or {}).get("planner") or {}
+        challenge = (planner_result.get("challenge") or "").strip()
+        plan = (planner_result.get("plan") or "").strip()
+        impl_hint = (planner_result.get("implementation_hint") or "general").strip()
+        summary = (planner_result.get("summary") or "").strip() or challenge.split(".")[0].strip() + "." if challenge else ""
+        timestamp = datetime.now(timezone.utc).isoformat()
+        entry = {
+            "timestamp": timestamp,
+            "challenge": challenge or "No challenge recorded.",
+            "plan": plan or "-",
+            "implementation_hint": impl_hint,
+            "summary": summary,
+        }
+        path = Path(DIRECTION_JSON_PATH)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        data = {"latest": None, "history": []}
+        if path.exists():
+            try:
+                with open(path, "r") as f:
+                    data = json.load(f)
+            except (json.JSONDecodeError, IOError):
+                pass
+        if data.get("latest"):
+            data["history"] = (data.get("history") or []) + [data["latest"]]
+        data["history"] = (data.get("history") or [])[-DIRECTION_HISTORY_CAP:]
+        data["latest"] = entry
+        if validate_direction_json(data):
+            with open(path, "w") as f:
+                json.dump(data, f, indent=2)
     
     def run(self):
         """Run the never-ending agent loop."""
@@ -62,6 +98,9 @@ class VirtualWorldSystem:
                 # Run agent workflow
                 print("Running agent workflow...")
                 final_state = self.workflow.run_cycle()
+                
+                # Persist planner direction for frontend
+                self._save_direction(final_state)
                 
                 # Update world state
                 self.world_engine.save_world()

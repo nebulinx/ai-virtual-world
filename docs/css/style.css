@@ -72,6 +72,44 @@ header p {
     overflow-y: auto;
 }
 
+.sidebar-tabs {
+    display: flex;
+    border-bottom: 1px solid #3a3a4e;
+    padding: 0;
+}
+
+.sidebar-tabs .tab-btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    color: #a0a0a0;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.sidebar-tabs .tab-btn:hover {
+    color: #e0e0e0;
+}
+
+.sidebar-tabs .tab-btn.active {
+    color: #4a90e2;
+    border-bottom-color: #4a90e2;
+}
+
+.tab-panel {
+    display: none;
+    padding: 1.5rem;
+    border-bottom: 1px solid #3a3a4e;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
 #news-panel, #entity-details {
     padding: 1.5rem;
     border-bottom: 1px solid #3a3a4e;
@@ -118,6 +156,58 @@ header p {
     color: #e0e0e0;
     font-size: 0.9rem;
     line-height: 1.6;
+}
+
+#direction-content {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.direction-summary {
+    color: #4a90e2;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.direction-label {
+    color: #888;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.direction-challenge {
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.direction-plan {
+    color: #c0c0c0;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    margin: 0;
+    padding: 0.5rem 0;
+}
+
+.direction-hint {
+    color: #888;
+    font-size: 0.8rem;
+    margin-top: 0.75rem;
+}
+
+.direction-timestamp {
+    color: #666;
+    font-size: 0.75rem;
+    margin-top: 1rem;
+}
+
+#direction-panel h2 {
+    color: #4a90e2;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 

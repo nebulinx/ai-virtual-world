@@ -3,6 +3,7 @@
 const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/nebulinx/ai-virtual-world/main";
 const WORLD_JSON_URL = `${GITHUB_RAW_BASE}/backend/data/world.json`;
 const NEWS_JSON_URL = `${GITHUB_RAW_BASE}/backend/data/news.json`;
+const DIRECTION_JSON_URL = `${GITHUB_RAW_BASE}/backend/data/direction.json`;
 const POLL_INTERVAL = 30000; // 30 seconds
 
 class API {
@@ -10,9 +11,11 @@ class API {
         this.cache = {
             world: null,
             news: null,
+            direction: null,
             lastFetch: {
                 world: 0,
-                news: 0
+                news: 0,
+                direction: 0
             }
         };
     }
@@ -59,15 +62,35 @@ class API {
         }
     }
 
-    startPolling(onWorldUpdate, onNewsUpdate) {
+    async fetchDirection() {
+        const now = Date.now();
+        if (this.cache.direction && (now - this.cache.lastFetch.direction) < 10000) {
+            return this.cache.direction;
+        }
+        try {
+            const response = await fetch(DIRECTION_JSON_URL + `?t=${now}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            this.cache.direction = data;
+            this.cache.lastFetch.direction = now;
+            return data;
+        } catch (error) {
+            console.error("Failed to fetch direction:", error);
+            return this.cache.direction;
+        }
+    }
+
+    startPolling(onWorldUpdate, onNewsUpdate, onDirectionUpdate) {
         // Initial fetch
         this.fetchWorld().then(onWorldUpdate);
         this.fetchNews().then(onNewsUpdate);
+        if (onDirectionUpdate) this.fetchDirection().then(onDirectionUpdate);
 
         // Poll periodically
         setInterval(() => {
             this.fetchWorld().then(onWorldUpdate);
             this.fetchNews().then(onNewsUpdate);
+            if (onDirectionUpdate) this.fetchDirection().then(onDirectionUpdate);
         }, POLL_INTERVAL);
     }
 }
