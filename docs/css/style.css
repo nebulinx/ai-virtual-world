@@ -204,6 +204,22 @@ header p {
     margin-top: 1rem;
 }
 
+.evolution-history {
+    margin-bottom: 1rem;
+}
+
+.evolution-entry {
+    color: #b0b0b0;
+    font-size: 0.85rem;
+    margin: 0.35rem 0;
+    line-height: 1.35;
+}
+
+.evolution-timestamp {
+    color: #666;
+    font-size: 0.75rem;
+}
+
 #direction-panel h2 {
     color: #4a90e2;
     margin-bottom: 1rem;

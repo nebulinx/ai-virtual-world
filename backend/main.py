@@ -5,7 +5,7 @@ import time
 import signal
 from pathlib import Path
 from datetime import datetime, timezone
-from backend.config import AGENT_LOOP_INTERVAL, COMMIT_INTERVAL, DIRECTION_JSON_PATH
+from backend.config import AGENT_LOOP_INTERVAL, COMMIT_INTERVAL, COMMIT_EVERY_CYCLE, DIRECTION_JSON_PATH
 from backend.world.world_engine import WorldEngine
 from backend.world.events import EventGenerator
 from backend.world.schemas import validate_direction_json
@@ -102,14 +102,34 @@ class VirtualWorldSystem:
                 # Persist planner direction for frontend
                 self._save_direction(final_state)
                 
-                # Update world state
+                # Optional world tick: run entity updates so world state changes between cycles
+                self.world_engine.run_entity_tick()
                 self.world_engine.save_world()
                 
-                # Commit periodically
+                # Spawn one instance when Applier added a new entity type
+                applier_result = (final_state.get("agent_results") or {}).get("applier") or {}
+                new_entity_type = applier_result.get("new_entity_type")
+                if new_entity_type:
+                    try:
+                        from backend.world.entities import create_entity
+                        import random
+                        pos = {"x": random.uniform(-30, 30), "y": random.uniform(-30, 30), "z": random.uniform(-30, 30), "w": random.uniform(-5, 5)}
+                        entity = create_entity(new_entity_type, f"entity_{len(self.world_engine.world_state['entities'])}", pos)
+                        self.world_engine.add_entity(entity.to_dict())
+                        print(f"Spawned new entity type: {new_entity_type}")
+                    except Exception as e:
+                        print(f"Could not spawn {new_entity_type}: {e}")
+                
+                # Commit: every cycle (with Planner summary) or on interval
                 current_time = time.time()
-                if current_time - self.last_commit_time >= COMMIT_INTERVAL:
+                commit_message = None
+                if COMMIT_EVERY_CYCLE:
+                    summary = (final_state.get("agent_results") or {}).get("planner", {}).get("summary", "").strip()
+                    commit_message = f"feat(world): {summary}" if summary else None
+                do_commit = COMMIT_EVERY_CYCLE or (current_time - self.last_commit_time >= COMMIT_INTERVAL)
+                if do_commit:
                     print("Committing changes...")
-                    success, message = self.git_utils.commit_and_push()
+                    success, message = self.git_utils.commit_and_push(commit_message)
                     if success:
                         print(f"✓ {message}")
                         self.last_commit_time = current_time
@@ -117,8 +137,11 @@ class VirtualWorldSystem:
                         print(f"✗ Commit/push failed: {message}")
                         print("  (In Docker: set GITHUB_TOKEN for HTTPS push, or mount ~/.ssh for SSH.)")
                 
-                print(f"Cycle {cycle_count} completed. Waiting {AGENT_LOOP_INTERVAL}s...")
-                time.sleep(AGENT_LOOP_INTERVAL)
+                if AGENT_LOOP_INTERVAL > 0:
+                    print(f"Cycle {cycle_count} completed. Waiting {AGENT_LOOP_INTERVAL}s...")
+                    time.sleep(AGENT_LOOP_INTERVAL)
+                else:
+                    print(f"Cycle {cycle_count} completed.")
             
             except KeyboardInterrupt:
                 print("\nInterrupted by user")
@@ -129,7 +152,8 @@ class VirtualWorldSystem:
                 import traceback
                 traceback.print_exc()
                 print("Continuing after error...")
-                time.sleep(AGENT_LOOP_INTERVAL)
+                if AGENT_LOOP_INTERVAL > 0:
+                    time.sleep(AGENT_LOOP_INTERVAL)
         
         print("\n" + "=" * 60)
         print("AI Virtual World - Shutting down")

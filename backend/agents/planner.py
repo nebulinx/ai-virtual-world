@@ -1,10 +1,13 @@
 """Planner agent - merges challenge (PM) and implementation plan (Developer think) in one LLM call."""
 
+import json
 import re
-from typing import Dict, Any
+from pathlib import Path
+from typing import Dict, Any, List
 from backend.agents.base_agent import BaseAgent
 from backend.agents.prompt_context import WORLD_SCHEMA_SUMMARY, WORLD_JSON_PATH, ENTITIES_MODULE_PATH, PHYSICS_MODULE_PATH, EVENTS_MODULE_PATH
 from backend.ai.ollama_client import OllamaClient
+from backend.config import DIRECTION_JSON_PATH
 
 
 class PlannerAgent(BaseAgent):
@@ -12,6 +15,22 @@ class PlannerAgent(BaseAgent):
 
     def __init__(self, ollama_client: OllamaClient):
         super().__init__("Planner", ollama_client)
+
+    def _load_recent_evolutions(self, cap: int = 3) -> List[Dict[str, Any]]:
+        """Load last N direction entries (evolution log) for Planner context."""
+        path = Path(DIRECTION_JSON_PATH)
+        if not path.exists():
+            return []
+        try:
+            with open(path, "r") as f:
+                data = json.load(f)
+        except (json.JSONDecodeError, IOError):
+            return []
+        history = list(data.get("history") or [])
+        latest = data.get("latest")
+        if latest:
+            history = history + [latest]
+        return history[-cap:] if cap else history
 
     def think(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Single LLM call: challenge + implementation_hint + plan."""
@@ -28,14 +47,24 @@ class PlannerAgent(BaseAgent):
             "dimensions": physics.get("dimensions", 4),
         }
 
+        recent = self._load_recent_evolutions(cap=3)
+        evolution_block = ""
+        if recent:
+            lines = []
+            for i, entry in enumerate(reversed(recent), 1):
+                s = entry.get("summary") or entry.get("challenge", "")[:80]
+                if s:
+                    lines.append(f"  {i}. {s}")
+            if lines:
+                evolution_block = "\nRecent evolutions (build on or diverge from these):\n" + "\n".join(lines) + "\n\n"
+
         prompt = f"""You are the Planner for an autonomous AI virtual world. Your job is to invent unexpected, creative directions—new mechanics, entities, world rules, or narrative twists. Surprise the simulation. Do NOT limit yourself to obvious ideas; think out of the box (e.g. time flow per zone, entity–zone interactions, new dimensions, emergent behavior). Past ideas you should not copy: "entity in negative gravity", "physics for dimensional warping"—come up with something different.
 
 World schema (stored at {WORLD_JSON_PATH}):
 {WORLD_SCHEMA_SUMMARY}
 
 Current world state: {analysis['entity_count']} entities, {analysis['recent_events']} recent events, {analysis['physics_zones']} gravity zones, dimensions {analysis['dimensions']}.
-
-Codebase paths: entities -> {ENTITIES_MODULE_PATH}, physics -> {PHYSICS_MODULE_PATH}, events -> {EVENTS_MODULE_PATH}.
+{evolution_block}Codebase paths: entities -> {ENTITIES_MODULE_PATH}, physics -> {PHYSICS_MODULE_PATH}, events -> {EVENTS_MODULE_PATH}.
 
 Reply in this exact format (no other text):
 

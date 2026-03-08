@@ -132,7 +132,39 @@ class WorldEngine:
         self.save_world()
     
     def tick(self) -> None:
-        """Advance world simulation by one tick."""
-        # Update entities based on physics
-        # This is a placeholder - actual physics simulation in physics.py
-        self.save_world()
+        """Advance world simulation by one tick (legacy alias)."""
+        self.run_entity_tick()
+
+    def run_entity_tick(self) -> None:
+        """Run each entity's update(world_state) and apply results back to the world."""
+        try:
+            from backend.world.entities import ENTITY_TYPES
+        except ImportError:
+            return
+        world_copy = self.get_world_state()
+        for i, entity_data in enumerate(list(self.world_state["entities"])):
+            entity_type = entity_data.get("type")
+            if not entity_type or entity_type not in ENTITY_TYPES:
+                continue
+            try:
+                cls = ENTITY_TYPES[entity_type]
+                pos = entity_data.get("position") or {}
+                props = entity_data.get("properties") or {}
+                inst = cls(
+                    entity_data.get("id", ""),
+                    {"x": pos.get("x", 0), "y": pos.get("y", 0), "z": pos.get("z", 0), "w": pos.get("w", 0)},
+                    props,
+                )
+                inst.age = entity_data.get("age", 0)
+                result = inst.update(world_copy)
+                if isinstance(result, dict):
+                    if "position" in result:
+                        self.world_state["entities"][i]["position"] = result["position"]
+                    if "properties" in result:
+                        self.world_state["entities"][i]["properties"] = result["properties"]
+                    if "age" in result:
+                        self.world_state["entities"][i]["age"] = result["age"]
+                    elif hasattr(inst, "age"):
+                        self.world_state["entities"][i]["age"] = inst.age
+            except Exception:
+                continue

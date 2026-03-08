@@ -171,8 +171,9 @@ class AdaptiveEntity(Entity):
         return super().update(world_state)
 
     def to_dict(self) -> Dict[str, Any]:
-        # Ensure position, properties, age are set
         return {
+            "id": self.id,
+            "type": self.__class__.__name__,
             "position": self.position,
             "properties": self.properties,
             "age": self.age

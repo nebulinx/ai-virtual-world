@@ -24,8 +24,9 @@ DIRECTION_JSON_PATH = f"{WORLD_DATA_DIR}/direction.json"
 HISTORY_DIR = f"{WORLD_DATA_DIR}/history"
 
 # Agent loop configuration
-AGENT_LOOP_INTERVAL = 60  # seconds between agent cycles
-COMMIT_INTERVAL = 300  # seconds between commits (5 minutes)
+AGENT_LOOP_INTERVAL = int(os.getenv("AGENT_LOOP_INTERVAL", "60"))  # seconds between cycles; 0 = no sleep (back-to-back)
+COMMIT_INTERVAL = int(os.getenv("COMMIT_INTERVAL", "300"))  # seconds between commits (when not committing every cycle)
+COMMIT_EVERY_CYCLE = os.getenv("COMMIT_EVERY_CYCLE", "true").lower() in ("1", "true", "yes")  # commit after each cycle with Planner summary as message
 
 # Frontend configuration
 GITHUB_RAW_BASE = "https://raw.githubusercontent.com/nebulinx/ai-virtual-world/main"

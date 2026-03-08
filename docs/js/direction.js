@@ -16,6 +16,8 @@ class DirectionPanel {
                 tabs.forEach(b => b.classList.remove('active'));
                 panels.forEach(p => p.classList.remove('active'));
                 btn.classList.add('active');
+                const entityDetails = document.getElementById('entity-details');
+                if (entityDetails) entityDetails.style.display = 'none';
                 const panel = tab === 'news' ? document.getElementById('news-panel') : document.getElementById('direction-panel');
                 if (panel) panel.classList.add('active');
             });
@@ -33,10 +35,44 @@ class DirectionPanel {
         this.container.innerHTML = '';
 
         const latest = this.data && this.data.latest;
+        const history = (this.data && this.data.history) || [];
+
+        // Evolution history panel (last evolutions)
+        if (history.length > 0 || latest) {
+            const historySection = document.createElement('div');
+            historySection.className = 'evolution-history';
+            const historyTitle = document.createElement('div');
+            historyTitle.className = 'direction-label';
+            historyTitle.textContent = 'Evolution history';
+            historySection.appendChild(historyTitle);
+            const entries = latest ? [...history, latest] : history;
+            const lastN = entries.slice(-5).reverse();
+            lastN.forEach(entry => {
+                const line = document.createElement('p');
+                line.className = 'evolution-entry';
+                line.textContent = (entry.summary || entry.challenge || '').substring(0, 120) + (entry.summary && entry.summary.length > 120 ? '…' : '');
+                if (entry.timestamp) {
+                    const ts = document.createElement('span');
+                    ts.className = 'evolution-timestamp';
+                    ts.textContent = ' ' + new Date(entry.timestamp).toLocaleString();
+                    line.appendChild(ts);
+                }
+                historySection.appendChild(line);
+            });
+            this.container.appendChild(historySection);
+        }
+
         if (!latest || !latest.challenge) {
-            this.container.innerHTML = '<p style="color: #888;">No direction set yet. Run a cycle to see the Planner\'s challenge and plan.</p>';
+            if (!history.length) {
+                this.container.innerHTML = '<p style="color: #888;">No direction set yet. Run a cycle to see the Planner\'s challenge and plan.</p>';
+            }
             return;
         }
+
+        const currentLabel = document.createElement('div');
+        currentLabel.className = 'direction-label';
+        currentLabel.textContent = 'Current direction';
+        this.container.appendChild(currentLabel);
 
         const summaryEl = document.createElement('p');
         summaryEl.className = 'direction-summary';

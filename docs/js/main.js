@@ -2,6 +2,7 @@
 
 let scene, camera, renderer, controls;
 let worldData = null;
+let raycaster, mouse;
 
 function init() {
     // Scene setup
@@ -35,6 +36,12 @@ function init() {
     
     // Simple orbit controls (manual implementation)
     setupControls();
+    
+    // Entity click: raycast and show entity details (properties, age, position including w)
+    raycaster = new THREE.Raycaster();
+    mouse = new THREE.Vector2();
+    const canvas = document.getElementById('world-canvas');
+    canvas.addEventListener('click', onCanvasClick);
     
     // Handle window resize
     window.addEventListener('resize', onWindowResize);
@@ -115,6 +122,47 @@ function updateNews(data) {
 
 function updateDirection(data) {
     if (window.directionPanel) window.directionPanel.update(data);
+}
+
+function onCanvasClick(event) {
+    if (!scene || !camera || !worldData) return;
+    const canvas = document.getElementById('world-canvas');
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+    const entityMeshes = [];
+    scene.traverse(obj => {
+        if (obj.userData && obj.userData.entity) entityMeshes.push(obj);
+    });
+    const hits = raycaster.intersectObjects(entityMeshes);
+    const panel = document.getElementById('entity-details');
+    const info = document.getElementById('entity-info');
+    const newsPanel = document.getElementById('news-panel');
+    const directionPanel = document.getElementById('direction-panel');
+    if (!panel || !info) return;
+    if (hits.length === 0) {
+        panel.style.display = 'none';
+        if (newsPanel) newsPanel.classList.add('active');
+        if (directionPanel) directionPanel.classList.remove('active');
+        return;
+    }
+    const entity = hits[0].object.userData.entity;
+    info.innerHTML = '';
+    const add = (label, value) => {
+        const p = document.createElement('p');
+        p.innerHTML = '<strong>' + label + ':</strong> ' + (typeof value === 'object' ? JSON.stringify(value) : value);
+        info.appendChild(p);
+    };
+    add('ID', entity.id);
+    add('Type', entity.type);
+    add('Position', (entity.position || {}).x + ', ' + (entity.position || {}).y + ', ' + (entity.position || {}).z + (entity.position && entity.position.w != null ? ', w=' + entity.position.w : ''));
+    if (entity.age != null) add('Age', entity.age);
+    if (entity.properties && Object.keys(entity.properties).length) add('Properties', entity.properties);
+    panel.style.display = 'block';
+    if (newsPanel) newsPanel.classList.remove('active');
+    if (directionPanel) directionPanel.classList.remove('active');
+    document.querySelectorAll('.sidebar-tabs .tab-btn').forEach(b => b.classList.remove('active'));
 }
 
 function animate() {

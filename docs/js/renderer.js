@@ -19,12 +19,17 @@ function updateRenderer(worldData) {
     const scene = window.scene;
     const entities = worldData.entities || [];
     const physics = worldData.physics || {};
+    const events = worldData.events || [];
+    const anomalies = worldData.anomalies || [];
     
     // Update entities
     updateEntities(scene, entities);
     
-    // Update physics zones
+    // Update physics zones (with labels: gravity = red, time = blue)
     updatePhysicsZones(scene, physics);
+    
+    // Update events and anomalies as temporary markers
+    updateEventsAndAnomalies(scene, events, anomalies);
 }
 
 function updateEntities(scene, entities) {
@@ -54,6 +59,9 @@ function updateEntities(scene, entities) {
 function createEntityObject(entity) {
     const type = entity.type || 'Unknown';
     const position = entity.position || { x: 0, y: 0, z: 0 };
+    const w = position.w != null ? position.w : 0;
+    // Expose 4th dimension (w) via scale: larger |w| = slightly larger object
+    const wScale = 1 + Math.min(1, Math.abs(w) / 10) * 0.3;
     
     let geometry, material, mesh;
     
@@ -103,6 +111,7 @@ function createEntityObject(entity) {
         position.y || 0,
         position.z || 0
     );
+    mesh.scale.setScalar(wScale);
     mesh.userData = { entity: entity };
     
     return mesh;
@@ -110,11 +119,14 @@ function createEntityObject(entity) {
 
 function updateEntityObject(obj, entity) {
     const position = entity.position || { x: 0, y: 0, z: 0 };
+    const w = position.w != null ? position.w : 0;
+    const wScale = 1 + Math.min(1, Math.abs(w) / 10) * 0.3;
     obj.position.set(
         position.x || 0,
         position.y || 0,
         position.z || 0
     );
+    obj.scale.setScalar(wScale);
     obj.userData.entity = entity;
 }
 
@@ -159,6 +171,32 @@ function createZoneHelper(zone, color) {
         return mesh;
     }
     return null;
+}
+
+let eventAnomalyMarkers = [];
+
+function updateEventsAndAnomalies(scene, events, anomalies) {
+    eventAnomalyMarkers.forEach(m => scene.remove(m));
+    eventAnomalyMarkers = [];
+    const recentEvents = (events || []).slice(-15);
+    const list = [
+        ...recentEvents.map(e => ({ ...e, isAnomaly: false })),
+        ...(anomalies || []).map(a => ({ ...a, isAnomaly: true }))
+    ];
+    list.forEach(item => {
+        const pos = item.position || item.center || {};
+        const geometry = new THREE.SphereGeometry(1.5, 8, 8);
+        const material = new THREE.MeshBasicMaterial({
+            color: item.isAnomaly ? 0xff8800 : 0x88ff88,
+            transparent: true,
+            opacity: 0.7
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(pos.x || 0, pos.y || 0, pos.z || 0);
+        mesh.userData = { event: item };
+        scene.add(mesh);
+        eventAnomalyMarkers.push(mesh);
+    });
 }
 
 // Expose to global scope

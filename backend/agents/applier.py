@@ -96,8 +96,10 @@ class ApplierAgent(BaseAgent):
                 "next_agent": "refactor",
             }
 
+        new_entity_type = None
         # For entities, add ENTITY_TYPES entry if we have it
         if impl_type == "entity" and (entity_types_line or class_name):
+            new_entity_type = class_name
             path = Path(target_file)
             if path.exists():
                 text = path.read_text()
@@ -106,6 +108,7 @@ class ApplierAgent(BaseAgent):
                     m = re.search(r'ENTITY_TYPES\s*\[\s*["\'](\w+)["\']\s*\]\s*=\s*(\w+)', entity_types_line)
                     if m:
                         key, val = m.group(1), m.group(2)
+                        new_entity_type = key
                         entry_line = f'    "{key}": {val}'
                     else:
                         entry_line = None
@@ -144,7 +147,7 @@ class ApplierAgent(BaseAgent):
                             )
                             path.write_text(new_text)
 
-        return {
+        result = {
             "status": "success",
             "agent": self.name,
             "applied": True,
@@ -152,3 +155,6 @@ class ApplierAgent(BaseAgent):
             "message": msg,
             "next_agent": "refactor",
         }
+        if impl_type == "entity" and new_entity_type:
+            result["new_entity_type"] = new_entity_type
+        return result
