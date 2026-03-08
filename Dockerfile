@@ -9,10 +9,11 @@ RUN apt-get update && apt-get install -y \
 # Install Poetry
 RUN pip install --no-cache-dir poetry
 
-# Configure Poetry
+# Configure Poetry to not create a virtual environment (use system Python)
 ENV POETRY_NO_INTERACTION=1 \
-    POETRY_VENV_IN_PROJECT=1 \
-    POETRY_CACHE_DIR=/tmp/poetry_cache
+    POETRY_VENV_IN_PROJECT=0 \
+    POETRY_CACHE_DIR=/tmp/poetry_cache \
+    POETRY_VIRTUALENVS_CREATE=false
 
 # Set working directory
 WORKDIR /app
@@ -20,8 +21,8 @@ WORKDIR /app
 # Copy Poetry files
 COPY pyproject.toml poetry.lock* ./
 
-# Install dependencies
-RUN poetry install --no-root && rm -rf $POETRY_CACHE_DIR
+# Install dependencies directly to system Python
+RUN poetry install --no-root --no-interaction && rm -rf $POETRY_CACHE_DIR
 
 # Copy backend code
 COPY backend/ ./backend/
@@ -29,5 +30,5 @@ COPY backend/ ./backend/
 # Set Python path
 ENV PYTHONPATH=/app
 
-# Run the application
-CMD ["poetry", "run", "python", "backend/main.py"]
+# Run the application directly with Python (no poetry run needed)
+CMD ["python", "backend/main.py"]
