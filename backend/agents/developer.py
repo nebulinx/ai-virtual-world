@@ -20,13 +20,17 @@ class DeveloperAgent(BaseAgent):
         super().__init__("Developer", ollama_client)
     
     def think(self, context: Dict[str, Any]) -> Dict[str, Any]:
-        """Plan implementation for challenge."""
+        """Plan implementation for challenge. Skip LLM if plan and implementation_type/hint already provided (e.g. by Planner)."""
+        plan = context.get("plan", "")
+        impl_type = context.get("implementation_type") or context.get("implementation_hint", "")
+        if impl_type in ("entity", "physics", "event", "general") and plan:
+            return {"plan": plan, "implementation_type": impl_type if impl_type != "" else "general"}
+
         challenge = context.get("challenge", "")
         world_state = context.get("world_state", {})
         impl_hint = context.get("implementation_hint", "")
-        
         impl_type = impl_hint if impl_hint in ("entity", "physics", "event") else self._determine_type(challenge)
-        
+
         prompt = f"""You are the Developer for an AI virtual world. You will implement the challenge by writing code that will be injected into this codebase.
 
 Challenge: {challenge}
@@ -44,14 +48,14 @@ Current world: {len(world_state.get('entities', []))} entities, physics dimensio
 Implementation type for this task: {impl_type}.
 
 Provide a short implementation plan (3-5 bullet points): which file to modify, what to add (e.g. new class name, method signatures), and how it fits the challenge."""
-        
+
         plan_text = self.ollama.generate(
             prompt,
             model=self.ollama.coder_model,
             temperature=0.7,
             max_tokens=1000
         )
-        
+
         return {
             "plan": plan_text.strip(),
             "implementation_type": impl_type,

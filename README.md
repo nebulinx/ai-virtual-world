@@ -5,10 +5,10 @@ This experiment is designed to allow AI to design a virtual world autonomously. 
 ## Architecture Overview
 
 - **Multi-agent system** using LangGraph for orchestration
-- **5 specialized agents**: Product Manager, Developer, Refactor, Tester, News Agent
+- **5 agents**: Planner, Developer, Applier, Tester, News Agent (3 LLM calls per cycle)
 - **World engine** managing entities, physics, and events
 - **Real-time 3D visualization** with Three.js
-- **Autonomous code evolution** and world state generation
+- **Autonomous code evolution**: generated code is applied to the repo via the Applier agent
 
 ## System Requirements
 
@@ -106,26 +106,34 @@ ollama serve
 ollama pull qwen2.5-coder:7b
 ollama pull deepseek-r1:7b
 
-# Run backend
-poetry run python backend/main.py
+# Run backend (set PYTHONPATH so backend module resolves)
+PYTHONPATH=. poetry run python backend/main.py
+```
+
+### Reset World and News
+
+To reset world state and news feed to a blank state:
+
+```bash
+PYTHONPATH=. python -m backend.reset_world
 ```
 
 ## Agent Descriptions
 
-### Product Manager
-Defines challenges and goals for world evolution. Analyzes current world state and generates new objectives for other agents to implement.
+### Planner
+Single LLM call that outputs a challenge (1–2 sentences), implementation hint (entity/physics/event), and a short implementation plan. Replaces the former Product Manager + Developer planning step.
 
 ### Developer
-Implements new entities, physics rules, and world features. Receives challenges and writes Python code to extend the world simulation.
+Generates Python code from the Planner’s challenge and plan. Writes new entity classes, physics rules, or event logic. Code-only when used after Planner (no extra planning call).
 
-### Refactor
-Optimizes code and improves existing implementations. Analyzes code quality and refactors for performance and readability.
+### Applier
+Writes the Developer’s generated code to the codebase using `CodeEvolution`: appends to `backend/world/entities.py`, `physics.py`, or `events.py` and registers new entities in `ENTITY_TYPES`. No LLM; applies code with backup and syntax validation.
 
 ### Tester
-Validates world state integrity and code correctness. Ensures world.json is valid, checks for rendering errors, and validates entity data.
+Validates world state (world.json schema, entity types) and runs basic syntax checks on generated code. No LLM.
 
 ### News Agent
-Generates real-time news about world events. Converts world events into natural language "alien news" descriptions.
+Generates real-time news about world events. Outputs headline and body (validated; empty items are filtered out). Uses reasoning model (or single model when `OLLAMA_MODEL` is set).
 
 ## World Mechanics
 
@@ -162,10 +170,27 @@ Generates real-time news about world events. Converts world events into natural 
 
 ### Model Configuration
 
-- **qwen2.5-coder:7b** (~14GB): Code generation tasks (Developer, Refactor agents)
-- **deepseek-r1:7b** (~14GB): Reasoning tasks (Product Manager, News Agent, Tester)
+**Default: single model** – All agents use **qwen2.5-coder:7b** (no model switching, faster cycles).
 
-**Note:** Base 7B models use ~14GB each. With 12GB allocated to Ollama, only one model can be loaded at a time. The system will automatically switch models as needed.
+To use a different single model:
+
+```bash
+export OLLAMA_MODEL=qwen2.5:7b   # or another model name
+```
+
+To use the coder/reasoning split again (qwen coder for code, deepseek-r1 for planning/news):
+
+```bash
+export OLLAMA_MODEL=   # empty = use OLLAMA_CODER_MODEL and OLLAMA_REASONING_MODEL
+```
+
+Override defaults via env:
+
+- `OLLAMA_MODEL` – default is qwen2.5-coder:7b; set to another model or leave empty for split
+- `OLLAMA_CODER_MODEL` – code tasks when using split (default: qwen2.5-coder:7b)
+- `OLLAMA_REASONING_MODEL` – planning and news when using split (default: deepseek-r1:7b)
+
+**Note:** 7B models use several GB. With single-model default, only one model is loaded.
 
 ## 24x7 Operation
 
@@ -180,7 +205,7 @@ The system runs continuously with:
 
 ### Submit Challenges
 
-Submit challenges via GitHub Issues. The Product Manager agent will consider them for implementation.
+Submit challenges via GitHub Issues. The Planner agent may take them into account when generating new challenges.
 
 ### View World State
 
@@ -190,20 +215,22 @@ Submit challenges via GitHub Issues. The Product Manager agent will consider the
 
 ### Understanding Autonomous Evolution
 
-The system evolves autonomously:
-1. Product Manager generates challenges
-2. Developer implements solutions
-3. Refactor optimizes code
-4. Tester validates changes
-5. News Agent reports events
-6. Cycle repeats indefinitely
+The system evolves autonomously each cycle:
+1. **Planner** – one LLM call: challenge + implementation hint + plan
+2. **Developer** – one LLM call: generates code from the plan
+3. **Applier** – writes code to entities.py / physics.py / events.py (and registers new entity types)
+4. **Tester** – validates world state and code
+5. **News Agent** – one LLM call: generates news headline and body
+6. World state and news are saved; git commit/push runs on an interval
+7. Cycle repeats indefinitely
 
 ## Important Notes
 
-- **Model memory usage:** Base 7B models use ~14GB each. The system loads one model at a time and switches as needed.
-- **Frontend polling** is set to 30 seconds to respect GitHub rate limits
-- **Code evolution** includes safety checks - tester agent validates before commits
-- **Git authentication** required: either SSH keys or GitHub token must be configured
+- **Model memory:** 7B models use several GB each. Use `OLLAMA_MODEL` for a single model to avoid switch latency.
+- **Frontend polling** is set to 30 seconds to respect GitHub rate limits.
+- **Code evolution:** Applier uses `CodeEvolution` (backup + syntax validation); Tester validates world and code before commits.
+- **Git:** Repo root is detected from the backend path. For push: set `GITHUB_TOKEN` (HTTPS) or mount `~/.ssh` (SSH) in Docker.
+- **Reset:** Run `python -m backend.reset_world` to reset world.json and news.json to a blank state.
 
 ## License
 

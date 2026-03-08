@@ -3,7 +3,7 @@
 import requests
 import time
 from typing import Optional, Dict, Any, List
-from backend.config import OLLAMA_HOST, OLLAMA_CODER_MODEL, OLLAMA_REASONING_MODEL
+from backend.config import OLLAMA_HOST, OLLAMA_MODEL, OLLAMA_CODER_MODEL, OLLAMA_REASONING_MODEL
 
 
 class OllamaClient:
@@ -69,10 +69,11 @@ class OllamaClient:
         retries: int = 5
     ) -> str:
         """Generate text using Ollama API."""
-        # Select model based on task type if not specified
+        # Select model: single OLLAMA_MODEL overrides coder/reasoning
         if model is None:
-            # Use coder model for code-related tasks, reasoning for others
-            if any(keyword in prompt.lower() for keyword in ["code", "function", "class", "import", "def"]):
+            if OLLAMA_MODEL:
+                model = OLLAMA_MODEL
+            elif any(keyword in prompt.lower() for keyword in ["code", "function", "class", "import", "def"]):
                 model = self.coder_model
             else:
                 model = self.reasoning_model
@@ -123,13 +124,15 @@ class OllamaClient:
     ) -> str:
         """Chat completion using Ollama API."""
         if model is None:
-            # Determine model from message content
-            content = " ".join([msg.get("content", "") for msg in messages])
-            if any(keyword in content.lower() for keyword in ["code", "function", "class", "import", "def"]):
-                model = self.coder_model
+            if OLLAMA_MODEL:
+                model = OLLAMA_MODEL
             else:
-                model = self.reasoning_model
-        
+                content = " ".join([msg.get("content", "") for msg in messages])
+                if any(keyword in content.lower() for keyword in ["code", "function", "class", "import", "def"]):
+                    model = self.coder_model
+                else:
+                    model = self.reasoning_model
+
         if not self._ensure_model_loaded(model):
             raise ConnectionError(f"Failed to load model: {model}")
         

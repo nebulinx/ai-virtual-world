@@ -2,17 +2,16 @@
 
 from typing import TypedDict, Annotated
 from langgraph.graph import StateGraph, END
-from backend.agents.product_manager import ProductManagerAgent
+from backend.agents.planner import PlannerAgent
 from backend.agents.developer import DeveloperAgent
 from backend.agents.applier import ApplierAgent
-from backend.agents.refactor import RefactorAgent
 from backend.agents.tester import TesterAgent
 from backend.agents.news_agent import NewsAgent
 from backend.ai.ollama_client import OllamaClient
 from backend.world.world_engine import WorldEngine
 
 
-class AgentState(TypedDict):
+class AgentState(TypedDict, total=False):
     """State schema for agent workflow."""
     world_state: dict
     challenges: list
@@ -21,6 +20,8 @@ class AgentState(TypedDict):
     agent_results: dict
     current_agent: str
     applier_result: dict
+    plan: str
+    implementation_hint: str
 
 
 class AgentWorkflow:
@@ -31,10 +32,9 @@ class AgentWorkflow:
         self.ollama = ollama_client
         
         # Initialize agents
-        self.product_manager = ProductManagerAgent(ollama_client)
+        self.planner = PlannerAgent(ollama_client)
         self.developer = DeveloperAgent(ollama_client)
         self.applier = ApplierAgent()
-        self.refactor = RefactorAgent(ollama_client)
         self.tester = TesterAgent(ollama_client)
         self.news_agent = NewsAgent(ollama_client)
         
@@ -45,46 +45,43 @@ class AgentWorkflow:
         """Build LangGraph state machine."""
         workflow = StateGraph(AgentState)
         
-        # Add nodes
-        workflow.add_node("product_manager", self._product_manager_node)
+        # Add nodes: Planner -> Developer -> Applier -> Tester -> News
+        workflow.add_node("planner", self._planner_node)
         workflow.add_node("developer", self._developer_node)
         workflow.add_node("applier", self._applier_node)
-        workflow.add_node("refactor", self._refactor_node)
         workflow.add_node("tester", self._tester_node)
         workflow.add_node("news_agent", self._news_agent_node)
         
-        # Set entry point
-        workflow.set_entry_point("product_manager")
-        
-        # Add edges: PM -> Developer -> Applier -> Refactor -> Tester -> News
-        workflow.add_edge("product_manager", "developer")
+        workflow.set_entry_point("planner")
+        workflow.add_edge("planner", "developer")
         workflow.add_edge("developer", "applier")
-        workflow.add_edge("applier", "refactor")
-        workflow.add_edge("refactor", "tester")
+        workflow.add_edge("applier", "tester")
         workflow.add_edge("tester", "news_agent")
         workflow.add_edge("news_agent", END)
         
         return workflow.compile()
     
-    def _product_manager_node(self, state: AgentState) -> AgentState:
-        """Product Manager agent node."""
+    def _planner_node(self, state: AgentState) -> AgentState:
+        """Planner agent node: challenge + plan in one LLM call."""
         context = {
             "world_state": state.get("world_state", self.world_engine.get_world_state())
         }
-        result = self.product_manager.execute(context)
-        state["challenges"] = state.get("challenges", []) + [result.get("challenge", "")]
+        result = self.planner.execute(context)
+        state["challenges"] = [result.get("challenge", "")]
+        state["plan"] = result.get("plan", "")
+        state["implementation_hint"] = result.get("implementation_hint", "general")
         state["agent_results"] = state.get("agent_results", {})
-        state["agent_results"]["product_manager"] = result
-        state["current_agent"] = "product_manager"
+        state["agent_results"]["planner"] = result
+        state["current_agent"] = "planner"
         return state
     
     def _developer_node(self, state: AgentState) -> AgentState:
-        """Developer agent node."""
-        pm_result = state.get("agent_results", {}).get("product_manager", {})
+        """Developer agent node (code-only when plan from Planner)."""
         context = {
             "world_state": state.get("world_state", self.world_engine.get_world_state()),
             "challenge": state.get("challenges", [""])[-1] if state.get("challenges") else "",
-            "implementation_hint": pm_result.get("implementation_hint", ""),
+            "plan": state.get("plan", ""),
+            "implementation_hint": state.get("implementation_hint", "general"),
         }
         result = self.developer.execute(context)
         state["code_changes"] = state.get("code_changes", []) + [result]
@@ -104,19 +101,6 @@ class AgentWorkflow:
         state["agent_results"]["applier"] = result
         state["applier_result"] = result
         state["current_agent"] = "applier"
-        return state
-    
-    def _refactor_node(self, state: AgentState) -> AgentState:
-        """Refactor agent node."""
-        context = {
-            "world_state": state.get("world_state", self.world_engine.get_world_state()),
-            "code_changes": state.get("code_changes", []),
-            "applier_result": state.get("applier_result", {}),
-        }
-        result = self.refactor.execute(context)
-        state["agent_results"] = state.get("agent_results", {})
-        state["agent_results"]["refactor"] = result
-        state["current_agent"] = "refactor"
         return state
     
     def _tester_node(self, state: AgentState) -> AgentState:
