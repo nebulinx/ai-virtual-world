@@ -1964,3 +1964,24 @@ class TemporalEntity(Entity):
         self.time_position += steps
 
 ENTITY_TYPES["TemporalEntity"] = TemporalEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DimensionalManipulator(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for dimensional manipulation
+        # Example: Collapse a dimension based on certain conditions
+        if self.properties["energy"] < 100:
+            world_state["dimensions"].remove(self.properties["dimension"])
+        return world_state
+
+    def to_dict(self):
+        return {
+            "type": "DimensionalManipulator",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["DimensionalManipulator"] = DimensionalManipulator
