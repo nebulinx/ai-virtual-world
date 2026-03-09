@@ -807,3 +807,28 @@ class DimensionalLimiter(Entity):
         return {'action': 'update', 'entity': self.to_dict()}
 
 ENTITY_TYPES["DimensionalLimiter"] = DimensionalLimiter
+
+from world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import time
+
+class TemporalLimiterEntity(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.influence_radius = properties.get("influence_radius", 10)
+        self.time_speed = properties.get("time_speed", 1.0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_world_state = super().update(world_state)
+        for entity_id, entity in world_state["entities"].items():
+            if entity_id != self.id and self._is_within_influence(entity):
+                new_age = entity.age * self.time_speed
+                new_world_state["entities"][entity_id]["age"] = new_age
+        return new_world_state
+
+    def _is_within_influence(self, entity: Entity) -> bool:
+        distance = ((self.position[0] - entity.position[0]) ** 2 + 
+                    (self.position[1] - entity.position[1]) ** 2) ** 0.5
+        return distance <= self.influence_radius
+
+ENTITY_TYPES["TemporalLimiterEntity"] = TemporalLimiterEntity
