@@ -1716,3 +1716,27 @@ class SpacialDisord(Entity):
 
 # Register the new entity type
 ENTITY_TYPES["SpacialDisord"] = SpacialDisord
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalJump(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any] = None):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for TemporalJump here
+        # For example, allow players to jump to different moments in time
+        # and create a branching timeline experience
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TemporalJump",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TemporalJump"] = TemporalJump
