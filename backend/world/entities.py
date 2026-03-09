@@ -1214,3 +1214,32 @@ class TimeDimension(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TimeDimension"] = TimeDimension
+
+from backend.world.entities import Entity, ENTITY_TYPES, Dict, Any
+
+class TemporalEntity(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+        self.time_speed = 1.0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Adjust time flow based on some properties
+        if "time_speed" in self.properties:
+            self.time_speed = self.properties["time_speed"]
+
+        # Update events, physics, and neighboring zones
+        for zone in world_state.get("zones", []):
+            if zone.position.distance_to(self.position) < self.properties.get("range", 10):
+                zone.update_time(self.time_speed)
+
+        # Update properties based on time flow
+        new_properties = self.properties.copy()
+        new_properties["age"] += self.time_speed
+
+        return {
+            "position": self.position,
+            "properties": new_properties,
+            "age": self.age + self.time_speed
+        }
+
+ENTITY_TYPES["TemporalEntity"] = TemporalEntity
