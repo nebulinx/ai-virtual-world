@@ -1243,3 +1243,41 @@ class TemporalEntity(Entity):
         }
 
 ENTITY_TYPES["TemporalEntity"] = TemporalEntity
+
+from world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DimensionShifter(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties, age)
+        self.current_dimension = properties.get("dimension", "normal")
+        self.dimensions = properties.get("dimensions", ["normal", "alternate"])
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Switch to the next dimension
+        current_index = self.dimensions.index(self.current_dimension)
+        next_index = (current_index + 1) % len(self.dimensions)
+        self.current_dimension = self.dimensions[next_index]
+        
+        # Modify world state based on the new dimension
+        if self.current_dimension == "alternate":
+            world_state["time_flow"] *= 0.5
+            world_state["physical_properties"]["gravity"] *= 2
+        else:
+            world_state["time_flow"] = 1.0
+            world_state["physical_properties"]["gravity"] = 1.0
+        
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": {
+                "type": "DimensionShifter",
+                "dimension": self.current_dimension,
+                "dimensions": self.dimensions
+            },
+            "age": self.age
+        }
+
+ENTITY_TYPES["DimensionShifter"] = DimensionShifter
