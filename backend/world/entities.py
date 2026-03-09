@@ -1555,3 +1555,22 @@ class DimensionBridge(Entity):
         return super().update(world_state)
 
 ENTITY_TYPES["DimensionBridge"] = DimensionBridge
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DimensionalBridge(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+        self.dimensions = properties.get("dimensions", [])
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        for dimension in self.dimensions:
+            if dimension in world_state:
+                world_state[dimension]["temporal_anomaly"] = True
+                world_state[dimension]["age"] += 1
+        return world_state.to_dict()
+
+ENTITY_TYPES["DimensionalBridge"] = DimensionalBridge

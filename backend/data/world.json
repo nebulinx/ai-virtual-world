@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "timestamp": "2026-03-09T05:33:58.093276",
+  "timestamp": "2026-03-09T05:42:30.428225",
   "physics": {
     "gravity": {
       "default": -9.8,
@@ -108,6 +108,20 @@
       "radius": 9.913756509175023,
       "duration": 30.51570256403399,
       "description": "Temporal distortion: time flows 0.73x normal speed"
+    },
+    {
+      "type": "energy_storm",
+      "timestamp": "2026-03-09T05:35:00.028078",
+      "position": {
+        "x": -28.31448685818273,
+        "y": 43.62730246785311,
+        "z": 7.395206344830775,
+        "w": -2.531989461543973
+      },
+      "intensity": 0.9225147134818407,
+      "radius": 27.237022709731555,
+      "duration": 20.43863381379181,
+      "description": "Energy storm detected: intensity 0.92, radius 27.2m"
     }
   ],
   "anomalies": [],
@@ -341,6 +355,11 @@
       "cycle": 49,
       "timestamp": "2026-03-09T05:33:58.091989+00:00",
       "summary": "**   Introduce a unique entity that allows dimensional travel and creates bridges between dimensions, enhancing the world's complexity and unpredictability. **"
+    },
+    {
+      "cycle": 50,
+      "timestamp": "2026-03-09T05:42:30.427133+00:00",
+      "summary": "**   Extend the TemporalDrift entity to create a dimensional bridge that connects multiple dimensions and affects local physics, creating a temporal anomaly. **"
     }
   ]
 }
