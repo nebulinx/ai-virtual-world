@@ -3031,3 +3031,20 @@ class TemporalZoneShifter(Entity):
 
 # Register the TemporalZoneShifter entity
 ENTITY_TYPES["TemporalZoneShifter"] = TemporalZoneShifter
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeSpaceTunnel(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic for time and space traversal
+        new_position = self.properties.get("next_position")
+        if new_position:
+            self.position = new_position
+            del self.properties["next_position"]
+        return self.to_dict()
+
+ENTITY_TYPES["TimeSpaceTunnel"] = TimeSpaceTunnel
