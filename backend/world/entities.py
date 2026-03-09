@@ -2534,3 +2534,37 @@ class AgingEntity(Entity):
         }
 
 ENTITY_TYPES["AgingEntity"] = AgingEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DynamicEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int, dimension: str, gravity_zone: str):
+        super().__init__(position, properties, age)
+        self.dimension = dimension
+        self.gravity_zone = gravity_zone
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_age = self.age + 1
+        dimension_modifier = 1.0
+        gravity_modifier = 1.0
+
+        # Example modifiers based on dimension and gravity zone
+        if self.dimension == "Quantum":
+            dimension_modifier = 0.5
+        elif self.dimension == "Temporal":
+            dimension_modifier = 1.5
+
+        if self.gravity_zone == "High":
+            gravity_modifier = 1.2
+        elif self.gravity_zone == "Low":
+            gravity_modifier = 0.8
+
+        new_age += dimension_modifier * gravity_modifier
+
+        return {
+            **self.to_dict(),
+            "age": new_age
+        }
+
+ENTITY_TYPES["DynamicEntity"] = DynamicEntity
