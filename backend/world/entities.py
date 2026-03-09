@@ -4686,3 +4686,20 @@ ENTITY_TYPES = {
     "QuantumParticle": QuantumParticle,
     "FifthDimensionalInterface": FifthDimensionalInterface
 }
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class FourthDimensionalEntity(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic to interact with the fourth dimension
+        # Example: manipulate time and create temporal distortions
+        for entity_id, entity in world_state['entities'].items():
+            if entity_id != self.id:
+                entity['position'] = (entity['position'][0] + 1, entity['position'][1], entity['position'][2], entity['position'][3] + 0.1)
+        return world_state
+
+ENTITY_TYPES["FourthDimensionalEntity"] = FourthDimensionalEntity
