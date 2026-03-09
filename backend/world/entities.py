@@ -3574,3 +3574,32 @@ class TimeRipple(Entity):
         return distance <= self.properties.get("ripple_radius", 10)
 
 ENTITY_TYPES["TimeRipple"] = TimeRipple
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from backend.world.world_state import WorldState
+import random
+from typing import Dict, Any
+
+class DimensionalRipple(Entity):
+    def __init__(self, position, properties=None, age=0):
+        super().__init__(position, properties, age)
+        self.ripple_strength = properties.get("ripple_strength", 1.0)
+        self.affected_dimensions = properties.get("affected_dimensions", 1)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        ripple_effect = self.ripple_strength * self.age
+        for _ in range(self.affected_dimensions):
+            target_dimension = random.choice(list(world_state.keys()))
+            if target_dimension != self.world_position["dimension"]:
+                self.trigger_events_in_dimension(world_state, target_dimension, ripple_effect)
+        return {}
+
+    def trigger_events_in_dimension(self, world_state: Dict[str, Any], dimension: str, ripple_effect: float):
+        for entity in world_state[dimension]:
+            if entity.world_position == self.world_position:
+                continue
+            distance = abs(entity.world_position["x"] - self.world_position["x"]) + abs(entity.world_position["y"] - self.world_position["y"]) + abs(entity.world_position["z"] - self.world_position["z"])
+            if distance <= ripple_effect:
+                entity.properties["temporal_offset"] += ripple_effect - distance
+
+ENTITY_TYPES["DimensionalRipple"] = DimensionalRipple
