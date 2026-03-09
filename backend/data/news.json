@@ -245,6 +245,12 @@
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 5 recorded events, and 4 dimensions.",
       "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T05:00:13.121267",
+      "headline": "```json",
+      "body": "{ \"headline\": \"",
+      "category": "entity"
     }
   ]
 }

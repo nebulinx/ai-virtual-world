@@ -1444,3 +1444,22 @@ class TimeZone(Entity):
         }
 
 ENTITY_TYPES["TimeZone"] = TimeZone
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import random
+
+class TimeWarp(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for the TimeWarp entity
+        # This could involve altering the time sequence, creating unpredictable events, or dimensional shifts
+        # For example, you could randomly change the position of other entities or alter the time flow in a region
+        # Update the entity's properties based on the world state
+        self.properties['age'] += 1
+        for entity_id, entity in world_state['entities'].items():
+            if entity_id != self.id:
+                if random.random() < 0.1:  # 10% chance to move the entity
+                    entity['position'] = (random.randint(-100, 100), random.randint(-100, 100))
+        return super().to_dict()
+
+ENTITY_TYPES["TimeWarp"] = TimeWarp
