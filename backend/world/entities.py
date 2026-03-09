@@ -1677,3 +1677,42 @@ class TemporalWarp(Entity):
 
 # Register the TemporalWarp entity
 ENTITY_TYPES["TemporalWarp"] = TemporalWarp
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class SpacialDisord(Entity):
+    def __init__(self, position, properties=None, age=0):
+        super().__init__(position, properties, age)
+        self.properties["intensity"] = properties.get("intensity", 1.0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Warp local dimensions
+        for entity_id, entity in world_state["entities"].items():
+            if entity_id != self.id:
+                distance = self.calculate_distance(entity["position"])
+                if distance < 10:  # Example threshold
+                    entity["position"] = self.warp_position(entity["position"], self.properties["intensity"])
+        return world_state
+
+    def calculate_distance(self, other_position: Dict[str, float]) -> float:
+        return ((self.position["x"] - other_position["x"]) ** 2 +
+                (self.position["y"] - other_position["y"]) ** 2 +
+                (self.position["z"] - other_position["z"]) ** 2) ** 0.5
+
+    def warp_position(self, position: Dict[str, float], intensity: float) -> Dict[str, float]:
+        # Simple warp logic: move in a random direction
+        import random
+        direction = {
+            "x": random.uniform(-1, 1),
+            "y": random.uniform(-1, 1),
+            "z": random.uniform(-1, 1)
+        }
+        return {
+            "x": position["x"] + direction["x"] * intensity,
+            "y": position["y"] + direction["y"] * intensity,
+            "z": position["z"] + direction["z"] * intensity
+        }
+
+# Register the new entity type
+ENTITY_TYPES["SpacialDisord"] = SpacialDisord
