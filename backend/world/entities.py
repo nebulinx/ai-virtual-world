@@ -1875,3 +1875,22 @@ class TemporalAnomaly(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class RealityManipulationZone(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to handle energy expenditure and reality manipulation
+        if "energy" in world_state and world_state["energy"] > 0:
+            world_state["energy"] -= 1
+            # Example manipulation: change gravity
+            world_state["gravity"] = 9.8 * (1 + 0.1 * self.age)
+            self.age += 1
+        return world_state
+
+ENTITY_TYPES["RealityManipulationZone"] = RealityManipulationZone
