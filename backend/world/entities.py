@@ -4395,3 +4395,18 @@ class TimeManipulator(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TimeManipulator"] = TimeManipulator
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalGateway(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for the Temporal Gateway entity
+        # For example, it could allow entities to pass through to other timelines
+        return self.to_dict()
+
+ENTITY_TYPES["TemporalGateway"] = TemporalGateway
