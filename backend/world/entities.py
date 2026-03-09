@@ -3131,3 +3131,28 @@ class TimeShard(Entity):
         }
 
 ENTITY_TYPES["TimeShard"] = TimeShard
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import random
+
+class TimeVerse(Entity):
+    def __init__(self, position, properties):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        # Randomly manipulate the timeline
+        if random.random() < 0.1:
+            # Create a branching reality
+            new_time_verses = []
+            for _ in range(2):
+                new_time_verses.append(TimeVerse(self.position, self.properties.copy()))
+                world_state["entities"].append(new_time_verses[-1])
+            # Update the main timeline
+            for entity in world_state["entities"]:
+                entity.properties["time_manipulation"] = self.age
+        return world_state.to_dict()
+
+ENTITY_TYPES["TimeVerse"] = TimeVerse
