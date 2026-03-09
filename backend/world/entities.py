@@ -1766,3 +1766,18 @@ class TemporalManipulator(Entity):
         }
 
 ENTITY_TYPES["TemporalManipulator"] = TemporalManipulator
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeWarp(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any] = None):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time manipulation logic here
+        self.age += 1
+        return self.to_dict()
+
+ENTITY_TYPES["TimeWarp"] = TimeWarp
