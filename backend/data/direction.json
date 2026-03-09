@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T11:57:48.642609+00:00",
-    "challenge": "**   Introduce a fifth temporal dimension with a unique anomaly that warps time flow, affecting entity aging and gravity dynamics across all zones. **Implementation Hint:** physics **",
-    "plan": "**  \n1. **File to Modify:** backend/world/physics.py  \n2. **Add New Physics Rule:** Introduce a new class `TemporalAnomaly` that defines how the fifth dimension affects time flow, entity aging, and gravity interactions.  \n3. **Integrate with Existing Systems:** Modify the `physics` module to include the new temporal anomaly, ensuring it influences all zones and entities uniformly.  \n4. **Impact on Entities:** Adjust the aging mechanics of entities to reflect their presence in the fifth dimension, potentially causing aging rates to",
+    "timestamp": "2026-03-09T12:06:12.716296+00:00",
+    "challenge": "Introduce a fifth temporal dimension as a \"time loop anomaly\" that causes entities to age in reverse within a specific zone, while also warping their movement through time and space. Implementation Hint: entity",
+    "plan": "- entity: Introduce a new TimeLoopAnomaly class that inherits from Anomaly.  \n- entity: Override the aging and movement functions to reverse entity aging within a specific zone.  \n- entity: Implement a special behavior where entities can \"jump\" through time loops, altering their position in time and space.  \n- entity: Create events that trigger time loop anomalies in specific zones, causing unpredictable aging and movement effects.",
     "implementation_hint": "entity",
-    "summary": "**   Introduce a new temporal dimension and its unique anomaly to the physics system, altering entity aging and gravity mechanics. **"
+    "summary": "Create a new temporal anomaly that causes entities to age in reverse within a specific zone, while also warping their movement through time and space."
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T10:39:48.198692+00:00",
-      "challenge": "**   Introduce a temporal anomaly where entities' aging affects the flow of time around them, creating a dynamic where local time dilation occurs as entities age, altering the perception of time in the world. **",
-      "plan": "**  \n1. **Create a new aging effect class** (`temporalAnomaly` in `backend/world/entities.py`) that calculates the time dilation effect based on the entity's age and properties.  \n2. **Modify the entity's aging mechanism** to include a `timeDilationFactor` that affects the entity's position and interactions with the environment.  \n3. **Adjust the time flow calculations** in the physics system to account for the localized time dilation, creating a ripple effect on nearby entities and events.  \n4. **Implement event handling** for the new effect, ensuring that events trigger the appropriate time dilation changes and interact with the affected entities.",
-      "implementation_hint": "entity",
-      "summary": "**   This cycle aims to explore the concept of time dilation caused by aging entities, creating a dynamic where the passage of time is influenced by the entity's internal state. **"
-    },
     {
       "timestamp": "2026-03-09T10:47:33.776455+00:00",
       "challenge": "Create a dynamic where each entity's rate of aging is influenced by its current dimension and the gravity zone it is in, causing aging to vary across different dimensions and zones.",
@@ -76,6 +69,13 @@
       "plan": "**\n1. **Modify physics.py:**  \n   - Add `timeFlowPerDimension` class to track time flow rates per dimension.\n   - Introduce `TimeFlowPerDimension` for each zone.\n\n2. **Add TimeFlowRatePerDimension class:**  \n   ```python\n   from datetime import timedelta\n\n   class TimeFlowRatePerDimension:\n       def __init__(self, zone, rate):\n           self.zone = zone\n           self.rate = rate  # Time dilation factor per dimension\n   ```\n\n3. **Introduce AgeingAlongDimensions function:**  \n   ```python\n   def ageing_along_dimensions(entity, dimensions, current_time):\n       total_age = 0\n       for dim in dimensions:\n           if dim.timeFlowRate:\n               delta = (current_time - dim.timeFlowRate.zone.start).total_seconds() * dim.timeFlowRate.rate\n               total_age += delta\n       return total_age\n   ```\n\n4. **Create TemporalAnomalyEvent:**  \n   ```python\n   class TemporalAnomalyEvent:\n       def __init__(self, world, duration, start_time",
       "implementation_hint": "entity",
       "summary": "**   Introduce a fifth temporal dimension with unique anomaly that warps time flow, affecting entity aging and gravity dynamics across all zones. **"
+    },
+    {
+      "timestamp": "2026-03-09T11:57:48.642609+00:00",
+      "challenge": "**   Introduce a fifth temporal dimension with a unique anomaly that warps time flow, affecting entity aging and gravity dynamics across all zones. **Implementation Hint:** physics **",
+      "plan": "**  \n1. **File to Modify:** backend/world/physics.py  \n2. **Add New Physics Rule:** Introduce a new class `TemporalAnomaly` that defines how the fifth dimension affects time flow, entity aging, and gravity interactions.  \n3. **Integrate with Existing Systems:** Modify the `physics` module to include the new temporal anomaly, ensuring it influences all zones and entities uniformly.  \n4. **Impact on Entities:** Adjust the aging mechanics of entities to reflect their presence in the fifth dimension, potentially causing aging rates to",
+      "implementation_hint": "entity",
+      "summary": "**   Introduce a new temporal dimension and its unique anomaly to the physics system, altering entity aging and gravity mechanics. **"
     }
   ]
 }

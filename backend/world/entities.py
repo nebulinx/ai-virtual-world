@@ -2817,3 +2817,25 @@ class FifthDimensionAnomaly(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["FifthDimensionAnomaly"] = FifthDimensionAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeLoopAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Reverse age within the anomaly zone
+        for entity_id, entity in world_state['entities'].items():
+            if entity['zone'] == self.zone:
+                entity['age'] = max(0, entity['age'] - 1)
+        
+        # Warp movement through time and space
+        for entity_id, entity in world_state['entities'].items():
+            if entity['zone'] == self.zone:
+                entity['x'] += entity['velocity_x'] * world_state['time_step']
+                entity['y'] += entity['velocity_y'] * world_state['time_step']
+                entity['z'] += entity['velocity_z'] * world_state['time_step']
+                entity['t'] += entity['velocity_t'] * world_state['time_step']
+        
+        return world_state
+
+ENTITY_TYPES["TimeLoopAnomaly"] = TimeLoopAnomaly
