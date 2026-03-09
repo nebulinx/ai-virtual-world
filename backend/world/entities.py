@@ -2144,3 +2144,42 @@ class TemporalPortal(Entity):
 
 # Register the TemporalPortal entity type
 ENTITY_TYPES["TemporalPortal"] = TemporalPortal
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalDimensionHopper(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.current_dimension = properties.get("current_dimension", 0)
+        self.dimensions = properties.get("dimensions", [])
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_position = self.position
+        new_properties = self.properties.copy()
+        
+        # Simulate aging effect in current dimension
+        if self.current_dimension in self.dimensions:
+            new_properties["age"] += 1
+        
+        # Logic to switch dimensions
+        # For simplicity, just cycle through dimensions
+        self.current_dimension = (self.current_dimension + 1) % len(self.dimensions)
+        
+        new_position = {
+            "x": new_position["x"] + 1 if self.current_dimension % 2 == 0 else new_position["x"] - 1,
+            "y": new_position["y"] + 1 if self.current_dimension % 3 == 0 else new_position["y"] - 1,
+            "z": new_position["z"] + 1 if self.current_dimension % 5 == 0 else new_position["z"] - 1
+        }
+        
+        new_properties["position"] = new_position
+        return new_properties
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TemporalDimensionHopper",
+            "position": self.position,
+            "properties": self.properties
+        }
+
+ENTITY_TYPES["TemporalDimensionHopper"] = TemporalDimensionHopper
