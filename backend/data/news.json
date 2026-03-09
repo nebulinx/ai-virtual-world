@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T01:46:45.425659",
-      "headline": "{headline",
-      "body": "The simulation holds 0 entities, 1 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T01:55:09.631601",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 1 recorded events, and 4 dimensions.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-09T08:59:38.158534",
       "headline": "```json",
       "body": "{ \"headline\": \"Silence Reigns Supreme in the Digital Abyss\", \"",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T09:08:20.937095",
+      "headline": "{ Virtual Simulation Reflects Real-World Chaos, body: The virtual simulation has recently undergone a significant transformation, now operating in a 4-dimensional space with enhanced capabilities. Over the past week, 9 distinct events have occurred, including 5 user activities and 4 anomalies. Users reported issues with data import functionality, while the system experienced unexpected activity spikes during peak usage times. Anomalies included system",
+      "body": "The simulation holds 0 entities, 9 recorded events, and 4 dimensions.",
       "category": "entity"
     }
   ]

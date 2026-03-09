@@ -2116,3 +2116,31 @@ class TemporalPortal(Entity):
         }
 
 ENTITY_TYPES["TemporalPortal"] = "temporal_portal"
+
+from backend.world.entities import Entity, ENTITY_TYPES, Dict, Any
+
+class TemporalPortal(Entity):
+    def __init__(self, position, properties, age, target_reality):
+        super().__init__(position, properties, age)
+        self.target_reality = target_reality
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to switch to the target reality
+        if self.target_reality in world_state:
+            # Teleport the entity to the target reality
+            self.position = world_state[self.target_reality]["spawn_point"]
+            # Update the properties based on the new reality
+            self.properties = world_state[self.target_reality]["properties"]
+        return super().update(world_state)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TemporalPortal",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "target_reality": self.target_reality
+        }
+
+# Register the TemporalPortal entity type
+ENTITY_TYPES["TemporalPortal"] = TemporalPortal
