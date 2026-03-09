@@ -5008,3 +5008,35 @@ class TimeZone(Entity):
         }
 
 ENTITY_TYPES["TimeZone"] = TimeZone
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalAnomaly(Entity):
+    def __init__(self, position, properties=None):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age % 10 == 0:
+            # Warp time in vicinity
+            self.warp_time(world_state)
+        return self.to_dict()
+
+    def warp_time(self, world_state):
+        # Logic to warp time in vicinity
+        # Example: Randomly warp time for entities in a radius
+        radius = self.properties.get('radius', 10)
+        entities_to_warp = [e for e in world_state['entities'] if self.distance_to(e) <= radius]
+        for entity in entities_to_warp:
+            entity.age = 0
+            entity.position = self.random_position()
+
+    def random_position(self):
+        # Generate a random position within a certain range
+        from random import randint
+        return (randint(self.position[0] - 5, self.position[0] + 5),
+                randint(self.position[1] - 5, self.position[1] + 5),
+                randint(self.position[2] - 5, self.position[2] + 5))
+
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
