@@ -1091,3 +1091,18 @@ class FifthDimensionalTemporalAnomaly(Entity):
         }
 
 ENTITY_TYPES["FifthDimensionalTemporalAnomaly"] = FifthDimensionalTemporalAnomaly
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class SixthDimensionColor(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic to interact with existing entities based on their color properties
+        # Create new behaviors and events that influence entity interactions and world dynamics
+        # Example: Interact with other entities based on their color properties
+        # Update position, properties, age, etc.
+        # Return updated state as a dictionary
+        pass
+
+# Register the new entity type
+ENTITY_TYPES["SixthDimensionColor"] = SixthDimensionColor
