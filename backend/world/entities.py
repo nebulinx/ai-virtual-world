@@ -1489,3 +1489,36 @@ class DimensionalWeaver(Entity):
         return super().update(world_state)
 
 ENTITY_TYPES["DimensionalWeaver"] = DimensionalWeaver
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import random
+import time
+
+class TemporalDrift(Entity):
+    def __init__(self, position, properties):
+        super().__init__(position, properties)
+        self.age = 0
+        self.warp_radius = properties.get("warp_radius", 5)
+        self.warp_speed = properties.get("warp_speed", 1)
+        self.last_warp_time = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        current_time = time.time()
+        if current_time - self.last_warp_time >= self.warp_speed:
+            self.last_warp_time = current_time
+            self.warp(world_state)
+
+        return self.to_dict()
+
+    def warp(self, world_state: Dict[str, Any]):
+        for entity in world_state["entities"]:
+            if entity != self:
+                distance = ((self.position[0] - entity.position[0]) ** 2 +
+                             (self.position[1] - entity.position[1]) ** 2) ** 0.5
+                if distance <= self.warp_radius:
+                    entity.position = (entity.position[0] + random.uniform(-1, 1),
+                                       entity.position[1] + random.uniform(-1, 1))
+                    entity.age = random.randint(0, 100)
+
+ENTITY_TYPES["TemporalDrift"] = TemporalDrift

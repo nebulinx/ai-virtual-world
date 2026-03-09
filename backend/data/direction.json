@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T05:09:16.601291+00:00",
-    "challenge": "** Create a new entity called \"DimensionalWeaver\" that creates temporary bridges between zones in different dimensions, allowing entities to move between dimensions seamlessly. **Implementation Hint:** entity **",
-    "plan": "**\n- **1. Add a new entity file for DimensionalWeaver:** This entity will manage its dimensional shifts and temporary zone bridges.\n- **2. Create a new method for dimensional switching:** The `DimensionalWeaver` will have a method `switchDimensions()` that changes its position across different zones.\n- **3. Modify physics to handle extra dimension:** Update the physics engine to support movement across four or more dimensions and ensure collisions are detected in all dimensions.\n- **4. Create a new event for dimensional bridges:** Implement the `DimensionalBridge",
+    "timestamp": "2026-03-09T05:15:50.432007+00:00",
+    "challenge": "**   Create a TemporalDrift entity that warps time around itself, creating unpredictable event sequences and dimensional shifts. **Implementation Hint:** physics **",
+    "plan": "**  \n- **file:** backend/world/physics.py  \n- **add:** A new class `TimeFlowDistortion` that calculates and applies time flow distortions to entities passing through a specific zone.  \n- **add:** Modify the `TimeFlow` parameter for the distortion zone to include a multiplier that adjusts the local time flow rate.  \n- **add:** Implement a `TemporalDrift` entity type that carries this `TimeFlowDistortion` and affects both the movement and event timing of entities in its vicinity.  \n- **add:** Update the event processing to account for time flow distortions, creating unpredictable timing sequences and dimensional shifts as entities interact with the distortion zone.",
     "implementation_hint": "entity",
-    "summary": "** The challenge is to create a unique entity that introduces dimensional travel and bridges, enhancing the world's complexity and unpredictability. **"
+    "summary": "**   The TemporalDrift entity will introduce localized time dilation and dimensional shifts, creating unpredictable event sequences and altering the physics of the world around it. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T03:43:23.532005+00:00",
-      "challenge": "**   Introduce a TimeDimension entity that affects time dilation and entity properties, creating a fourth-dimensional temporal interaction system. **Implementation Hint:** entity **",
-      "plan": "**  \n- **File to Modify:** backend/world/entities.py  \n- **Addition:** Create a TimeDimension class inheriting from Entity, with properties for time type and duration.  \n- **Implementation:** When entities travel through TimeDimension zones, their age and properties change based on zone settings.  \n- **Events:** Introduce TimeDimensionEvents to trigger actions at specific time intervals or based on time state.  \n- **Anomalies:** Allow TimeDimensionAnomalies to warp time zones dynamically, causing unexpected temporal effects.  \n- **Physics Update:** Modify entity movement calculations to include time dilation effects.",
-      "implementation_hint": "entity",
-      "summary": "**   Introduce a TimeDimension entity that modifies local time perception and triggers events based on time zones. **"
-    },
     {
       "timestamp": "2026-03-09T03:52:06.938495+00:00",
       "challenge": "**   Introduce a Temporal Entity that allows for real-time manipulation of time flow, affecting events, physics, and neighboring zones. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "**  \n- **backend/world/entities.py**: Add a new TemporalDrift entity class.  \n  - **Attributes**: name (str), type (str), position (dict), properties (dict).  \n  - **Methods**: __init__ (initialize), get WarpedTime (calculate time difference).  \n- **Events**: Create a new event that triggers a time warp effect.  \n- **Physics**: Modify the time flow in zones to be influenced by nearby Temporal",
       "implementation_hint": "physics",
       "summary": "**   Create a TemporalDrift entity that warps time around itself, creating unpredictable event sequences and dimensional shifts. **"
+    },
+    {
+      "timestamp": "2026-03-09T05:09:16.601291+00:00",
+      "challenge": "** Create a new entity called \"DimensionalWeaver\" that creates temporary bridges between zones in different dimensions, allowing entities to move between dimensions seamlessly. **Implementation Hint:** entity **",
+      "plan": "**\n- **1. Add a new entity file for DimensionalWeaver:** This entity will manage its dimensional shifts and temporary zone bridges.\n- **2. Create a new method for dimensional switching:** The `DimensionalWeaver` will have a method `switchDimensions()` that changes its position across different zones.\n- **3. Modify physics to handle extra dimension:** Update the physics engine to support movement across four or more dimensions and ensure collisions are detected in all dimensions.\n- **4. Create a new event for dimensional bridges:** Implement the `DimensionalBridge",
+      "implementation_hint": "entity",
+      "summary": "** The challenge is to create a unique entity that introduces dimensional travel and bridges, enhancing the world's complexity and unpredictability. **"
     }
   ]
 }
