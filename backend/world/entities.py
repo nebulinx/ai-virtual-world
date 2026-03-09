@@ -4847,3 +4847,15 @@ class TemporalDriftZone(Entity):
         return {'age': new_age}
 
 TemporalDriftZone.register(ENTITY_TYPES)
+
+from world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any, List
+
+class TimeLoopEntity(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age % 10 == 0:
+            self.position = (self.position[0] + 1, self.position[1])
+        return self.to_dict()
+
+ENTITY_TYPES["TimeLoopEntity"] = TimeLoopEntity
