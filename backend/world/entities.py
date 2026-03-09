@@ -3156,3 +3156,28 @@ class TimeVerse(Entity):
         return world_state.to_dict()
 
 ENTITY_TYPES["TimeVerse"] = TimeVerse
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalAnomaly(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Simulate temporal effect based on player actions
+        player_actions = world_state.get("player_actions", [])
+        time_shift = sum(action.get("time_shift", 0) for action in player_actions)
+        self.age += time_shift
+
+        # Update world state based on temporal anomaly
+        world_state["anomaly_age"] = self.age
+
+        # Example effect: Increase energy vortex power with anomaly age
+        for vortex in world_state.get("energy_vortices", []):
+            vortex["power"] *= (1 + self.age / 100)
+
+        return world_state.to_dict()
+
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
