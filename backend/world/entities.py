@@ -574,3 +574,36 @@ class FifthDimensionalEntity(Entity):
         }
 
 ENTITY_TYPES["FifthDimensionalEntity"] = FifthDimensionalEntity
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_position = {
+            "x": self.position["x"] + 1,
+            "y": self.position["y"],
+            "z": self.position["z"]
+        }
+        self.position = new_position
+        self.age += 1
+        return super().to_dict()
+
+ENTITY_TYPES = {
+    "TemporalAnomaly": TemporalAnomaly
+}
