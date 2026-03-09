@@ -2607,3 +2607,29 @@ class TimeZone(Entity):
 ENTITY_TYPES = {
     "TimeZone": TimeZone
 }
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class HyperDimensionalEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int, hyper_dimension: int):
+        super().__init__(position, properties, age)
+        self.hyper_dimension = hyper_dimension
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement unique behaviors and interactions for the fourth spatial dimension
+        # Example: Move along the fourth dimension based on a property
+        if 'hyper_speed' in self.properties:
+            self.position['t'] += self.properties['hyper_speed']
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "HyperDimensionalEntity",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "hyper_dimension": self.hyper_dimension
+        }
+
+ENTITY_TYPES["HyperDimensionalEntity"] = HyperDimensionalEntity
