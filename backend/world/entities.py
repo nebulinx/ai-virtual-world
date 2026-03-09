@@ -5172,3 +5172,28 @@ class TemporalGuard(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TemporalGuard"] = TemporalGuard
+
+from typing import Dict, Any
+from backend.world.entities import Entity
+
+class TemporalGateway(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.time_destination = properties.get('time_destination', 0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to handle time travel through the gateway
+        current_time = world_state.get('current_time', 0)
+        if current_time >= self.time_destination:
+            return {'action': 'travel_to_time', 'time': self.time_destination}
+        return {'action': 'stay'}
+
+    def to_dict(self):
+        return {
+            'type': 'TemporalGateway',
+            'position': self.position,
+            'properties': self.properties,
+            'age': self.age
+        }
+
+ENTITY_TYPES["TemporalGateway"] = TemporalGateway
