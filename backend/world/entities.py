@@ -4988,3 +4988,23 @@ class NewEntityName(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["NewEntityName"] = NewEntityName
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeZone(Entity):
+    def __init__(self, position, time_rate):
+        super().__init__(position)
+        self.time_rate = time_rate
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += self.time_rate * world_state['time_delta']
+        return super().update(world_state)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            'time_rate': self.time_rate,
+        }
+
+ENTITY_TYPES["TimeZone"] = TimeZone
