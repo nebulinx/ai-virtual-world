@@ -1985,3 +1985,22 @@ class DimensionalManipulator(Entity):
         }
 
 ENTITY_TYPES["DimensionalManipulator"] = DimensionalManipulator
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DimensionalPortal(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.target_dimension = properties.get("target_dimension", None)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.target_dimension:
+            # Logic to handle dimension traversal
+            self.position = world_state.get(self.target_dimension, {}).get("entry_point", self.position)
+        return super().update(world_state)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {**super().to_dict(), "target_dimension": self.target_dimension}
+
+ENTITY_TYPES["DimensionalPortal"] = DimensionalPortal
