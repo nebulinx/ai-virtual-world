@@ -4554,3 +4554,30 @@ ENTITY_TYPES = {
     "TemporalAnomaly": TemporalAnomaly,
     "QuantumParticle": QuantumParticle
 }
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalRewind(Entity):
+    def __init__(self, position, properties=None):
+        super().__init__(position, properties)
+        self.history = []
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.history.append((self.position, self.properties, self.age))
+        return super().update(world_state)
+
+    def rewind(self, steps=1):
+        if len(self.history) > steps:
+            self.position, self.properties, self.age = self.history[-steps-1]
+            self.history = self.history[:-steps]
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "history": self.history
+        }
+
+ENTITY_TYPES["TemporalRewind"] = TemporalRewind

@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T20:45:53.649266+00:00",
-    "challenge": "**   Introduce a mechanism where each entity can exist in an independent alternate timeline, allowing for parallel realities and different outcomes based on the entity's unique path through time and space. **Implementation Hint:** entity **",
+    "timestamp": "2026-03-09T20:53:43.482980+00:00",
+    "challenge": "**   Create an entity mechanism where entities can temporarily \"rewind\" their movement in time or space based on certain conditions or interactions, introducing the possibility of temporal or spatial shortcuts. **Implementation Hint:** entity **",
     "plan": "- Implement in codebase (hint: entity)",
     "implementation_hint": "entity",
-    "summary": "**   This challenge will enable entities to traverse through their own"
+    "summary": "**"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T19:28:44.269471+00:00",
-      "challenge": "**   Introduce a dynamic dimension shifter that can change the number of dimensions in real-time, creating a variable spacetime environment where events and entities can exist in multiple dimensions simultaneously. **Implementation Hint:** entity **",
-      "plan": "- Implement in codebase (hint: entity)",
-      "implementation_hint": "entity",
-      "summary": "**   This challenge extends the spacetime manipulation by introducing a dynamic dimension shifter that adds another dimension of complexity, allowing for variable spacetime environments"
-    },
     {
       "timestamp": "2026-03-09T19:36:54.481348+00:00",
       "challenge": "**Create a Time Dimension Warping Entity that alters the spatial dimensions of time, creating a fifth dimension of temporal manipulation and allowing for variable time flow rates in specific areas of the world.**",
@@ -76,6 +69,13 @@
       "plan": "**  \n1. **Define a new entity type:** Create a new entity class, `DimensionalJumper`, which can switch between dimensions and interact with anomalies.  \n2. **Modify the entity class:** In `backend/world/entities.py`, add the `DimensionalJumper` class with methods for dimension switching and anomaly interaction.  \n3. **Add entity to world:** Ensure that `DimensionalJumper` entities are created and added to the world's entities array.  \n4. **Influence physics:** Implement a temporary effect when `DimensionalJumper` moves through zones, altering gravity zones or creating dimensional shifts.  \n5. **Trigger events:** When `DimensionalJumper` interacts with anomalies",
       "implementation_hint": "entity",
       "summary": "**   The new entity will allow for deeper interaction with the world's dimensional and temporal structures, adding a layer of complexity to entity behavior. **"
+    },
+    {
+      "timestamp": "2026-03-09T20:45:53.649266+00:00",
+      "challenge": "**   Introduce a mechanism where each entity can exist in an independent alternate timeline, allowing for parallel realities and different outcomes based on the entity's unique path through time and space. **Implementation Hint:** entity **",
+      "plan": "- Implement in codebase (hint: entity)",
+      "implementation_hint": "entity",
+      "summary": "**   This challenge will enable entities to traverse through their own"
     }
   ]
 }
