@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T16:27:07.718988+00:00",
-    "challenge": "**   Create a new entity type capable of generating time echoes that propagate through different zones and dimensions, causing events to occur in non-linear temporal orders.  **Implementation Hint:** entity   Modify the entity class to include a new entity type `Time Echo Entity` that creates time echoes propagating through zones and dimensions, altering event orders.   **",
-    "plan": "**  \n- **event_handling_time echoing:** Add a function to handle events triggered by time echoes from `Time Echo Entity` in different zones and dimensions.  \n- **new entity class:** Create a `Time Echo Entity` class that, when activated, generates time echoes propagating through zones and dimensions.  \n- **time echo effects:** Implement time echo effects that alter event timelines, creating non-linear temporal orders across multiple zones and dimensions.  \n- **entity interaction:** Allow entities to interact with `Time Echo Entity` to create",
+    "timestamp": "2026-03-09T16:36:50.267853+00:00",
+    "challenge": "Create a new mechanic where entities can create time zones with unique signatures, causing events to occur in non-linear temporal orders based on proximity and interaction with other entities. Implementation Hint: entity",
+    "plan": "- Implement in codebase (hint: entity)",
     "implementation_hint": "entity",
-    "summary": "**   This challenge introduces a revolutionary new mechanic where entities can create time echoes that ripple through multiple zones and dimensions, causing events to occur in non-linear temporal orders and introducing chaos and unpredictability into the timeline.   **"
+    "summary": "This challenge introduces time signature zones that alter event timelines non-linearly, creating unpredictable temporal sequences based on entity interactions and proximity."
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T14:57:01.299057+00:00",
-      "challenge": "Create a new entity type that can create time portals, which manipulate the local time flow, causing inconsistencies and altering event sequences.",
-      "plan": "- Add a new entity class: TimePortal in backend/world/entities.py\n- The TimePortal entity will have parameters for position, duration, and time manipulation settings (e.g., time acceleration, rewinding)\n- The TimePortal will interact with TimeFlow zones, temporarily deactivating them and creating new TimeFlow zones with altered parameters\n- Implement event handling to track when TimePortal interactions cause event inconsistencies\n- Add a method to clear the TimePortal's effects and revert to normal time flow",
-      "implementation_hint": "entity",
-      "summary": "Introduce TimePortal entities that can create localized time distortions, affecting the timeline of nearby areas and events."
-    },
     {
       "timestamp": "2026-03-09T15:05:02.157684+00:00",
       "challenge": "**   Introduce a system for preserved memory fragments that can be captured and analyzed, potentially affecting the timeline and event sequences. **",
@@ -76,6 +69,13 @@
       "plan": "- **backend/world/entities.py**: Add a new `TimeWarp` class.  \n  - The `TimeWarp` entity will have a `setWarpRate` method to define how much time is compressed or dilated in its vicinity.  \n  - The `applyWarp` method will propagate this warp to nearby zones, affecting their time flow and event processing.  \n  - The `TimeWarp` will also interact with other entities, potentially combining warps and creating complex temporal patterns.  \n\nThis challenge will introduce localized time warping, creating unpredictable and dynamic event sequences while maintaining causality where possible.",
       "implementation_hint": "entity",
       "summary": "The challenge will create a new entity type capable of warping local time, causing events to occur in non-linear orders based on proximity and interaction with other entities."
+    },
+    {
+      "timestamp": "2026-03-09T16:27:07.718988+00:00",
+      "challenge": "**   Create a new entity type capable of generating time echoes that propagate through different zones and dimensions, causing events to occur in non-linear temporal orders.  **Implementation Hint:** entity   Modify the entity class to include a new entity type `Time Echo Entity` that creates time echoes propagating through zones and dimensions, altering event orders.   **",
+      "plan": "**  \n- **event_handling_time echoing:** Add a function to handle events triggered by time echoes from `Time Echo Entity` in different zones and dimensions.  \n- **new entity class:** Create a `Time Echo Entity` class that, when activated, generates time echoes propagating through zones and dimensions.  \n- **time echo effects:** Implement time echo effects that alter event timelines, creating non-linear temporal orders across multiple zones and dimensions.  \n- **entity interaction:** Allow entities to interact with `Time Echo Entity` to create",
+      "implementation_hint": "entity",
+      "summary": "**   This challenge introduces a revolutionary new mechanic where entities can create time echoes that ripple through multiple zones and dimensions, causing events to occur in non-linear temporal orders and introducing chaos and unpredictability into the timeline.   **"
     }
   ]
 }

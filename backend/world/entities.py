@@ -3694,3 +3694,38 @@ class TimeEchoEntity(Entity):
         self.echoes.append({'target': target, 'duration': duration, 'age': 0})
 
 ENTITY_TYPES["TimeEchoEntity"] = TimeEchoEntity
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeZoneEntity(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.signature = self.properties.get('signature', 'Unknown')
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to create time zones with unique signatures
+        # Events occur based on proximity and interaction with other entities
+        # Placeholder logic for demonstration purposes
+        for entity in world_state['entities']:
+            if entity['type'] == 'TimeZoneEntity' and entity['signature'] != self.signature:
+                distance = self.calculate_distance(entity['position'])
+                if distance < 100:
+                    self.trigger_event(entity)
+        return {}
+
+    def calculate_distance(self, position):
+        # Placeholder for distance calculation logic
+        return ((self.position[0] - position[0])**2 + (self.position[1] - position[1])**2)**0.5
+
+    def trigger_event(self, entity):
+        # Placeholder for event triggering logic
+        print(f"Event triggered between {self.signature} and {entity['signature']}")
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            'signature': self.signature
+        }
+
+ENTITY_TYPES["TimeZoneEntity"] = TimeZoneEntity
