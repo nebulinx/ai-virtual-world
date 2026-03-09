@@ -2969,3 +2969,25 @@ ENTITY_TYPES = {
     "QuantumParticle": QuantumParticle,
     "TemporalTraverse": TemporalTraverse
 }
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeLoop(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.time_slices = properties.get("time_slices", [])
+        self.current_slice_index = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.current_slice_index < len(self.time_slices):
+            slice = self.time_slices[self.current_slice_index]
+            slice.update(world_state)
+            self.current_slice_index += 1
+        return self.to_dict()
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> 'TimeLoop':
+        return cls(data.get("position", {"x": 0, "y": 0}), data.get("properties", {}))
+
+ENTITY_TYPES["TimeLoop"] = TimeLoop
