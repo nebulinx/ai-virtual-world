@@ -3226,3 +3226,37 @@ class TimeWarp(Entity):
         }
 
 ENTITY_TYPES["TimeWarp"] = TimeWarp
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeDilation(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.dilation_factor = properties.get("dilation_factor", 1.0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        updated_entities = {}
+        for entity_id, entity in world_state["entities"].items():
+            if entity_id == self.id:
+                continue
+            distance = ((entity["position"]["x"] - self.position["x"]) ** 2 +
+                        (entity["position"]["y"] - self.position["y"]) ** 2 +
+                        (entity["position"]["z"] - self.position["z"]) ** 2) ** 0.5
+            if distance <= self.properties.get("range", 100):
+                updated_entity = entity.copy()
+                updated_entity["position"]["x"] += (entity["position"]["x"] - self.position["x"]) * self.dilation_factor
+                updated_entity["position"]["y"] += (entity["position"]["y"] - self.position["y"]) * self.dilation_factor
+                updated_entity["position"]["z"] += (entity["position"]["z"] - self.position["z"]) * self.dilation_factor
+                updated_entities[entity_id] = updated_entity
+        return updated_entities
+
+    def to_dict(self):
+        return {
+            "type": "TimeDilation",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeDilation"] = TimeDilation
