@@ -2440,3 +2440,75 @@ class AgingEntity(Entity):
         }
 
 ENTITY_TYPES["AgingEntity"] = AgingEntity
+
+from typing import Dict, Any
+import time
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class AgingSystem:
+    def __init__(self, entities: Dict[str, Entity]):
+        self.entities = entities
+        self.zone_time_flow = {}
+
+    def update_zone_time_flow(self, zone_id: str, time_flow_rate: float):
+        self.zone_time_flow[zone_id] = time_flow_rate
+
+    def update_entities(self, world_state: Dict[str, Any]):
+        current_time = time.time()
+        for zone_id, time_flow_rate in self.zone_time_flow.items():
+            zone_entities = [entity for entity in self.entities.values() if zone_id in entity.properties.get("zones", [])]
+            for entity in zone_entities:
+                entity.age += 1 * time_flow_rate
+                entity.properties["age"] = entity.age
+                updated_properties = entity.update(world_state)
+                entity.properties.update(updated_properties)
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic
+        if self.age % 10 == 0:
+            self.properties["strength"] += 1
+        return {}
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic
+        if self.age % 5 == 0:
+            self.properties["size"] += 1
+        return {}
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic
+        if self.age % 3 == 0:
+            self.properties["intensity"] += 0.1
+        return {}
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic
+        if self.age % 2 == 0:
+            self.properties["spin"] += 1
+        return {}
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle
+}
