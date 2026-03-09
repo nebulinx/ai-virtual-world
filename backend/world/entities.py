@@ -4703,3 +4703,32 @@ class FourthDimensionalEntity(Entity):
         return world_state
 
 ENTITY_TYPES["FourthDimensionalEntity"] = FourthDimensionalEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class FifthDimensionalInterface(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Simulate interaction with the fifth-dimensional interface
+        if "fifth_dimensional_event" in world_state:
+            # Modify movement or interactions based on the event
+            self.position["x"] += 1  # Example modification
+            self.position["y"] += 1
+            self.position["z"] += 1
+            self.position["t"] += 1
+        self.age += 1
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "FifthDimensionalInterface",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["FifthDimensionalInterface"] = FifthDimensionalInterface
