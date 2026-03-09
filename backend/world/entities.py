@@ -3305,3 +3305,24 @@ class TemporalRift(Entity):
         return data
 
 ENTITY_TYPES["TemporalRift"] = TemporalRift
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class ErraticTimeline(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Simulate erratic time behavior
+        current_time = world_state.get("time", 0)
+        new_time = current_time + 1 if current_time % 2 == 0 else current_time - 1
+        world_state["time"] = new_time
+        
+        # Randomly alter the sequence of events
+        events = world_state.get("events", [])
+        import random
+        random.shuffle(events)
+        world_state["events"] = events
+        
+        return world_state
+
+# Register the new entity type
+ENTITY_TYPES["ErraticTimeline"] = ErraticTimeline
