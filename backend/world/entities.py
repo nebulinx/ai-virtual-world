@@ -3110,3 +3110,24 @@ class TemporalNexus(Entity):
 
 # Register the TemporalNexus entity type
 ENTITY_TYPES["TemporalNexus"] = TemporalNexus
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeShard(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic to influence the timeline based on player actions
+        # For example, change properties or events in the world_state
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeShard"] = TimeShard
