@@ -4256,3 +4256,29 @@ class SpacetimeManipulator(Entity):
         }
 
 ENTITY_TYPES["SpacetimeManipulator"] = SpacetimeManipulator
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeWarp(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.time_factor = properties.get('time_factor', 1.0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        for entity_id, entity in world_state['entities'].items():
+            if entity['type'] != 'TimeWarp':
+                entity['age'] += self.time_factor
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'type': 'TimeWarp',
+            'position': self.position,
+            'properties': {
+                'time_factor': self.time_factor
+            },
+            'age': self.age
+        }
+
+ENTITY_TYPES["TimeWarp"] = TimeWarp
