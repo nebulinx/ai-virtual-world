@@ -1281,3 +1281,39 @@ class DimensionShifter(Entity):
         }
 
 ENTITY_TYPES["DimensionShifter"] = DimensionShifter
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from backend.world.world_state import WorldState
+import random
+
+class DimensionalEntity(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.dimensions = properties.get('dimensions', 3)
+        self.time_flow = properties.get('time_flow', 1.0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_dimensions = self.dimensions + random.randint(-1, 1)
+        new_time_flow = self.time_flow * (1 + random.uniform(-0.1, 0.1))
+
+        if new_dimensions != self.dimensions or new_time_flow != self.time_flow:
+            self.dimensions = new_dimensions
+            self.time_flow = new_time_flow
+            self.age = 0
+            self.properties['dimensions'] = self.dimensions
+            self.properties['time_flow'] = self.time_flow
+            self.trigger_events(world_state)
+
+        return self.to_dict()
+
+    def trigger_events(self, world_state: WorldState):
+        if self.dimensions > 3:
+            print("New dimensions detected! Events triggered.")
+            # Trigger events related to increased dimensions
+            world_state.trigger_event("dimension_increase", entity=self)
+        elif self.dimensions < 3:
+            print("Dimension reduction detected! Events triggered.")
+            # Trigger events related to reduced dimensions
+            world_state.trigger_event("dimension_decrease", entity=self)
+
+ENTITY_TYPES["DimensionalEntity"] = DimensionalEntity
