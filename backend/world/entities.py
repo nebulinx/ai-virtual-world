@@ -957,3 +957,22 @@ class RippleEffect(Entity):
         }
 
 ENTITY_TYPES["RippleEffect"] = RippleEffect
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DimensionJiggerer(Entity):
+    def __init__(self, position, properties=None, age=0):
+        super().__init__(position, properties, age)
+        self.properties['fifth_dimension_shift'] = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement manipulation of the fifth spatial dimension
+        self.properties['fifth_dimension_shift'] += 1
+        # Affect nearby entities and events
+        for entity in world_state['entities']:
+            if self.position == entity.position:
+                entity.properties['time_passage_speed'] *= 0.95
+        return self.to_dict()
+
+ENTITY_TYPES["DimensionJiggerer"] = DimensionJiggerer
