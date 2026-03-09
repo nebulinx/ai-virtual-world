@@ -4807,3 +4807,29 @@ class TemporalDimensionEvent(Entity):
         }
 
 ENTITY_TYPES["TemporalDimensionEvent"] = TemporalDimensionEvent
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import random
+
+class TemporalAnomaly(Entity):
+    def __init__(self, id: str, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(id, position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age > 10:
+            new_position = {
+                "x": self.position["x"] + random.randint(-5, 5),
+                "y": self.position["y"] + random.randint(-5, 5)
+            }
+            return {
+                "id": self.id,
+                "type": "TemporalAnomaly",
+                "position": new_position,
+                "properties": self.properties
+            }
+        return self.to_dict()
+
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
