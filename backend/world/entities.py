@@ -3729,3 +3729,39 @@ class TimeZoneEntity(Entity):
         }
 
 ENTITY_TYPES["TimeZoneEntity"] = TimeZoneEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from backend.world.world_state import WorldState
+from typing import Dict, Any
+
+class TimeWarpingDevice(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to warp local time based on proximity and interaction with other entities
+        for entity_id, entity in world_state["entities"].items():
+            if entity_id != self.id:
+                distance = self.calculate_distance(entity)
+                if distance < self.properties["warp_range"]:
+                    self.warp_time(entity, distance)
+        return world_state
+
+    def calculate_distance(self, entity: Dict[str, Any]) -> float:
+        return ((self.position["x"] - entity["position"]["x"]) ** 2 + 
+                (self.position["y"] - entity["position"]["y"]) ** 2) ** 0.5
+
+    def warp_time(self, entity: Dict[str, Any], distance: float):
+        warp_factor = 1 - (distance / self.properties["warp_range"])
+        entity["age"] += int(warp_factor * entity["age"])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TimeWarpingDevice",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeWarpingDevice"] = TimeWarpingDevice
