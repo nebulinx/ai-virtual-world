@@ -1781,3 +1781,24 @@ class TimeWarp(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TimeWarp"] = TimeWarp
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class HealingCrystal(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic to update the HealingCrystal
+        self.properties["heal_amount"] -= 1
+        if self.properties["heal_amount"] <= 0:
+            return {"action": "remove"}
+        return {"action": "update"}
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "HealingCrystal",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["HealingCrystal"] = HealingCrystal
