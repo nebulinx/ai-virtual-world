@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T08:01:04.138990",
-      "headline": "{ Stellar Simulation Engine: A New Era of Digital Existence, body: The virtual simulation has recently undergone a significant update, introducing eight new interactive zones and expanding its event calendar with a variety of activities. Users are now able to explore immersive zones featuring cutting-edge technology and diverse",
-      "body": "The simulation holds 0 entities, 8 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T08:08:50.279811",
       "headline": "```json",
       "body": "{ \"headline",
@@ -297,6 +291,12 @@
     {
       "timestamp": "2026-03-09T14:48:15.839592",
       "headline": "{ A New Dimension of Intrigue Unfolds in the Virtual Realm, body: The virtual simulation has reached a pivotal point with 16 active events and a neutral state across its 4 dimensions. As of now, the virtual space remains balanced with no anomalies detected, and the simulation continues to function smoothly. Recent activity highlights a growing exploration of different virtual landscapes, each with unique properties and potential for interaction. The simulation's current state reflects a dynamic equilibrium, where collaboration and competition are key",
+      "body": "The simulation holds 0 entities, 16 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T14:57:01.170298",
+      "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 16 recorded events, and 4 dimensions.",
       "category": "entity"
     }

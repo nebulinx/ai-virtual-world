@@ -3349,3 +3349,24 @@ class DimensionalPortal(Entity):
         return data
 
 ENTITY_TYPES["DimensionalPortal"] = DimensionalPortal
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimePortal(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.properties['time_manipulation'] = properties.get('time_manipulation', 0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        world_state['time'] += self.properties['time_manipulation']
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'position': self.position,
+            'properties': self.properties,
+            'age': self.age
+        }
+
+ENTITY_TYPES["TimePortal"] = TimePortal
