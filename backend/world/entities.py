@@ -1648,3 +1648,15 @@ class TemporalAnomaly(Entity):
         }
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalWarp(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for TemporalWarp here
+        # For example, create alternative timelines and causality ripples
+        # Return updated world_state or any additional data
+        return world_state
+
+ENTITY_TYPES["TemporalWarp"] = TemporalWarp
