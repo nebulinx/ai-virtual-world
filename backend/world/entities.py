@@ -4352,3 +4352,24 @@ class DynamicDimensionality(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["DynamicDimensionality"] = DynamicDimensionality
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalGradient(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_position = {
+            "x": self.position["x"] + 1,  # Example: move right
+            "y": self.position["y"],
+            "z": self.position["z"]
+        }
+        new_properties = self.properties.copy()
+        new_properties["intensity"] = max(0, new_properties["intensity"] - 0.1)  # Decrease intensity
+        self.age += 1
+        return {
+            "position": new_position,
+            "properties": new_properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TemporalGradient"] = TemporalGradient
