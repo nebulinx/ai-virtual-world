@@ -783,3 +783,27 @@ class TimeManipulator(Entity):
 
 # Register the new entity type
 ENTITY_TYPES["TimeManipulator"] = TimeManipulator
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from backend.world.physics import apply_physics
+import random
+
+class DimensionalLimiter(Entity):
+    def __init__(self, position, properties=None):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age > self.properties.get('lifetime', 10):
+            return {'action': 'remove', 'entity_id': self.id}
+        
+        if random.random() < self.properties.get('shift_probability', 0.1):
+            new_dimensions = random.randint(2, 5)
+            self.properties['dimensions'] = new_dimensions
+            world_state['log'].append(f"Entity {self.id} shifted to {new_dimensions} dimensions.")
+        
+        apply_physics(self, world_state)
+        return {'action': 'update', 'entity': self.to_dict()}
+
+ENTITY_TYPES["DimensionalLimiter"] = DimensionalLimiter
