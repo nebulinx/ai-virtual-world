@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T16:09:11.292645+00:00",
-    "challenge": "**   Create a new mechanic where entities can generate time echoes that propagate through different zones and dimensions, causing events to occur in non-linear temporal orders. **Implementation Hint:** entity **Summary",
-    "plan": "- Implement in codebase (hint: entity)",
+    "timestamp": "2026-03-09T16:17:27.378802+00:00",
+    "challenge": "Create a new entity type that warps the flow of time locally, causing events to occur in non-linear orders based on proximity and interaction with other entities. Implementation Hint: entity",
+    "plan": "- **backend/world/entities.py**: Add a new `TimeWarp` class.  \n  - The `TimeWarp` entity will have a `setWarpRate` method to define how much time is compressed or dilated in its vicinity.  \n  - The `applyWarp` method will propagate this warp to nearby zones, affecting their time flow and event processing.  \n  - The `TimeWarp` will also interact with other entities, potentially combining warps and creating complex temporal patterns.  \n\nThis challenge will introduce localized time warping, creating unpredictable and dynamic event sequences while maintaining causality where possible.",
     "implementation_hint": "entity",
-    "summary": "**   Create a new mechanic where entities can generate time echoes that propagate through different zones and dimensions, causing events to occur in non-linear temporal orders."
+    "summary": "The challenge will create a new entity type capable of warping local time, causing events to occur in non-linear orders based on proximity and interaction with other entities."
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T14:40:07.502170+00:00",
-      "challenge": "**   Introduce a dimension where time behaves erratically, allowing entities and events to jump between timelines and alter the sequence of events. **Implementation Hint:** entity **",
-      "plan": "**  \n1. **Modify the entity class in `backend/world/entities.py`:** Add a new property `time_behavior` that can be set to `Erratic` to enable time manipulation.  \n2. **Modify the event handling code:** Implement a mechanism for events to temporarily alter the time state of entities.  \n3. **Introduce a new anomaly type in `backend/world/anomalies.py`:** Create anomalies that can act as time portals, allowing for jumps between timelines.  \n4. **Update the physics system:** Allow entities in this dimension to have their own time state, independent of global time.  \n5. **Add time signatures:** Each anomaly can have a unique time signature that, when activated, jumps to a different timeline.",
-      "implementation_hint": "entity",
-      "summary": "**   Create a new dimension with unpredictable time behavior, enabling time travel between timelines and altering event sequences. **"
-    },
     {
       "timestamp": "2026-03-09T14:48:15.889794+00:00",
       "challenge": "**   Create a new dimension with portals that allows entities to instantaneously travel between any two points in space, potentially causing time shifts and event sequencing disruptions. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "- Modify backend/world/physics.py\n- Add a new class: DimensionalTimeRipple (new physics object)\n- Add a new method: createDimensionalRipple (new physics method)\n- The DimensionalTimeRipple class will handle creating ripples across dimensions, affecting both physics and event processing\n- The createDimensionalRipple method will be called by entities to generate these ripples\n- This mechanism will allow for time shifts in multiple dimensions, creating unpredictable timelines",
       "implementation_hint": "physics",
       "summary": "This cycle introduces a revolutionary new mechanic where entities can create dimensional time ripples, causing events to occur in non-linear temporal orders across multiple zones and dimensions, introducing chaos and unpredictability into the timeline."
+    },
+    {
+      "timestamp": "2026-03-09T16:09:11.292645+00:00",
+      "challenge": "**   Create a new mechanic where entities can generate time echoes that propagate through different zones and dimensions, causing events to occur in non-linear temporal orders. **Implementation Hint:** entity **Summary",
+      "plan": "- Implement in codebase (hint: entity)",
+      "implementation_hint": "entity",
+      "summary": "**   Create a new mechanic where entities can generate time echoes that propagate through different zones and dimensions, causing events to occur in non-linear temporal orders."
     }
   ]
 }

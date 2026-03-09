@@ -3639,3 +3639,31 @@ class TimeEcho(Entity):
                     break
 
 ENTITY_TYPES["TimeEcho"] = TimeEcho
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalWarp(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for the TemporalWarp entity
+        # Example: Warp events based on proximity to other entities
+        for entity_id, entity in world_state.items():
+            if entity_id != self.id:
+                distance = self.calculate_distance(entity)
+                if distance < 10:  # Example condition for proximity
+                    self.warp_event(entity_id, entity)
+
+        return super().update(world_state)
+
+    def calculate_distance(self, entity: Entity) -> float:
+        # Calculate the Euclidean distance between two entities
+        return ((self.position[0] - entity.position[0]) ** 2 + (self.position[1] - entity.position[1]) ** 2) ** 0.5
+
+    def warp_event(self, entity_id: str, entity: Entity):
+        # Implement the logic to warp an event based on proximity
+        # Example: Shuffle the order of events
+        events = world_state['events']
+        events.remove(entity_id)
+        events.insert(0, entity_id)
+        world_state['events'] = events
+
+ENTITY_TYPES["TemporalWarp"] = TemporalWarp
