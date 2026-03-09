@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T22:01:29.480996+00:00",
-    "challenge": "Introduce a temporal anomaly zone that warps the fabric of time, creating non-linear causality and forcing entities to interact with events in ways that challenge their timelines.",
-    "plan": "- Modify backend/world/physics.py  \n- Add a new zone type: \"Time Warp Zone\" with properties: time dilation factor, time direction, and temporal anomaly strength.  \n- Implement interactions where entities in this zone experience time differently, potentially causing events to loop or be causally disconnected.  \n- Create new entities that are affected by this zone's time warping, introducing unexpected interactions and anomalies.",
-    "implementation_hint": "physics",
-    "summary": "Introduce a \"Time Warp Zone\" that distorts the flow of time, creating temporal paradoxes and forcing entities to interact with events in non-linear ways."
+    "timestamp": "2026-03-09T22:08:09.101584+00:00",
+    "challenge": "Introduce a Temporal Drift Zone that allows entities to experience time in a non-linear manner, creating opportunities for causality paradoxes and time travel anomalies. Implementation Hint: entity",
+    "plan": "- backend/world/entities.py: Create a new TemporalDriftEntity class that inherits from BaseEntity. This entity will have a unique TemporalDriftBehavior that allows it to manipulate time flow within specific zones.  \n- backend/world/physics.py: Introduce a TemporalAnomaly class to manage inconsistencies in time flow, particularly within the Temporal Drift Zone.  \n- Create a new TemporalDriftZone in the world.json schema that defines its properties, such as time warp strength and duration.  \n- Add event types that trigger Temporal Drift Zones when certain conditions are met, such as entity proximity or time anomaly detection.",
+    "implementation_hint": "entity",
+    "summary": "Create entities that can drift through time, interacting with Temporal Drift Zones and causing unpredictable causality events."
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T20:45:53.649266+00:00",
-      "challenge": "**   Introduce a mechanism where each entity can exist in an independent alternate timeline, allowing for parallel realities and different outcomes based on the entity's unique path through time and space. **Implementation Hint:** entity **",
-      "plan": "- Implement in codebase (hint: entity)",
-      "implementation_hint": "entity",
-      "summary": "**   This challenge will enable entities to traverse through their own"
-    },
     {
       "timestamp": "2026-03-09T20:53:43.482980+00:00",
       "challenge": "**   Create an entity mechanism where entities can temporarily \"rewind\" their movement in time or space based on certain conditions or interactions, introducing the possibility of temporal or spatial shortcuts. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "- Add a new event type: `EchoDimensionEvent`.  \n- Modify the `events` array to include instances of `EchoDimensionEvent`.  \n- Implement the event to create and manipulate echo dimensions, allowing entities to interact with past/future states of the world.  \n- Introduce new time anomalies that affect the flow of causality, such as time loops or causality reversals.",
       "implementation_hint": "event",
       "summary": "Introduce a new temporal dimension event that creates non-linear time interactions, introducing anomalies that challenge the predictability of causality."
+    },
+    {
+      "timestamp": "2026-03-09T22:01:29.480996+00:00",
+      "challenge": "Introduce a temporal anomaly zone that warps the fabric of time, creating non-linear causality and forcing entities to interact with events in ways that challenge their timelines.",
+      "plan": "- Modify backend/world/physics.py  \n- Add a new zone type: \"Time Warp Zone\" with properties: time dilation factor, time direction, and temporal anomaly strength.  \n- Implement interactions where entities in this zone experience time differently, potentially causing events to loop or be causally disconnected.  \n- Create new entities that are affected by this zone's time warping, introducing unexpected interactions and anomalies.",
+      "implementation_hint": "physics",
+      "summary": "Introduce a \"Time Warp Zone\" that distorts the flow of time, creating temporal paradoxes and forcing entities to interact with events in non-linear ways."
     }
   ]
 }

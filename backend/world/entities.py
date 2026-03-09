@@ -4833,3 +4833,17 @@ class TemporalAnomaly(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalDriftZone(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.time_dilation_factor = properties.get('time_dilation_factor', 1.0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_age = self.age + 1 / self.time_dilation_factor
+        return {'age': new_age}
+
+TemporalDriftZone.register(ENTITY_TYPES)
