@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T04:11:15.642876",
-      "headline": "Simulation status update",
-      "body": "The simulation holds 0 entities, 4 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T04:20:13.997049",
       "headline": "```json",
       "body": "{ \"headline\": \"Virtual Simulation Upgrades and Explores New Dimensions\", \"body\": \"The virtual simulation has undergone a recent system upgrade,",
@@ -296,6 +290,12 @@
     },
     {
       "timestamp": "2026-03-09T11:19:10.070086",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 12 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T11:28:03.182720",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 12 recorded events, and 4 dimensions.",
       "category": "entity"
