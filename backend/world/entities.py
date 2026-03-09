@@ -2839,3 +2839,50 @@ class TimeLoopAnomaly(Entity):
         return world_state
 
 ENTITY_TYPES["TimeLoopAnomaly"] = TimeLoopAnomaly
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class Zone:
+    def __init__(self, aging_rules: Dict[str, Any]):
+        self.aging_rules = aging_rules
+
+    def apply_aging(self, entity: Entity, world_state: Dict[str, Any]) -> Entity:
+        for rule, value in self.aging_rules.items():
+            if rule in entity.properties:
+                entity.properties[rule] += value
+        return entity
+
+class EnergyVortex(Entity):
+    pass
+
+class CrystalFormation(Entity):
+    pass
+
+class TemporalAnomaly(Entity):
+    pass
+
+class QuantumParticle(Entity):
+    pass
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle
+}
