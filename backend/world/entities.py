@@ -2004,3 +2004,33 @@ class DimensionalPortal(Entity):
         return {**super().to_dict(), "target_dimension": self.target_dimension}
 
 ENTITY_TYPES["DimensionalPortal"] = DimensionalPortal
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class Zone:
+    def __init__(self, time_rate: float):
+        self.time_rate = time_rate
+        self.entities = []
+
+    def add_entity(self, entity: Entity):
+        self.entities.append(entity)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        for entity in self.entities:
+            entity.update(world_state)
+        world_state['time'] += self.time_rate
+        return world_state
+
+class TimeWarpPortal(Entity):
+    def __init__(self, position, target_zone: Zone):
+        super().__init__(position, {'type': 'TimeWarpPortal'})
+        self.target_zone = target_zone
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.position in world_state['player'].position:
+            world_state['player'].position = self.target_zone.entities[0].position
+            world_state['player'].age *= self.target_zone.time_rate
+        return world_state
+
+ENTITY_TYPES["TimeWarpPortal"] = TimeWarpPortal
