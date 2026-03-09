@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T18:23:27.601701+00:00",
-    "challenge": "**   Introduce an entity that can switch between multiple time zones while aging based on the time flow of each zone it traverses, thereby influencing the time flow in those zones. **Implementation Hint:** entity **",
-    "plan": "**  \n1. **File to Modify:** backend/world/entities.py  \n2. **New Entity Class:** `TimeToggler`  \n   - The `TimeToggler` entity will have properties for its current time zone, position, and age.  \n   - It will include a method to switch between time zones, which will adjust its aging rate based on the destination zone's time flow.  \n   - Each time zone it enters will have its time flow slightly altered to reflect the entity's presence and movement.  \n3. **How It Fits:**  \n   - This entity will create an interactive effect where moving between zones affects both the entity's aging and the zones' time flow, adding a layer of complexity to the simulation dynamics.",
+    "timestamp": "2026-03-09T18:31:52.711241+00:00",
+    "challenge": "**   Create an entity that can dynamically shift between different dimensions (additional dimensions beyond the current 4D space) and alter the time flow in each dimension it passes through. **Implementation Hint:** entity **",
+    "plan": "**\n\n- **1. backend/world/entities.py**  \n  - **New class:** `DimensionShifter`  \n    - Inherits from `Entity`  \n    - **Optional fields:** `dimensionShifts` (array of dimension indices it has shifted)  \n    - **Behavior:**  \n      - When moving, checks if the destination dimension exists.  \n      - If not, shifts to an additional dimension by adding a new dimension to `dimensionShifts`.",
     "implementation_hint": "entity",
-    "summary": "**   Extend the simulation by creating an entity that toggles between different time zones, altering its aging process and modifying the time flow in each zone it visits. **"
+    "summary": "**   Introduce a new entity type capable of dimensional shifting, which dynamically modifies the time flow parameters of the zones it interacts with, creating a feedback loop between entity movement and dimensional changes. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T16:55:45.893916+00:00",
-      "challenge": "**   Create a mechanism where entities interact to dynamically alter the speed of time across zones and dimensions, introducing varying time flows based on entity interactions. **Implementation Hint:** physics **",
-      "plan": "**\n- **1.** Introduce a new Time Flow Modifier class in `physics.py` that adjusts the time flow based on entity proximity and interactions. This class will modify the timeFlow property of each zone dynamically.\n- **2.** Update the Event class in `events.py` to include a Time Signature property that captures the unique timing signatures influenced by entity interactions.\n- **3.** Modify Anomaly entities in `entities.py` to inject specific time signatures, further complicating the timeline.\n- **4.** Update the Physics and Events processing logic to track and apply these modifications, ensuring that time flow variations are consistent across all entities and zones.\n\nThis approach allows for entity-based control over time flow, creating a complex and unpredictable timeline that extends beyond the current Time Echo Entity and Time Signature Zones mechanics.",
-      "implementation_hint": "entity",
-      "summary": "**   The challenge introduces a new physics concept where entity interactions affect the local time flow across zones and dimensions, creating unpredictable timelines and introducing chaos. **"
-    },
     {
       "timestamp": "2026-03-09T17:04:57.992822+00:00",
       "challenge": "Create a Temporal Nexus Entity that allows entities to jump between different time zones and dimensions, creating unpredictable and shifting timelines.",
@@ -76,6 +69,13 @@
       "plan": "**  \n1. **Modify the entities.py file** to include a new TimeJumper entity class.  \n2. **Define the entity's behavior** to switch between time zones when traveling, adjusting its internal aging process.  \n3. **Incorporate time zone switching** in the physics interactions to modify the entity's aging rate.  \n4. **Add event handling** in events.py to trigger time zone changes and aging adjustments.",
       "implementation_hint": "entity",
       "summary": "**   Introduce a time-jumping entity that changes its aging based on the time flow of the zones it travels between. **"
+    },
+    {
+      "timestamp": "2026-03-09T18:23:27.601701+00:00",
+      "challenge": "**   Introduce an entity that can switch between multiple time zones while aging based on the time flow of each zone it traverses, thereby influencing the time flow in those zones. **Implementation Hint:** entity **",
+      "plan": "**  \n1. **File to Modify:** backend/world/entities.py  \n2. **New Entity Class:** `TimeToggler`  \n   - The `TimeToggler` entity will have properties for its current time zone, position, and age.  \n   - It will include a method to switch between time zones, which will adjust its aging rate based on the destination zone's time flow.  \n   - Each time zone it enters will have its time flow slightly altered to reflect the entity's presence and movement.  \n3. **How It Fits:**  \n   - This entity will create an interactive effect where moving between zones affects both the entity's aging and the zones' time flow, adding a layer of complexity to the simulation dynamics.",
+      "implementation_hint": "entity",
+      "summary": "**   Extend the simulation by creating an entity that toggles between different time zones, altering its aging process and modifying the time flow in each zone it visits. **"
     }
   ]
 }

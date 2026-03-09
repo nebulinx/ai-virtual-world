@@ -4088,3 +4088,32 @@ class TimeTraveler(Entity):
         }
 
 ENTITY_TYPES["TimeTraveler"] = TimeTraveler
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DimensionalShifter(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+        self.dimensions = []
+        self.time_flows = {}
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_world_state = super().update(world_state)
+        for dimension in self.dimensions:
+            if dimension not in world_state:
+                world_state[dimension] = {}
+            world_state[dimension]["time_flow"] = self.time_flows.get(dimension, 1)
+        return new_world_state
+
+    def add_dimension(self, dimension, time_flow=1):
+        if dimension not in self.dimensions:
+            self.dimensions.append(dimension)
+            self.time_flows[dimension] = time_flow
+
+    def remove_dimension(self, dimension):
+        if dimension in self.dimensions:
+            self.dimensions.remove(dimension)
+            self.time_flows.pop(dimension, None)
+
+ENTITY_TYPES["DimensionalShifter"] = DimensionalShifter
