@@ -1660,3 +1660,20 @@ class TemporalWarp(Entity):
         return world_state
 
 ENTITY_TYPES["TemporalWarp"] = TemporalWarp
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalWarp(Entity):
+    def __init__(self, position, properties=None):
+        super().__init__(position, properties or {})
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Update logic for TemporalWarp
+        self.age += 1
+        if self.age > 10:  # Example condition to remove the warp after some time
+            return {}
+        return self.to_dict()
+
+# Register the TemporalWarp entity
+ENTITY_TYPES["TemporalWarp"] = TemporalWarp
