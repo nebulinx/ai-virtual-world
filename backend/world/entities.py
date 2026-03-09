@@ -1858,3 +1858,20 @@ class TimeReactingTerrain(Entity):
         }
 
 ENTITY_TYPES["TimeReactingTerrain"] = TimeReactingTerrain
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalAnomaly(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time manipulation logic here
+        # Example: Alter events based on time manipulation
+        # For simplicity, let's assume we just increase the age of the anomaly
+        self.age += 1
+        self.properties['age'] = self.age
+        return self.to_dict()
+
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
