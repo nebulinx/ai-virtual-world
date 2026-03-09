@@ -1362,3 +1362,31 @@ class HealingCrystal(Entity):
         return super().update(world_state)
 
 ENTITY_TYPES["HealingCrystal"] = HealingCrystal
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DynamicDimensionShift(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any] = None):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for shifting dimensions
+        # This is a placeholder for actual logic
+        new_position = {
+            "x": self.position["x"] + 1,  # Example shift
+            "y": self.position["y"] + 1,  # Example shift
+            "z": self.position["z"] + 1   # Example shift
+        }
+        return {"position": new_position, "properties": self.properties}
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "DynamicDimensionShift",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["DynamicDimensionShift"] = DynamicDimensionShift
