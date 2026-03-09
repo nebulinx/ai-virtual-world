@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T15:42:46.481221+00:00",
-    "challenge": "**Allow entities to create localized time ripples that cause events to play out in unexpected temporal orders, introducing chaos and unpredictability into the timeline.**",
-    "plan": "- **Modify the entity class** to include a new method for creating time ripples, which can be triggered by entity actions or interactions.  \n- **Update the physics system** to handle the propagation and interaction of these time ripples across zones, altering the effective time flow.  \n- **Adjust the event handling** to account for time ripples, potentially rewinding or altering event timelines based on the ripple's impact.  \n- **Track ripple effects** to ensure events are processed in the altered temporal order caused by the ripples.",
+    "timestamp": "2026-03-09T15:51:53.670889+00:00",
+    "challenge": "Introduce a mechanism where entities create localized time ripples within their zones, causing events to be processed in non-linear temporal orders, introducing chaos and unpredictability. Implementation Hint: physics",
+    "plan": "1. **backend/world/physics.py**: Introduce a new class `TimeRipple` that models localized time perturbations.\n   - Add `TimeRipple` class with `__init__` taking `entity` and `zone_id`, and `create_ripple` method to generate time shifts.\n2. **backend/world/events.py**: Modify event processing to account for nearby ripples.\n   - Update event detection logic to check for active time ripples in the same zone and adjust event times.\n3. **backend/world/world.json**: Track time ripples per zone.\n   - Add `ripple` property to each zone to store active time ripples.\n4. **backend/world/entities.py**: Ensure events know their zones.\n   - Add `zones` property to each event to store associated zone information.\n\nOptional:\n- **Implementation Hint: entity** - Create an event where an entity directly creates a ripple in its zone.\n- **Implementation Hint: entity** - Add a method",
     "implementation_hint": "entity",
-    "summary": "This cycle aims to introduce a revolutionary new mechanic where entities can create localized time ripples, causing events to occur in non-linear temporal orders, thereby introducing chaos and unpredictability into the timeline."
+    "summary": "Entities will create time ripples within their zones, altering the order in which events are processed, creating unpredictable timelines."
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T14:15:00.342926+00:00",
-      "challenge": "**   Create a TimeDilation system where entities can manipulate their own internal time progression, affecting the perceived time flow of others based on their interactions and movements through zones. **Implementation Hint:** entity **",
-      "plan": "- Implement in codebase (hint: entity)",
-      "implementation_hint": "entity",
-      "summary": "**   This challenge introduces a unique time manipulation mechanic where entities can alter"
-    },
     {
       "timestamp": "2026-03-09T14:23:43.160714+00:00",
       "challenge": "**   Create a dynamic time dilation system where entities' aging is affected by the zones they travel through. Each zone has its own time flow rate, altering the entity's perceived time. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "- **backend/world/entities.py**: Add a new \"TemporalLoop\" class that allows entities to move through time ripples, altering the timeline as they interact with events.  \n- **backend/world/events.py**: Create a \"TemporalRippleEvent\" that triggers quantum time ripples across the dimensions, causing unexpected temporal orders.  \n- **backend/world/physics.py**: Introduce a \"QuantumTimeRipple\" class that warps the fabric of spacetime, creating ripples that affect the flow of time across zones.  \n\nThis challenge will introduce a revolutionary new mechanic where entities can traverse through time ripples, creating non-linear temporal orders and introducing chaos and unpredictability into the timeline.",
       "implementation_hint": "entity",
       "summary": "This cycle aims to introduce a revolutionary new mechanic where entities can traverse through time ripples, causing events to play out in non-linear temporal orders, introducing chaos and unpredictability into the timeline."
+    },
+    {
+      "timestamp": "2026-03-09T15:42:46.481221+00:00",
+      "challenge": "**Allow entities to create localized time ripples that cause events to play out in unexpected temporal orders, introducing chaos and unpredictability into the timeline.**",
+      "plan": "- **Modify the entity class** to include a new method for creating time ripples, which can be triggered by entity actions or interactions.  \n- **Update the physics system** to handle the propagation and interaction of these time ripples across zones, altering the effective time flow.  \n- **Adjust the event handling** to account for time ripples, potentially rewinding or altering event timelines based on the ripple's impact.  \n- **Track ripple effects** to ensure events are processed in the altered temporal order caused by the ripples.",
+      "implementation_hint": "entity",
+      "summary": "This cycle aims to introduce a revolutionary new mechanic where entities can create localized time ripples, causing events to occur in non-linear temporal orders, thereby introducing chaos and unpredictability into the timeline."
     }
   ]
 }

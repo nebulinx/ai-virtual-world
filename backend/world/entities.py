@@ -3533,3 +3533,44 @@ class TimeRipple(Entity):
         }
 
 ENTITY_TYPES["TimeRipple"] = TimeRipple
+
+from abc import ABC, abstractmethod
+from typing import Dict, Any
+
+class Entity(ABC):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int = 0):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    @abstractmethod
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES = {}
+
+class TimeRipple(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Simulate time ripple effect
+        for entity in world_state["entities"]:
+            if entity != self and self.is_in_range(entity):
+                entity.properties["time_ripple"] = self.properties.get("time_ripple", 0) + 1
+                entity.age += self.properties.get("ripple_intensity", 1)
+        return world_state
+
+    def is_in_range(self, entity: Entity) -> bool:
+        distance = ((self.position["x"] - entity.position["x"]) ** 2 +
+                    (self.position["y"] - entity.position["y"]) ** 2) ** 0.5
+        return distance <= self.properties.get("ripple_radius", 10)
+
+ENTITY_TYPES["TimeRipple"] = TimeRipple
