@@ -1049,3 +1049,23 @@ class FifthDimensionalEntity(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["FifthDimensionalEntity"] = FifthDimensionalEntity
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class WarpingEntity(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for the WarpingEntity
+        # Example: Warp time and space across dimensions, create causality effects
+        # Update the world_state accordingly
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+# Register the WarpingEntity in the ENTITY_TYPES dictionary
+ENTITY_TYPES["WarpingEntity"] = WarpingEntity
