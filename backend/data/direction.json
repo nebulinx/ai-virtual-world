@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T16:00:25.880057+00:00",
-    "challenge": "Create a new mechanic where entities can generate dimensional time ripples that affect multiple zones and dimensions simultaneously, causing events to occur in non-linear temporal orders across different dimensions. Implementation Hint: physics",
-    "plan": "- Modify backend/world/physics.py\n- Add a new class: DimensionalTimeRipple (new physics object)\n- Add a new method: createDimensionalRipple (new physics method)\n- The DimensionalTimeRipple class will handle creating ripples across dimensions, affecting both physics and event processing\n- The createDimensionalRipple method will be called by entities to generate these ripples\n- This mechanism will allow for time shifts in multiple dimensions, creating unpredictable timelines",
-    "implementation_hint": "physics",
-    "summary": "This cycle introduces a revolutionary new mechanic where entities can create dimensional time ripples, causing events to occur in non-linear temporal orders across multiple zones and dimensions, introducing chaos and unpredictability into the timeline."
+    "timestamp": "2026-03-09T16:09:11.292645+00:00",
+    "challenge": "**   Create a new mechanic where entities can generate time echoes that propagate through different zones and dimensions, causing events to occur in non-linear temporal orders. **Implementation Hint:** entity **Summary",
+    "plan": "- Implement in codebase (hint: entity)",
+    "implementation_hint": "entity",
+    "summary": "**   Create a new mechanic where entities can generate time echoes that propagate through different zones and dimensions, causing events to occur in non-linear temporal orders."
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T14:32:43.744054+00:00",
-      "challenge": "** Introduce a \"Temporal rift\" mechanics where entities can enter regions with altered time flows, affecting their age and the timeline of events. **Implementation Hint:** physics **",
-      "plan": "**\n1. **backend/world/physics.py**: Introduce a new class `TemporalRift` that defines how time flows in this altered dimension.\n2. **backend/world/events.py**: Add a new event type, `TemporalRiftEvent`, which creates a new entity instance in the Temporal rift with altered age and position.\n3. **backend/world/anomalies.py**: Include zones with unstable time flows that cause entities to experience multiple timelines simultaneously.\n\nThis challenge would allow for unexpected narrative possibilities, such as entities traveling between timelines or experiencing events in different orders, adding depth to the world's complexity and replayability.",
-      "implementation_hint": "entity",
-      "summary": "** Create a new dimension where time behaves erratically, allowing for jumps between timelines and altering event sequences. **"
-    },
     {
       "timestamp": "2026-03-09T14:40:07.502170+00:00",
       "challenge": "**   Introduce a dimension where time behaves erratically, allowing entities and events to jump between timelines and alter the sequence of events. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "1. **backend/world/physics.py**: Introduce a new class `TimeRipple` that models localized time perturbations.\n   - Add `TimeRipple` class with `__init__` taking `entity` and `zone_id`, and `create_ripple` method to generate time shifts.\n2. **backend/world/events.py**: Modify event processing to account for nearby ripples.\n   - Update event detection logic to check for active time ripples in the same zone and adjust event times.\n3. **backend/world/world.json**: Track time ripples per zone.\n   - Add `ripple` property to each zone to store active time ripples.\n4. **backend/world/entities.py**: Ensure events know their zones.\n   - Add `zones` property to each event to store associated zone information.\n\nOptional:\n- **Implementation Hint: entity** - Create an event where an entity directly creates a ripple in its zone.\n- **Implementation Hint: entity** - Add a method",
       "implementation_hint": "entity",
       "summary": "Entities will create time ripples within their zones, altering the order in which events are processed, creating unpredictable timelines."
+    },
+    {
+      "timestamp": "2026-03-09T16:00:25.880057+00:00",
+      "challenge": "Create a new mechanic where entities can generate dimensional time ripples that affect multiple zones and dimensions simultaneously, causing events to occur in non-linear temporal orders across different dimensions. Implementation Hint: physics",
+      "plan": "- Modify backend/world/physics.py\n- Add a new class: DimensionalTimeRipple (new physics object)\n- Add a new method: createDimensionalRipple (new physics method)\n- The DimensionalTimeRipple class will handle creating ripples across dimensions, affecting both physics and event processing\n- The createDimensionalRipple method will be called by entities to generate these ripples\n- This mechanism will allow for time shifts in multiple dimensions, creating unpredictable timelines",
+      "implementation_hint": "physics",
+      "summary": "This cycle introduces a revolutionary new mechanic where entities can create dimensional time ripples, causing events to occur in non-linear temporal orders across multiple zones and dimensions, introducing chaos and unpredictability into the timeline."
     }
   ]
 }

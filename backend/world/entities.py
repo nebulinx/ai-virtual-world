@@ -3603,3 +3603,39 @@ class DimensionalRipple(Entity):
                 entity.properties["temporal_offset"] += ripple_effect - distance
 
 ENTITY_TYPES["DimensionalRipple"] = DimensionalRipple
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from backend.world.world_state import WorldState
+from typing import Dict, Any
+import random
+
+class TimeEcho(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.echo_range = properties.get("echo_range", 10)
+        self.echo_delay = properties.get("echo_delay", 5)
+        self.echo_timer = self.echo_delay
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.echo_timer -= 1
+        if self.echo_timer <= 0:
+            self.echo_timer = self.echo_delay
+            self.propagate_echo(world_state)
+
+        return super().update(world_state)
+
+    def propagate_echo(self, world_state: Dict[str, Any]):
+        for zone in world_state["zones"]:
+            if self.position in zone["area"]:
+                for entity in zone["entities"]:
+                    if isinstance(entity, TimeEcho):
+                        continue
+                    new_position = (self.position[0] + random.randint(-self.echo_range, self.echo_range),
+                                    self.position[1] + random.randint(-self.echo_range, self.echo_range))
+                    new_properties = self.properties.copy()
+                    new_properties["source"] = self
+                    new_entity = TimeEcho(new_position, new_properties)
+                    zone["entities"].append(new_entity)
+                    break
+
+ENTITY_TYPES["TimeEcho"] = TimeEcho
