@@ -2034,3 +2034,19 @@ class TimeWarpPortal(Entity):
         return world_state
 
 ENTITY_TYPES["TimeWarpPortal"] = TimeWarpPortal
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DimensionalTraveler(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time alteration logic here
+        # For example, create alternative timelines or branch experiences
+        # Update the world state accordingly
+        return world_state
+
+# Register the new entity type
+ENTITY_TYPES["DimensionalTraveler"] = DimensionalTraveler
