@@ -901,3 +901,31 @@ class TemporalWarp(Entity):
 
 # Register the new entity type
 ENTITY_TYPES["TemporalWarp"] = TemporalWarp
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any, List
+
+class TemporalRippleEntity(Entity):
+    def __init__(self, position: List[int], properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties, age)
+        self.ripple_radius = properties.get("ripple_radius", 5)
+        self.ripple_strength = properties.get("ripple_strength", 1)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        ripple_effect = {}
+        for entity_id, entity in world_state["entities"].items():
+            distance = sum((self.position[i] - entity["position"][i]) ** 2 for i in range(len(self.position))) ** 0.5
+            if distance <= self.ripple_radius:
+                ripple_effect[entity_id] = {
+                    "time_dilation": self.ripple_strength / (distance + 1)
+                }
+        return ripple_effect
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "ripple_radius": self.ripple_radius,
+            "ripple_strength": self.ripple_strength
+        }
+
+ENTITY_TYPES["TemporalRippleEntity"] = TemporalRippleEntity
