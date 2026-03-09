@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T20:21:29.036789+00:00",
-    "challenge": "**   Create an entity that allows for temporary or permanent switching between alternate realities, each with its own unique dimensions, gravity, and time flow. **Implementation Hint:** physics **",
-    "plan": "**  \n1. **AlternateRealityEntity:** Create a new physics entity class that manages its own dimensions, gravity, and time flow. This entity will exist in a specific alternate reality and can be triggered to switch realities in response to specific events.  \n2. **AlternateRealityTriggerEvents:** Introduce new event types that, when triggered, activate an AlternateRealityEntity, creating a bridge between different timelines.  \n3. **AlternateRealityInteractions:** Allow entities in one reality to interact with those in another, causing complex and unpredictable temporal effects.",
+    "timestamp": "2026-03-09T20:28:00.551181+00:00",
+    "challenge": "**   Create a mechanism where entities can exist in a fractional combination of multiple timelines and dimensions simultaneously, allowing them to exhibit different behaviors in each temporal and dimensional domain. **Implementation Hint:** entity **",
+    "plan": "**  \n- **1.** Modify the entity file to include additional fractional dimensions and timelines (0-1) for each entity.  \n- **2.** Implement a new method for creating entities with customizable fractional existence across timelines and dimensions.  \n- **3.** Update event handlers to target specific fractional parts of an entity based on their dimension and timeline presence.",
     "implementation_hint": "entity",
-    "summary": "**   This challenge will enable entities to interact with multiple timelines, adding depth and complexity to the world's timeline network. **"
+    "summary": "**   This evolution will enable entities to embody and interact with multiple timelines and dimensions, creating a rich ecosystem of temporal and dimensional interplay. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T19:04:51.120909+00:00",
-      "challenge": "**   Create a manipulation entity that allows users to directly warp the dimensions of a zone, creating temporary anomalies in spacetime that affect events and zone interactions. **Implementation Hint:** entity **",
-      "plan": "**\n- **1. Add a new entity class in backend/world/entities.py:** `DimensionWarpEntity` that allows users to manually or procedurally warp dimensions.\n- **2. Implement dimension shifting mechanics in the entity's `update` function:** which modifies the dimensions of a target zone, potentially creating temporary anomalies.\n- **3. Update the event handling in backend/world/events.py:** to account for the new dimension anomalies, causing events to teleport or be processed differently within the altered zones.\n\nThis feature adds a new layer of interactivity and unpredictability, allowing users to explore the fabric of reality itself.",
-      "implementation_hint": "entity",
-      "summary": "**   This challenge introduces a new way for users to directly influence the topology of the world, adding a layer of interactive spacetime manipulation to the simulation. **"
-    },
     {
       "timestamp": "2026-03-09T19:12:30.290752+00:00",
       "challenge": "**   Create a new entity type that dynamically manipulates the topology of spacetime, allowing for real-time alteration of dimension connections and event timelines. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "- Implement in codebase (hint: general)",
       "implementation_hint": "general",
       "summary": "Evolve the virtual world with a new feature."
+    },
+    {
+      "timestamp": "2026-03-09T20:21:29.036789+00:00",
+      "challenge": "**   Create an entity that allows for temporary or permanent switching between alternate realities, each with its own unique dimensions, gravity, and time flow. **Implementation Hint:** physics **",
+      "plan": "**  \n1. **AlternateRealityEntity:** Create a new physics entity class that manages its own dimensions, gravity, and time flow. This entity will exist in a specific alternate reality and can be triggered to switch realities in response to specific events.  \n2. **AlternateRealityTriggerEvents:** Introduce new event types that, when triggered, activate an AlternateRealityEntity, creating a bridge between different timelines.  \n3. **AlternateRealityInteractions:** Allow entities in one reality to interact with those in another, causing complex and unpredictable temporal effects.",
+      "implementation_hint": "entity",
+      "summary": "**   This challenge will enable entities to interact with multiple timelines, adding depth and complexity to the world's timeline network. **"
     }
   ]
 }
