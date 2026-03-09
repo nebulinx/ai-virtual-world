@@ -2886,3 +2886,21 @@ ENTITY_TYPES = {
     "TemporalAnomaly": TemporalAnomaly,
     "QuantumParticle": QuantumParticle
 }
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeAccelerationField(Entity):
+    def __init__(self, position, properties):
+        super().__init__(position, properties)
+        self.previous_zone = None
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        current_zone = self.position
+        if self.previous_zone != current_zone:
+            self.age += world_state.get("time_acceleration", 1)
+            self.previous_zone = current_zone
+
+        return self.to_dict()
+
+ENTITY_TYPES["TimeAccelerationField"] = TimeAccelerationField
