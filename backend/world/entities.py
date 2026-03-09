@@ -1198,3 +1198,19 @@ class DimensionalSwitcher(Entity):
         return False
 
 ENTITY_TYPES["DimensionalSwitcher"] = DimensionalSwitcher
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeDimension(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        time_dilation_factor = 1 + self.properties.get("dilation_factor", 0)
+        world_state["time_dilation"] = time_dilation_factor
+        return self.to_dict()
+
+ENTITY_TYPES["TimeDimension"] = TimeDimension
