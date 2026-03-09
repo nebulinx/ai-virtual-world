@@ -3097,3 +3097,16 @@ class TimeLoop(Entity):
         }
 
 ENTITY_TYPES["TimeLoop"] = TimeLoop
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalNexus(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for Temporal Nexus
+        # For example, create a hub for alternate timelines
+        # and allow players to explore and interact with them
+        pass
+
+# Register the TemporalNexus entity type
+ENTITY_TYPES["TemporalNexus"] = TemporalNexus
