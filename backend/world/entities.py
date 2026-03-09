@@ -2761,3 +2761,24 @@ class TemporalAnomaly(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalWarp(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Apply time warp effects
+        self.age -= 1
+        if self.age < 0:
+            self.age = 0
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TemporalWarp"] = TemporalWarp
