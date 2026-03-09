@@ -3667,3 +3667,30 @@ class TemporalWarp(Entity):
         world_state['events'] = events
 
 ENTITY_TYPES["TemporalWarp"] = TemporalWarp
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeEchoEntity(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.echoes = []
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_world_state = world_state.copy()
+        for echo in self.echoes:
+            if echo['age'] > echo['duration']:
+                continue
+            echo['age'] += 1
+            if echo['age'] == echo['duration']:
+                self.trigger_event(new_world_state, echo['target'])
+        return new_world_state
+
+    def trigger_event(self, world_state, target):
+        # Implement event logic here
+        print(f"Event triggered in {target} due to time echo.")
+
+    def add_echo(self, target, duration):
+        self.echoes.append({'target': target, 'duration': duration, 'age': 0})
+
+ENTITY_TYPES["TimeEchoEntity"] = TimeEchoEntity

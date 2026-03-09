@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T16:17:27.378802+00:00",
-    "challenge": "Create a new entity type that warps the flow of time locally, causing events to occur in non-linear orders based on proximity and interaction with other entities. Implementation Hint: entity",
-    "plan": "- **backend/world/entities.py**: Add a new `TimeWarp` class.  \n  - The `TimeWarp` entity will have a `setWarpRate` method to define how much time is compressed or dilated in its vicinity.  \n  - The `applyWarp` method will propagate this warp to nearby zones, affecting their time flow and event processing.  \n  - The `TimeWarp` will also interact with other entities, potentially combining warps and creating complex temporal patterns.  \n\nThis challenge will introduce localized time warping, creating unpredictable and dynamic event sequences while maintaining causality where possible.",
+    "timestamp": "2026-03-09T16:27:07.718988+00:00",
+    "challenge": "**   Create a new entity type capable of generating time echoes that propagate through different zones and dimensions, causing events to occur in non-linear temporal orders.  **Implementation Hint:** entity   Modify the entity class to include a new entity type `Time Echo Entity` that creates time echoes propagating through zones and dimensions, altering event orders.   **",
+    "plan": "**  \n- **event_handling_time echoing:** Add a function to handle events triggered by time echoes from `Time Echo Entity` in different zones and dimensions.  \n- **new entity class:** Create a `Time Echo Entity` class that, when activated, generates time echoes propagating through zones and dimensions.  \n- **time echo effects:** Implement time echo effects that alter event timelines, creating non-linear temporal orders across multiple zones and dimensions.  \n- **entity interaction:** Allow entities to interact with `Time Echo Entity` to create",
     "implementation_hint": "entity",
-    "summary": "The challenge will create a new entity type capable of warping local time, causing events to occur in non-linear orders based on proximity and interaction with other entities."
+    "summary": "**   This challenge introduces a revolutionary new mechanic where entities can create time echoes that ripple through multiple zones and dimensions, causing events to occur in non-linear temporal orders and introducing chaos and unpredictability into the timeline.   **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T14:48:15.889794+00:00",
-      "challenge": "**   Create a new dimension with portals that allows entities to instantaneously travel between any two points in space, potentially causing time shifts and event sequencing disruptions. **Implementation Hint:** entity **",
-      "plan": "**  \n- **backend/world/entities.py:** Create a new PortalEvent class that triggers when an entity passes through a portal, altering time flow.\n- **backend/world/physics.py:** Modify the physics to adjust time dilation when entities enter or exit portals.\n- **backend/world/entities.py:** Implement entity aging based on the dimension's time flow, affecting their lifespan and event timing.\n\nThis approach adds a new layer of travel mechanics, enhancing the world's complexity and providing unexpected narrative opportunities.",
-      "implementation_hint": "entity",
-      "summary": "**   Introduce spacetime portals that enable entities to traverse dimensions, causing time shifts and event inconsistencies. **"
-    },
     {
       "timestamp": "2026-03-09T14:57:01.299057+00:00",
       "challenge": "Create a new entity type that can create time portals, which manipulate the local time flow, causing inconsistencies and altering event sequences.",
@@ -76,6 +69,13 @@
       "plan": "- Implement in codebase (hint: entity)",
       "implementation_hint": "entity",
       "summary": "**   Create a new mechanic where entities can generate time echoes that propagate through different zones and dimensions, causing events to occur in non-linear temporal orders."
+    },
+    {
+      "timestamp": "2026-03-09T16:17:27.378802+00:00",
+      "challenge": "Create a new entity type that warps the flow of time locally, causing events to occur in non-linear orders based on proximity and interaction with other entities. Implementation Hint: entity",
+      "plan": "- **backend/world/entities.py**: Add a new `TimeWarp` class.  \n  - The `TimeWarp` entity will have a `setWarpRate` method to define how much time is compressed or dilated in its vicinity.  \n  - The `applyWarp` method will propagate this warp to nearby zones, affecting their time flow and event processing.  \n  - The `TimeWarp` will also interact with other entities, potentially combining warps and creating complex temporal patterns.  \n\nThis challenge will introduce localized time warping, creating unpredictable and dynamic event sequences while maintaining causality where possible.",
+      "implementation_hint": "entity",
+      "summary": "The challenge will create a new entity type capable of warping local time, causing events to occur in non-linear orders based on proximity and interaction with other entities."
     }
   ]
 }
