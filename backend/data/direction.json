@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T09:16:30.873157+00:00",
-    "challenge": "**   Introduce entities that can dynamically hop between multiple temporal dimensions, each with unique time flow properties, allowing them to switch realities seamlessly. **Implementation Hint:** entity   Create a new class called `TemporalDimensionHopper` that allows entities to switch between alternate timelines with different aging effects. **",
-    "plan": "**  \n1. **entities.py**: Introduce a new entity type `TemporalDimensionHopper` that can detect and switch between different temporal dimensions.  \n2. **events.py**: Create an `Event::TemporalDimensionHop` event that initializes a network of temporal portals connecting multiple timelines.  \n3. **physics.py**: Modify the time flow mechanics to account for different temporal dimensions, with each having its own time speed multiplier.  \n4. **world.schema.json**: Add a special `TemporalDimension` entity type and a `TemporalPortals` dimension that holds the portals and their configurations.  \n5. When an entity hops to a new dimension, update its aging properties to reflect the new time flow.",
+    "timestamp": "2026-03-09T09:26:39.610165+00:00",
+    "challenge": "**   Create a system where entities can transition between temporal zones with unique aging properties, but also gain or lose energy which affects their lifespan and behavior across these zones. **Implementation Hint:** physics   (or",
+    "plan": "**  \n- **1. Add a new physics class `EnergyZoneTimeFlow` to `physics.py` that manages time dilation based on energy levels for each zone.**  \n  This class will modify the aging calculation for entities based on their energy state and the zone's time flow properties.  \n- **2. Create a new entity class `EnergyEntity` in `entities.py` that inherits from `BaseEntity`.**  \n  This entity will",
     "implementation_hint": "entity",
-    "summary": "**   Create a system where entities can hop between temporal dimensions, each with unique time flow properties, creating a branching timeline system with variable aging effects. **"
+    "summary": "**   Introduce a fourth temporal dimension as a form of \"energy\" or \"consciousness\" that affects how entities age and behave when moving between zones.   **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T07:53:38.872060+00:00",
-      "challenge": "Evolve the virtual world with a new feature.",
-      "plan": "- Implement in codebase (hint: general)",
-      "implementation_hint": "general",
-      "summary": "Evolve the virtual world with a new feature."
-    },
     {
       "timestamp": "2026-03-09T08:01:04.192172+00:00",
       "challenge": "**   Create a system where Timebearers in the Time Dimension Zone can manipulate the flow of time, creating alternate timelines and branching story paths. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "- **Modify the entity.py file** to include a new TemporalPortal class.\n- **Add methods** to the Entity class to detect and interact with Temporal",
       "implementation_hint": "entity",
       "summary": "This cycle aims to introduce dynamic temporal portals that allow entities to traverse between alternate realities, each with unique time flow and dimensional properties, creating a branching timeline system. ###"
+    },
+    {
+      "timestamp": "2026-03-09T09:16:30.873157+00:00",
+      "challenge": "**   Introduce entities that can dynamically hop between multiple temporal dimensions, each with unique time flow properties, allowing them to switch realities seamlessly. **Implementation Hint:** entity   Create a new class called `TemporalDimensionHopper` that allows entities to switch between alternate timelines with different aging effects. **",
+      "plan": "**  \n1. **entities.py**: Introduce a new entity type `TemporalDimensionHopper` that can detect and switch between different temporal dimensions.  \n2. **events.py**: Create an `Event::TemporalDimensionHop` event that initializes a network of temporal portals connecting multiple timelines.  \n3. **physics.py**: Modify the time flow mechanics to account for different temporal dimensions, with each having its own time speed multiplier.  \n4. **world.schema.json**: Add a special `TemporalDimension` entity type and a `TemporalPortals` dimension that holds the portals and their configurations.  \n5. When an entity hops to a new dimension, update its aging properties to reflect the new time flow.",
+      "implementation_hint": "entity",
+      "summary": "**   Create a system where entities can hop between temporal dimensions, each with unique time flow properties, creating a branching timeline system with variable aging effects. **"
     }
   ]
 }
