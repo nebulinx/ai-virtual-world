@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T13:04:57.937275+00:00",
-    "challenge": "**   Introduce a mechanism where entities can traverse between multiple temporal rifts, each with its own unique time flow and dimensional properties, creating a narrative of alternate timelines and temporal choices. **Implementation Hint:** entity **",
-    "plan": "**\n- **1. backend/world/entities.py:** Create a new `TimeRift` entity type that enables traversal between temporal rifts. Each TimeRift can have unique properties such as time acceleration, rewinding, or dimensional shifts.\n- **2. backend/world/physics.py:** Modify the physics to allow TimeRifts to influence the local time flow and dimensional properties of the space they traverse.\n- **3. backend/world/events.py:** Implement events that allow players to activate TimeRifts, discover alternative timelines, and interact with different dimensional properties.\n\nThis plan introduces a fresh temporal mechanic that allows players to explore alternative realities, enhancing the world's narrative depth and gameplay complexity.",
+    "timestamp": "2026-03-09T13:13:24.266252+00:00",
+    "challenge": "** Create a TimeLoop zone that warps the perception of time, where moving forward in time affects the timeline of the main world, introducing feedback loops and narrative choices. **Implementation Hint:** physics **",
+    "plan": "**\n- **1. Create a new physics entity called TimeLoopZone in backend/world/physics.py:** This zone will have its own time flow parameters, such as time dilation and temporal feedback.\n- **2. Add TimeLoopZone class with methods for time manipulation:** Include functions to alter time flow rates and detect/track interactions with other entities to trigger timeline changes.\n- **3. Implement time feedback mechanism:** When entities interact within TimeLoopZone, their actions will affect the main world's timeline, creating a narrative of cause and effect.\n\nThis challenge will allow for innovative storytelling and gameplay mechanics where players can shape the timeline through their actions, adding depth to the world's narrative.",
     "implementation_hint": "entity",
-    "summary": "**   Extend the world by introducing TimeRift entities that allow players to travel between alternative timelines, each with different dimensional properties and time flows, enhancing the narrative and gameplay with temporal choice. **"
+    "summary": "** Introduce a TimeLoop zone where time passage affects the main world's timeline, enabling players to create feedback loops and make choices that alter the past and present. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T11:42:53.085920+00:00",
-      "challenge": "**   Introduce a new type of event that warps the temporal dimension in specific zones, creating singularities where time flows backward or in non-Euclidean ways, affecting entity aging and the flow of events. **Implementation Hint:** event **",
-      "plan": "**\n- **event.py** (modify event.py): Introduce a new event type `TemporalEventOrbifold`.\n- **event.py:** Add parameters for zone ID, dimensions affected, and strength of temporal distortion.\n- **event.py:** Implement logic to apply time warping when an entity enters a TemporalEventOrbifold zone, affecting their aging and event timeline",
-      "implementation_hint": "entity",
-      "summary": "**   The challenge is to create events that introduce temporal anomalies, such as orbifolds that distort time flow, altering how events and aging interact. **"
-    },
     {
       "timestamp": "2026-03-09T11:50:33.381256+00:00",
       "challenge": "**   Implement a fifth temporal dimension with unique anomaly that warps time flow, affecting entity aging and gravity dynamics across all zones. **Implementation Hint:** physics **",
@@ -76,6 +69,13 @@
       "plan": "- **backend/world/entities.py**: Add a new entity class `TimeSpaceTunnel` that inherits from `BaseEntity`.  \n- **backend/world/events.py**: Modify event handling to detect interactions with `TimeSpaceTunnel` entities and trigger corresponding time loop events.  \n- **backend/world/physics.py**: Update the physics engine to support movement across multiple dimensions, ensuring smooth navigation through time and space.",
       "implementation_hint": "entity",
       "summary": "Expand the world's temporal mechanics by introducing a fifth dimension where entities can freely move through both space and time, creating intricate narrative and gameplay possibilities."
+    },
+    {
+      "timestamp": "2026-03-09T13:04:57.937275+00:00",
+      "challenge": "**   Introduce a mechanism where entities can traverse between multiple temporal rifts, each with its own unique time flow and dimensional properties, creating a narrative of alternate timelines and temporal choices. **Implementation Hint:** entity **",
+      "plan": "**\n- **1. backend/world/entities.py:** Create a new `TimeRift` entity type that enables traversal between temporal rifts. Each TimeRift can have unique properties such as time acceleration, rewinding, or dimensional shifts.\n- **2. backend/world/physics.py:** Modify the physics to allow TimeRifts to influence the local time flow and dimensional properties of the space they traverse.\n- **3. backend/world/events.py:** Implement events that allow players to activate TimeRifts, discover alternative timelines, and interact with different dimensional properties.\n\nThis plan introduces a fresh temporal mechanic that allows players to explore alternative realities, enhancing the world's narrative depth and gameplay complexity.",
+      "implementation_hint": "entity",
+      "summary": "**   Extend the world by introducing TimeRift entities that allow players to travel between alternative timelines, each with different dimensional properties and time flows, enhancing the narrative and gameplay with temporal choice. **"
     }
   ]
 }

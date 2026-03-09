@@ -3074,3 +3074,26 @@ class TemporalRift(Entity):
 
 # Register the TemporalRift entity type
 ENTITY_TYPES["TemporalRift"] = TemporalRift
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeLoop(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.timeline = []
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for the TimeLoop entity
+        # This is a placeholder for the actual implementation
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TimeLoop",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeLoop"] = TimeLoop
