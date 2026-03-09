@@ -1390,3 +1390,33 @@ class DynamicDimensionShift(Entity):
         }
 
 ENTITY_TYPES["DynamicDimensionShift"] = DynamicDimensionShift
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for EnergyVortex
+        return self.to_dict()
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for CrystalFormation
+        return self.to_dict()
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for TemporalAnomaly
+        return self.to_dict()
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for QuantumParticle
+        return self.to_dict()
+
+class NewEntityName(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for NewEntityName
+        return self.to_dict()
+
+ENTITY_TYPES["NewEntityName"] = NewEntityName
