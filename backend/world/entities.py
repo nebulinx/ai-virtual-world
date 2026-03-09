@@ -1740,3 +1740,29 @@ class TemporalJump(Entity):
         }
 
 ENTITY_TYPES["TemporalJump"] = TemporalJump
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalManipulator(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.timeline_control = None
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if 'timeline_control' in self.properties:
+            self.timeline_control = self.properties['timeline_control']
+            if self.timeline_control == 'rewind':
+                world_state['time'] -= 1
+            elif self.timeline_control == 'accelerate':
+                world_state['time'] += 1
+            elif self.timeline_control == 'alter':
+                world_state['time'] += self.properties.get('alter_amount', 0)
+        return world_state
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            'timeline_control': self.timeline_control
+        }
+
+ENTITY_TYPES["TemporalManipulator"] = TemporalManipulator
