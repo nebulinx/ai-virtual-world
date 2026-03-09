@@ -3260,3 +3260,26 @@ class TimeDilation(Entity):
         }
 
 ENTITY_TYPES["TimeDilation"] = TimeDilation
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeDilatedEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties, age)
+        self.time_dilation_factor = 1.0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Calculate time dilation based on current zone
+        zone = world_state.get('zone', {})
+        self.time_dilation_factor = zone.get('time_dilation_factor', 1.0)
+        self.age += 1 / self.time_dilation_factor
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            'age': self.age
+        }
+
+ENTITY_TYPES["TimeDilatedEntity"] = TimeDilatedEntity

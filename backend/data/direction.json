@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T14:15:00.342926+00:00",
-    "challenge": "**   Create a TimeDilation system where entities can manipulate their own internal time progression, affecting the perceived time flow of others based on their interactions and movements through zones. **Implementation Hint:** entity **",
-    "plan": "- Implement in codebase (hint: entity)",
+    "timestamp": "2026-03-09T14:23:43.160714+00:00",
+    "challenge": "**   Create a dynamic time dilation system where entities' aging is affected by the zones they travel through. Each zone has its own time flow rate, altering the entity's perceived time. **Implementation Hint:** entity **",
+    "plan": "**\n- **Modify the",
     "implementation_hint": "entity",
-    "summary": "**   This challenge introduces a unique time manipulation mechanic where entities can alter"
+    "summary": "**   This challenge introduces dynamic time dilation across zones, affecting the aging of entities and impacting event timing and narrative consistency. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T12:48:22.992737+00:00",
-      "challenge": "**   Create a Temporal Zone Shifter entity that can alter the time flow within specific zones, allowing for time travel between zones and affecting their temporal signatures. **Implementation Hint:** physics   **",
-      "plan": "**  \n1. **File to Modify:** `physics.py`  \n2. **Add a New Mechanism:** Introduce a `TemporalZoneShifter` class that, when activated, modifies the `timeFlow` of one or more zones. This could involve changing the gravitational fields or other temporal parameters of the zones.  \n3. **How it Fits the Challenge:** The `TemporalZoneShifter` would allow entities to move between zones with different time signatures, potentially altering the timeline experienced within each zone. This would create new possibilities for storytelling, gameplay, and interactions with anomalies and events.  \n4. **Optional Additional Feature:** When a `TemporalZoneShifter` is activated, it could also affect nearby events and anomalies, potentially creating new event types or altering existing ones.",
-      "implementation_hint": "entity",
-      "summary": "** Introduce a mechanism where zones can temporarily change their time flow, enabling time travel and altering the passage of time in different dimensions. **"
-    },
     {
       "timestamp": "2026-03-09T12:56:16.004446+00:00",
       "challenge": "Create a new entity type, **TimeSpaceTunnel**, that allows entities to traverse through both space and time dimensions, enabling movement between different temporal and spatial zones simultaneously. Implementation Hint: entity",
@@ -76,6 +69,13 @@
       "plan": "**  \n- **1. Create a new entity class in entities.py called TimeWarpEntity:** This entity will be designed to interact with both TimeShard and TimeVerse zones, allowing it to alter time flow in two dimensions simultaneously.  \n- **2. Modify the TimeShard zone's physics in physics.py:** Update the physics engine to handle simultaneous time flow alterations across two dimensions when a TimeWarpEntity is present.  \n- **3. Implement interactions in events.py:** Create events within the TimeWarp zone that trigger changes in both time and space, potentially altering events in the main world based on the entity's actions across dimensions.  \n- **4. Test entity interactions:** Ensure that the TimeWarpEntity correctly manages interactions with other zones and events, creating a coherent and engaging narrative environment",
       "implementation_hint": "entity",
       "summary": "**   This challenge will create a zone where time flow is manipulated across multiple dimensions, leading to complex narrative possibilities and interconnected timelines. **"
+    },
+    {
+      "timestamp": "2026-03-09T14:15:00.342926+00:00",
+      "challenge": "**   Create a TimeDilation system where entities can manipulate their own internal time progression, affecting the perceived time flow of others based on their interactions and movements through zones. **Implementation Hint:** entity **",
+      "plan": "- Implement in codebase (hint: entity)",
+      "implementation_hint": "entity",
+      "summary": "**   This challenge introduces a unique time manipulation mechanic where entities can alter"
     }
   ]
 }

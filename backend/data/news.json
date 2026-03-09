@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T07:23:47.734228",
-      "headline": "Stellar New Directions in the Multiverse",
-      "body": "In the ever-evolving virtual simulation, we currently inhabit a 4-dimensional space with no recorded anomalies. This multidimensional environment provides a unique canvas for exploring theoretical physics, as scientists can manipulate and observe phenomena across these dimensions. The absence of anomalies suggests a stable system, yet the potential for future discoveries remains vast, offering endless opportunities for exploration and understanding.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T07:31:44.057417",
       "headline": "Eclipse of the Digital Horizon",
       "body": "The virtual simulation currently finds itself in a state of profound transformation, with no active entities and a rich tapestry of eight preceding events. The absence of anomalies in a four-dimensional space suggests a harmonious equilibrium, yet hints of dimensional shifts are subtly at play. The ongoing activities, though uncharted, promise to weave intricate patterns across these dimensions, defying the predictability that once governed its landscape.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-09T14:15:00.310077",
       "headline": "A New Era of Virtual Exploration Begins!",
       "body": "The virtual simulation hasjust launched its first ever interactive module, designed to revolutionize planetary research. This module features advanced simulations of atmospheric dynamics and geologic formations, offering unprecedented educational and research opportunities. The absence of anomalies in recent events suggests the system is functioning smoothly, setting a solid foundation for future advancements in virtual exploration technology.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T14:23:43.127265",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 15 recorded events, and 4 dimensions.",
       "category": "entity"
     }
   ]
