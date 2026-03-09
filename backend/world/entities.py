@@ -2050,3 +2050,22 @@ class DimensionalTraveler(Entity):
 
 # Register the new entity type
 ENTITY_TYPES["DimensionalTraveler"] = DimensionalTraveler
+
+from world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DimensionPortal(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.connected_reality = None
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.connected_reality is None:
+            self.connect_to_reality(world_state)
+        return super().update(world_state)
+
+    def connect_to_reality(self, world_state):
+        # Logic to find an available reality and connect the portal
+        pass
+
+ENTITY_TYPES["DimensionPortal"] = DimensionPortal
