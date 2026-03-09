@@ -4490,3 +4490,67 @@ class DimensionNavigator(Entity):
 
 # Register the new entity type
 ENTITY_TYPES["DimensionNavigator"] = DimensionNavigator
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError("Subclasses must implement update method")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class AlternateTimeline:
+    def __init__(self):
+        self.entities = {}
+
+    def add_entity(self, entity_type: str, entity_id: str, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        if entity_type in ENTITY_TYPES:
+            entity_class = ENTITY_TYPES[entity_type]
+            entity = entity_class(position, properties, age)
+            self.entities[entity_id] = entity
+        else:
+            raise ValueError(f"Unknown entity type: {entity_type}")
+
+    def update_entities(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        updated_entities = {}
+        for entity_id, entity in self.entities.items():
+            updated_entity = entity.update(world_state)
+            updated_entities[entity_id] = updated_entity
+        return updated_entities
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for EnergyVortex
+        pass
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for CrystalFormation
+        pass
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for TemporalAnomaly
+        pass
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for QuantumParticle
+        pass
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle
+}

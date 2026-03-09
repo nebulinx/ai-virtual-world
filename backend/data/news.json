@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T13:40:08.947914",
-      "headline": "{ Silence of the Virtual Simulation, body: The virtual simulation currently exists in a quiet, balanced state with no",
-      "body": "The simulation holds 0 entities, 14 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T13:48:29.804640",
       "headline": "New Frontiers Unveiled in the Digital Realm",
       "body": "The virtual simulation has reached a new milestone, showcasing 15 distinct events and 0 anomalies, ensuring a seamless experience across 4 interconnected dimensions. Dimensional hubs have been established, each hosting unique interactive events, fostering exploration and collaboration. The absence of anomalies reflects the simulation's robust stability, guaranteeing an optimal user journey.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-09T20:35:29.660815",
       "headline": "Virtual Simulation Upgrade Brings New Features and Enhanced Performance",
       "body": "The virtual simulation has undergone a significant upgrade, introducing 15 new entity types and improving efficiency. This update includes enhanced gravity zones and new physics simulations, boosting performance by 30%. The upgrade involved 23 critical events, ensuring smoother operations and better integration of entity interactions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T20:45:53.613897",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 23 recorded events, and 4 dimensions.",
       "category": "entity"
     }
   ]
