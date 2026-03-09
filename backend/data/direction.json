@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T12:56:16.004446+00:00",
-    "challenge": "Create a new entity type, **TimeSpaceTunnel**, that allows entities to traverse through both space and time dimensions, enabling movement between different temporal and spatial zones simultaneously. Implementation Hint: entity",
-    "plan": "- **backend/world/entities.py**: Add a new entity class `TimeSpaceTunnel` that inherits from `BaseEntity`.  \n- **backend/world/events.py**: Modify event handling to detect interactions with `TimeSpaceTunnel` entities and trigger corresponding time loop events.  \n- **backend/world/physics.py**: Update the physics engine to support movement across multiple dimensions, ensuring smooth navigation through time and space.",
+    "timestamp": "2026-03-09T13:04:57.937275+00:00",
+    "challenge": "**   Introduce a mechanism where entities can traverse between multiple temporal rifts, each with its own unique time flow and dimensional properties, creating a narrative of alternate timelines and temporal choices. **Implementation Hint:** entity **",
+    "plan": "**\n- **1. backend/world/entities.py:** Create a new `TimeRift` entity type that enables traversal between temporal rifts. Each TimeRift can have unique properties such as time acceleration, rewinding, or dimensional shifts.\n- **2. backend/world/physics.py:** Modify the physics to allow TimeRifts to influence the local time flow and dimensional properties of the space they traverse.\n- **3. backend/world/events.py:** Implement events that allow players to activate TimeRifts, discover alternative timelines, and interact with different dimensional properties.\n\nThis plan introduces a fresh temporal mechanic that allows players to explore alternative realities, enhancing the world's narrative depth and gameplay complexity.",
     "implementation_hint": "entity",
-    "summary": "Expand the world's temporal mechanics by introducing a fifth dimension where entities can freely move through both space and time, creating intricate narrative and gameplay possibilities."
+    "summary": "**   Extend the world by introducing TimeRift entities that allow players to travel between alternative timelines, each with different dimensional properties and time flows, enhancing the narrative and gameplay with temporal choice. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T11:35:46.344268+00:00",
-      "challenge": "Introduce a fifth temporal dimension and create a temporal anomaly that distorts time, affecting entity aging and gravity interactions. Implementation Hint: entity",
-      "plan": "1. backend/world/temporal_zones.py: Create a new module to handle the fifth temporal dimension and its effects.\n2. backend/world/entities.py: Add a new temporal_state property to entities for time distortion tracking.\n3. backend/world/anomalies.py: Implement a new anomaly type that warps time in a specific zone.\n4. backend/world/events.py: Modify event handling to trigger effects when time anomalies are detected.",
-      "implementation_hint": "entity",
-      "summary": "Introduce a fifth temporal dimension with a unique anomaly that warps time, altering entity aging and gravity dynamics."
-    },
     {
       "timestamp": "2026-03-09T11:42:53.085920+00:00",
       "challenge": "**   Introduce a new type of event that warps the temporal dimension in specific zones, creating singularities where time flows backward or in non-Euclidean ways, affecting entity aging and the flow of events. **Implementation Hint:** event **",
@@ -76,6 +69,13 @@
       "plan": "**  \n1. **File to Modify:** `physics.py`  \n2. **Add a New Mechanism:** Introduce a `TemporalZoneShifter` class that, when activated, modifies the `timeFlow` of one or more zones. This could involve changing the gravitational fields or other temporal parameters of the zones.  \n3. **How it Fits the Challenge:** The `TemporalZoneShifter` would allow entities to move between zones with different time signatures, potentially altering the timeline experienced within each zone. This would create new possibilities for storytelling, gameplay, and interactions with anomalies and events.  \n4. **Optional Additional Feature:** When a `TemporalZoneShifter` is activated, it could also affect nearby events and anomalies, potentially creating new event types or altering existing ones.",
       "implementation_hint": "entity",
       "summary": "** Introduce a mechanism where zones can temporarily change their time flow, enabling time travel and altering the passage of time in different dimensions. **"
+    },
+    {
+      "timestamp": "2026-03-09T12:56:16.004446+00:00",
+      "challenge": "Create a new entity type, **TimeSpaceTunnel**, that allows entities to traverse through both space and time dimensions, enabling movement between different temporal and spatial zones simultaneously. Implementation Hint: entity",
+      "plan": "- **backend/world/entities.py**: Add a new entity class `TimeSpaceTunnel` that inherits from `BaseEntity`.  \n- **backend/world/events.py**: Modify event handling to detect interactions with `TimeSpaceTunnel` entities and trigger corresponding time loop events.  \n- **backend/world/physics.py**: Update the physics engine to support movement across multiple dimensions, ensuring smooth navigation through time and space.",
+      "implementation_hint": "entity",
+      "summary": "Expand the world's temporal mechanics by introducing a fifth dimension where entities can freely move through both space and time, creating intricate narrative and gameplay possibilities."
     }
   ]
 }

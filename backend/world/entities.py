@@ -3048,3 +3048,29 @@ class TimeSpaceTunnel(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TimeSpaceTunnel"] = TimeSpaceTunnel
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalRift(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+        self.time_flow = properties.get("time_flow", 1.0)
+        self.dimensions = properties.get("dimensions", 3)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Update the entity's position based on its current velocity
+        new_position = [self.position[i] + self.properties["velocity"][i] * self.time_flow for i in range(len(self.position))]
+        self.position = new_position
+        
+        # Update the entity's properties based on the world state
+        # For example, change dimensions based on some condition
+        if world_state["time_state"] == "past":
+            self.dimensions -= 1
+        elif world_state["time_state"] == "future":
+            self.dimensions += 1
+        
+        return self.to_dict()
+
+# Register the TemporalRift entity type
+ENTITY_TYPES["TemporalRift"] = TemporalRift
