@@ -2738,3 +2738,26 @@ class TemporalAnomaly(Entity):
         }
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalAnomaly(Entity):
+    def __init__(self, position: Dict[str, float]):
+        super().__init__(position)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        time_distortion = self.age / 100
+        for entity in world_state["entities"].values():
+            if entity != self:
+                entity.position = {
+                    "x": entity.position["x"] * (1 + time_distortion),
+                    "y": entity.position["y"] * (1 + time_distortion),
+                    "z": entity.position["z"] * (1 + time_distortion),
+                    "t": entity.position["t"] * (1 - time_distortion)
+                }
+        return self.to_dict()
+
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
