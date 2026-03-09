@@ -5124,3 +5124,19 @@ class TemporalLayer(Entity):
 
 # Register the TemporalLayer entity
 ENTITY_TYPES["TemporalLayer"] = TemporalLayer
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalStabilizer(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        anomalies = [e for e in world_state.values() if isinstance(e, TemporalAnomaly)]
+        for anomaly in anomalies:
+            self.shift_time(anomaly)
+        return world_state
+
+    def shift_time(self, anomaly):
+        # Logic to shift time for the anomaly
+        anomaly.position = (anomaly.position[0] + 1, anomaly.position[1] + 1)
+
+ENTITY_TYPES["TemporalStabilizer"] = TemporalStabilizer
