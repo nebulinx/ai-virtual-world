@@ -3882,3 +3882,48 @@ class SpaceDilator(Entity):
 
 # Register the SpaceDilator entity
 ENTITY_TYPES["SpaceDilator"] = SpaceDilator
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from backend.world.types import Dict, Any
+
+class TimeDimensionalDistorter(Entity):
+    def __init__(self, position: Dict[str, Any], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for TimeDimensionalDistorter's update method
+        # Example: Warp space and time in its vicinity
+        for entity in world_state['entities']:
+            if entity != self:
+                distance = self.calculate_distance(entity.position)
+                if distance < self.properties['distortion_range']:
+                    entity.position = self.warp_position(entity.position, distance)
+                    entity.age += 1
+        self.age += 1
+        return self.to_dict()
+
+    def calculate_distance(self, other_position: Dict[str, Any]) -> float:
+        # Calculate the Euclidean distance between two positions
+        return ((self.position['x'] - other_position['x']) ** 2 + 
+                (self.position['y'] - other_position['y']) ** 2 + 
+                (self.position['z'] - other_position['z']) ** 2) ** 0.5
+
+    def warp_position(self, position: Dict[str, Any], distance: float) -> Dict[str, Any]:
+        # Warp the position based on the distance
+        scale_factor = (self.properties['distortion_factor'] / distance) ** 0.5
+        return {
+            'x': self.position['x'] + (position['x'] - self.position['x']) * scale_factor,
+            'y': self.position['y'] + (position['y'] - self.position['y']) * scale_factor,
+            'z': self.position['z'] + (position['z'] - self.position['z']) * scale_factor
+        }
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'type': 'TimeDimensionalDistorter',
+            'position': self.position,
+            'properties': self.properties,
+            'age': self.age
+        }
+
+ENTITY_TYPES["TimeDimensionalDistorter"] = TimeDimensionalDistorter
