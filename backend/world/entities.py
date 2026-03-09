@@ -1021,3 +1021,13 @@ class TemporalManipulator(Entity):
         }
 
 ENTITY_TYPES["TemporalManipulator"] = TemporalManipulator
+
+from backend.world.entities import Entity, ENTITY_TYPES, Dict, Any
+
+class FifthDimensionalEntity(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic to warp dimensions
+        # For now, just return the current state
+        return world_state
+
+ENTITY_TYPES["FifthDimensionalEntity"] = FifthDimensionalEntity
