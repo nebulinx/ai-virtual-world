@@ -5140,3 +5140,16 @@ class TemporalStabilizer(Entity):
         anomaly.position = (anomaly.position[0] + 1, anomaly.position[1] + 1)
 
 ENTITY_TYPES["TemporalStabilizer"] = TemporalStabilizer
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class NewEntity(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic here
+        # Example: Move the entity based on some condition
+        if self.position[0] < 100:
+            self.position[0] += 1
+        return self.to_dict()
+
+ENTITY_TYPES["NewEntity"] = NewEntity
