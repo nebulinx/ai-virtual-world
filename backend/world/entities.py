@@ -4439,3 +4439,34 @@ class NewEntity(Entity):
         pass
 
 ENTITY_TYPES["NewEntity"] = NewEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class AlternateReality(Entity):
+    def __init__(self, position, properties, age, reality_id, temporary=True):
+        super().__init__(position, properties, age)
+        self.reality_id = reality_id
+        self.temporary = temporary
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for switching between realities
+        if self.temporary:
+            # Temporary reality, switch after some condition
+            pass
+        else:
+            # Permanent reality, handle time flow and gravity
+            pass
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "AlternateReality",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "reality_id": self.reality_id,
+            "temporary": self.temporary
+        }
+
+ENTITY_TYPES["AlternateReality"] = AlternateReality
