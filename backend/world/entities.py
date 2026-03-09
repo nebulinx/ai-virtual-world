@@ -2278,3 +2278,25 @@ class MovingEntity(Entity):
 
 # Register MovingEntity
 ENTITY_TYPES["MovingEntity"] = MovingEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES, Dict, Any
+
+class DynamicEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties)
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Simulate aging based on energy/consciousness encountered
+        if "energy" in world_state:
+            self.age += world_state["energy"]
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["DynamicEntity"] = DynamicEntity

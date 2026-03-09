@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T09:41:49.163675+00:00",
-    "challenge": "**   Create a system where entities moving between zones experience time flow based on the number of temporal dimensions each zone is using, leading to complex aging and behavior interactions. **Implementation Hint:** entity **",
-    "plan": "**  \n1. Create a `TemporalZone` class that defines how time flows within a zone based on its dimension count.  \n2. Modify the `Entity` class to include a reference to its current `TemporalZone`.  \n3. Implement a `TemporalEvent` that can alter a zone's dimension count, thereby changing its time flow properties.",
+    "timestamp": "2026-03-09T09:49:30.165969+00:00",
+    "challenge": "**   Implement a dynamic aging system where entities' age progression is influenced by the fourth temporal dimension (energy/conciousness) they encounter as they move between zones. **Implementation Hint:** entity",
+    "plan": "- Implement in codebase (hint: entity)",
     "implementation_hint": "entity",
-    "summary": "**   This challenge will create a dynamic aging system where entities' behavior and age are influenced by the temporal dimensions of the zones they traverse. **"
+    "summary": "**   Implement a dynamic aging system where entities' age progression is influenced by the fourth temporal dimension (energy/conciousness) they encounter as they move between zones."
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T08:16:51.966387+00:00",
-      "challenge": "**   Create a system where entities can manipulate the dimensions, allowing for the creation or collapse of dimensions, thereby affecting the world's structure and flow. **Implementation Hint:** physics **",
-      "plan": "**  \n- **1. Modify the physics system:**  \n  Create a new",
-      "implementation_hint": "physics",
-      "summary": "**   Introduce a dynamic dimension manipulation system where entities can alter the number of spatial dimensions, creating or collapsing dimensions and affecting the world's geometry and physics. **"
-    },
     {
       "timestamp": "2026-03-09T08:25:37.816990+00:00",
       "challenge": "**   Introduce an alternate dimension gate system that allows entities to traverse between dimensions through dynamic portals, creating a branching reality where dimension jumps and time manipulations intersect. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "**\n\n- **1. Create a TimeZone class in backend/world/physics.py:** This class will represent a temporal zone with its own time flow multiplier and gravity settings.\n- **2. Modify the Entity class in backend/world/entities.py:** Add an `AgeProperty` attribute that tracks how much an entity has aged based on the zone's time flow.\n- **3. Implement a TimeFlowEvent in backend/world/events.py:** When an entity moves between zones, this event adjusts the entity's `AgeProperty` based on the destination zone's time flow multiplier.",
       "implementation_hint": "entity",
       "summary": "** Introduce zone-specific time dilation to create a complex aging and behavior system for entities moving between zones with different temporal properties. **"
+    },
+    {
+      "timestamp": "2026-03-09T09:41:49.163675+00:00",
+      "challenge": "**   Create a system where entities moving between zones experience time flow based on the number of temporal dimensions each zone is using, leading to complex aging and behavior interactions. **Implementation Hint:** entity **",
+      "plan": "**  \n1. Create a `TemporalZone` class that defines how time flows within a zone based on its dimension count.  \n2. Modify the `Entity` class to include a reference to its current `TemporalZone`.  \n3. Implement a `TemporalEvent` that can alter a zone's dimension count, thereby changing its time flow properties.",
+      "implementation_hint": "entity",
+      "summary": "**   This challenge will create a dynamic aging system where entities' behavior and age are influenced by the temporal dimensions of the zones they traverse. **"
     }
   ]
 }
