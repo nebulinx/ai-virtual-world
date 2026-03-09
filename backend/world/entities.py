@@ -3206,3 +3206,23 @@ class TimeShard(Entity):
         return distance < 10
 
 ENTITY_TYPES["TimeShard"] = TimeShard
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeWarp(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time warp logic here
+        # For example, alter time flow in two dimensions
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "type": "TimeWarp",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeWarp"] = TimeWarp

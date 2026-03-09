@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T13:58:16.690906+00:00",
-    "challenge": "**   Create a TimeShard zone where entities can locally manipulate time within a specific dimension, affecting the main world's timeline and enabling a feedback loop between past, present, and future. **Implementation Hint:** physics **",
-    "plan": "**\n\n- **backend/world/physics.py:**  \n  Add a new `TimeShardRule` class that inherits from `GravityRule`. This rule will set a custom gravity value for a specific dimension, allowing time manipulation.\n\n- **backend/world/entities.py:**  \n  Implement a method in the entity class that, when entering the TimeShard zone, checks for an active `TimeShardRule`. If found, it will apply a time shift to the entity's position in the affected dimension.\n\n- **backend/world/events.py:**  \n  Modify event handling to detect interactions with TimeShard entities. When an event occurs, it will log the time shift and trigger corresponding adjustments in the main world's timeline.\n\nBy introducing a new physics rule and entity interaction mechanism, the TimeShard zone",
+    "timestamp": "2026-03-09T14:06:08.682789+00:00",
+    "challenge": "**   Create a **TimeWarp** zone that enables entities to simultaneously alter time flow in two dimensions, creating a temporal anomaly where actions in one dimension affect the other, while also interacting with both TimeShard and TimeVerse zones. **Implementation Hint:** entity **",
+    "plan": "**  \n- **1. Create a new entity class in entities.py called TimeWarpEntity:** This entity will be designed to interact with both TimeShard and TimeVerse zones, allowing it to alter time flow in two dimensions simultaneously.  \n- **2. Modify the TimeShard zone's physics in physics.py:** Update the physics engine to handle simultaneous time flow alterations across two dimensions when a TimeWarpEntity is present.  \n- **3. Implement interactions in events.py:** Create events within the TimeWarp zone that trigger changes in both time and space, potentially altering events in the main world based on the entity's actions across dimensions.  \n- **4. Test entity interactions:** Ensure that the TimeWarpEntity correctly manages interactions with other zones and events, creating a coherent and engaging narrative environment",
     "implementation_hint": "entity",
-    "summary": "**   The TimeShard zone will enable entities to alter the flow of time in a specific dimension, creating a dynamic and interconnected timeline that affects the main world. **"
+    "summary": "**   This challenge will create a zone where time flow is manipulated across multiple dimensions, leading to complex narrative possibilities and interconnected timelines. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T12:31:43.364709+00:00",
-      "challenge": "Create a fifth temporal dimension where entities can traverse through time, allowing them to move backward or forward while interacting with the world.   Implementation Hint: physics   This challenge requires modifying the physics system to handle movement through time in addition to space, as well as creating new temporal zones that can influence the flow of time.",
-      "plan": "1. entity: Add a new class `TemporalDimensions` to the physics module that manages movement through the fifth dimension.  \n2. physics: Extend the `Physics` class to include movement through time and create new temporal zones that affect time flow.  \n3. events: Implement a function that triggers time shifts during gameplay, allowing entities to move through time in a controlled manner.  \n4. entity: Create a new entity type `TemporalEntity` that can",
-      "implementation_hint": "entity",
-      "summary": "This challenge will expand the world's temporal mechanics by introducing a fifth dimension where entities can navigate through time, creating intricate narratives and gameplay possibilities."
-    },
     {
       "timestamp": "2026-03-09T12:39:26.053699+00:00",
       "challenge": "**   \"Introduce time loops where entities can loop through different time slices, creating a dynamic narrative where past actions influence future outcomes and vice versa.\" **Implementation Hint:** entity   **",
@@ -76,6 +69,13 @@
       "plan": "**  \n1. **backend/world/physics.py:** Introduce a new dimension class that manages time flow across zones, allowing actions in one dimension to affect the timeline in another.  \n2. **Introduce a new class:** TemporalAnomaly, which enables interactions between different dimensions by altering their time flow.  \n3. **Modify event handling:** Allow events to trigger changes in the time flow of different dimensions based",
       "implementation_hint": "physics",
       "summary": "**   The challenge is to create a temporal anomaly that allows actions in one dimension to alter the flow of time in another dimension, creating a dynamic and interconnected timeline. **"
+    },
+    {
+      "timestamp": "2026-03-09T13:58:16.690906+00:00",
+      "challenge": "**   Create a TimeShard zone where entities can locally manipulate time within a specific dimension, affecting the main world's timeline and enabling a feedback loop between past, present, and future. **Implementation Hint:** physics **",
+      "plan": "**\n\n- **backend/world/physics.py:**  \n  Add a new `TimeShardRule` class that inherits from `GravityRule`. This rule will set a custom gravity value for a specific dimension, allowing time manipulation.\n\n- **backend/world/entities.py:**  \n  Implement a method in the entity class that, when entering the TimeShard zone, checks for an active `TimeShardRule`. If found, it will apply a time shift to the entity's position in the affected dimension.\n\n- **backend/world/events.py:**  \n  Modify event handling to detect interactions with TimeShard entities. When an event occurs, it will log the time shift and trigger corresponding adjustments in the main world's timeline.\n\nBy introducing a new physics rule and entity interaction mechanism, the TimeShard zone",
+      "implementation_hint": "entity",
+      "summary": "**   The TimeShard zone will enable entities to alter the flow of time in a specific dimension, creating a dynamic and interconnected timeline that affects the main world. **"
     }
   ]
 }
