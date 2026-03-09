@@ -671,3 +671,20 @@ class NewEntity(Entity):
         return {"position": new_position, "properties": self.properties, "age": self.age + 1}
 
 ENTITY_TYPES["NewEntity"] = NewEntity
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class HealingCrystal(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.properties["healing_power"] = properties.get("healing_power", 10)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example: Healing nearby entities
+        for entity in world_state["entities"]:
+            if entity["type"] == "EnergyVortex" and entity["position"]["x"] == self.position["x"]:
+                entity["properties"]["health"] += self.properties["healing_power"]
+        return self.to_dict()
+
+ENTITY_TYPES["HealingCrystal"] = HealingCrystal
