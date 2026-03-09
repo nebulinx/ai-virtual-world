@@ -4117,3 +4117,34 @@ class DimensionalShifter(Entity):
             self.time_flows.pop(dimension, None)
 
 ENTITY_TYPES["DimensionalShifter"] = DimensionalShifter
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeManipulator(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.paused = False
+        self.acceleration = 1.0
+        self.rewind_speed = -1.0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.paused:
+            world_state['time'] = world_state.get('time', 0)
+        elif self.acceleration > 1.0:
+            world_state['time'] += world_state.get('time', 0) * (self.acceleration - 1.0)
+        elif self.rewind_speed < 0.0:
+            world_state['time'] += world_state.get('time', 0) * self.rewind_speed
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "paused": self.paused,
+            "acceleration": self.acceleration,
+            "rewind_speed": self.rewind_speed
+        }
+
+ENTITY_TYPES["TimeManipulator"] = TimeManipulator

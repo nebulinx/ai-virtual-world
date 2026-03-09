@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T18:31:52.711241+00:00",
-    "challenge": "**   Create an entity that can dynamically shift between different dimensions (additional dimensions beyond the current 4D space) and alter the time flow in each dimension it passes through. **Implementation Hint:** entity **",
-    "plan": "**\n\n- **1. backend/world/entities.py**  \n  - **New class:** `DimensionShifter`  \n    - Inherits from `Entity`  \n    - **Optional fields:** `dimensionShifts` (array of dimension indices it has shifted)  \n    - **Behavior:**  \n      - When moving, checks if the destination dimension exists.  \n      - If not, shifts to an additional dimension by adding a new dimension to `dimensionShifts`.",
+    "timestamp": "2026-03-09T18:40:25.919913+00:00",
+    "challenge": "** Introduce a time manipulation entity that can pause, accelerate, or rewind time locally, affecting the time flow of nearby zones and events. **Implementation Hint:** entity **",
+    "plan": "**\n- **File to Modify:** entities.py\n- **Add:** A new TimeManipulationEntity class with properties for time speed (pause, normal, accelerate, rewind) and methods to apply time changes to zones.\n- **How It Fits:**\n  - The entity will interact with zones, dynamically adjusting their time flow parameters (speed) based on proximity and time settings.\n  - Each zone's time flow is updated when the entity moves through, affecting event timestamps and entity aging.\n  - Events are adjusted based on the time flow of the zones they're in, creating a dynamic feedback loop.\n  - The entity's time manipulation",
     "implementation_hint": "entity",
-    "summary": "**   Introduce a new entity type capable of dimensional shifting, which dynamically modifies the time flow parameters of the zones it interacts with, creating a feedback loop between entity movement and dimensional changes. **"
+    "summary": "** A time manipulation entity that alters local time, impacting zones and events it interacts with. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T17:04:57.992822+00:00",
-      "challenge": "Create a Temporal Nexus Entity that allows entities to jump between different time zones and dimensions, creating unpredictable and shifting timelines.",
-      "plan": "- Implement in codebase (hint: entity)",
-      "implementation_hint": "entity",
-      "summary": "This challenge introduces a new way for entities to interact with time, creating complex and chaotic timelines across"
-    },
     {
       "timestamp": "2026-03-09T17:13:51.773441+00:00",
       "challenge": "**   Create a Time Dilator entity that warps local time, creating accelerated or dilated timelines within specific zones and affecting event sequences in unexpected ways. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "**  \n1. **File to Modify:** backend/world/entities.py  \n2. **New Entity Class:** `TimeToggler`  \n   - The `TimeToggler` entity will have properties for its current time zone, position, and age.  \n   - It will include a method to switch between time zones, which will adjust its aging rate based on the destination zone's time flow.  \n   - Each time zone it enters will have its time flow slightly altered to reflect the entity's presence and movement.  \n3. **How It Fits:**  \n   - This entity will create an interactive effect where moving between zones affects both the entity's aging and the zones' time flow, adding a layer of complexity to the simulation dynamics.",
       "implementation_hint": "entity",
       "summary": "**   Extend the simulation by creating an entity that toggles between different time zones, altering its aging process and modifying the time flow in each zone it visits. **"
+    },
+    {
+      "timestamp": "2026-03-09T18:31:52.711241+00:00",
+      "challenge": "**   Create an entity that can dynamically shift between different dimensions (additional dimensions beyond the current 4D space) and alter the time flow in each dimension it passes through. **Implementation Hint:** entity **",
+      "plan": "**\n\n- **1. backend/world/entities.py**  \n  - **New class:** `DimensionShifter`  \n    - Inherits from `Entity`  \n    - **Optional fields:** `dimensionShifts` (array of dimension indices it has shifted)  \n    - **Behavior:**  \n      - When moving, checks if the destination dimension exists.  \n      - If not, shifts to an additional dimension by adding a new dimension to `dimensionShifts`.",
+      "implementation_hint": "entity",
+      "summary": "**   Introduce a new entity type capable of dimensional shifting, which dynamically modifies the time flow parameters of the zones it interacts with, creating a feedback loop between entity movement and dimensional changes. **"
     }
   ]
 }
