@@ -929,3 +929,31 @@ class TemporalRippleEntity(Entity):
         }
 
 ENTITY_TYPES["TemporalRippleEntity"] = TemporalRippleEntity
+
+from world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class RippleEffect(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age % 10 == 0:
+            # Alter past events
+            for event in world_state['past_events']:
+                event['impact'] = self.properties['impact']
+            # Alter future events
+            for event in world_state['future_events']:
+                event['impact'] = self.properties['impact']
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'position': self.position,
+            'properties': self.properties,
+            'age': self.age
+        }
+
+ENTITY_TYPES["RippleEffect"] = RippleEffect
