@@ -1574,3 +1574,47 @@ class DimensionalBridge(Entity):
         return world_state.to_dict()
 
 ENTITY_TYPES["DimensionalBridge"] = DimensionalBridge
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimePrism(Entity):
+    def __init__(self, position, properties=None, age=0):
+        super().__init__(position, properties, age)
+        self.properties['time_portals'] = []
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_state = world_state.copy()
+        for portal in self.properties['time_portals']:
+            if portal['active']:
+                self.influence_past_and_future(portal, new_state)
+        return new_state
+
+    def influence_past_and_future(self, portal, world_state):
+        past = portal['past']
+        future = portal['future']
+        event = portal['event']
+        
+        # Influence past
+        past_state = world_state[past]
+        past_state['influence'] = event
+        new_past_state = past_state.copy()
+        new_past_state['influence'] = event
+        world_state[past] = new_past_state
+        
+        # Influence future
+        future_state = world_state[future]
+        future_state['influence'] = event
+        new_future_state = future_state.copy()
+        new_future_state['influence'] = event
+        world_state[future] = new_future_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'type': 'TimePrism',
+            'position': self.position,
+            'properties': self.properties,
+            'age': self.age
+        }
+
+ENTITY_TYPES["TimePrism"] = TimePrism
