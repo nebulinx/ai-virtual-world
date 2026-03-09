@@ -4053,3 +4053,38 @@ class TimeTraveler(Entity):
         }
 
 ENTITY_TYPES["TimeTraveler"] = TimeTraveler
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from datetime import datetime, timedelta
+import pytz
+
+class TimeTraveler(Entity):
+    def __init__(self, position, time_zones):
+        super().__init__(position, {"time_zones": time_zones, "current_zone": time_zones[0], "age": 0})
+        self.time_zones = time_zones
+        self.current_zone = time_zones[0]
+        self.age = 0
+
+    def update(self, world_state):
+        zone = self.properties["current_zone"]
+        zone_age = world_state.get(f"{zone}_age", 0)
+        self.age += 1
+
+        # Update age in the current time zone
+        world_state[f"{zone}_age"] = zone_age + self.age
+
+        # Move to the next time zone if necessary
+        if self.age >= len(self.time_zones):
+            self.age = 0
+            self.properties["current_zone"] = self.time_zones[(self.time_zones.index(zone) + 1) % len(self.time_zones)]
+
+        return self.to_dict()
+
+    def to_dict(self):
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeTraveler"] = TimeTraveler

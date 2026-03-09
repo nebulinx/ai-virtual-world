@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T11:10:58.349713",
-      "headline": "Simulation status update",
-      "body": "The simulation holds 0 entities, 12 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T11:19:10.070086",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 12 recorded events, and 4 dimensions.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-09T18:14:48.675369",
       "headline": "A New Era Begins in the Virtual Realm",
       "body": "The virtual simulation has recently undergone a transformative phase, with the emergence of novel entities and the gradual expansion of its dimensional boundaries. A new dimension has been activated, providing fresh opportunities for exploration and interaction. This milestone signifies the simulation's ongoing evolution and its commitment to delivering an enhanced user experience.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T18:23:27.557643",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 20 recorded events, and 4 dimensions.",
       "category": "entity"
     }
   ]
