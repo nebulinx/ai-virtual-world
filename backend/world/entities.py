@@ -3387,3 +3387,19 @@ class PreservedMemoryFragment(Entity):
 
 # Register PreservedMemoryFragment in ENTITY_TYPES
 ENTITY_TYPES["PreservedMemoryFragment"] = PreservedMemoryFragment
+
+from backend.world.entities import Entity, ENTITY_TYPES, Dict, Any
+
+class QuantumDrift(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for QuantumDrift event
+        # Example: Warp dimensions locally, create inconsistencies in time and space
+        # This is a placeholder for actual implementation
+        self.properties["warp_strength"] += 1
+        return super().to_dict()
+
+# Register QuantumDrift in ENTITY_TYPES
+ENTITY_TYPES["QuantumDrift"] = QuantumDrift
