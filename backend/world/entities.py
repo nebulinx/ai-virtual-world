@@ -2801,3 +2801,19 @@ class TemporalAnomaly(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class FifthDimensionAnomaly(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        # Implement unique anomaly effects here
+        # For example, warp time flow and affect gravity dynamics
+        return self.to_dict()
+
+ENTITY_TYPES["FifthDimensionAnomaly"] = FifthDimensionAnomaly
