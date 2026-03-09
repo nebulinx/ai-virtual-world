@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T20:28:00.551181+00:00",
-    "challenge": "**   Create a mechanism where entities can exist in a fractional combination of multiple timelines and dimensions simultaneously, allowing them to exhibit different behaviors in each temporal and dimensional domain. **Implementation Hint:** entity **",
-    "plan": "**  \n- **1.** Modify the entity file to include additional fractional dimensions and timelines (0-1) for each entity.  \n- **2.** Implement a new method for creating entities with customizable fractional existence across timelines and dimensions.  \n- **3.** Update event handlers to target specific fractional parts of an entity based on their dimension and timeline presence.",
+    "timestamp": "2026-03-09T20:35:29.689877+00:00",
+    "challenge": "**   Create a new entity type that can navigate through multiple dimensions and interact with anomalies in a way that affects the surrounding zones. **Implementation Hint:** entity **",
+    "plan": "**  \n1. **Define a new entity type:** Create a new entity class, `DimensionalJumper`, which can switch between dimensions and interact with anomalies.  \n2. **Modify the entity class:** In `backend/world/entities.py`, add the `DimensionalJumper` class with methods for dimension switching and anomaly interaction.  \n3. **Add entity to world:** Ensure that `DimensionalJumper` entities are created and added to the world's entities array.  \n4. **Influence physics:** Implement a temporary effect when `DimensionalJumper` moves through zones, altering gravity zones or creating dimensional shifts.  \n5. **Trigger events:** When `DimensionalJumper` interacts with anomalies",
     "implementation_hint": "entity",
-    "summary": "**   This evolution will enable entities to embody and interact with multiple timelines and dimensions, creating a rich ecosystem of temporal and dimensional interplay. **"
+    "summary": "**   The new entity will allow for deeper interaction with the world's dimensional and temporal structures, adding a layer of complexity to entity behavior. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T19:12:30.290752+00:00",
-      "challenge": "**   Create a new entity type that dynamically manipulates the topology of spacetime, allowing for real-time alteration of dimension connections and event timelines. **Implementation Hint:** entity **",
-      "plan": "**  \n-",
-      "implementation_hint": "entity",
-      "summary": "**   This challenge introduces a dynamic spacetime manipulation entity that warps dimension connections and event timelines in real-time. **"
-    },
     {
       "timestamp": "2026-03-09T19:20:18.765215+00:00",
       "challenge": "**   Create a time manipulation entity that warps the passage of time in real-time, creating variable time zones that affect event timelines. **Implementation Hint:** entity   (or",
@@ -76,6 +69,13 @@
       "plan": "**  \n1. **AlternateRealityEntity:** Create a new physics entity class that manages its own dimensions, gravity, and time flow. This entity will exist in a specific alternate reality and can be triggered to switch realities in response to specific events.  \n2. **AlternateRealityTriggerEvents:** Introduce new event types that, when triggered, activate an AlternateRealityEntity, creating a bridge between different timelines.  \n3. **AlternateRealityInteractions:** Allow entities in one reality to interact with those in another, causing complex and unpredictable temporal effects.",
       "implementation_hint": "entity",
       "summary": "**   This challenge will enable entities to interact with multiple timelines, adding depth and complexity to the world's timeline network. **"
+    },
+    {
+      "timestamp": "2026-03-09T20:28:00.551181+00:00",
+      "challenge": "**   Create a mechanism where entities can exist in a fractional combination of multiple timelines and dimensions simultaneously, allowing them to exhibit different behaviors in each temporal and dimensional domain. **Implementation Hint:** entity **",
+      "plan": "**  \n- **1.** Modify the entity file to include additional fractional dimensions and timelines (0-1) for each entity.  \n- **2.** Implement a new method for creating entities with customizable fractional existence across timelines and dimensions.  \n- **3.** Update event handlers to target specific fractional parts of an entity based on their dimension and timeline presence.",
+      "implementation_hint": "entity",
+      "summary": "**   This evolution will enable entities to embody and interact with multiple timelines and dimensions, creating a rich ecosystem of temporal and dimensional interplay. **"
     }
   ]
 }

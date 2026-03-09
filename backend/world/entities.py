@@ -4470,3 +4470,23 @@ class AlternateReality(Entity):
         }
 
 ENTITY_TYPES["AlternateReality"] = AlternateReality
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DimensionNavigator(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for the entity to navigate through multiple dimensions
+        # and interact with anomalies
+        self.age += 1
+        # Example: Move the entity to a new dimension based on some criteria
+        new_dimension = world_state.get("current_dimension") + 1
+        self.position["dimension"] = new_dimension
+        return self.to_dict()
+
+# Register the new entity type
+ENTITY_TYPES["DimensionNavigator"] = DimensionNavigator
