@@ -3765,3 +3765,29 @@ class TimeWarpingDevice(Entity):
         }
 
 ENTITY_TYPES["TimeWarpingDevice"] = TimeWarpingDevice
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeManipulator(Entity):
+    def __init__(self, position: Dict[str, float], speed_factor: float):
+        super().__init__(position)
+        self.speed_factor = speed_factor
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        for zone in world_state.get('zones', {}):
+            if self.position in zone:
+                zone['time_flow'] *= self.speed_factor
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'type': 'TimeManipulator',
+            'position': self.position,
+            'speed_factor': self.speed_factor,
+            'age': self.age
+        }
+
+ENTITY_TYPES["TimeManipulator"] = TimeManipulator
