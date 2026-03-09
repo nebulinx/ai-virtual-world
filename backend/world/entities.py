@@ -1943,3 +1943,24 @@ class TimeBearer(Entity):
         }
 
 ENTITY_TYPES["TimeBearer"] = TimeBearer
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalEntity(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+        self.time_position = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.time_position += 1
+        self.properties["time_position"] = self.time_position
+        return self.to_dict()
+
+    def rewind(self, steps: int):
+        self.time_position = max(0, self.time_position - steps)
+
+    def fast_forward(self, steps: int):
+        self.time_position += steps
+
+ENTITY_TYPES["TemporalEntity"] = TemporalEntity
