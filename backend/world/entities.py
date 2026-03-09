@@ -1155,3 +1155,46 @@ ENTITY_TYPES = {
     "QuantumParticle": QuantumParticle,
     "TimeLoopEvent": TimeLoopEvent
 }
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DimensionalSwitcher(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any] = None):
+        super().__init__(position, properties)
+        self.current_dimension = '3D'
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        proximity_to_zone = self.check_proximity_to_zone(world_state)
+        if proximity_to_zone:
+            self.switch_dimension(proximity_to_zone)
+        self.age += 1
+        return self.to_dict()
+
+    def check_proximity_to_zone(self, world_state: Dict[str, Any]) -> str:
+        # Implement logic to check proximity to zones and determine dimension type
+        # Example:
+        # for zone, zone_data in world_state['zones'].items():
+        #     if self.is_within_range(zone_data['position'], zone_data['range']):
+        #         return zone_data['dimension']
+        return None
+
+    def switch_dimension(self, dimension: str) -> None:
+        if dimension != self.current_dimension:
+            self.current_dimension = dimension
+            # Implement logic to alter physical properties based on new dimension
+            # Example:
+            # if dimension == '4D':
+            #     self.properties['time_flow'] = 'accelerated'
+            # elif dimension == 'conceptual':
+            #     self.properties['physical_form'] = 'energy'
+
+    def is_within_range(self, position: Dict[str, float], range: float) -> bool:
+        # Implement logic to check if entity is within range of a zone
+        # Example:
+        # distance = ((self.position['x'] - position['x']) ** 2 + (self.position['y'] - position['y']) ** 2 + (self.position['z'] - position['z']) ** 2) ** 0.5
+        # return distance <= range
+        return False
+
+ENTITY_TYPES["DimensionalSwitcher"] = DimensionalSwitcher
