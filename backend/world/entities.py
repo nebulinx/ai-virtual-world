@@ -770,3 +770,16 @@ ENTITY_TYPES = {
     "TemporalAnomaly": TemporalAnomaly,
     "QuantumParticle": QuantumParticle
 }
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeManipulator(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time manipulation logic here
+        # For example, slow down, speed up, or reverse aging
+        # Update world_state accordingly
+        return world_state
+
+# Register the new entity type
+ENTITY_TYPES["TimeManipulator"] = TimeManipulator
