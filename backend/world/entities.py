@@ -4581,3 +4581,27 @@ class TemporalRewind(Entity):
         }
 
 ENTITY_TYPES["TemporalRewind"] = TemporalRewind
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class FifthDimensionalInterface(Entity):
+    def __init__(self, position, properties=None, age=0):
+        super().__init__(position, properties, age)
+        self.current_dimension = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic to traverse different temporal and spatial dimensions
+        self.current_dimension = (self.current_dimension + 1) % len(world_state['dimensions'])
+        return self.to_dict()
+
+    def to_dict(self):
+        return {
+            'type': self.__class__.__name__,
+            'position': self.position,
+            'properties': self.properties,
+            'age': self.age,
+            'current_dimension': self.current_dimension
+        }
+
+ENTITY_TYPES["FifthDimensionalInterface"] = FifthDimensionalInterface
