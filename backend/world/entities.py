@@ -5040,3 +5040,43 @@ class TemporalAnomaly(Entity):
                 randint(self.position[2] - 5, self.position[2] + 5))
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import random
+
+class TemporalWormhole(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties, age)
+        self.radius = properties.get('radius', 10)
+        self.strength = properties.get('strength', 5)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_position = self.position.copy()
+        # Randomly move the wormhole within its radius
+        new_position['x'] += random.randint(-self.radius, self.radius)
+        new_position['y'] += random.randint(-self.radius, self.radius)
+        self.position = new_position
+
+        # Simulate causality paradoxes by randomly affecting nearby entities
+        entities_in_radius = [e for e in world_state['entities'].values() if e != self and
+                              abs(e.position['x'] - self.position['x']) <= self.radius and
+                              abs(e.position['y'] - self.position['y']) <= self.radius]
+
+        for entity in entities_in_radius:
+            entity.properties['health'] -= self.strength
+            if entity.properties['health'] <= 0:
+                del world_state['entities'][entity.id]
+
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'id': self.id,
+            'type': 'TemporalWormhole',
+            'position': self.position,
+            'properties': self.properties,
+            'age': self.age
+        }
+
+ENTITY_TYPES["TemporalWormhole"] = TemporalWormhole
