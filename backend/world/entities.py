@@ -4646,3 +4646,43 @@ ENTITY_TYPES = {
     "QuantumParticle": QuantumParticle,
     "NewEntityName": NewEntityName
 }
+
+# backend/world/entities.py
+
+from typing import Dict, Any
+import random
+
+class Entity:
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class FifthDimensionalInterface(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for interacting with the fifth-dimensional interface
+        # This could affect movement through time and space in the fourth dimension
+        self.age += 1
+        self.position['t'] += 0.1  # Example effect on time dimension
+        return self.to_dict()
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle,
+    "FifthDimensionalInterface": FifthDimensionalInterface
+}
