@@ -4148,3 +4148,32 @@ class TimeManipulator(Entity):
         }
 
 ENTITY_TYPES["TimeManipulator"] = TimeManipulator
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class QuantumEntangler(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        # Implement time flow parameter alteration logic here
+        # Example: Alter time flow based on entangler's position and properties
+        time_flow_factor = self.properties.get('time_flow_factor', 1.0)
+        for zone in world_state['zones']:
+            if zone['id'] in self.properties['zones']:
+                zone['time_flow'] *= time_flow_factor
+
+        # Implement feedback loop logic here
+        # Example: Adjust entangler's movement based on dimensional changes
+        for zone in world_state['zones']:
+            if zone['id'] in self.properties['zones']:
+                zone['dimensional_changes'] = zone['time_flow'] != 1.0
+                if zone['dimensional_changes']:
+                    self.position['x'] += 1  # Example movement logic
+
+        return self.to_dict()
+
+ENTITY_TYPES["QuantumEntangler"] = QuantumEntangler

@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T18:40:25.919913+00:00",
-    "challenge": "** Introduce a time manipulation entity that can pause, accelerate, or rewind time locally, affecting the time flow of nearby zones and events. **Implementation Hint:** entity **",
-    "plan": "**\n- **File to Modify:** entities.py\n- **Add:** A new TimeManipulationEntity class with properties for time speed (pause, normal, accelerate, rewind) and methods to apply time changes to zones.\n- **How It Fits:**\n  - The entity will interact with zones, dynamically adjusting their time flow parameters (speed) based on proximity and time settings.\n  - Each zone's time flow is updated when the entity moves through, affecting event timestamps and entity aging.\n  - Events are adjusted based on the time flow of the zones they're in, creating a dynamic feedback loop.\n  - The entity's time manipulation",
+    "timestamp": "2026-03-09T18:49:02.237256+00:00",
+    "challenge": "**   Create a new entity type called \"Quantum Entangler\" that connects two points in space-time, dynamically altering the time flow parameters of the zones it interacts with while also creating a feedback loop between its movement and the dimensional changes. **Implementation Hint:** entity   **",
+    "plan": "**  \n1. entity.py - Create a new `Entangler` class that inherits from `BaseEntity`.  \n2. Add methods to `Entangler` to handle creating, updating, and destroying entanglement between two points in space-time.",
     "implementation_hint": "entity",
-    "summary": "** A time manipulation entity that alters local time, impacting zones and events it interacts with. **"
+    "summary": "** Create a new entity type that manipulates the fabric of spacetime, creating a dynamic interplay between dimension shifting, time flow, and event processing.   **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T17:13:51.773441+00:00",
-      "challenge": "**   Create a Time Dilator entity that warps local time, creating accelerated or dilated timelines within specific zones and affecting event sequences in unexpected ways. **Implementation Hint:** entity **",
-      "plan": "**  \n- **1. Add a new entity class in backend/world/entities.py:** Create a `TimeDilator` class that inherits from `Entity`. The class will have properties like `dilation_rate` (default: 1) and `time_zone_offset` (default: 0). It will also include an `__init__` method to initialize these properties.  \n- **2. Modify the physics system in backend/world/physics.py:** Add a `TimeDilator` subclass of `GravityZone` or a separate `TimeDilator` class that manages its own time flow. This will allow it to independently control time dilation.  \n- **3. Update the event system in backend/world/events.py:** Int",
-      "implementation_hint": "entity",
-      "summary": "**   Introduce a new Time Dilator entity that distorts local time, adding unpredictability to event timelines across zones and dimensions. **"
-    },
     {
       "timestamp": "2026-03-09T17:22:39.362857+00:00",
       "challenge": "Evolve the virtual world with a new feature.",
@@ -76,6 +69,13 @@
       "plan": "**\n\n- **1. backend/world/entities.py**  \n  - **New class:** `DimensionShifter`  \n    - Inherits from `Entity`  \n    - **Optional fields:** `dimensionShifts` (array of dimension indices it has shifted)  \n    - **Behavior:**  \n      - When moving, checks if the destination dimension exists.  \n      - If not, shifts to an additional dimension by adding a new dimension to `dimensionShifts`.",
       "implementation_hint": "entity",
       "summary": "**   Introduce a new entity type capable of dimensional shifting, which dynamically modifies the time flow parameters of the zones it interacts with, creating a feedback loop between entity movement and dimensional changes. **"
+    },
+    {
+      "timestamp": "2026-03-09T18:40:25.919913+00:00",
+      "challenge": "** Introduce a time manipulation entity that can pause, accelerate, or rewind time locally, affecting the time flow of nearby zones and events. **Implementation Hint:** entity **",
+      "plan": "**\n- **File to Modify:** entities.py\n- **Add:** A new TimeManipulationEntity class with properties for time speed (pause, normal, accelerate, rewind) and methods to apply time changes to zones.\n- **How It Fits:**\n  - The entity will interact with zones, dynamically adjusting their time flow parameters (speed) based on proximity and time settings.\n  - Each zone's time flow is updated when the entity moves through, affecting event timestamps and entity aging.\n  - Events are adjusted based on the time flow of the zones they're in, creating a dynamic feedback loop.\n  - The entity's time manipulation",
+      "implementation_hint": "entity",
+      "summary": "** A time manipulation entity that alters local time, impacting zones and events it interacts with. **"
     }
   ]
 }
