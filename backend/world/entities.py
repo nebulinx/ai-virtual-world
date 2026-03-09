@@ -2904,3 +2904,68 @@ class TimeAccelerationField(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TimeAccelerationField"] = TimeAccelerationField
+
+from typing import Dict, Any
+import random
+
+class Entity:
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: float = 0):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def to_dict(self):
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        return self.to_dict()
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 0.5
+        return self.to_dict()
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 0.1
+        return self.to_dict()
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 0.05
+        return self.to_dict()
+
+class TemporalTraverse(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: float = 0, time_dimension: float = 0):
+        super().__init__(position, properties, age)
+        self.time_dimension = time_dimension
+
+    def to_dict(self):
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "time_dimension": self.time_dimension
+        }
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        self.time_dimension += random.uniform(-1, 1)  # Randomly move in time
+        return self.to_dict()
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle,
+    "TemporalTraverse": TemporalTraverse
+}

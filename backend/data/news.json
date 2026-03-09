@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T05:25:23.436385",
-      "headline": "Simulation status update",
-      "body": "The simulation holds 0 entities, 5 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T05:33:58.037788",
       "headline": "Virtual Simulation Updates and New Dimension Experimental Access",
       "body": "The virtual simulation has undergone recent updates, including server maintenance and bug fixes to enhance stability. A new virtual dimension, designated as Dimension 5, has been experimentally opened, offering novel gameplay opportunities. However, this change may temporarily disrupt existing server functions. Players are advised to check for updates and prepare for potential anomalies during the transition to the new dimension.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-09T12:23:07.472888",
       "headline": "The Digital Fabric Experiences an Unusual Stillness",
       "body": "In the current state of the virtual simulation, the dimensional plane remains devoid of any active events, with a total of 14 recorded occurrences. Despite the absence of recent activity, the system is stable, maintaining a balanced equilibrium across all 4 dimensions. The absence of anomalies suggests a harmonious state, where gravity zones are currently inactive, allowing for a consistent user experience without any disruptions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T12:31:43.321122",
+      "headline": "```json",
+      "body": "{ \"headline\": \"In-World Update: Virtual Simulation Reflects Real-World Phenomena\", \"body\": \"Recent discoveries in the virtual simulation have revealed unexpected interactions between entities and gravity zones. A new anomaly, classified as a virtual particle, has been observed to travel through dimensions, causing minor disruptions in the simulation's physics. This anomaly is affecting the stability of virtual entities, potentially impacting the accuracy of the simulation's representation",
       "category": "entity"
     }
   ]
