@@ -4282,3 +4282,36 @@ class TimeWarp(Entity):
         }
 
 ENTITY_TYPES["TimeWarp"] = TimeWarp
+
+from typing import Dict, Any, List
+from .base_entity import Entity
+
+class DimensionShifter(Entity):
+    def __init__(self, position: List[float], properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties, age)
+        self.dimensions = 3  # Default number of dimensions
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to update the number of dimensions dynamically
+        # For simplicity, let's assume the number of dimensions changes randomly
+        import random
+        self.dimensions = random.randint(2, 5)
+        return {
+            "position": self.position,
+            "dimensions": self.dimensions,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "DimensionShifter",
+            "position": self.position,
+            "dimensions": self.dimensions,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+# Register the DimensionShifter entity type
+from .entity_registry import ENTITY_TYPES
+ENTITY_TYPES["DimensionShifter"] = DimensionShifter
