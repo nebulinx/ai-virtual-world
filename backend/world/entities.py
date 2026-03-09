@@ -3440,3 +3440,52 @@ class EchoDrift(Entity):
         return events
 
 ENTITY_TYPES["EchoDrift"] = EchoDrift
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def to_dict(self):
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class TimeRipple(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int, intensity: float):
+        super().__init__(position, properties, age)
+        self.intensity = intensity
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_age = self.age + 1
+        new_position = {
+            "x": self.position["x"] + (self.intensity * (new_age % 2)),
+            "y": self.position["y"] + (self.intensity * (new_age % 2)),
+            "z": self.position["z"] + (self.intensity * (new_age % 2))
+        }
+        return {
+            "position": new_position,
+            "properties": self.properties,
+            "age": new_age
+        }
+
+    def to_dict(self):
+        return {
+            "type": "TimeRipple",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "intensity": self.intensity
+        }
+
+ENTITY_TYPES = {
+    "TimeRipple": TimeRipple
+}
