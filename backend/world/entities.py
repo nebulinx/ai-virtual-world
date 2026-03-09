@@ -3845,3 +3845,22 @@ class TimeDilator(Entity):
         }
 
 ENTITY_TYPES["TimeDilator"] = TimeDilator
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class NewEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic here
+        new_position = self.position.copy()
+        new_position['x'] += 1  # Example update logic
+        return {
+            'position': new_position,
+            'properties': self.properties,
+            'age': self.age + 1
+        }
+
+ENTITY_TYPES["NewEntity"] = NewEntity
