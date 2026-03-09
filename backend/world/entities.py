@@ -2991,3 +2991,43 @@ class TimeLoop(Entity):
         return cls(data.get("position", {"x": 0, "y": 0}), data.get("properties", {}))
 
 ENTITY_TYPES["TimeLoop"] = TimeLoop
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalZoneShifter(Entity):
+    def __init__(self, position, properties):
+        super().__init__(position, properties)
+        self.zones = {}  # Dictionary to store zones and their properties
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Update the state of each zone
+        for zone_id, zone_properties in self.zones.items():
+            zone_properties['time_flow'] += zone_properties['time_shift_rate']
+        return world_state
+
+    def add_zone(self, zone_id, time_shift_rate):
+        # Add a new zone with a given time shift rate
+        self.zones[zone_id] = {'time_shift_rate': time_shift_rate}
+
+    def remove_zone(self, zone_id):
+        # Remove a zone
+        if zone_id in self.zones:
+            del self.zones[zone_id]
+
+    def get_zone_properties(self, zone_id):
+        # Get properties of a specific zone
+        return self.zones.get(zone_id, {})
+
+    def to_dict(self):
+        # Convert entity to dictionary for JSON serialization
+        return {
+            'type': 'TemporalZoneShifter',
+            'position': self.position,
+            'properties': self.properties,
+            'zones': self.zones,
+            'age': self.age
+        }
+
+# Register the TemporalZoneShifter entity
+ENTITY_TYPES["TemporalZoneShifter"] = TemporalZoneShifter
