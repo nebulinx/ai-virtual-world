@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T23:19:42.247708+00:00",
-    "challenge": "Create a dimension-jumping anomaly entity that allows entities to temporarily shift between different dimensions, creating new dimensions and unpredicted causality events. Implementation Hint: entity",
-    "plan": "- **entity:** Create a new entity type called DimensionJumper.  \n- **physics:** Override the default dimension for the entity to allow dimension shifts. When activated, the entity will trigger a dimension change, potentially creating a new dimension.  \n- **events:** Log events when a DimensionJumper entity starts or ends its dimension-jumping behavior.  \n- **code:** Ensure the entity can teleport to a specified or random dimension, potentially spawning new dimensions when it jumps.",
+    "timestamp": "2026-03-09T23:27:21.264905+00:00",
+    "challenge": "Create a new entity type \"Temporal Layer\" that allows entities to exist in different layers of time, affecting the time flow and causality of the world.",
+    "plan": "- Create a new entity type called \"Temporal Layer\" in the entities.py file.  \n- Define attributes for each layer, including its base time speed, temporal causality, and interactions with other layers.  \n- Implement interactions between layers to create temporal anomalies and loops, enhancing the world's temporal complexity.  \n- Ensure that events involving Temporal Layers trigger causality events and potential time loops.",
     "implementation_hint": "entity",
-    "summary": "Add a new entity type that enables dimension shifts, creating temporal anomalies and new dimensions in the virtual world."
+    "summary": "Temporal Layers"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T22:01:29.480996+00:00",
-      "challenge": "Introduce a temporal anomaly zone that warps the fabric of time, creating non-linear causality and forcing entities to interact with events in ways that challenge their timelines.",
-      "plan": "- Modify backend/world/physics.py  \n- Add a new zone type: \"Time Warp Zone\" with properties: time dilation factor, time direction, and temporal anomaly strength.  \n- Implement interactions where entities in this zone experience time differently, potentially causing events to loop or be causally disconnected.  \n- Create new entities that are affected by this zone's time warping, introducing unexpected interactions and anomalies.",
-      "implementation_hint": "physics",
-      "summary": "Introduce a \"Time Warp Zone\" that distorts the flow of time, creating temporal paradoxes and forcing entities to interact with events in non-linear ways."
-    },
     {
       "timestamp": "2026-03-09T22:08:09.101584+00:00",
       "challenge": "Introduce a Temporal Drift Zone that allows entities to experience time in a non-linear manner, creating opportunities for causality paradoxes and time travel anomalies. Implementation Hint: entity",
@@ -76,6 +69,13 @@
       "plan": "**  \n- entity: TemporalWormholeEvent  \n  - Create a new event class `TemporalWormholeEvent` that models the creation and effects of wormholes.  \n  - This event type will introduce localized time distortions, variable causality, and the possibility of time loops, adding new layers of complexity and unpredictability to the world's temporal mechanics.  \n  - Integrate wormhole behavior that affects nearby zones' time flows, creating new opportunities for causality paradoxes and temporal anomalies.  \n  - Ensure wormholes interact with existing time flow mechanics to enhance the world's temporal complexity.  \n- physics: TemporalGravityAdjustment (optional)  \n  - Add a gravity adjustment mechanism specific to wormhole zones to create additional space-time distortions.  \n- events: TemporalAnomaly (optional)  \n  - Introduce a new event type to handle and track temporal anomalies caused by wormholes.",
       "implementation_hint": "entity",
       "summary": "** Temporal Wormholes introduce a new dimension of space-time manipulation, creating unpredictable causality events and potential time loops, enhancing the world's temporal complexity.   **"
+    },
+    {
+      "timestamp": "2026-03-09T23:19:42.247708+00:00",
+      "challenge": "Create a dimension-jumping anomaly entity that allows entities to temporarily shift between different dimensions, creating new dimensions and unpredicted causality events. Implementation Hint: entity",
+      "plan": "- **entity:** Create a new entity type called DimensionJumper.  \n- **physics:** Override the default dimension for the entity to allow dimension shifts. When activated, the entity will trigger a dimension change, potentially creating a new dimension.  \n- **events:** Log events when a DimensionJumper entity starts or ends its dimension-jumping behavior.  \n- **code:** Ensure the entity can teleport to a specified or random dimension, potentially spawning new dimensions when it jumps.",
+      "implementation_hint": "entity",
+      "summary": "Add a new entity type that enables dimension shifts, creating temporal anomalies and new dimensions in the virtual world."
     }
   ]
 }

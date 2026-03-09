@@ -5099,3 +5099,28 @@ class DimensionJumpingAnomaly(Entity):
         return world_state
 
 ENTITY_TYPES["DimensionJumpingAnomaly"] = DimensionJumpingAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalLayer(Entity):
+    def __init__(self, position, properties, age, layer_id):
+        super().__init__(position, properties, age)
+        self.layer_id = layer_id
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for updating the Temporal Layer
+        # This could involve affecting time flow, causality, etc.
+        # For now, let's just return the current state
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TemporalLayer",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "layer_id": self.layer_id
+        }
+
+# Register the TemporalLayer entity
+ENTITY_TYPES["TemporalLayer"] = TemporalLayer
