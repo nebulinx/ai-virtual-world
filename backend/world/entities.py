@@ -1347,3 +1347,18 @@ class NewEntity(Entity):
         pass
 
 ENTITY_TYPES["NewEntity"] = NewEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES, Dict, Any
+
+class HealingCrystal(Entity):
+    def __init__(self, position: Tuple[int, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age >= self.properties.get("healing_duration", 10):
+            world_state["healing"] = self.properties.get("healing_amount", 10)
+        return super().update(world_state)
+
+ENTITY_TYPES["HealingCrystal"] = HealingCrystal
