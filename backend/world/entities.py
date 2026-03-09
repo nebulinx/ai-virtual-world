@@ -2300,3 +2300,42 @@ class DynamicEntity(Entity):
         }
 
 ENTITY_TYPES["DynamicEntity"] = DynamicEntity
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class TemporalAnomaly(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0, anomaly_type: str = "time_dilation"):
+        super().__init__(position, properties, age)
+        self.anomaly_type = anomaly_type
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        zone = world_state.get("zone", {})
+        if zone.get("temporal_properties"):
+            if self.anomaly_type == "time_dilation":
+                self.age += zone["temporal_properties"]["time_dilation_factor"]
+            elif self.anomaly_type == "time_reversal":
+                self.age -= zone["temporal_properties"]["time_reversal_factor"]
+        return self.to_dict()
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle
+}
