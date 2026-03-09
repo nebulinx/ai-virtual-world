@@ -1911,3 +1911,16 @@ class Timebearer(Entity):
         }
 
 ENTITY_TYPES["Timebearer"] = Timebearer
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TeleportationPortal(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for updating the TeleportationPortal entity
+        # For example, you can add logic to handle teleportation effects
+        # Return the updated state
+        return super().to_dict()
+
+# Register the TeleportationPortal entity in the ENTITY_TYPES dictionary
+ENTITY_TYPES["TeleportationPortal"] = TeleportationPortal
