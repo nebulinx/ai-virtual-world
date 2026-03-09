@@ -607,3 +607,36 @@ class TemporalAnomaly(Entity):
 ENTITY_TYPES = {
     "TemporalAnomaly": TemporalAnomaly
 }
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class FifthDimensionalBeing(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+        self.fifth_dimensional_energy = properties.get('fifth_dimensional_energy', 0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_position = self.position
+        # Simulate movement and influence in the fifth dimension
+        if self.fifth_dimensional_energy > 0:
+            # Warp to a random position in 3D space
+            new_position = (
+                self.position[0] + (self.fifth_dimensional_energy * 0.1),
+                self.position[1] + (self.fifth_dimensional_energy * 0.1),
+                self.position[2] + (self.fifth_dimensional_energy * 0.1)
+            )
+            self.fifth_dimensional_energy -= 1
+
+        new_properties = {
+            **self.properties,
+            'fifth_dimensional_energy': self.fifth_dimensional_energy
+        }
+
+        return {
+            'position': new_position,
+            'properties': new_properties,
+            'age': self.age + 1
+        }
+
+ENTITY_TYPES["FifthDimensionalBeing"] = FifthDimensionalBeing
