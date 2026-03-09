@@ -1538,3 +1538,20 @@ class TimeTraveler(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TimeTraveler"] = TimeTraveler
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import random
+
+class DimensionBridge(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any] = None):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age % 10 == 0:
+            self.properties['destination'] = random.choice(list(world_state.keys()))
+        return super().update(world_state)
+
+ENTITY_TYPES["DimensionBridge"] = DimensionBridge
