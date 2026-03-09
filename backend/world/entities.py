@@ -1031,3 +1031,21 @@ class FifthDimensionalEntity(Entity):
         return world_state
 
 ENTITY_TYPES["FifthDimensionalEntity"] = FifthDimensionalEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class FifthDimensionalEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        # Simulate dimensional shifts and unpredictable temporal effects
+        for zone in world_state['zones']:
+            zone['time'] += zone['time_shift'] * self.properties['temporal_effect']
+            zone['space'] += zone['space_shift'] * self.properties['spatial_effect']
+        return self.to_dict()
+
+ENTITY_TYPES["FifthDimensionalEntity"] = FifthDimensionalEntity
