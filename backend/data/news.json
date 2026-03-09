@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T11:42:53.041808",
-      "headline": "{ The Virtual Realm Embarks On Its Journey, body: The virtual simulation has transitioned",
-      "body": "The simulation holds 0 entities, 13 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T11:50:33.330769",
       "headline": "Breakthrough in Virtual Simulation Technology",
       "body": "The virtual simulation has undergone significant advancements, introducing a cutting-edge feature that expands its dimensional framework. By integrating time as the fourth dimension, the simulation now supports dynamic interactions across temporal and spatial realms, enhancing the user experience with unprecedented depth and complexity.",
@@ -297,6 +291,12 @@
     {
       "timestamp": "2026-03-09T18:49:02.175142",
       "headline": "{ Virtual Simulation Deepens Complexity with 21 New Events, body: The virtual simulation has recently undergone significant updates, with 21 new events marking its progress. Users have experienced enhanced profile creation and environment",
+      "body": "The simulation holds 0 entities, 21 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T18:57:53.063626",
+      "headline": "{ Floating Digital Beings Begin Floating Over Fabled Virtual Islands, body: Recent testing of new physics has introduced gravity zones that allow virtual avatars to float effortlessly over ancient, fabled digital islands. The enhanced physics engine is creating a sense of wonder and realism",
       "body": "The simulation holds 0 entities, 21 recorded events, and 4 dimensions.",
       "category": "entity"
     }

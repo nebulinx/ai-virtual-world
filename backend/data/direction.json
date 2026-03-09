@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T18:49:02.237256+00:00",
-    "challenge": "**   Create a new entity type called \"Quantum Entangler\" that connects two points in space-time, dynamically altering the time flow parameters of the zones it interacts with while also creating a feedback loop between its movement and the dimensional changes. **Implementation Hint:** entity   **",
-    "plan": "**  \n1. entity.py - Create a new `Entangler` class that inherits from `BaseEntity`.  \n2. Add methods to `Entangler` to handle creating, updating, and destroying entanglement between two points in space-time.",
+    "timestamp": "2026-03-09T18:57:53.166117+00:00",
+    "challenge": "Create a new entity type, the **time gate**, which warps time across connected zones, allowing for simultaneous time travel and event teleportation between dimensions. Implementation Hint: entity",
+    "plan": "- **File to modify**: backend/world/entities.py  \n- **Add**: A new TimeGate class inheriting from Entity, with fields for zone connections, time warping strength, event teleportation flag, and time loop prevention.  \n- **Behavior**: When activated, the time gate will trigger events in connected zones at different times, potentially creating time loops or altering the order of events.  \n- **Events**: Time gate events will be added to the affected zones, triggering their events at the specified time.",
     "implementation_hint": "entity",
-    "summary": "** Create a new entity type that manipulates the fabric of spacetime, creating a dynamic interplay between dimension shifting, time flow, and event processing.   **"
+    "summary": "The time gate entity will connect multiple zones, warping time and event timelines to create asynchronous time travel and event teleportation across dimensions."
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T17:22:39.362857+00:00",
-      "challenge": "Evolve the virtual world with a new feature.",
-      "plan": "- Implement in codebase (hint: general)",
-      "implementation_hint": "general",
-      "summary": "Evolve the virtual world with a new feature."
-    },
     {
       "timestamp": "2026-03-09T17:30:23.894841+00:00",
       "challenge": "**   Introduce a new Space Dilator entity that distorts both local time and spatial dimensions, creating unpredictable geometries and spacetime effects within zones. **Implementation Hint:** physics **",
@@ -76,6 +69,13 @@
       "plan": "**\n- **File to Modify:** entities.py\n- **Add:** A new TimeManipulationEntity class with properties for time speed (pause, normal, accelerate, rewind) and methods to apply time changes to zones.\n- **How It Fits:**\n  - The entity will interact with zones, dynamically adjusting their time flow parameters (speed) based on proximity and time settings.\n  - Each zone's time flow is updated when the entity moves through, affecting event timestamps and entity aging.\n  - Events are adjusted based on the time flow of the zones they're in, creating a dynamic feedback loop.\n  - The entity's time manipulation",
       "implementation_hint": "entity",
       "summary": "** A time manipulation entity that alters local time, impacting zones and events it interacts with. **"
+    },
+    {
+      "timestamp": "2026-03-09T18:49:02.237256+00:00",
+      "challenge": "**   Create a new entity type called \"Quantum Entangler\" that connects two points in space-time, dynamically altering the time flow parameters of the zones it interacts with while also creating a feedback loop between its movement and the dimensional changes. **Implementation Hint:** entity   **",
+      "plan": "**  \n1. entity.py - Create a new `Entangler` class that inherits from `BaseEntity`.  \n2. Add methods to `Entangler` to handle creating, updating, and destroying entanglement between two points in space-time.",
+      "implementation_hint": "entity",
+      "summary": "** Create a new entity type that manipulates the fabric of spacetime, creating a dynamic interplay between dimension shifting, time flow, and event processing.   **"
     }
   ]
 }

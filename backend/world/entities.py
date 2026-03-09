@@ -4177,3 +4177,35 @@ class QuantumEntangler(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["QuantumEntangler"] = QuantumEntangler
+
+from backend.world.entities import Entity, ENTITY_TYPES, Vector2D
+
+class TimeGate(Entity):
+    def __init__(self, position: Vector2D, target_position: Vector2D):
+        super().__init__(position)
+        self.target_position = target_position
+        self.properties["target_position"] = target_position.to_dict()
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Simulate time travel for entities within the time gate's influence
+        entities_to_travel = []
+        for entity in world_state["entities"].values():
+            if entity.position.distance_to(self.position) <= self.properties.get("range", 10):
+                entities_to_travel.append(entity)
+
+        for entity in entities_to_travel:
+            entity.position = self.target_position
+            entity.age = 0  # Reset age upon time travel
+
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TimeGate",
+            "position": self.position.to_dict(),
+            "target_position": self.target_position.to_dict(),
+            "age": self.age,
+            "properties": self.properties
+        }
+
+ENTITY_TYPES["TimeGate"] = TimeGate
