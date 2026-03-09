@@ -2568,3 +2568,42 @@ class DynamicEntity(Entity):
         }
 
 ENTITY_TYPES["DynamicEntity"] = DynamicEntity
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        self.position = position
+        self.properties = properties
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class TimeZone(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], time_rate: float):
+        super().__init__(position, properties)
+        self.time_rate = time_rate
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += self.time_rate
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "time_rate": self.time_rate
+        }
+
+ENTITY_TYPES = {
+    "TimeZone": TimeZone
+}

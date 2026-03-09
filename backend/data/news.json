@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T03:34:58.269982",
-      "headline": "{ The Digital Realm Faces Dimensional Perturbations, body: The virtual simulation currently operates",
-      "body": "The simulation holds 0 entities, 3 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T03:43:23.481325",
       "headline": "```json",
       "body": "{ \"headline\": \"New Discoveries Unveiled in the Multidimensional Simulation\", \"body\": \"The virtual simulation has recently explored its fourth dimension, offering new possibilities for interaction and data analysis. Researchers have successfully mapped out the structure of this new dimension, enhancing the simulation's ability to model complex systems. The",
@@ -296,6 +290,12 @@
     },
     {
       "timestamp": "2026-03-09T10:47:33.723814",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 11 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T10:55:35.353320",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 11 recorded events, and 4 dimensions.",
       "category": "entity"
