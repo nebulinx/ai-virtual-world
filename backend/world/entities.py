@@ -4315,3 +4315,22 @@ class DimensionShifter(Entity):
 # Register the DimensionShifter entity type
 from .entity_registry import ENTITY_TYPES
 ENTITY_TYPES["DimensionShifter"] = DimensionShifter
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeDimensionWarping(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        time_flow_rate = self.properties.get("time_flow_rate", 1.0)
+        self.age += time_flow_rate
+        for entity in world_state["entities"]:
+            if entity["id"] == self.id:
+                entity["age"] = self.age
+                break
+        return self.to_dict()
+
+ENTITY_TYPES["TimeDimensionWarping"] = TimeDimensionWarping
