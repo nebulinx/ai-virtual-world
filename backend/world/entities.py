@@ -4026,3 +4026,30 @@ class NewEntityName(Entity):
         pass
 
 ENTITY_TYPES["NewEntityName"] = NewEntityName
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+from backend.world.world_state import WorldState
+
+class TimeTraveler(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+        self.time_zones_visited = []
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        current_zone = world_state.get('current_zone')
+        if current_zone and current_zone not in self.time_zones_visited:
+            self.time_zones_visited.append(current_zone)
+            self.properties['time_shift'] += 1
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'type': self.__class__.__name__,
+            'position': self.position,
+            'properties': self.properties,
+            'age': self.age
+        }
+
+ENTITY_TYPES["TimeTraveler"] = TimeTraveler
