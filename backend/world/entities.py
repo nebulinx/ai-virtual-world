@@ -2254,3 +2254,27 @@ class TemporalEntity(Entity):
         return self.to_dict(position=self.position, properties=self.properties, age=new_age, time_multiplier=self.time_multiplier)
 
 ENTITY_TYPES["TemporalEntity"] = TemporalEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class MovingEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int, temporal_dimensions: int):
+        super().__init__(position, properties, age)
+        self.temporal_dimensions = temporal_dimensions
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Simulate aging based on the number of temporal dimensions
+        self.age += self.temporal_dimensions
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "temporal_dimensions": self.temporal_dimensions
+        }
+
+# Register MovingEntity
+ENTITY_TYPES["MovingEntity"] = MovingEntity
