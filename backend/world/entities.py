@@ -4890,3 +4890,51 @@ class FifthDimensionEntity(Entity):
         }
 
 ENTITY_TYPES["FifthDimensionEntity"] = FifthDimensionEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import random
+
+class Zone:
+    def __init__(self, time_flow_rate: float):
+        self.time_flow_rate = time_flow_rate
+        self.entities = []
+
+    def add_entity(self, entity: Entity):
+        self.entities.append(entity)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        for entity in self.entities:
+            entity.update({**world_state, "time_flow_rate": self.time_flow_rate})
+        return world_state
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        super().update(world_state)
+        self.properties["intensity"] += 0.1 * world_state["time_flow_rate"]
+        return self.to_dict()
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        super().update(world_state)
+        self.properties["size"] += 0.05 * world_state["time_flow_rate"]
+        return self.to_dict()
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        super().update(world_state)
+        self.properties["distortion"] += 0.01 * world_state["time_flow_rate"]
+        return self.to_dict()
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        super().update(world_state)
+        self.position["x"] += random.uniform(-0.1, 0.1) * world_state["time_flow_rate"]
+        self.position["y"] += random.uniform(-0.1, 0.1) * world_state["time_flow_rate"]
+        return self.to_dict()
+
+ENTITY_TYPES["Zone"] = Zone
+ENTITY_TYPES["EnergyVortex"] = EnergyVortex
+ENTITY_TYPES["CrystalFormation"] = CrystalFormation
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+ENTITY_TYPES["QuantumParticle"] = QuantumParticle
