@@ -1106,3 +1106,52 @@ class SixthDimensionColor(Entity):
 
 # Register the new entity type
 ENTITY_TYPES["SixthDimensionColor"] = SixthDimensionColor
+
+from typing import Dict, Any
+import time
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class TimeLoopEvent(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], duration: int, interval: int):
+        super().__init__(position, properties)
+        self.duration = duration
+        self.interval = interval
+        self.start_time = time.time()
+        self.last_event_time = self.start_time
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        current_time = time.time()
+        if current_time - self.start_time >= self.duration:
+            self.start_time = current_time
+            self.last_event_time = current_time
+        if current_time - self.last_event_time >= self.interval:
+            self.last_event_time = current_time
+            self.trigger_events(world_state)
+        return world_state
+
+    def trigger_events(self, world_state: Dict[str, Any]):
+        # Implement periodic events here
+        print("Periodic event triggered!")
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle,
+    "TimeLoopEvent": TimeLoopEvent
+}
