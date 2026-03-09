@@ -3791,3 +3791,32 @@ class TimeManipulator(Entity):
         }
 
 ENTITY_TYPES["TimeManipulator"] = TimeManipulator
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalNexus(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+        self.time_zones = ["UTC", "America/New_York", "Asia/Tokyo", "Europe/London"]
+        self.dimensions = ["Primary", "Secondary", "Tertiary"]
+        self.current_time_zone = self.time_zones[0]
+        self.current_dimension = self.dimensions[0]
+
+    def update(self, world_state):
+        # Simulate time zone and dimension shifting
+        self.current_time_zone = self.time_zones[(self.time_zones.index(self.current_time_zone) + 1) % len(self.time_zones)]
+        self.current_dimension = self.dimensions[(self.dimensions.index(self.current_dimension) + 1) % len(self.dimensions)]
+        world_state['current_time_zone'] = self.current_time_zone
+        world_state['current_dimension'] = self.current_dimension
+        return world_state
+
+    def to_dict(self):
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "current_time_zone": self.current_time_zone,
+            "current_dimension": self.current_dimension
+        }
+
+ENTITY_TYPES["TemporalNexus"] = TemporalNexus

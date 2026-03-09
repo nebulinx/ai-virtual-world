@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T16:55:45.893916+00:00",
-    "challenge": "**   Create a mechanism where entities interact to dynamically alter the speed of time across zones and dimensions, introducing varying time flows based on entity interactions. **Implementation Hint:** physics **",
-    "plan": "**\n- **1.** Introduce a new Time Flow Modifier class in `physics.py` that adjusts the time flow based on entity proximity and interactions. This class will modify the timeFlow property of each zone dynamically.\n- **2.** Update the Event class in `events.py` to include a Time Signature property that captures the unique timing signatures influenced by entity interactions.\n- **3.** Modify Anomaly entities in `entities.py` to inject specific time signatures, further complicating the timeline.\n- **4.** Update the Physics and Events processing logic to track and apply these modifications, ensuring that time flow variations are consistent across all entities and zones.\n\nThis approach allows for entity-based control over time flow, creating a complex and unpredictable timeline that extends beyond the current Time Echo Entity and Time Signature Zones mechanics.",
+    "timestamp": "2026-03-09T17:04:57.992822+00:00",
+    "challenge": "Create a Temporal Nexus Entity that allows entities to jump between different time zones and dimensions, creating unpredictable and shifting timelines.",
+    "plan": "- Implement in codebase (hint: entity)",
     "implementation_hint": "entity",
-    "summary": "**   The challenge introduces a new physics concept where entity interactions affect the local time flow across zones and dimensions, creating unpredictable timelines and introducing chaos. **"
+    "summary": "This challenge introduces a new way for entities to interact with time, creating complex and chaotic timelines across"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T15:22:00.901745+00:00",
-      "challenge": "**   Introduce a system where entities can create \"EchoDrift\" effects, causing time to ripple and alter the sequence of events in non-linear ways. **Implementation Hint:** entity   **",
-      "plan": "**  \n- Create a new class `EchoDrift` in `backend/world/entities.py`.  \n- Implement methods for `EchoDrift` entities to detect nearby events and alter their timestamps.  \n- Allow `EchoDrift` entities to be triggered by other events and propagate \"TimeRipple\" anomalies to nearby areas.  \n- Update the event system to handle time shifts and event sequence changes dynamically.",
-      "implementation_hint": "entity",
-      "summary": "** Allow entities to create localized time ripples that cause events to play out in unexpected temporal orders, introducing chaos and unpredictability into the timeline.   **"
-    },
     {
       "timestamp": "2026-03-09T15:33:24.237847+00:00",
       "challenge": "**Create a new system where entities can traverse through time ripples, causing events to play out in non-linear temporal orders, introducing chaos and unpredictability into the timeline.**",
@@ -76,6 +69,13 @@
       "plan": "**  \n- **1. Add a new entity",
       "implementation_hint": "entity",
       "summary": "**   Create a Time Echo Entity that generates local time distortions, affecting event timelines across zones and dimensions. **"
+    },
+    {
+      "timestamp": "2026-03-09T16:55:45.893916+00:00",
+      "challenge": "**   Create a mechanism where entities interact to dynamically alter the speed of time across zones and dimensions, introducing varying time flows based on entity interactions. **Implementation Hint:** physics **",
+      "plan": "**\n- **1.** Introduce a new Time Flow Modifier class in `physics.py` that adjusts the time flow based on entity proximity and interactions. This class will modify the timeFlow property of each zone dynamically.\n- **2.** Update the Event class in `events.py` to include a Time Signature property that captures the unique timing signatures influenced by entity interactions.\n- **3.** Modify Anomaly entities in `entities.py` to inject specific time signatures, further complicating the timeline.\n- **4.** Update the Physics and Events processing logic to track and apply these modifications, ensuring that time flow variations are consistent across all entities and zones.\n\nThis approach allows for entity-based control over time flow, creating a complex and unpredictable timeline that extends beyond the current Time Echo Entity and Time Signature Zones mechanics.",
+      "implementation_hint": "entity",
+      "summary": "**   The challenge introduces a new physics concept where entity interactions affect the local time flow across zones and dimensions, creating unpredictable timelines and introducing chaos. **"
     }
   ]
 }
