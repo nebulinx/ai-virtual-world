@@ -3864,3 +3864,21 @@ class NewEntity(Entity):
         }
 
 ENTITY_TYPES["NewEntity"] = NewEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class SpaceDilator(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        # Implement space dilator logic here
+        # For example, distort spatial dimensions and local time
+        # ...
+        return self.to_dict()
+
+# Register the SpaceDilator entity
+ENTITY_TYPES["SpaceDilator"] = SpaceDilator
