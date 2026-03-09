@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T15:51:53.624552",
-      "headline": "Dynamic Simulation Activity Discovers 17 Events in Four Dimensions",
-      "body": "The virtual simulation has recently observed 17 distinct events, marking significant progress in its operational phase. These activities, occurring across four dimensions, indicate a robust framework for interaction and exploration, with no reported anomalies impacting stability.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T16:00:25.844351",
       "headline": "Virtual Simulation Deepens Our Understanding of Dimensional Physics",
       "body": "The virtual simulation continues to operate flawlessly, currently hosting 0 entities and 18 ongoing events across 4 dimensions. Despite the absence of recent anomalies, researchers have been utilizing the simulation to explore fundamental physics concepts, including the behavior of gravity zones and the interactions between dimensional planes. The simulation's 4D space provides a unique environment for testing hypotheses and advancing our knowledge of multidimensional physics.",
@@ -296,6 +290,12 @@
     },
     {
       "timestamp": "2026-03-09T22:32:47.223540",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 26 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T22:39:45.550589",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 26 recorded events, and 4 dimensions.",
       "category": "entity"

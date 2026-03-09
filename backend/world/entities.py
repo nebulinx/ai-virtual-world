@@ -4938,3 +4938,18 @@ ENTITY_TYPES["EnergyVortex"] = EnergyVortex
 ENTITY_TYPES["CrystalFormation"] = CrystalFormation
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
 ENTITY_TYPES["QuantumParticle"] = QuantumParticle
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalGate(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        current_time = world_state.get("current_time", 0)
+        if current_time in self.properties.get("active_times", []):
+            return {"action": "activate", "entity_id": self.id}
+        return {"action": "idle"}
+
+ENTITY_TYPES["TemporalGate"] = TemporalGate
