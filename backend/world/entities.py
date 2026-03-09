@@ -3489,3 +3489,47 @@ class TimeRipple(Entity):
 ENTITY_TYPES = {
     "TimeRipple": TimeRipple
 }
+
+from typing import Dict, Any
+import random
+
+class Entity:
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES = {}
+
+class TimeRipple(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        events = world_state.get("events", [])
+        new_events = []
+        for event in events:
+            if random.random() < self.properties.get("chaos_factor", 0.1):
+                event["temporal_order"] = random.randint(0, len(events) - 1)
+            new_events.append(event)
+        world_state["events"] = new_events
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeRipple"] = TimeRipple
