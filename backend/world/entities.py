@@ -3283,3 +3283,25 @@ class TimeDilatedEntity(Entity):
         }
 
 ENTITY_TYPES["TimeDilatedEntity"] = TimeDilatedEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalRift(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0.0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Alter time flow within the rift
+        time_factor = self.properties.get('time_factor', 1.0)
+        world_state['time_factor'] *= time_factor
+        self.age += time_factor
+        return super().update(world_state)
+
+    def to_dict(self) -> Dict[str, Any]:
+        data = super().to_dict()
+        data['age'] = self.age
+        return data
+
+ENTITY_TYPES["TemporalRift"] = TemporalRift

@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T07:31:44.057417",
-      "headline": "Eclipse of the Digital Horizon",
-      "body": "The virtual simulation currently finds itself in a state of profound transformation, with no active entities and a rich tapestry of eight preceding events. The absence of anomalies in a four-dimensional space suggests a harmonious equilibrium, yet hints of dimensional shifts are subtly at play. The ongoing activities, though uncharted, promise to weave intricate patterns across these dimensions, defying the predictability that once governed its landscape.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T07:39:42.756036",
       "headline": "```json",
       "body": "{ \"headline\": \"Stellar New Horizons in the Digital Galaxy\", \"body\": \"The virtual simulation has reached a fascinating new chapter, with 4 dimensions now seamlessly integrated into the virtual space. Despite a total of 8 recent events, nothing unusual has been reported, ensuring a stable environment for players. The system maintains its 0 anomalies, a testament to its robust design. With 8 new updates",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-09T14:23:43.127265",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 15 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T14:32:43.678222",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 16 recorded events, and 4 dimensions.",
       "category": "entity"
     }
   ]
