@@ -4859,3 +4859,34 @@ class TimeLoopEntity(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TimeLoopEntity"] = TimeLoopEntity
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class FifthDimensionEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int, presence: float):
+        super().__init__(position, properties, age)
+        self.presence = presence
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic here
+        # For example, modify properties based on presence
+        new_properties = self.properties.copy()
+        new_properties['modified_property'] = self.presence * self.properties['original_property']
+        return {
+            'position': self.position,
+            'properties': new_properties,
+            'age': self.age + 1,
+            'presence': self.presence
+        }
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'type': 'FifthDimensionEntity',
+            'position': self.position,
+            'properties': self.properties,
+            'age': self.age,
+            'presence': self.presence
+        }
+
+ENTITY_TYPES["FifthDimensionEntity"] = FifthDimensionEntity
