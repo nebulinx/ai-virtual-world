@@ -1894,3 +1894,20 @@ class RealityManipulationZone(Entity):
         return world_state
 
 ENTITY_TYPES["RealityManipulationZone"] = RealityManipulationZone
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class Timebearer(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for the Timebearer entity
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["Timebearer"] = Timebearer
