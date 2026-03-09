@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T14:06:08.627493",
-      "headline": "{ Simulation System Stabilizes Post-Mainframe MEL Crisis, body: The virtual simulation system has stabilized following a critical mainframe MEL (Maintenance, Engineering, and Life support) event, affecting 15 active data nodes.",
-      "body": "The simulation holds 0 entities, 15 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T14:15:00.310077",
       "headline": "A New Era of Virtual Exploration Begins!",
       "body": "The virtual simulation hasjust launched its first ever interactive module, designed to revolutionize planetary research. This module features advanced simulations of atmospheric dynamics and geologic formations, offering unprecedented educational and research opportunities. The absence of anomalies in recent events suggests the system is functioning smoothly, setting a solid foundation for future advancements in virtual exploration technology.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-09T21:01:28.609144",
       "headline": "```json",
       "body": "{ \"headline\": \"Silence of the Virtual World\", \"body\": \"Recent observations indicate a quiet state in the virtual simulation, with no entities active and 23 total events recorded. The simulation currently operates in a single dimension, free from any gravity",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T21:09:24.858569",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 23 recorded events, and 4 dimensions.",
       "category": "entity"
     }
   ]
