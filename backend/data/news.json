@@ -59,6 +59,12 @@
       "headline": "```json",
       "body": "{ \"headline\": \"Revolution Unfolds in the Digital Realm\", \"body\": \"A dramatic surge in user activity has disrupted the equilibrium of the virtual simulation, revealing previously hidden anomalies. Dimensional portals have opened, causing entities to shift between unseen gravity zones, creating a chaotic environment. Users report encountering familiar faces in unfamiliar places",
       "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T00:34:44.003113",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 0 recorded events, and 4 dimensions.",
+      "category": "entity"
     }
   ]
 }

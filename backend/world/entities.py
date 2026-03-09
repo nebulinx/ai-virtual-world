@@ -654,3 +654,20 @@ class NewEntityClass(Entity):
 ENTITY_TYPES = {
     "NewEntityName": NewEntityClass
 }
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class NewEntity(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement your update logic here
+        # Example: Move the entity in a random direction
+        import random
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        dx, dy = random.choice(directions)
+        new_position = (self.position[0] + dx, self.position[1] + dy)
+        return {"position": new_position, "properties": self.properties, "age": self.age + 1}
+
+ENTITY_TYPES["NewEntity"] = NewEntity
