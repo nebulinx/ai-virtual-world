@@ -2069,3 +2069,50 @@ class DimensionPortal(Entity):
         pass
 
 ENTITY_TYPES["DimensionPortal"] = DimensionPortal
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError("Subclasses must implement update method")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES = {
+    "EnergyVortex": "energy_vortex",
+    "CrystalFormation": "crystal_formation",
+    "TemporalAnomaly": "temporal_anomaly",
+    "QuantumParticle": "quantum_particle"
+}
+
+class TemporalPortal(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], time_dilation: float, target_dimension: str):
+        super().__init__(position, properties)
+        self.time_dilation = time_dilation
+        self.target_dimension = target_dimension
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age % self.time_dilation == 0:
+            # Teleport to target dimension
+            world_state[self.target_dimension].append(self)
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "time_dilation": self.time_dilation,
+            "target_dimension": self.target_dimension
+        }
+
+ENTITY_TYPES["TemporalPortal"] = "temporal_portal"
