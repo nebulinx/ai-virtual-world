@@ -861,3 +861,21 @@ class VariableTimeEntity(Entity):
                 (self.position[1] - entity["position"][1]) ** 2) ** 0.5
 
 ENTITY_TYPES["VariableTimeEntity"] = VariableTimeEntity
+
+from typing import Dict, Any
+from backend.world.entities import Entity
+
+class TimeWarpEntity(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        nearby_entities = world_state.get("nearby_entities", [])
+        for entity in nearby_entities:
+            if self.position == entity.position:
+                entity.properties["time_factor"] = 1 + self.properties["intensity"] * (self.age / 100)
+        self.age += 1
+        return super().to_dict()
+
+ENTITY_TYPES["TimeWarpEntity"] = TimeWarpEntity
