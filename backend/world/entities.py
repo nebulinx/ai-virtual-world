@@ -4232,3 +4232,27 @@ class WarpManipulator(Entity):
         return world_state
 
 ENTITY_TYPES["WarpManipulator"] = WarpManipulator
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class SpacetimeManipulator(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example manipulation: Toggle dimension connection
+        if world_state.get("time_dilation"):
+            world_state["time_dilation"] = False
+        else:
+            world_state["time_dilation"] = True
+        return world_state
+
+    def to_dict(self):
+        return {
+            "type": "SpacetimeManipulator",
+            "position": self.position,
+            "properties": {
+                "age": self.age,
+                "time_dilation": world_state.get("time_dilation", False)
+            }
+        }
+
+ENTITY_TYPES["SpacetimeManipulator"] = SpacetimeManipulator
