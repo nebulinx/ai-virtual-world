@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T02:54:11.845989",
-      "headline": "```json",
-      "body": "{ \"headline\": \"New Horizons Unveil in 3D Virtual Simulation\", \"body\": \"The virtual simulation has just undergone a significant update, introducing a brand new 3D structure known as the 'New Horizons'. This feature allows users to explore vast, uncharted regions of space with unprecedented detail. Recent activity has also revealed a previously hidden anomaly in the gravitational field, creating an intriguing 'black hole' effect that draws nearby objects into its pull. The simulation now operates in a 4D space, with the fourth dimension being time,",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T03:02:02.300877",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 3 recorded events, and 4 dimensions.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-09T10:06:32.867525",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 10 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T10:14:31.271831",
+      "headline": "```json",
+      "body": "{ \"headline\": \"Stable but",
       "category": "entity"
     }
   ]

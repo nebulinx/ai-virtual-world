@@ -2381,3 +2381,36 @@ class TimeWarpingCrystal(Entity):
         }
 
 ENTITY_TYPES["TimeWarpingCrystal"] = TimeWarpingCrystal
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for EnergyVortex update
+        return super().to_dict()
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for CrystalFormation update
+        return super().to_dict()
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for TemporalAnomaly update
+        return super().to_dict()
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for QuantumParticle update
+        return super().to_dict()
+
+class LightBurst(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for LightBurst update
+        return super().to_dict()
+
+ENTITY_TYPES["LightBurst"] = LightBurst
