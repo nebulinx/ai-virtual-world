@@ -1463,3 +1463,29 @@ class TimeWarp(Entity):
         return super().to_dict()
 
 ENTITY_TYPES["TimeWarp"] = TimeWarp
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DimensionalWeaver(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.bridges = []
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to create and maintain temporary bridges between zones
+        for zone in world_state['zones']:
+            if zone['dimension'] != self.properties['dimension']:
+                # Create a bridge to another zone if not already present
+                if zone['id'] not in [bridge['zone_id'] for bridge in self.bridges]:
+                    new_bridge = {'zone_id': zone['id'], 'status': 'active'}
+                    self.bridges.append(new_bridge)
+        
+        # Update the state of bridges
+        for bridge in self.bridges:
+            if bridge['status'] == 'active':
+                bridge['status'] = 'inactive'
+        
+        return super().update(world_state)
+
+ENTITY_TYPES["DimensionalWeaver"] = DimensionalWeaver
