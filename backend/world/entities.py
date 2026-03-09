@@ -3326,3 +3326,26 @@ class ErraticTimeline(Entity):
 
 # Register the new entity type
 ENTITY_TYPES["ErraticTimeline"] = ErraticTimeline
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DimensionalPortal(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int, target_position: Dict[str, int]):
+        super().__init__(position, properties, age)
+        self.target_position = target_position
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for updating the entity
+        # For example, check for nearby entities and allow them to teleport
+        for entity_id, entity in world_state["entities"].items():
+            if entity_id != self.id and self.position == entity.position:
+                entity.position = self.target_position
+        return super().update(world_state)
+
+    def to_dict(self) -> Dict[str, Any]:
+        data = super().to_dict()
+        data["target_position"] = self.target_position
+        return data
+
+ENTITY_TYPES["DimensionalPortal"] = DimensionalPortal
