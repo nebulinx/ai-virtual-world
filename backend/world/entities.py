@@ -1522,3 +1522,19 @@ class TemporalDrift(Entity):
                     entity.age = random.randint(0, 100)
 
 ENTITY_TYPES["TemporalDrift"] = TemporalDrift
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeTraveler(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age % 10 == 0:
+            self.position['x'] += 1
+        return self.to_dict()
+
+ENTITY_TYPES["TimeTraveler"] = TimeTraveler
