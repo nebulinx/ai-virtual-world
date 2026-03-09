@@ -879,3 +879,25 @@ class TimeWarpEntity(Entity):
         return super().to_dict()
 
 ENTITY_TYPES["TimeWarpEntity"] = TimeWarpEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import random
+
+class TemporalWarp(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Calculate temporal effect
+        time_shift = random.uniform(-1.0, 1.0)
+        
+        # Apply temporal effect to nearby entities
+        for entity_id, entity in world_state['entities'].items():
+            if entity_id != self.id and self.distance_to(entity) < self.properties['warp_range']:
+                entity.properties['age'] += time_shift
+        
+        # Update own properties
+        self.properties['age'] += time_shift
+        
+        return self.to_dict()
+
+# Register the new entity type
+ENTITY_TYPES["TemporalWarp"] = TemporalWarp
