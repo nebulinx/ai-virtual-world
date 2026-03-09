@@ -976,3 +976,17 @@ class DimensionJiggerer(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["DimensionJiggerer"] = DimensionJiggerer
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class FifthDimensionalEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        return self.to_dict()
+
+ENTITY_TYPES["FifthDimensionalEntity"] = FifthDimensionalEntity
