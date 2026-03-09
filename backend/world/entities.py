@@ -1069,3 +1069,25 @@ class WarpingEntity(Entity):
 
 # Register the WarpingEntity in the ENTITY_TYPES dictionary
 ENTITY_TYPES["WarpingEntity"] = WarpingEntity
+
+from world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class FifthDimensionalTemporalAnomaly(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for updating the FifthDimensionalTemporalAnomaly entity
+        # This could include warping time across multiple zones, causing temporal paradoxes, and alternate realities
+        pass
+
+    @staticmethod
+    def to_dict(entity):
+        return {
+            "position": entity.position,
+            "properties": entity.properties,
+            "age": entity.age
+        }
+
+ENTITY_TYPES["FifthDimensionalTemporalAnomaly"] = FifthDimensionalTemporalAnomaly
