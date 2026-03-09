@@ -4334,3 +4334,21 @@ class TimeDimensionWarping(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TimeDimensionWarping"] = TimeDimensionWarping
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DynamicDimensionality(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.dimensions = len(position)
+        self.current_dimension = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Switch between dimensions
+        self.current_dimension = (self.current_dimension + 1) % self.dimensions
+        # Introduce new time flow variable
+        world_state['time_flow'] = f"Dimension {self.current_dimension} time flow"
+        return self.to_dict()
+
+ENTITY_TYPES["DynamicDimensionality"] = DynamicDimensionality
