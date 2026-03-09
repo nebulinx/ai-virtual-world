@@ -716,3 +716,57 @@ class TimeManipulationZone(Entity):
         self.time_scale = scale
 
 ENTITY_TYPES["TimeManipulationZone"] = TimeManipulationZone
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int = 0):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class SlowedTimeFlow:
+    def __init__(self, entity: Entity):
+        self.entity = entity
+
+    def apply(self, time_factor: float):
+        self.entity.age += int(self.entity.age * time_factor)
+
+class TemporalAnomaly(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], anomaly_radius: float):
+        super().__init__(position, properties)
+        self.anomaly_radius = anomaly_radius
+        self.slowed_time_flow = None
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        updated_entity = super().update(world_state)
+        for entity_id, entity in world_state.get("entities", {}).items():
+            distance = ((entity["position"]["x"] - self.position["x"]) ** 2 + (entity["position"]["y"] - self.position["y"]) ** 2) ** 0.5
+            if distance <= self.anomaly_radius:
+                if not self.slowed_time_flow:
+                    self.slowed_time_flow = SlowedTimeFlow(entity)
+                else:
+                    self.slowed_time_flow.apply(0.5)
+        return updated_entity
+
+    def to_dict(self) -> Dict[str, Any]:
+        entity_dict = super().to_dict()
+        entity_dict["anomaly_radius"] = self.anomaly_radius
+        return entity_dict
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle
+}
