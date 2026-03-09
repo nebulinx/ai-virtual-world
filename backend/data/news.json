@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T16:36:50.225381",
-      "headline": "{ In-World Update: Virtual Simulation Reflects Real-World Complexity, body: The virtual simulation, currently operational in",
-      "body": "The simulation holds 0 entities, 18 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T16:46:39.972773",
       "headline": "Dynamic Simulation Engine Powers Advanced Computing",
       "body": "The virtual simulation environment has transitioned to an advanced phase, utilizing a sophisticated dynamic simulation engine to execute complex computational tasks. Recent activities include testing of multi-dimensional data processing and real-time anomaly detection algorithms, which are currently functioning without any observed anomalies. The engine's adaptive gravity zones are enhancing the simulation's realism and accuracy in modeling various physical phenomena.",
@@ -297,6 +291,12 @@
     {
       "timestamp": "2026-03-09T23:11:58.288740",
       "headline": "{ Stable Simulation Environment as Dimensions Remain Steady, body: The virtual simulation maintains a consistent state with 27 total events and no anomalies. The current dimension count remains at 4, indicating stability. While no recent events have occurred, the system continues to function without issues, ensuring a smooth operational environment",
+      "body": "The simulation holds 0 entities, 27 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T23:19:42.065099",
+      "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 27 recorded events, and 4 dimensions.",
       "category": "entity"
     }

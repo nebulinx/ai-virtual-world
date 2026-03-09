@@ -5080,3 +5080,22 @@ class TemporalWormhole(Entity):
         }
 
 ENTITY_TYPES["TemporalWormhole"] = TemporalWormhole
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DimensionJumpingAnomaly(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.current_dimension = properties.get('initial_dimension', 'Dimension1')
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.properties.get('allow_dimension_jump', False):
+            new_dimension = self.properties.get('target_dimension', 'NewDimension')
+            if new_dimension not in world_state:
+                world_state[new_dimension] = []
+            world_state[new_dimension].append(self)
+            del world_state[self.current_dimension][world_state[self.current_dimension].index(self)]
+            self.current_dimension = new_dimension
+        return world_state
+
+ENTITY_TYPES["DimensionJumpingAnomaly"] = DimensionJumpingAnomaly
