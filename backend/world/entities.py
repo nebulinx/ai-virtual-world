@@ -1317,3 +1317,33 @@ class DimensionalEntity(Entity):
             world_state.trigger_event("dimension_decrease", entity=self)
 
 ENTITY_TYPES["DimensionalEntity"] = DimensionalEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic for EnergyVortex
+        pass
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic for CrystalFormation
+        pass
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic for TemporalAnomaly
+        pass
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic for QuantumParticle
+        pass
+
+class NewEntity(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic for NewEntity
+        pass
+
+ENTITY_TYPES["NewEntity"] = NewEntity
