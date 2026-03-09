@@ -2633,3 +2633,29 @@ class HyperDimensionalEntity(Entity):
         }
 
 ENTITY_TYPES["HyperDimensionalEntity"] = HyperDimensionalEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalAnomaly(Entity):
+    def __init__(self, position, properties):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state):
+        new_world_state = world_state.copy()
+        for entity_type, entities in new_world_state.items():
+            if entity_type == "CrystalFormation":
+                for entity in entities:
+                    entity.age += 1
+                    if self.properties.get("anomaly_type") == "time_stretch":
+                        entity.age *= 2
+                    elif self.properties.get("anomaly_type") == "time_reverse":
+                        entity.age -= 1
+                        if entity.age < 0:
+                            entity.age = 0
+            elif entity_type == "GravityZone":
+                if self.properties.get("anomaly_type") == "gravity_distort":
+                    entity.properties["gravity_strength"] *= 1.5
+        return new_world_state
+
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly

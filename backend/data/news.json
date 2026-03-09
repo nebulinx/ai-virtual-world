@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T03:52:06.751697",
-      "headline": "Stellar New Horizons in the Virtual Realm",
-      "body": "The virtual simulation currently operates seamlessly with 0 anomalies and 4 dimensions, creating a stable yet expansive environment for users. Dimensional hubs have recently been activated, allowing for enhanced interactions across multiple planes. While no events have occurred recently, the system is poised for further development, promising new explorations and immersive experiences as new entities and events are integrated into the virtual fabric.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T04:01:49.520938",
       "headline": "A New Era of Dimensional Exploration Begins",
       "body": "The virtual simulation has just entered a new phase with the creation of a stable gravity zone in the third dimension, allowing for unprecedented exploration of interconnected realities. Dimensional rifts have been reported in areas near floating platforms, which are said to stabilize temporarily when two or more gravity zones intersect. Scientists are monitoring these anomalies for potential applications in interdimensional travel and energy manipulation, while the fourth dimension remains largely unexplored due to its instability.",
@@ -297,6 +291,12 @@
     {
       "timestamp": "2026-03-09T11:03:02.292042",
       "headline": "{ A Calm Reigns Over the Virtual Realm, body: In the vast expanse of the virtual simulation, a serene and stable state currently prevails. The dimensional plane remains untouched, with no anomalies disrupting its equilibrium. The 12 recorded events, spread across the entire simulation, reflect a period of relative tranquility, allowing for a deeper exploration of the entities and the intricate physics governing the space. This idyllic phase serves as a",
+      "body": "The simulation holds 0 entities, 12 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T11:10:58.349713",
+      "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 12 recorded events, and 4 dimensions.",
       "category": "entity"
     }
