@@ -4732,3 +4732,21 @@ class FifthDimensionalInterface(Entity):
         }
 
 ENTITY_TYPES["FifthDimensionalInterface"] = FifthDimensionalInterface
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class FifthDimensionalInterface(Entity):
+    def __init__(self, position, properties=None, age=0):
+        super().__init__(position, properties, age)
+        self.properties["interface_type"] = "fifth_dimensional"
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for interacting with the fifth-dimensional interface
+        # This could involve altering the temporal and spatial dynamics of entities
+        pass
+
+    def to_dict(self):
+        return super().to_dict()
+
+ENTITY_TYPES["FifthDimensionalInterface"] = FifthDimensionalInterface
