@@ -3370,3 +3370,20 @@ class TimePortal(Entity):
         }
 
 ENTITY_TYPES["TimePortal"] = TimePortal
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class PreservedMemoryFragment(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for PreservedMemoryFragment
+        # For example, analyze the fragment or affect the timeline
+        return super().update(world_state)
+
+    def to_dict(self):
+        return super().to_dict()
+
+# Register PreservedMemoryFragment in ENTITY_TYPES
+ENTITY_TYPES["PreservedMemoryFragment"] = PreservedMemoryFragment

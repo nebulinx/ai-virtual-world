@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T14:57:01.299057+00:00",
-    "challenge": "Create a new entity type that can create time portals, which manipulate the local time flow, causing inconsistencies and altering event sequences.",
-    "plan": "- Add a new entity class: TimePortal in backend/world/entities.py\n- The TimePortal entity will have parameters for position, duration, and time manipulation settings (e.g., time acceleration, rewinding)\n- The TimePortal will interact with TimeFlow zones, temporarily deactivating them and creating new TimeFlow zones with altered parameters\n- Implement event handling to track when TimePortal interactions cause event inconsistencies\n- Add a method to clear the TimePortal's effects and revert to normal time flow",
+    "timestamp": "2026-03-09T15:05:02.157684+00:00",
+    "challenge": "**   Introduce a system for preserved memory fragments that can be captured and analyzed, potentially affecting the timeline and event sequences. **",
+    "plan": "**\n1. **Modify the entities.py file** to add a new class for MemoryFragment entities.\n2. **Create a new event type** in",
     "implementation_hint": "entity",
-    "summary": "Introduce TimePortal entities that can create localized time distortions, affecting the timeline of nearby areas and events."
+    "summary": "**   Create a new system for memory fragments that can be captured and stored, potentially altering event sequences and providing insight into the simulation's timeline. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T13:30:44.813954+00:00",
-      "challenge": "** Create a TimeShard zone where players' actions can influence the timeline, creating a feedback loop where their choices alter past and future events.   **Implementation Hint:** entity   **",
-      "plan": "**  \n- Create a new entity called **Timebearer** specifically for interacting with TimeShard zones.  \n- When a Timebearer is triggered (e.g., killed or revived), it can influence the timeline of the TimeShard.  \n- Implement a new event type called **TimeShift** that allows players to alter the timeline within a TimeShard.  \n- Add a new anomaly called **TimeWarp** that causes the main timeline to shift, altering the present and past.",
-      "implementation_hint": "entity",
-      "summary": "** Introduce a TimeShard zone where players' actions can alter the timeline, creating a feedback loop where their choices affect past and future events.   **"
-    },
     {
       "timestamp": "2026-03-09T13:40:09.009639+00:00",
       "challenge": "Introduce a TimeVerse zone that allows players to interact with a multidimensional space where their actions can influence the main world's timeline through branching realities and time manipulation. Implementation Hint: entity   Implementation Hint: physics",
@@ -76,6 +69,13 @@
       "plan": "**  \n- **backend/world/entities.py:** Create a new PortalEvent class that triggers when an entity passes through a portal, altering time flow.\n- **backend/world/physics.py:** Modify the physics to adjust time dilation when entities enter or exit portals.\n- **backend/world/entities.py:** Implement entity aging based on the dimension's time flow, affecting their lifespan and event timing.\n\nThis approach adds a new layer of travel mechanics, enhancing the world's complexity and providing unexpected narrative opportunities.",
       "implementation_hint": "entity",
       "summary": "**   Introduce spacetime portals that enable entities to traverse dimensions, causing time shifts and event inconsistencies. **"
+    },
+    {
+      "timestamp": "2026-03-09T14:57:01.299057+00:00",
+      "challenge": "Create a new entity type that can create time portals, which manipulate the local time flow, causing inconsistencies and altering event sequences.",
+      "plan": "- Add a new entity class: TimePortal in backend/world/entities.py\n- The TimePortal entity will have parameters for position, duration, and time manipulation settings (e.g., time acceleration, rewinding)\n- The TimePortal will interact with TimeFlow zones, temporarily deactivating them and creating new TimeFlow zones with altered parameters\n- Implement event handling to track when TimePortal interactions cause event inconsistencies\n- Add a method to clear the TimePortal's effects and revert to normal time flow",
+      "implementation_hint": "entity",
+      "summary": "Introduce TimePortal entities that can create localized time distortions, affecting the timeline of nearby areas and events."
     }
   ]
 }
