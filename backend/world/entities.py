@@ -3820,3 +3820,28 @@ class TemporalNexus(Entity):
         }
 
 ENTITY_TYPES["TemporalNexus"] = TemporalNexus
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeDilator(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.dilation_factor = properties.get('dilation_factor', 1.0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_world_state = world_state.copy()
+        zone = world_state.get('zone')
+        if zone == self.properties.get('zone'):
+            time_passed = world_state.get('time_passed', 0)
+            new_time_passed = time_passed * self.dilation_factor
+            new_world_state['time_passed'] = new_time_passed
+        return new_world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            'dilation_factor': self.dilation_factor,
+        }
+
+ENTITY_TYPES["TimeDilator"] = TimeDilator
