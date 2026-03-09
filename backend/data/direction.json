@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T05:51:18.946628+00:00",
-    "challenge": "Introduce a new entity, \"Time Prism,\" that creates temporary time portals between different moments in time, allowing for events to influence past and future states. Implementation Hint: entity",
-    "plan": "- **backend/world/entities.py**: Add a new TimePrism class that spans a specific time range and has a gravity-like effect, warping nearby spacetime.  \n- **backend/world/events.py**: Create event types that can record or manipulate TimePrism states, allowing for dynamic changes in the timeline.  \n- **backend/world/physics.py**: Integrate TimePrism's gravity-like effect with existing physics, creating interactions between TimePrism entities",
+    "timestamp": "2026-03-09T05:59:43.301845+00:00",
+    "challenge": "**Introduce a novel TemporalAnomaly entity that creates temporal gateways and causality loops between different moments in time, potentially rewinding or teleporting entities through these gateways.**",
+    "plan": "- **Entities**: Create a new TemporalAnomaly entity class in `backend/world/entities.py` that allows for time travel and causality manipulation.  \n- **Physics**: Modify the timeFlow mechanics to handle temporal anomalies, potentially creating time loops or affecting the flow of time.  \n- **Events**: Add events that trigger the creation of TemporalAnomaly entities, such as temporal gateways or time portals.  \n- **Backend**: Implement the logic for TemporalAnomaly to manipulate time, including rewinding time, creating causality loops, and potentially altering the dimensional structure of time itself.",
     "implementation_hint": "entity",
-    "summary": "Introduce a novel temporal entity that connects moments in time, adding a new dimension of time travel and causality."
+    "summary": "This challenge aims to expand the temporal mechanics of the world by introducing a new entity that allows for time travel and causality manipulation, creating a more complex and dynamic temporal fabric."
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T04:28:58.539349+00:00",
-      "challenge": "Evolve the virtual world with a new feature.",
-      "plan": "- Implement in codebase (hint: general)",
-      "implementation_hint": "general",
-      "summary": "Evolve the virtual world with a new feature."
-    },
     {
       "timestamp": "2026-03-09T04:36:57.594357+00:00",
       "challenge": "**   Introduce a DynamicDimensionShift entity that allows players to freely shift between dimensions, affecting the world's physics, terrain, and events. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "**  \n- **backend/world/physics.py**: Introduce a new physics rule for the TemporalDrift entity that allows it to create and manage dimensional bridges.  \n  - Add a method to create a dimensional bridge between specified dimensions.  \n  - Implement rules for how dimensional bridges affect gravity and movement in the affected zones.  \n  - Add logic to handle the temporary disruption of dimensional flow in the zones.",
       "implementation_hint": "entity",
       "summary": "**   Extend the TemporalDrift entity to create a dimensional bridge that connects multiple dimensions and affects local physics, creating a temporal anomaly. **"
+    },
+    {
+      "timestamp": "2026-03-09T05:51:18.946628+00:00",
+      "challenge": "Introduce a new entity, \"Time Prism,\" that creates temporary time portals between different moments in time, allowing for events to influence past and future states. Implementation Hint: entity",
+      "plan": "- **backend/world/entities.py**: Add a new TimePrism class that spans a specific time range and has a gravity-like effect, warping nearby spacetime.  \n- **backend/world/events.py**: Create event types that can record or manipulate TimePrism states, allowing for dynamic changes in the timeline.  \n- **backend/world/physics.py**: Integrate TimePrism's gravity-like effect with existing physics, creating interactions between TimePrism entities",
+      "implementation_hint": "entity",
+      "summary": "Introduce a novel temporal entity that connects moments in time, adding a new dimension of time travel and causality."
     }
   ]
 }

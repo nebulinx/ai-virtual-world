@@ -1618,3 +1618,33 @@ class TimePrism(Entity):
         }
 
 ENTITY_TYPES["TimePrism"] = TimePrism
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalAnomaly(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.gateways = {}
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        for gateway_id, gateway in self.gateways.items():
+            if gateway['target']:
+                entity = world_state.get(gateway['target'])
+                if entity:
+                    entity.position = gateway['position']
+                    gateway['target'] = None
+        return world_state
+
+    def create_gateway(self, position, target):
+        gateway_id = f"gw_{len(self.gateways)}"
+        self.gateways[gateway_id] = {'position': position, 'target': target}
+        return gateway_id
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            'gateways': self.gateways
+        }
+
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
