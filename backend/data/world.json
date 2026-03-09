@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "timestamp": "2026-03-09T17:57:29.154285",
+  "timestamp": "2026-03-09T18:06:12.078797",
   "physics": {
     "gravity": {
       "default": -9.8,
@@ -392,15 +392,24 @@
       "radius": 19.582138969338253,
       "duration": 29.76785220602216,
       "description": "Gravity fluctuation detected: -17.98 m/s\u00b2 in 19.6m radius"
+    },
+    {
+      "type": "energy_storm",
+      "timestamp": "2026-03-09T17:58:32.276077",
+      "position": {
+        "x": 8.922472776816846,
+        "y": 40.15879869739895,
+        "z": -26.277959344083403,
+        "w": -8.461961324855896
+      },
+      "intensity": 1.7161004546085958,
+      "radius": 29.05365033559056,
+      "duration": 25.832130291466818,
+      "description": "Energy storm detected: intensity 1.72, radius 29.1m"
     }
   ],
   "anomalies": [],
   "evolution_log": [
-    {
-      "cycle": 89,
-      "timestamp": "2026-03-09T10:55:35.456883+00:00",
-      "summary": "**   This cycle aims to introduce a dynamic where time flows differently in different zones, affecting how entities age and interact with their environment.   **"
-    },
     {
       "cycle": 90,
       "timestamp": "2026-03-09T11:03:02.338744+00:00",
@@ -645,6 +654,11 @@
       "cycle": 139,
       "timestamp": "2026-03-09T17:57:29.153885+00:00",
       "summary": "**   Extend the simulation by introducing an entity that shifts between time zones, altering its aging process and affecting the time flow in the zones it traverses. **"
+    },
+    {
+      "cycle": 140,
+      "timestamp": "2026-03-09T18:06:12.078739+00:00",
+      "summary": "Cycle 140"
     }
   ]
 }

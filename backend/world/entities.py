@@ -3996,3 +3996,33 @@ class TimeTraveler(Entity):
         }
 
 ENTITY_TYPES["TimeTraveler"] = TimeTraveler
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Update logic for EnergyVortex
+        pass
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Update logic for CrystalFormation
+        pass
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Update logic for TemporalAnomaly
+        pass
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Update logic for QuantumParticle
+        pass
+
+class NewEntityName(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Update logic for NewEntityName
+        pass
+
+ENTITY_TYPES["NewEntityName"] = NewEntityName
