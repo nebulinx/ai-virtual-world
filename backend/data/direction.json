@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T07:06:28.986789+00:00",
-    "challenge": "Evolve the virtual world with a new feature.",
-    "plan": "- Implement in codebase (hint: general)",
-    "implementation_hint": "general",
-    "summary": "Evolve the virtual world with a new feature."
+    "timestamp": "2026-03-09T07:15:25.344439+00:00",
+    "challenge": "**   Create a TimeBudgetEntity that allows players to spend time on specific events, altering the timeline and causing alternate realities. The entity will track the remaining time and determine the consequences of time manipulation, leading to branching narratives. **Implementation Hint:** entity **",
+    "plan": "**  \n- **1. backend/world/entities.py:** Introduce a new TimeBudgetEntity class that tracks the player's remaining time and determines the consequences of time manipulation.  \n- **2. backend/world/events.py:** Modify the event system to include time budget events, which will alter the timeline based on the allocated time.  \n- **3. Update the world.json schema:** Add a time_budget field to the events array to track time allocation and its effects.  \n- **4.",
+    "implementation_hint": "entity",
+    "summary": "**   The TimeBudgetEntity will manage a player's time resource, allowing them to influence events and create alternate realities by spending time units on specific actions or events. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T05:42:30.416338+00:00",
-      "challenge": "**   Implement an entity that creates a bridge between multiple dimensions, allowing dimensional travel and creating a temporal anomaly that affects nearby zones. **Implementation Hint:** physics **",
-      "plan": "**  \n- **backend/world/physics.py**: Introduce a new physics rule for the TemporalDrift entity that allows it to create and manage dimensional bridges.  \n  - Add a method to create a dimensional bridge between specified dimensions.  \n  - Implement rules for how dimensional bridges affect gravity and movement in the affected zones.  \n  - Add logic to handle the temporary disruption of dimensional flow in the zones.",
-      "implementation_hint": "entity",
-      "summary": "**   Extend the TemporalDrift entity to create a dimensional bridge that connects multiple dimensions and affects local physics, creating a temporal anomaly. **"
-    },
     {
       "timestamp": "2026-03-09T05:51:18.946628+00:00",
       "challenge": "Introduce a new entity, \"Time Prism,\" that creates temporary time portals between different moments in time, allowing for events to influence past and future states. Implementation Hint: entity",
@@ -76,6 +69,13 @@
       "plan": "**\n- **1. entity.py:** Create a new TimeWarp entity class that allows players to insert events affecting time flow.\n- **2. physics.py:** Introduce a new TimeWarpGravity zone type that alters time dilation effects.\n- **3. events.py:** Implement a TimeShift event",
       "implementation_hint": "entity",
       "summary": "**   This cycle aims to create a dynamic temporal mechanic where players can interact with and alter the fabric of time, creating branching narratives and alternate realities. **"
+    },
+    {
+      "timestamp": "2026-03-09T07:06:28.986789+00:00",
+      "challenge": "Evolve the virtual world with a new feature.",
+      "plan": "- Implement in codebase (hint: general)",
+      "implementation_hint": "general",
+      "summary": "Evolve the virtual world with a new feature."
     }
   ]
 }

@@ -1802,3 +1802,30 @@ class HealingCrystal(Entity):
         }
 
 ENTITY_TYPES["HealingCrystal"] = HealingCrystal
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeBudgetEntity(Entity):
+    def __init__(self, position, properties, age, time_budget):
+        super().__init__(position, properties, age)
+        self.time_budget = time_budget
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if 'time_spent' in world_state:
+            self.time_budget -= world_state['time_spent']
+            if self.time_budget <= 0:
+                self.properties['consequences'] = 'Time manipulation failed. Alternate reality created.'
+            else:
+                self.properties['consequences'] = 'Time manipulation successful. Alternate reality unfolding.'
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'position': self.position,
+            'properties': self.properties,
+            'age': self.age,
+            'time_budget': self.time_budget
+        }
+
+ENTITY_TYPES["TimeBudgetEntity"] = TimeBudgetEntity
