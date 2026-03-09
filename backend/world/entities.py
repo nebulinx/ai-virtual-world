@@ -4373,3 +4373,25 @@ class TemporalGradient(Entity):
         }
 
 ENTITY_TYPES["TemporalGradient"] = TemporalGradient
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import time
+
+class TimeManipulator(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.time_factor = 1.0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example interaction: Adjust time based on nearby TemporalAnomaly
+        anomalies = world_state.get("TemporalAnomaly", [])
+        anomaly_count = sum(1 for anomaly in anomalies if anomaly["position"] == self.position)
+        self.time_factor = 1.0 + 0.1 * anomaly_count
+
+        # Simulate time flow
+        time.sleep(self.time_factor)
+
+        return self.to_dict()
+
+ENTITY_TYPES["TimeManipulator"] = TimeManipulator
