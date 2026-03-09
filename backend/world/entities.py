@@ -3181,3 +3181,28 @@ class TemporalAnomaly(Entity):
         return world_state.to_dict()
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeShard(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        # Implement time manipulation logic here
+        # Example: affect nearby entities' time perception
+        for entity_id, entity in world_state['entities'].items():
+            if entity_id != self.id and self.is_nearby(entity):
+                entity.properties['time_perception'] += 0.1
+        return self.to_dict()
+
+    def is_nearby(self, entity: 'Entity') -> bool:
+        # Implement logic to determine if two entities are nearby
+        distance = ((self.position['x'] - entity.position['x']) ** 2 +
+                   (self.position['y'] - entity.position['y']) ** 2) ** 0.5
+        return distance < 10
+
+ENTITY_TYPES["TimeShard"] = TimeShard
