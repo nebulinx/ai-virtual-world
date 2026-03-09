@@ -4750,3 +4750,32 @@ class FifthDimensionalInterface(Entity):
         return super().to_dict()
 
 ENTITY_TYPES["FifthDimensionalInterface"] = FifthDimensionalInterface
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DimensionalGate(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.connected_dimension = properties.get('connected_dimension', None)
+        self.active = properties.get('active', False)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.active and self.connected_dimension:
+            for entity_id, entity in world_state['entities'].items():
+                if entity['position'] == self.position:
+                    entity['position'] = self.connected_dimension
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'type': 'DimensionalGate',
+            'position': self.position,
+            'properties': {
+                'connected_dimension': self.connected_dimension,
+                'active': self.active
+            },
+            'age': self.age
+        }
+
+ENTITY_TYPES["DimensionalGate"] = DimensionalGate

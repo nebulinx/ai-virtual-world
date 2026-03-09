@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T14:48:15.839592",
-      "headline": "{ A New Dimension of Intrigue Unfolds in the Virtual Realm, body: The virtual simulation has reached a pivotal point with 16 active events and a neutral state across its 4 dimensions. As of now, the virtual space remains balanced with no anomalies detected, and the simulation continues to function smoothly. Recent activity highlights a growing exploration of different virtual landscapes, each with unique properties and potential for interaction. The simulation's current state reflects a dynamic equilibrium, where collaboration and competition are key",
-      "body": "The simulation holds 0 entities, 16 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T14:57:01.170298",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 16 recorded events, and 4 dimensions.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-09T21:39:18.833624",
       "headline": "Virtual Simulation Breaks New Ground with Dimensional Leap",
       "body": "The virtual simulation has recently achieved a significant milestone as it successfully navigated a dimensional shift into dimension 4. This breakthrough opens up new zones for exploration and interaction, offering players unprecedented opportunities to dive deeper into its immersive world. The update also introduced refined physics models, enhancing the sense of realism and engagement in the virtual environment.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T21:47:08.339974",
+      "headline": "```json",
+      "body": "{ \"headline\": \"Stable but Potentially P",
       "category": "entity"
     }
   ]
