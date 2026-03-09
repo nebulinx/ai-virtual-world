@@ -5153,3 +5153,22 @@ class NewEntity(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["NewEntity"] = NewEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES, Position, Properties
+from typing import Dict, Any
+
+class TemporalGuard(Entity):
+    def __init__(self, position: Position, properties: Properties):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Detect and mitigate Temporal Shifters
+        for entity_id, entity in world_state.items():
+            if entity['type'] == 'TemporalShifter':
+                # Mitigate causality loop by moving the Temporal Shifter away
+                entity['position'] = Position(self.position.x + 10, self.position.y + 10)
+        self.age += 1
+        return self.to_dict()
+
+ENTITY_TYPES["TemporalGuard"] = TemporalGuard
