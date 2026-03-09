@@ -2339,3 +2339,45 @@ ENTITY_TYPES = {
     "TemporalAnomaly": TemporalAnomaly,
     "QuantumParticle": QuantumParticle
 }
+
+from backend.world.entities import Entity, ENTITY_TYPES, Vector, WorldState
+from typing import Dict, Any
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for EnergyVortex
+        pass
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for CrystalFormation
+        pass
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for TemporalAnomaly
+        pass
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for QuantumParticle
+        pass
+
+class TimeWarpingCrystal(Entity):
+    def __init__(self, position: Vector, properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties, age)
+        self.energy_level = properties.get("energy_level", 0)
+        self.consciousness_level = properties.get("consciousness_level", 0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_age = self.age + self.energy_level + self.consciousness_level
+        new_properties = self.properties.copy()
+        new_properties["energy_level"] = self.energy_level * 0.9
+        new_properties["consciousness_level"] = self.consciousness_level * 0.9
+        return {
+            "position": self.position,
+            "properties": new_properties,
+            "age": new_age
+        }
+
+ENTITY_TYPES["TimeWarpingCrystal"] = TimeWarpingCrystal
