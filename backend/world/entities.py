@@ -688,3 +688,31 @@ class HealingCrystal(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["HealingCrystal"] = HealingCrystal
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeManipulationZone(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.frozen = False
+        self.time_scale = 1.0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.frozen:
+            return self.to_dict()
+        
+        new_state = self.to_dict()
+        new_state["age"] = world_state["age"] * self.time_scale
+        return new_state
+
+    def freeze(self):
+        self.frozen = True
+
+    def unfreeze(self):
+        self.frozen = False
+
+    def set_time_scale(self, scale: float):
+        self.time_scale = scale
+
+ENTITY_TYPES["TimeManipulationZone"] = TimeManipulationZone
