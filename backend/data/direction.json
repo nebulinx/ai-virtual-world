@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T18:57:53.166117+00:00",
-    "challenge": "Create a new entity type, the **time gate**, which warps time across connected zones, allowing for simultaneous time travel and event teleportation between dimensions. Implementation Hint: entity",
-    "plan": "- **File to modify**: backend/world/entities.py  \n- **Add**: A new TimeGate class inheriting from Entity, with fields for zone connections, time warping strength, event teleportation flag, and time loop prevention.  \n- **Behavior**: When activated, the time gate will trigger events in connected zones at different times, potentially creating time loops or altering the order of events.  \n- **Events**: Time gate events will be added to the affected zones, triggering their events at the specified time.",
+    "timestamp": "2026-03-09T19:04:51.120909+00:00",
+    "challenge": "**   Create a manipulation entity that allows users to directly warp the dimensions of a zone, creating temporary anomalies in spacetime that affect events and zone interactions. **Implementation Hint:** entity **",
+    "plan": "**\n- **1. Add a new entity class in backend/world/entities.py:** `DimensionWarpEntity` that allows users to manually or procedurally warp dimensions.\n- **2. Implement dimension shifting mechanics in the entity's `update` function:** which modifies the dimensions of a target zone, potentially creating temporary anomalies.\n- **3. Update the event handling in backend/world/events.py:** to account for the new dimension anomalies, causing events to teleport or be processed differently within the altered zones.\n\nThis feature adds a new layer of interactivity and unpredictability, allowing users to explore the fabric of reality itself.",
     "implementation_hint": "entity",
-    "summary": "The time gate entity will connect multiple zones, warping time and event timelines to create asynchronous time travel and event teleportation across dimensions."
+    "summary": "**   This challenge introduces a new way for users to directly influence the topology of the world, adding a layer of interactive spacetime manipulation to the simulation. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T17:30:23.894841+00:00",
-      "challenge": "**   Introduce a new Space Dilator entity that distorts both local time and spatial dimensions, creating unpredictable geometries and spacetime effects within zones. **Implementation Hint:** physics **",
-      "plan": "**  \n1. **backend/world/physics.py**: Introduce a new `SpaceDilator` class that inherits from `Entity`.  \n2. **Add new method in SpaceDilator**: `apply_space_dilation(self, entity, zone)` which modifies the spatial dimensions of entities based on the time dilation factor.  \n3. **Create new event type**: `SpaceDilationEvent` in `events.py` to track the activation of Space Dilator entities.  \n4. **Modify gravity calculations**: In `physics.py`, update the gravity",
-      "implementation_hint": "entity",
-      "summary": "**   Extend the simulation by introducing an entity that affects both time dilation and spatial dimensions, creating complex and dynamic spacetime effects. **"
-    },
     {
       "timestamp": "2026-03-09T17:40:07.308383+00:00",
       "challenge": "**Introduce a Time-Dimensional Distorter entity that creates ripples in spacetime across multiple dimensions and zones, warping both space and time in its vicinity.** Implementation Hint: entity",
@@ -76,6 +69,13 @@
       "plan": "**  \n1. entity.py - Create a new `Entangler` class that inherits from `BaseEntity`.  \n2. Add methods to `Entangler` to handle creating, updating, and destroying entanglement between two points in space-time.",
       "implementation_hint": "entity",
       "summary": "** Create a new entity type that manipulates the fabric of spacetime, creating a dynamic interplay between dimension shifting, time flow, and event processing.   **"
+    },
+    {
+      "timestamp": "2026-03-09T18:57:53.166117+00:00",
+      "challenge": "Create a new entity type, the **time gate**, which warps time across connected zones, allowing for simultaneous time travel and event teleportation between dimensions. Implementation Hint: entity",
+      "plan": "- **File to modify**: backend/world/entities.py  \n- **Add**: A new TimeGate class inheriting from Entity, with fields for zone connections, time warping strength, event teleportation flag, and time loop prevention.  \n- **Behavior**: When activated, the time gate will trigger events in connected zones at different times, potentially creating time loops or altering the order of events.  \n- **Events**: Time gate events will be added to the affected zones, triggering their events at the specified time.",
+      "implementation_hint": "entity",
+      "summary": "The time gate entity will connect multiple zones, warping time and event timelines to create asynchronous time travel and event teleportation across dimensions."
     }
   ]
 }

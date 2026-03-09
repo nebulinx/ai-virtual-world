@@ -4209,3 +4209,26 @@ class TimeGate(Entity):
         }
 
 ENTITY_TYPES["TimeGate"] = TimeGate
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class WarpManipulator(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for warping dimensions
+        # Example: Warp the dimensions of a zone
+        zone_id = self.properties.get("zone_id")
+        if zone_id in world_state["zones"]:
+            zone = world_state["zones"][zone_id]
+            zone["dimensions"] = {
+                "length": zone["dimensions"]["length"] * 2,
+                "width": zone["dimensions"]["width"] * 2,
+                "height": zone["dimensions"]["height"] * 2
+            }
+            world_state["zones"][zone_id] = zone
+        return world_state
+
+ENTITY_TYPES["WarpManipulator"] = WarpManipulator
