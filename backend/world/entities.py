@@ -990,3 +990,34 @@ class FifthDimensionalEntity(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["FifthDimensionalEntity"] = FifthDimensionalEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalManipulator(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+        self.name = "TemporalManipulator"
+        self.temporal_loop = False
+        self.anomaly = False
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic to manipulate temporal and spatial fabric
+        if self.temporal_loop:
+            # Create a causality loop
+            pass
+        if self.anomaly:
+            # Create a temporal anomaly
+            pass
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "temporal_loop": self.temporal_loop,
+            "anomaly": self.anomaly
+        }
+
+ENTITY_TYPES["TemporalManipulator"] = TemporalManipulator

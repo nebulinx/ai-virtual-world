@@ -143,6 +143,12 @@
       "headline": "Mysterious Events Discovered in the Simulation",
       "body": "Two new entities of type Aether have been detected in the virtual simulation, causing unexpected shifts in the dimensional fabric. A dimensional anomaly has been identified, potentially affecting time travel within the system. These discoveries may have far-reaching implications for the integrity of the simulation itself.",
       "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T02:38:39.461234",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 2 recorded events, and 4 dimensions.",
+      "category": "entity"
     }
   ]
 }
