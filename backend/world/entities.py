@@ -3971,3 +3971,28 @@ class DynamicDimensionalEntity(Entity):
         }
 
 ENTITY_TYPES["DynamicDimensionalEntity"] = DynamicDimensionalEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from datetime import datetime, timedelta
+
+class TimeTraveler(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.time_zone = "Present"
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.time_zone == "Past":
+            world_state['time_flow'] -= timedelta(days=1)
+        elif self.time_zone == "Future":
+            world_state['time_flow'] += timedelta(days=1)
+        self.age += 1
+        return world_state
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            'time_zone': self.time_zone,
+            'age': self.age
+        }
+
+ENTITY_TYPES["TimeTraveler"] = TimeTraveler
