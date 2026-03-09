@@ -4779,3 +4779,31 @@ class DimensionalGate(Entity):
         }
 
 ENTITY_TYPES["DimensionalGate"] = DimensionalGate
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalDimensionEvent(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+        self.time_shift = properties.get("time_shift", 0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_world_state = world_state.copy()
+        for entity_id, entity in new_world_state.items():
+            if entity_id in self.properties.get("entities_affecting", []):
+                if self.time_shift > 0:
+                    entity["position"]["x"] += self.time_shift
+                else:
+                    entity["position"]["x"] -= abs(self.time_shift)
+        return new_world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TemporalDimensionEvent",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TemporalDimensionEvent"] = TemporalDimensionEvent

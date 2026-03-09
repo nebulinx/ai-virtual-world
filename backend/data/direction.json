@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T21:47:08.403448+00:00",
-    "challenge": "**   Create a dimensional gate that connects to another dimension, allowing entities to teleport or move between dimensions seamlessly, introducing new interactions and anomalies that affect time, space, and events",
-    "plan": "- Implement in codebase (hint: event)",
+    "timestamp": "2026-03-09T21:54:08.282001+00:00",
+    "challenge": "Create a temporal dimension event that introduces non-linear time interactions, allowing entities to experience past or future states of the world, with associated anomalies affecting causality and temporal relationships.",
+    "plan": "- Add a new event type: `EchoDimensionEvent`.  \n- Modify the `events` array to include instances of `EchoDimensionEvent`.  \n- Implement the event to create and manipulate echo dimensions, allowing entities to interact with past/future states of the world.  \n- Introduce new time anomalies that affect the flow of causality, such as time loops or causality reversals.",
     "implementation_hint": "event",
-    "summary": "**   Create a dimensional gate that connects to another dimension, allowing entities to teleport or move between dimensions seamlessly, introducing new interactions and anomalies that affect time, space, and events."
+    "summary": "Introduce a new temporal dimension event that creates non-linear time interactions, introducing anomalies that challenge the predictability of causality."
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T20:28:00.551181+00:00",
-      "challenge": "**   Create a mechanism where entities can exist in a fractional combination of multiple timelines and dimensions simultaneously, allowing them to exhibit different behaviors in each temporal and dimensional domain. **Implementation Hint:** entity **",
-      "plan": "**  \n- **1.** Modify the entity file to include additional fractional dimensions and timelines (0-1) for each entity.  \n- **2.** Implement a new method for creating entities with customizable fractional existence across timelines and dimensions.  \n- **3.** Update event handlers to target specific fractional parts of an entity based on their dimension and timeline presence.",
-      "implementation_hint": "entity",
-      "summary": "**   This evolution will enable entities to embody and interact with multiple timelines and dimensions, creating a rich ecosystem of temporal and dimensional interplay. **"
-    },
     {
       "timestamp": "2026-03-09T20:35:29.689877+00:00",
       "challenge": "**   Create a new entity type that can navigate through multiple dimensions and interact with anomalies in a way that affects the surrounding zones. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "- Modify backend/world/events.py to include a new event type for sixth-dimensional interactions.  \n- Add a new event class that triggers dimensional shifts and creates temporal anomalies.  \n- Enhance entity interactions to allow for participation in sixth-dimensional events, modifying their behavior and influencing time and space.",
       "implementation_hint": "event",
       "summary": "Expand the world's dimensional complexity by introducing a sixth-dimensional event that creates temporal anomalies affecting entities' interactions with time and space."
+    },
+    {
+      "timestamp": "2026-03-09T21:47:08.403448+00:00",
+      "challenge": "**   Create a dimensional gate that connects to another dimension, allowing entities to teleport or move between dimensions seamlessly, introducing new interactions and anomalies that affect time, space, and events",
+      "plan": "- Implement in codebase (hint: event)",
+      "implementation_hint": "event",
+      "summary": "**   Create a dimensional gate that connects to another dimension, allowing entities to teleport or move between dimensions seamlessly, introducing new interactions and anomalies that affect time, space, and events."
     }
   ]
 }

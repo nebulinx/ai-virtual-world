@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "timestamp": "2026-03-09T21:47:08.418012",
+  "timestamp": "2026-03-09T21:54:08.292483",
   "physics": {
     "gravity": {
       "default": -9.8,
@@ -461,15 +461,23 @@
       "radius": 18.47424221114541,
       "duration": 24.80743572093614,
       "description": "Energy storm detected: intensity 1.03, radius 18.5m"
+    },
+    {
+      "type": "dimensional_rift",
+      "timestamp": "2026-03-09T21:48:10.801914",
+      "position": {
+        "x": -19.995149498687994,
+        "y": 26.97913755784427,
+        "z": 35.22701537843288,
+        "w": -0.649911727399612
+      },
+      "stability": 0.9685632421653139,
+      "radius": 3.893800434671634,
+      "description": "Dimensional rift opened: stability 0.97"
     }
   ],
   "anomalies": [],
   "evolution_log": [
-    {
-      "cycle": 118,
-      "timestamp": "2026-03-09T14:57:01.313912+00:00",
-      "summary": "Introduce TimePortal entities that can create localized time distortions, affecting the timeline of nearby areas and events."
-    },
     {
       "cycle": 119,
       "timestamp": "2026-03-09T15:05:02.172575+00:00",
@@ -714,6 +722,11 @@
       "cycle": 169,
       "timestamp": "2026-03-09T21:47:08.416991+00:00",
       "summary": "**   Create a dimensional gate that connects to another dimension, allowing entities to teleport or move between dimensions seamlessly, introducing new interactions and anomalies that affect time, space, and events."
+    },
+    {
+      "cycle": 170,
+      "timestamp": "2026-03-09T21:54:08.292426+00:00",
+      "summary": "Introduce a new temporal dimension event that creates non-linear time interactions, introducing anomalies that challenge the predictability of causality."
     }
   ]
 }
