@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T03:02:02.300877",
-      "headline": "Simulation status update",
-      "body": "The simulation holds 0 entities, 3 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T03:09:45.237240",
       "headline": "{ Stable but Sharp: Virtual Simulation System Emscoring Recent Checks, body: The virtual simulation system has remained remarkably stable, with no signs of anomalies or issues despite the absence of any active entities. System checks and routine maintenance activities have been conducted, ensuring optimal performance. Moving forward, the",
       "body": "The simulation holds 0 entities, 3 recorded events, and 4 dimensions.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-09T10:14:31.271831",
       "headline": "```json",
       "body": "{ \"headline\": \"Stable but",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T10:22:46.163225",
+      "headline": "```json",
+      "body": "{",
       "category": "entity"
     }
   ]
