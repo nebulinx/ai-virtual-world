@@ -2659,3 +2659,33 @@ class TemporalAnomaly(Entity):
         return new_world_state
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalState:
+    FAST_FORWARD = "fast-forward"
+    TIME_LAPSE = "time-lapse"
+
+class EntityTemporalState(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int, state: str):
+        super().__init__(position, properties)
+        self.age = age
+        self.state = state
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.state == TemporalState.FAST_FORWARD:
+            self.age += 2
+        elif self.state == TemporalState.TIME_LAPSE:
+            self.age += 0.5
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "state": self.state
+        }
+
+ENTITY_TYPES["EntityTemporalState"] = EntityTemporalState

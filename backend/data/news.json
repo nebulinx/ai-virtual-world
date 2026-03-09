@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T04:01:49.520938",
-      "headline": "A New Era of Dimensional Exploration Begins",
-      "body": "The virtual simulation has just entered a new phase with the creation of a stable gravity zone in the third dimension, allowing for unprecedented exploration of interconnected realities. Dimensional rifts have been reported in areas near floating platforms, which are said to stabilize temporarily when two or more gravity zones intersect. Scientists are monitoring these anomalies for potential applications in interdimensional travel and energy manipulation, while the fourth dimension remains largely unexplored due to its instability.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T04:11:15.642876",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 4 recorded events, and 4 dimensions.",
@@ -296,6 +290,12 @@
     },
     {
       "timestamp": "2026-03-09T11:10:58.349713",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 12 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-09T11:19:10.070086",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 12 recorded events, and 4 dimensions.",
       "category": "entity"
