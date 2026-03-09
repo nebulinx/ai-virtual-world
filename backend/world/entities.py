@@ -2240,3 +2240,17 @@ ENTITY_TYPES = {
     "TemporalAnomaly": TemporalAnomaly,
     "QuantumParticle": QuantumParticle
 }
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalEntity(Entity):
+    def __init__(self, position, properties, age, time_multiplier):
+        super().__init__(position, properties, age)
+        self.time_multiplier = time_multiplier
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_age = self.age * self.time_multiplier
+        return self.to_dict(position=self.position, properties=self.properties, age=new_age, time_multiplier=self.time_multiplier)
+
+ENTITY_TYPES["TemporalEntity"] = TemporalEntity
