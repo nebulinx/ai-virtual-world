@@ -3403,3 +3403,40 @@ class QuantumDrift(Entity):
 
 # Register QuantumDrift in ENTITY_TYPES
 ENTITY_TYPES["QuantumDrift"] = QuantumDrift
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class EchoDrift(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+        self.echoes = []
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        current_time = world_state["time"]
+        new_echoes = [echo for echo in self.echoes if echo["time"] < current_time]
+        self.echoes = new_echoes
+
+        for echo in self.echoes:
+            echo["time"] += 1
+
+        new_echo = {
+            "time": current_time,
+            "events": self.generate_events()
+        }
+        self.echoes.append(new_echo)
+
+        return self.to_dict()
+
+    def generate_events(self):
+        events = []
+        for entity in self.world_state["entities"]:
+            if entity["type"] != "EchoDrift":
+                events.append({
+                    "type": entity["type"],
+                    "position": entity["position"],
+                    "age": entity["age"]
+                })
+        return events
+
+ENTITY_TYPES["EchoDrift"] = EchoDrift

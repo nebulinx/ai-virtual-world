@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-09T15:12:32.081980+00:00",
-    "challenge": "**   Implement a QuantumDrift event that warps the dimensions locally, creating inconsistencies in time and space. **Implementation Hint:** event **",
-    "plan": "**\n1. **Event System:**  \n   - Add a new event type called `QuantumDriftEvent` to handle dimensional warping.\n2. **Physics System:**  \n   - Modify the physics engine to detect and process QuantumDrift events, allowing temporary addition or shifting of dimensions.\n3. **Entity Interaction:**  \n   - Update entity classes to respond to QuantumDrift events, enabling them to adjust their properties or paths based on dimensional changes.\n4. **Dimension Handling:**  \n   - Ensure that when a QuantumDrift event occurs, the simulation temporarily adds or shifts dimensions, causing spacetime inconsistencies.",
+    "timestamp": "2026-03-09T15:22:00.901745+00:00",
+    "challenge": "**   Introduce a system where entities can create \"EchoDrift\" effects, causing time to ripple and alter the sequence of events in non-linear ways. **Implementation Hint:** entity   **",
+    "plan": "**  \n- Create a new class `EchoDrift` in `backend/world/entities.py`.  \n- Implement methods for `EchoDrift` entities to detect nearby events and alter their timestamps.  \n- Allow `EchoDrift` entities to be triggered by other events and propagate \"TimeRipple\" anomalies to nearby areas.  \n- Update the event system to handle time shifts and event sequence changes dynamically.",
     "implementation_hint": "entity",
-    "summary": "**   Introduce a QuantumDrift event that warps dimensions, causing time and space inconsistencies to explore novel spacetime interactions. **"
+    "summary": "** Allow entities to create localized time ripples that cause events to play out in unexpected temporal orders, introducing chaos and unpredictability into the timeline.   **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T13:48:29.844147+00:00",
-      "challenge": "**   Create a temporal anomaly where actions in one dimension can affect the flow of time in another dimension, creating a feedback loop where player choices influence the world's timeline. **Implementation Hint:** physics **",
-      "plan": "**  \n1. **backend/world/physics.py:** Introduce a new dimension class that manages time flow across zones, allowing actions in one dimension to affect the timeline in another.  \n2. **Introduce a new class:** TemporalAnomaly, which enables interactions between different dimensions by altering their time flow.  \n3. **Modify event handling:** Allow events to trigger changes in the time flow of different dimensions based",
-      "implementation_hint": "physics",
-      "summary": "**   The challenge is to create a temporal anomaly that allows actions in one dimension to alter the flow of time in another dimension, creating a dynamic and interconnected timeline. **"
-    },
     {
       "timestamp": "2026-03-09T13:58:16.690906+00:00",
       "challenge": "**   Create a TimeShard zone where entities can locally manipulate time within a specific dimension, affecting the main world's timeline and enabling a feedback loop between past, present, and future. **Implementation Hint:** physics **",
@@ -76,6 +69,13 @@
       "plan": "**\n1. **Modify the entities.py file** to add a new class for MemoryFragment entities.\n2. **Create a new event type** in",
       "implementation_hint": "entity",
       "summary": "**   Create a new system for memory fragments that can be captured and stored, potentially altering event sequences and providing insight into the simulation's timeline. **"
+    },
+    {
+      "timestamp": "2026-03-09T15:12:32.081980+00:00",
+      "challenge": "**   Implement a QuantumDrift event that warps the dimensions locally, creating inconsistencies in time and space. **Implementation Hint:** event **",
+      "plan": "**\n1. **Event System:**  \n   - Add a new event type called `QuantumDriftEvent` to handle dimensional warping.\n2. **Physics System:**  \n   - Modify the physics engine to detect and process QuantumDrift events, allowing temporary addition or shifting of dimensions.\n3. **Entity Interaction:**  \n   - Update entity classes to respond to QuantumDrift events, enabling them to adjust their properties or paths based on dimensional changes.\n4. **Dimension Handling:**  \n   - Ensure that when a QuantumDrift event occurs, the simulation temporarily adds or shifts dimensions, causing spacetime inconsistencies.",
+      "implementation_hint": "entity",
+      "summary": "**   Introduce a QuantumDrift event that warps dimensions, causing time and space inconsistencies to explore novel spacetime interactions. **"
     }
   ]
 }
