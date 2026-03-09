@@ -1829,3 +1829,32 @@ class TimeBudgetEntity(Entity):
         }
 
 ENTITY_TYPES["TimeBudgetEntity"] = TimeBudgetEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from backend.world.world_state import WorldState
+import random
+
+class TimeReactingTerrain(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.time_effect = properties.get('time_effect', 'static')
+
+    def update(self, world_state: WorldState) -> Dict[str, Any]:
+        properties = self.properties.copy()
+        if self.time_effect == 'age_based':
+            properties['color'] = f"#{self.age:02x}{self.age:02x}{255-self.age:02x}"
+            properties['elevation'] += self.age * 0.1
+        elif self.time_effect == 'random':
+            properties['color'] = f"#{random.randint(0, 255):02x}{random.randint(0, 255):02x}{random.randint(0, 255):02x}"
+            properties['elevation'] += random.uniform(-0.1, 0.1)
+        return self.to_dict(properties)
+
+    def to_dict(self, properties):
+        return {
+            "type": "TimeReactingTerrain",
+            "position": self.position,
+            "properties": properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeReactingTerrain"] = TimeReactingTerrain
