@@ -4953,3 +4953,38 @@ class TemporalGate(Entity):
         return {"action": "idle"}
 
 ENTITY_TYPES["TemporalGate"] = TemporalGate
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for EnergyVortex
+        self.age += 1
+        return self.to_dict()
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for CrystalFormation
+        self.age += 1
+        return self.to_dict()
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for TemporalAnomaly
+        self.age += 1
+        return self.to_dict()
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for QuantumParticle
+        self.age += 1
+        return self.to_dict()
+
+class NewEntityName(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for NewEntityName
+        self.age += 1
+        return self.to_dict()
+
+ENTITY_TYPES["NewEntityName"] = NewEntityName
