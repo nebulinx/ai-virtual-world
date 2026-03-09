@@ -640,3 +640,17 @@ class FifthDimensionalBeing(Entity):
         }
 
 ENTITY_TYPES["FifthDimensionalBeing"] = FifthDimensionalBeing
+
+from typing import Dict, Any
+from .entity import Entity
+
+class NewEntityClass(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the update logic for the new entity
+        self.age += 1
+        self.properties["health"] -= 1
+        return self.to_dict()
+
+ENTITY_TYPES = {
+    "NewEntityName": NewEntityClass
+}
