@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "timestamp": "2026-03-09T01:30:16.226682",
+  "timestamp": "2026-03-09T01:38:26.532856",
   "physics": {
     "gravity": {
       "default": -9.8,
@@ -14,7 +14,22 @@
   },
   "entities": [],
   "terrain": {},
-  "events": [],
+  "events": [
+    {
+      "type": "energy_storm",
+      "timestamp": "2026-03-09T01:31:18.289066",
+      "position": {
+        "x": -6.669034931882187,
+        "y": 29.184307777085223,
+        "z": -40.775956778347165,
+        "w": -4.290657463840979
+      },
+      "intensity": 1.6972711000803744,
+      "radius": 22.908940306593866,
+      "duration": 6.026868122085109,
+      "description": "Energy storm detected: intensity 1.70, radius 22.9m"
+    }
+  ],
   "anomalies": [],
   "evolution_log": [
     {
@@ -101,6 +116,11 @@
       "cycle": 19,
       "timestamp": "2026-03-09T01:30:16.225048+00:00",
       "summary": "The TemporalLimiterEntity introduces a novel mechanism where nearby entities can experience time differently, adding depth and unpredictability to the virtual world's dynamics."
+    },
+    {
+      "cycle": 20,
+      "timestamp": "2026-03-09T01:38:26.531643+00:00",
+      "summary": "Introduce a time-distorting entity that creates unpredictable time interactions."
     }
   ]
 }

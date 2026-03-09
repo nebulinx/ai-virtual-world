@@ -832,3 +832,32 @@ class TemporalLimiterEntity(Entity):
         return distance <= self.influence_radius
 
 ENTITY_TYPES["TemporalLimiterEntity"] = TemporalLimiterEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import random
+
+class VariableTimeEntity(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+        self.time_distortion_radius = properties.get("time_distortion_radius", 10)
+        self.time_distortion_factor = properties.get("time_distortion_factor", 0.1)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        updated_entities = []
+        for entity_id, entity in world_state["entities"].items():
+            distance = self.distance_to(entity)
+            if distance <= self.time_distortion_radius:
+                time_factor = 1 + self.time_distortion_factor * random.uniform(-1, 1)
+                entity["age"] += time_factor
+                if entity["age"] < 0:
+                    entity["age"] = 0
+            updated_entities.append(entity)
+        world_state["entities"] = updated_entities
+        return world_state
+
+    def distance_to(self, entity: Dict[str, Any]) -> float:
+        return ((self.position[0] - entity["position"][0]) ** 2 + 
+                (self.position[1] - entity["position"][1]) ** 2) ** 0.5
+
+ENTITY_TYPES["VariableTimeEntity"] = VariableTimeEntity
