@@ -5734,3 +5734,23 @@ class DynamicDimensionalShaper(Entity):
         }
 
 ENTITY_TYPES["DynamicDimensionalShaper"] = DynamicDimensionalShaper
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DynamicDimensionalInterfaceEntity(Entity):
+    def __init__(self, position, properties=None, age=0):
+        super().__init__(position, properties, age)
+        self.current_dimension = 2  # Start in 2D by default
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to switch dimensions or create portals
+        if self.properties.get('switch_dimension'):
+            self.current_dimension += 1 if self.current_dimension < 3 else -2
+            self.properties['switch_dimension'] = False
+
+        return {
+            **self.to_dict(),
+            'current_dimension': self.current_dimension
+        }
+
+ENTITY_TYPES["DynamicDimensionalInterfaceEntity"] = DynamicDimensionalInterfaceEntity
