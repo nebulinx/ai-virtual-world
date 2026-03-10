@@ -6961,3 +6961,20 @@ class NewEntity(Entity):
         return {'position': new_position, 'properties': self.properties, 'age': self.age + 1}
 
 ENTITY_TYPES["NewEntity"] = NewEntity
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeLoopEvent(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+        self.current_loop = 0
+        self.max_loops = properties.get("max_loops", 1)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.current_loop < self.max_loops:
+            self.current_loop += 1
+            return self.to_dict()
+        return {}
+
+ENTITY_TYPES["TimeLoopEvent"] = TimeLoopEvent
