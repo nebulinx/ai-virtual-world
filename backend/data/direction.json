@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T03:27:59.362740+00:00",
-    "challenge": "**   Create a system where time zones can be dynamically altered by entities, allowing for the emergence of alternate timelines that interact with the physical world and influence one another. **Implementation Hint:** entity **",
-    "plan": "**  \n1. **Modify the `timeFlow` property in the zone data structure** to allow each zone to have a customizable time flow rate. This will enable zones to experience",
+    "timestamp": "2026-03-10T03:35:31.936299+00:00",
+    "challenge": "** Introduce Temporal Nodes that can act as portals between different timeline zones, allowing entities to instantaneously jump between zones in time, creating a \"time tunnel\" effect that warps the timeline fabric. **Implementation Hint:** entity **",
+    "plan": "**\n\n- **entity:** Introduce a new entity type called Temporal Portal.\n- **Implementation:** Create a new class `TemporalPortal` in `backend/world/entities.py` that allows for time jumps between zones. The entity will have properties such as `targetZone` and `timeOffset`, enabling it to connect to another timeline zone and adjust the flow of time.\n- **Physics Integration:** Modify the physics system to recognize a fourth temporal dimension, allowing time to flow in any direction (past, present, or future) within a zone.\n- **Event",
     "implementation_hint": "entity",
-    "summary": "**   This cycle aims to create a dynamic, interconnected time fabric where time zones can be reshaped by entities, leading to complex and unpredictable interactions between timelines and the physical world. **"
+    "summary": "** Create a new type of entity that acts as a temporal portal, enabling instantaneous jumps between timeline zones, thereby creating complex interactions between past, present, and future zones. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T02:11:14.216052+00:00",
-      "challenge": "**Implement a TimeShifter entity that allows players to manipulate the timeline, shifting time forward or backward and altering subsequent events to create unpredictable and branching narratives.** Implementation Hint: entity   The TimeShifter entity will add a new dimension to time manipulation, enabling players to not only revisit past events but also influence future outcomes, creating a branching narrative where each decision can lead to entirely new paths.",
-      "plan": "- **entity.py**: Create the TimeShifter class that can shift time forward or backward and modify subsequent events.  \n-",
-      "implementation_hint": "entity",
-      "summary": "By introducing a TimeShifter entity, the simulation gains the ability to alter the flow of events, offering players a unique way to impact the world's history and future."
-    },
     {
       "timestamp": "2026-03-10T02:19:12.776458+00:00",
       "challenge": "Create an entity that can dynamically change the number of dimensions in specific gravity zones, introducing unpredictable space-time topology alterations and enabling players to explore evolving dimensional gateways. Implementation Hint: physics",
@@ -76,6 +69,13 @@
       "plan": "**\n- **Modify the physics module to handle time flow per zone.** Allow each zone to have its own time flow rate, which can be altered by entities.\n- **Create a new entity type, \"Timefold,\"** which allows for the creation of alternate timelines. These entities can manipulate time flow within their influence area.\n- **Implement functions in the physics module** that adjust the time flow rate of zones and handle the interactions between timelines created by Timefold entities.\n- **Enable Timefold entities to spawn in response to specific events,** which can trigger the appearance of alternate timelines that affect both the physical world and events across zones.",
       "implementation_hint": "entity",
       "summary": "**   This challenge aims to create a system where entities can alter the fabric of time, allowing for the emergence of alternate timelines that interact with the physical world, adding layers of complexity and unpredictability. **"
+    },
+    {
+      "timestamp": "2026-03-10T03:27:59.362740+00:00",
+      "challenge": "**   Create a system where time zones can be dynamically altered by entities, allowing for the emergence of alternate timelines that interact with the physical world and influence one another. **Implementation Hint:** entity **",
+      "plan": "**  \n1. **Modify the `timeFlow` property in the zone data structure** to allow each zone to have a customizable time flow rate. This will enable zones to experience",
+      "implementation_hint": "entity",
+      "summary": "**   This cycle aims to create a dynamic, interconnected time fabric where time zones can be reshaped by entities, leading to complex and unpredictable interactions between timelines and the physical world. **"
     }
   ]
 }

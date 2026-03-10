@@ -5909,3 +5909,28 @@ class TimeZoneAlterer(Entity):
         }
 
 ENTITY_TYPES["TimeZoneAlterer"] = TimeZoneAlterer
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalNode(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+        self.target_zone = properties.get('target_zone', None)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.target_zone and self.target_zone in world_state:
+            entity = self.to_dict()
+            del world_state[self.id]
+            world_state[self.target_zone][entity['id']] = entity
+        return world_state
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "type": "TemporalNode",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TemporalNode"] = TemporalNode
