@@ -5307,3 +5307,23 @@ class NewEntity(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["NewEntity"] = NewEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeInfluenceZone(Entity):
+    def __init__(self, position, time_speed):
+        super().__init__(position)
+        self.time_speed = time_speed
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        world_state['time'] *= self.time_speed
+        return world_state
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            'time_speed': self.time_speed
+        }
+
+ENTITY_TYPES["TimeInfluenceZone"] = TimeInfluenceZone
