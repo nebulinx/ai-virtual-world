@@ -5709,3 +5709,28 @@ class Dimension(Entity):
 
 ENTITY_TYPES["DimensionShaper"] = DimensionShaper
 ENTITY_TYPES["Dimension"] = Dimension
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DynamicDimensionalShaper(Entity):
+    def __init__(self, position, dimensions=3):
+        super().__init__(position)
+        self.dimensions = dimensions
+        self.properties = {
+            "dimensions": dimensions
+        }
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example logic to modify dimensions
+        if world_state["time"] % 10 == 0:
+            self.dimensions += 1
+        return self.to_dict()
+
+    def to_dict(self):
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["DynamicDimensionalShaper"] = DynamicDimensionalShaper
