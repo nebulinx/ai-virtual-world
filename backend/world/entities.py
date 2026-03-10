@@ -5948,3 +5948,31 @@ class NewEntityName(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["NewEntityName"] = NewEntityName
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeShifter(Entity):
+    def __init__(self, position, properties=None):
+        super().__init__(position, properties)
+        self.age = 0
+        self.manipulated_zones = set()
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        effects = {}
+        for zone in self.manipulated_zones:
+            if zone in world_state:
+                # Implement time manipulation logic here
+                # For example, change the time flow in the zone
+                pass
+        return effects
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            "age": self.age,
+            "manipulated_zones": list(self.manipulated_zones)
+        }
+
+ENTITY_TYPES["TimeShifter"] = TimeShifter

@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T03:49:35.943452+00:00",
-    "challenge": "Create a system where temporal portals can morph into different shapes or dimensions, allowing for variable paths through time and space, potentially warping the fabric of the timeline and the physical world.",
-    "plan": "- backend/world/events.py: Add a new event type for morphing temporal portals.  \n- When an entity activates a temporal portal, trigger this new event type, allowing the portal to change its dimensions and paths.  \n- This event will update the physics and timeline interactions accordingly, enabling new and complex travel patterns through space-time.  \n- Ensure that the morphing portals can interact with existing time zones, creating unpredictable and dynamic temporal loops.  \n- Add logic to handle the morphing in both 3D and 4D space-time, ensuring compatibility with the current 4D dimensional structure.",
-    "implementation_hint": "event",
-    "summary": "This cycle aims to introduce dynamic temporal portals that can morph through time and space, creating complex and unpredictable interactions between timeline zones and the physical world."
+    "timestamp": "2026-03-10T03:58:31.944486+00:00",
+    "challenge": "**   Create a new type of entity called \"Time Shifters\" that can manipulate the time flow within specific zones, creating dynamic and unpredictable temporal effects across the world. **Implementation Hint:** entity **",
+    "plan": "**  \n1. **Modify entity:** Introduce a new entity class called `TimeShifter` in the `backend/world/entities.py` file.  \n2",
+    "implementation_hint": "entity",
+    "summary": "**   The goal is to introduce Time Shifters, entities that can alter the rate of time flow within their zone, leading to unpredictable interactions and events, enhancing the world's temporal complexity. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T02:34:18.356478+00:00",
-      "challenge": "**   Create a dynamic dimensional shaper entity that allows players to modify the number of dimensions in zones, introducing unpredictable topology and event alteration mechanics. **Implementation Hint:** entity **",
-      "plan": "**\n- **1. Create the DimensionShifter Entity:** Introduce an entity class that allows specifying the number of dimensions for a zone. This entity will track the intended dimensions and ensure they are respected during entity creation and movement.\n- **",
-      "implementation_hint": "entity",
-      "summary": "**   The goal is to enable players to change the dimensionality of zones, altering the world's topology and event flow, creating an unpredictable and evolving virtual environment. **"
-    },
     {
       "timestamp": "2026-03-10T02:41:54.973193+00:00",
       "challenge": "Create a \"Dynamic Dimensional Interface Entity\" that allows players to interact with and switch between zones of different dimensionalities, creating unpredictable paths and portals within the virtual world. Implementation Hint: entity",
@@ -76,6 +69,13 @@
       "plan": "- Implement in codebase (hint: general)",
       "implementation_hint": "general",
       "summary": "Evolve the virtual world with a new feature."
+    },
+    {
+      "timestamp": "2026-03-10T03:49:35.943452+00:00",
+      "challenge": "Create a system where temporal portals can morph into different shapes or dimensions, allowing for variable paths through time and space, potentially warping the fabric of the timeline and the physical world.",
+      "plan": "- backend/world/events.py: Add a new event type for morphing temporal portals.  \n- When an entity activates a temporal portal, trigger this new event type, allowing the portal to change its dimensions and paths.  \n- This event will update the physics and timeline interactions accordingly, enabling new and complex travel patterns through space-time.  \n- Ensure that the morphing portals can interact with existing time zones, creating unpredictable and dynamic temporal loops.  \n- Add logic to handle the morphing in both 3D and 4D space-time, ensuring compatibility with the current 4D dimensional structure.",
+      "implementation_hint": "event",
+      "summary": "This cycle aims to introduce dynamic temporal portals that can morph through time and space, creating complex and unpredictable interactions between timeline zones and the physical world."
     }
   ]
 }
