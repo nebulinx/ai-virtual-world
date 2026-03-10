@@ -6978,3 +6978,46 @@ class TimeLoopEvent(Entity):
         return {}
 
 ENTITY_TYPES["TimeLoopEvent"] = TimeLoopEvent
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from backend.world.state import WorldState
+
+class MemoryKey:
+    def __init__(self, event_id: str):
+        self.event_id = event_id
+
+    def __eq__(self, other):
+        return self.event_id == other.event_id
+
+    def __hash__(self):
+        return hash(self.event_id)
+
+class EventReference:
+    def __init__(self, memory_key: MemoryKey):
+        self.memory_key = memory_key
+
+    def __eq__(self, other):
+        return self.memory_key == other.memory_key
+
+    def __hash__(self):
+        return hash(self.memory_key)
+
+class HistoricalChoiceEvent(Entity):
+    def __init__(self, position, properties, age, referenced_events):
+        super().__init__(position, properties, age)
+        self.referenced_events = referenced_events
+
+    def update(self, world_state: WorldState) -> Dict[str, Any]:
+        new_state = super().update(world_state)
+        for ref in self.referenced_events:
+            if ref.memory_key.event_id in world_state.events:
+                new_state.update(world_state.events[ref.memory_key.event_id])
+        return new_state
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            "referenced_events": [ref.memory_key.event_id for ref in self.referenced_events]
+        }
+
+ENTITY_TYPES["HistoricalChoiceEvent"] = HistoricalChoiceEvent

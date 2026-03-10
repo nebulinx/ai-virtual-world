@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T08:42:30.325427+00:00",
-    "challenge": "Introduce a TimeLoopEvent entity that allows for temporal loops, enabling the user to revisit past events and create alternate realities. Implementation Hint: entity",
-    "plan": "- entity.py: Add a new TimeLoopEvent class that creates temporal loops by reinitializing time flow in specific zones.  \n- Modify MemoryLoopEntity to interact with TimeLoopEvent for branching narratives.  \n- Ensure TemporalAnomaly can handle loops and time reversals while working with TimeLoopEvent.",
+    "timestamp": "2026-03-10T08:50:52.510800+00:00",
+    "challenge": "Introduce a new event type that allows entities to reference past events via MemoryKeys, enabling branching narratives based on alternative historical choices. Implementation Hint: event",
+    "plan": "- **backend/world/events.py**: Add a new MemoryKeyEvent class.\n- **Add event types**: Introduce MemoryKeyEvent with methods to store and retrieve past event data.\n- **Integrate with entities**: Modify MemoryLoopEntity to support interaction with MemoryKeyEvents, allowing branching narratives based on past choices.\n- **Update event handling",
     "implementation_hint": "entity",
-    "summary": "Enable temporal loops to create alternate realities and branching narratives by introducing a TimeLoopEvent."
+    "summary": "This feature will add a MemoryKeyEvent type that lets entities reference past events, creating alternate realities where choices from the past shape the simulation's current timeline."
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T07:22:17.096934+00:00",
-      "challenge": "** Introduce a new entity that can move between different temporal layers within the 4D spacetime fabric, allowing for interactions across various points in time.   **Implementation Hint:** entity   **",
-      "plan": "**  \n- **1:** Add a new entity class `TimeLayerEntity` to `backend/world/entities.py`.  \n- **2:** Implement properties for `TimeLayerEntity` such as `temporal_layers` (an array of layer indices) and `temporal_shift` (a function to adjust time flow).  \n- **3:** Modify the physics interactions in `backend/world/physics.py` to handle temporal layer transitions, allowing entities to change their layer and adjust time flow accordingly.  \n- **4:** Create events that can trigger temporal layer changes, such as `TemporalJumpEvent` in `backend/world/events.py`, which allows an entity to shift between layers.",
-      "implementation_hint": "entity",
-      "summary": "** Create a TimeLayerEntity that can transition between temporal layers, enabling interactions across different points in time while maintaining dimensional consistency.   **"
-    },
     {
       "timestamp": "2026-03-10T07:30:28.558453+00:00",
       "challenge": "**   Create a TimeCycleEntity that allows entities to traverse through time loops, interacting with events that now have a temporal dimension, while a TimeGravity zone adds mass to time, influencing movement and interactions, potentially causing time loops and affecting the main timeline's flow. **Implementation Hint:** physics **",
@@ -76,6 +69,13 @@
       "plan": "- Implement in codebase (hint: general)",
       "implementation_hint": "general",
       "summary": "Evolve the virtual world with a new feature."
+    },
+    {
+      "timestamp": "2026-03-10T08:42:30.325427+00:00",
+      "challenge": "Introduce a TimeLoopEvent entity that allows for temporal loops, enabling the user to revisit past events and create alternate realities. Implementation Hint: entity",
+      "plan": "- entity.py: Add a new TimeLoopEvent class that creates temporal loops by reinitializing time flow in specific zones.  \n- Modify MemoryLoopEntity to interact with TimeLoopEvent for branching narratives.  \n- Ensure TemporalAnomaly can handle loops and time reversals while working with TimeLoopEvent.",
+      "implementation_hint": "entity",
+      "summary": "Enable temporal loops to create alternate realities and branching narratives by introducing a TimeLoopEvent."
     }
   ]
 }
