@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T07:30:28.558453+00:00",
-    "challenge": "**   Create a TimeCycleEntity that allows entities to traverse through time loops, interacting with events that now have a temporal dimension, while a TimeGravity zone adds mass to time, influencing movement and interactions, potentially causing time loops and affecting the main timeline's flow. **Implementation Hint:** physics **",
-    "plan": "- Implement in codebase (hint: entity)",
+    "timestamp": "2026-03-10T07:39:24.718819+00:00",
+    "challenge": "**Introduce Temporal Scales, where entities can exist in different rates of time, affecting their movement, interactions, and aging across zones and dimensions.** Implementation Hint: physics   (or",
+    "plan": "- backend/world/physics.py: Add new time flow mechanics for Temporal Scaled Entities (TSE) that interact with the world's time flow.  \n- backend/world/entities.py: Create a new TemporalEntity class that manages its own aging and movement rates. This will include custom behavior for how TSE interact with zones, events, and anomalies.  \n- Modify entity interactions to account for TSE's unique time scaling, potentially altering how events are triggered and anomalies are detected.  \n- Introduce new events related to time scaling, such as Temporal Jumps",
     "implementation_hint": "entity",
-    "summary": "**   This challenge will extend the simulation's temporal mechanics"
+    "summary": "This cycle will introduce a new way entities interact with time, creating unique paths and interactions across zones and dimensions."
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T06:09:20.852571+00:00",
-      "challenge": "Create a temporal-spatial interaction zone where entities' movement affects both their position in space and the passage of time, introducing a dynamic feedback loop between physical and temporal dimensions.",
-      "plan": "- **backend/world/physics.py**: Introduce a new TimeDimension class that interacts with existing spatial dimensions.\n- **Modify the physics engine**: Update the physics module to handle time as a dimension, allowing for dynamic interaction between space and time.\n- **Create a new zone type**: Implement a TemporalSpatioZoning system where entities within can affect both space and time.\n- **Add interaction functions**: Include functions that allow entities to manipulate time flow and experience",
-      "implementation_hint": "physics",
-      "summary": "This cycle aims to create a unique interaction between space and time, allowing entities to influence and be influenced by the temporal dimensions they traverse, adding layers of unpredictability and interactivity."
-    },
     {
       "timestamp": "2026-03-10T06:16:47.584579+00:00",
       "challenge": "**   Introduce a fourth temporal dimension that warps the fabric of time, allowing entities to experience time differently based on their position in this dimension. This could create unique narrative outcomes and interactive possibilities where players' actions influence the flow of time. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "**  \n- **1:** Add a new entity class `TimeLayerEntity` to `backend/world/entities.py`.  \n- **2:** Implement properties for `TimeLayerEntity` such as `temporal_layers` (an array of layer indices) and `temporal_shift` (a function to adjust time flow).  \n- **3:** Modify the physics interactions in `backend/world/physics.py` to handle temporal layer transitions, allowing entities to change their layer and adjust time flow accordingly.  \n- **4:** Create events that can trigger temporal layer changes, such as `TemporalJumpEvent` in `backend/world/events.py`, which allows an entity to shift between layers.",
       "implementation_hint": "entity",
       "summary": "** Create a TimeLayerEntity that can transition between temporal layers, enabling interactions across different points in time while maintaining dimensional consistency.   **"
+    },
+    {
+      "timestamp": "2026-03-10T07:30:28.558453+00:00",
+      "challenge": "**   Create a TimeCycleEntity that allows entities to traverse through time loops, interacting with events that now have a temporal dimension, while a TimeGravity zone adds mass to time, influencing movement and interactions, potentially causing time loops and affecting the main timeline's flow. **Implementation Hint:** physics **",
+      "plan": "- Implement in codebase (hint: entity)",
+      "implementation_hint": "entity",
+      "summary": "**   This challenge will extend the simulation's temporal mechanics"
     }
   ]
 }

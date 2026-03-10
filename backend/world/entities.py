@@ -6691,3 +6691,57 @@ class TimeCycleEntity(Entity):
         }
 
 ENTITY_TYPES["TimeCycleEntity"] = TimeCycleEntity
+
+from typing import Dict, Any
+import random
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError("Subclasses must implement update method")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic for EnergyVortex
+        self.position["x"] += 1
+        self.age += 1
+        return self.to_dict()
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic for CrystalFormation
+        self.position["y"] += 1
+        self.age += 1
+        return self.to_dict()
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic for TemporalAnomaly
+        self.position["x"] += 2
+        self.age += 2
+        return self.to_dict()
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic for QuantumParticle
+        self.position["y"] += 2
+        self.age += 2
+        return self.to_dict()
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle
+}
