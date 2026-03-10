@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T07:04:32.926134+00:00",
-    "challenge": "**   Create an entity that can manipulate the fabric of time, allowing it to alter the flow of time zones and dimensional structure, thereby creating a temporal interaction network where entities can experience different timelines and dimensions simultaneously. **Implementation Hint:** entity **",
-    "plan": "**\n- **Modify the entity.py file**",
+    "timestamp": "2026-03-10T07:13:53.443619+00:00",
+    "challenge": "**   Create a TemporalFlowEntity that can manipulate the time flow within specific zones, allowing for different rates or even reversal of time flow across dimensions. **Implementation Hint:** entity   Modify the TemporalFlowEntity class to accept zones and apply custom time flow rates or transformations. **",
+    "plan": "**  \n- **file:** backend/world/entities.py  \n  - **new class:** TemporalFlowEntity  \n    - **fields:** zone_ids (list of affected zones), time_flow_rates (dictionary mapping zone IDs to custom rates), dimension_map (optional, specifying how dimensions are altered in each zone).  \n    - **methods:** apply_time_flow (modifies the timeFlow of zones), reset_time_flow (resets time flow to default in specified zones), get_time_flow (returns current time flow state for a zone).",
     "implementation_hint": "entity",
-    "summary": "**   This challenge introduces a TemporalShiftEntity that can alter the local time flow and dimensional structure, enabling entities to interact across different timelines and dimensions, creating a complex temporal interaction network. **"
+    "summary": "**   Introduce a new entity that dynamically adjusts the temporal flow across zones and dimensions, enabling interactions across different timelines. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T05:46:42.821712+00:00",
-      "challenge": "Create a Time-Dimensional Coupling system where entities within a specific energy field experience both time dilation and increased dimensional traversal, creating a unique interaction between temporal and spatial dimensions. Implementation Hint: entity",
-      "plan": "- Add a new `TimeDimensionCouplingZone` class in `backend/world/physics.py` that calculates an entity's effective dimensionality based on proximity to the zone.  \n- Create an `Entity` subclass that can be influenced by `TimeDimensionCouplingZone`, adjusting its aging rate and dimensional traversal abilities accordingly.  \n- Implement the `TimeDimensionCouplingZone` in `backend/world/world.json`, adding it to the `zones` array with customizable parameters like radius and time dilation effect.  \n- Test the interactions by placing entities within and outside of the zone to observe the unique effects on aging and dimensional perception.",
-      "implementation_hint": "entity",
-      "summary": "This feature will introduce a dynamic interaction where entities within a specified zone experience both time dilation and increased dimensional freedom, blending temporal and spatial dimensions in unique ways."
-    },
     {
       "timestamp": "2026-03-10T05:54:30.151005+00:00",
       "challenge": "**   Introduce a feedback loop in time dilation where completing a task leads to the revisitation of a past event, potentially causing infinite loops or time travel paradoxes. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "- **backend/world/physics.py**: Add a new `TemporalDimensionAnomaly` class that applies localized spacetime distortions, affecting nearby zones' time flow and dimensional structure based on proximity and duration.  \n- This entity would dynamically alter the physics of its vicinity, creating opportunities for time-travel-like interactions and unpredictable dimensional shifts.  \n- The anomaly would have a limited lifespan, encouraging exploration and experimentation with spacetime before wearing off entirely.  \n- This creates a fresh, creative twist by merging time and space in novel ways, offering players unique ways to interact with the world's structure.",
       "implementation_hint": "entity",
       "summary": "**Create an entity that warps the fabric of spacetime, creating localized time dilation and dimensional shifts, allowing for entities to interact with past, present, and future states of the world."
+    },
+    {
+      "timestamp": "2026-03-10T07:04:32.926134+00:00",
+      "challenge": "**   Create an entity that can manipulate the fabric of time, allowing it to alter the flow of time zones and dimensional structure, thereby creating a temporal interaction network where entities can experience different timelines and dimensions simultaneously. **Implementation Hint:** entity **",
+      "plan": "**\n- **Modify the entity.py file**",
+      "implementation_hint": "entity",
+      "summary": "**   This challenge introduces a TemporalShiftEntity that can alter the local time flow and dimensional structure, enabling entities to interact across different timelines and dimensions, creating a complex temporal interaction network. **"
     }
   ]
 }

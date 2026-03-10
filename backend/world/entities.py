@@ -6606,3 +6606,34 @@ class TemporalManipulator(Entity):
         }
 
 ENTITY_TYPES["TemporalManipulator"] = TemporalManipulator
+
+from backend.world.entities import Entity, EntityTypes
+from backend.world.state import WorldState
+from typing import Dict, Any
+
+class TemporalFlowEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.zones = properties.get("zones", {})
+
+    def update(self, world_state: WorldState) -> Dict[str, Any]:
+        updated_entities = {}
+        for zone, zone_properties in self.zones.items():
+            rate = zone_properties.get("rate", 1)
+            reverse = zone_properties.get("reverse", False)
+            for entity_id, entity in world_state.entities.items():
+                if zone in entity.properties.get("zones", []):
+                    if reverse:
+                        entity.position = {
+                            dim: entity.position[dim] + rate * dt
+                            for dim, dt in entity.position.items()
+                        }
+                    else:
+                        entity.position = {
+                            dim: entity.position[dim] - rate * dt
+                            for dim, dt in entity.position.items()
+                        }
+                    updated_entities[entity_id] = entity
+        return updated_entities
+
+EntityTypes["TemporalFlowEntity"] = TemporalFlowEntity
