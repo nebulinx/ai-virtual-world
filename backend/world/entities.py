@@ -6018,3 +6018,16 @@ class TimeVortex(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TimeVortex"] = TimeVortex
+
+from backend.world.entities import Entity, ENTITY_TYPES, Dict, Any
+
+class DimensionalAnomaly(Entity):
+    def __init__(self, position: Dict[str, float], dimensions: int):
+        super().__init__(position, properties={"dimensions": dimensions}, age=0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        time_flow_rate = 1 / self.properties["dimensions"]
+        self.age += time_flow_rate
+        return self.to_dict()
+
+ENTITY_TYPES["DimensionalAnomaly"] = DimensionalAnomaly
