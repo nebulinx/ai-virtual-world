@@ -5754,3 +5754,23 @@ class DynamicDimensionalInterfaceEntity(Entity):
         }
 
 ENTITY_TYPES["DynamicDimensionalInterfaceEntity"] = DynamicDimensionalInterfaceEntity
+
+from world.entities import Entity, ENTITY_TYPES
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for the temporal anomaly
+        # This could involve warping time across zones, causing events to happen out of order
+        # and affecting the world's topology
+        pass
+
+    @property
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TemporalAnomaly",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
