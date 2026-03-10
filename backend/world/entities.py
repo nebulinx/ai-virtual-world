@@ -5678,3 +5678,34 @@ class DimensionalGateway(Entity):
         }
 
 ENTITY_TYPES["DimensionalGateway"] = DimensionalGateway
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DimensionShaper(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic to dynamically create and destroy dimensions
+        # Example logic:
+        if self.age % 10 == 0:
+            # Destroy a dimension
+            for entity_id, entity in world_state['entities'].items():
+                if isinstance(entity, Dimension):
+                    del world_state['entities'][entity_id]
+                    break
+        if self.age % 15 == 0:
+            # Create a new dimension
+            new_dimension = Dimension(self.position, properties={"type": "DYNAMIC"})
+            world_state['entities'][new_dimension.id] = new_dimension
+        return world_state
+
+class Dimension(Entity):
+    def __init__(self, position, properties):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        return world_state
+
+ENTITY_TYPES["DimensionShaper"] = DimensionShaper
+ENTITY_TYPES["Dimension"] = Dimension
