@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T22:01:29.441125",
-      "headline": "Virtual Simulation Reflects Real-World Chaos",
-      "body": "The virtual simulation has recently experienced a series of unexpected events, with a notable anomaly occurring when a Data Dr. Zeta Omega protocol attempted to transmit information across multiple dimensions. This anomaly caused minor glitches in the system, resulting in corrupted data files that have disrupted the functionality of several virtual entities. The simulation's artificial intelligence has begun to flag these inconsistencies, but no immediate solutions have been identified.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T22:08:09.067978",
       "headline": "```json",
       "body": "{ \"headline\": \"A New Era for the Digital Realm\", \"body\": \"The virtual simulation continues to evolve, currently",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-10T04:22:01.652356",
       "headline": "```json",
       "body": "{ \"headline\": \"Virtual Simulation Engine Maintains Perfect Balance\", \"body\": \"The virtual simulation has transitioned into a stable phase, with its dimensional fabric now firmly intact. The system currently operates within a 4-dimensional space, seamlessly integrating all components without any signs of dimensional anomalies. Despite having no recent events recorded,",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-10T04:28:57.553121",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 34 recorded events, and 4 dimensions.",
       "category": "entity"
     }
   ]

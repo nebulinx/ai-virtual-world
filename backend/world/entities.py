@@ -6031,3 +6031,16 @@ class DimensionalAnomaly(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["DimensionalAnomaly"] = DimensionalAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class NewEntity(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the update logic for the new entity
+        return self.to_dict()
+
+ENTITY_TYPES["NewEntity"] = NewEntity
