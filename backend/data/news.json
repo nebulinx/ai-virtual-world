@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T23:58:53.614633",
-      "headline": "{ Operational Readiness: Virtual Simulation Maintains Its Ground",
-      "body": "The simulation holds 0 entities, 27 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-10T00:06:19.109497",
       "headline": "{ Vast",
       "body": "The simulation holds 0 entities, 27 recorded events, and 4 dimensions.",
@@ -296,6 +290,12 @@
     },
     {
       "timestamp": "2026-03-10T06:16:47.531517",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 37 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-10T06:25:25.350579",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 37 recorded events, and 4 dimensions.",
       "category": "entity"

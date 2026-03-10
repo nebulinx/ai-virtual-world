@@ -6440,3 +6440,46 @@ class TemporalWarp(Entity):
         }
 
 ENTITY_TYPES["TemporalWarp"] = TemporalWarp
+
+from typing import Dict, Any
+import random
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def to_dict(self):
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+ENTITY_TYPES = {
+    "EnergyVortex": "EnergyVortex",
+    "CrystalFormation": "CrystalFormation",
+    "TemporalAnomaly": "TemporalAnomaly",
+    "QuantumParticle": "QuantumParticle"
+}
+
+class TemporalRift(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Alter position randomly
+        self.position = {
+            "x": self.position["x"] + random.randint(-1, 1),
+            "y": self.position["y"] + random.randint(-1, 1)
+        }
+        # Introduce random effects on world state
+        effect = random.choice(["increase_temporal_distortion", "decrease_temporal_distortion", "no_effect"])
+        world_state["temporal_distortion"] += 1 if effect == "increase_temporal_distortion" else -1 if effect == "decrease_temporal_distortion" else 0
+        return self.to_dict()
+
+ENTITY_TYPES["TemporalRift"] = TemporalRift

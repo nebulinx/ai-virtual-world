@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T06:16:47.584579+00:00",
-    "challenge": "**   Introduce a fourth temporal dimension that warps the fabric of time, allowing entities to experience time differently based on their position in this dimension. This could create unique narrative outcomes and interactive possibilities where players' actions influence the flow of time. **Implementation Hint:** entity **",
-    "plan": "**  \n- **File to modify:** backend/world/entities.py  \n  - Add a new function `create_temporal_quadrant` that defines unique time dilation properties for different regions in the fourth dimension.  \n  - Modify the `handle_entity_movement` function to account for time dilation based on the entity's position in the fourth dimension.  \n  - Add a new event function `handle_time_dilation` that triggers time shifts in the main timeline when entities interact with the fourth dimension.  \n\nThis approach would allow for unique interactions where moving through the fourth dimension affects the passage of time, creating an unpredictable and interactive narrative environment.",
+    "timestamp": "2026-03-10T06:25:25.392261+00:00",
+    "challenge": "Create a mechanism where entities can be influenced by a temporal rift, altering their path and affecting the world's timeline, introducing unpredictable narrative outcomes.",
+    "plan": "- Introduce a new TemporalRift class in the entities file.\n- Implement TemporalRift's __init__ method to define target dimension, time shift, and activation conditions.\n- Modify events to trigger TemporalRift interactions when entities approach, altering their movement and history.\n- Allow TemporalRift to randomly affect entities, creating narrative loops and branching timelines.",
     "implementation_hint": "entity",
-    "summary": "**   Introduce a fourth temporal dimension that affects the perception and flow of time for entities, creating unpredictable and interactive narrative outcomes. **"
+    "summary": "Create a TemporalRift entity that can teleport or influence entities across time and dimensions, adding unpredictability and narrative depth."
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T04:59:55.148507+00:00",
-      "challenge": "** Create a fourth-dimensional entity that can temporarily alter the fabric of time in its zone by manipulating the dimensionality of nearby zones, creating a ripple effect across dimensions. **Implementation Hint:** entity **",
-      "plan": "**\n- **Entity Name:** Temporal Dimensional Disruptor (class in entity.py)\n- **Properties:**\n  - `dimension`: 4 (static, overrides default)\n  - `timeManipulationStrength`: 0.5 (optional, scalar value)\n  - `timeWarpRadius`: 50 (optional, radius in meters affecting zones)\n- **Behavior:**\n  - When activated, the Temporal Dimensional Disruptor will scan its zone for other zones within its `timeWarpRadius`.\n  - The entity will calculate the average time flow rate of the affected zones and apply a `timeManipulationStrength`-based adjustment to each, creating a ripple effect across dimensions.\n  - The adjustment will vary based on the entity's `timeWarpRadius` and the number of zones affected.\n\nThis mechanism allows for dynamic and interactive temporal experiences, where events in one zone can directly influence the passage of time in another, creating a rich, interconnected temporal ecosystem.",
-      "implementation_hint": "entity",
-      "summary": "** Introduce a new fourth-dimensional entity that can manipulate time zones by altering the dimensions of surrounding zones, creating complex temporal interactions. **"
-    },
     {
       "timestamp": "2026-03-10T05:07:25.909866+00:00",
       "challenge": "**   Introduce a mechanism where entities can create or traverse \"dimensional portals\" that connect different zones, allowing for instantaneous travel between dimensions and altering the dimensions of the zones they pass through. **",
@@ -76,6 +69,13 @@
       "plan": "- **backend/world/physics.py**: Introduce a new TimeDimension class that interacts with existing spatial dimensions.\n- **Modify the physics engine**: Update the physics module to handle time as a dimension, allowing for dynamic interaction between space and time.\n- **Create a new zone type**: Implement a TemporalSpatioZoning system where entities within can affect both space and time.\n- **Add interaction functions**: Include functions that allow entities to manipulate time flow and experience",
       "implementation_hint": "physics",
       "summary": "This cycle aims to create a unique interaction between space and time, allowing entities to influence and be influenced by the temporal dimensions they traverse, adding layers of unpredictability and interactivity."
+    },
+    {
+      "timestamp": "2026-03-10T06:16:47.584579+00:00",
+      "challenge": "**   Introduce a fourth temporal dimension that warps the fabric of time, allowing entities to experience time differently based on their position in this dimension. This could create unique narrative outcomes and interactive possibilities where players' actions influence the flow of time. **Implementation Hint:** entity **",
+      "plan": "**  \n- **File to modify:** backend/world/entities.py  \n  - Add a new function `create_temporal_quadrant` that defines unique time dilation properties for different regions in the fourth dimension.  \n  - Modify the `handle_entity_movement` function to account for time dilation based on the entity's position in the fourth dimension.  \n  - Add a new event function `handle_time_dilation` that triggers time shifts in the main timeline when entities interact with the fourth dimension.  \n\nThis approach would allow for unique interactions where moving through the fourth dimension affects the passage of time, creating an unpredictable and interactive narrative environment.",
+      "implementation_hint": "entity",
+      "summary": "**   Introduce a fourth temporal dimension that affects the perception and flow of time for entities, creating unpredictable and interactive narrative outcomes. **"
     }
   ]
 }
