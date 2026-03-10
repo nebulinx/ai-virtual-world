@@ -5217,3 +5217,33 @@ class TemporalCurrent(Entity):
         pass
 
 ENTITY_TYPES["TemporalCurrent"] = TemporalCurrent
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalCurrent(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        # Implement time traversal and warping logic here
+        # For example, change position based on time flow
+        new_position = {
+            'x': self.position['x'] + 1,  # Example: move 1 unit right each update
+            'y': self.position['y'],
+            'z': self.position['z']
+        }
+        return self.to_dict(new_position=new_position)
+
+    def to_dict(self, new_position=None) -> Dict[str, Any]:
+        position = new_position if new_position else self.position
+        return {
+            'type': 'TemporalCurrent',
+            'position': position,
+            'properties': self.properties,
+            'age': self.age
+        }
+
+ENTITY_TYPES["TemporalCurrent"] = TemporalCurrent
