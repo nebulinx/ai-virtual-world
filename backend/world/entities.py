@@ -5273,3 +5273,37 @@ class EchoEntity(Entity):
         return new_world_state
 
 ENTITY_TYPES["EchoEntity"] = EchoEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to update the EnergyVortex
+        self.age += 1
+        return self.to_dict()
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to update the CrystalFormation
+        self.age += 1
+        return self.to_dict()
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to update the TemporalAnomaly
+        self.age += 1
+        return self.to_dict()
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to update the QuantumParticle
+        self.age += 1
+        return self.to_dict()
+
+class NewEntity(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to update the NewEntity
+        self.age += 1
+        return self.to_dict()
+
+ENTITY_TYPES["NewEntity"] = NewEntity
