@@ -6102,3 +6102,48 @@ ENTITY_TYPES = {
     "TemporalAnomaly": TemporalAnomaly,
     "QuantumParticle": QuantumParticle
 }
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError("Subclasses should implement this!")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for EnergyVortex
+        pass
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for CrystalFormation
+        pass
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for TemporalAnomaly
+        pass
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for QuantumParticle
+        pass
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle
+}
