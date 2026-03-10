@@ -6208,3 +6208,48 @@ class DimensionalPortal(Entity):
         }
 
 ENTITY_TYPES["DimensionalPortal"] = DimensionalPortal
+
+# backend/world/entities.py
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class Zone(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int, connected_zones: Dict[str, Any]):
+        super().__init__(position, properties, age)
+        self.connected_zones = connected_zones
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Update logic for Zone
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "connected_zones": self.connected_zones
+        }
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle,
+    "Zone": Zone
+}
