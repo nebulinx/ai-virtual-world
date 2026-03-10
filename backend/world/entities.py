@@ -6917,3 +6917,28 @@ class TemporalAnomaly(Entity):
         return world_state
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class MemoryEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties, age)
+        self.memory = []
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_state = super().update(world_state)
+        if world_state.get("event"):
+            self.memory.append(world_state["event"])
+        new_state["memory"] = self.memory
+        return new_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "memory": self.memory
+        }
+
+ENTITY_TYPES["MemoryEntity"] = MemoryEntity

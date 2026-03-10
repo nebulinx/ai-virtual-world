@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-10T01:54:08.025166",
-      "headline": "Simulation status update",
-      "body": "The simulation holds 0 entities, 30 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-10T02:02:36.264146",
       "headline": "{ The Digital Frontier Expands to the Fourth Dimension, body: As the",
       "body": "The simulation holds 0 entities, 30 recorded events, and 4 dimensions.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-10T08:20:00.115866",
       "headline": "The Virtual Simulation: A Perfect Paradigm of Precision",
       "body": "The virtual simulation currently operates flawlessly, serving as a state-of-the-art digital environment with zero anomalies and 39 active events. The system maintains perfect equilibrium across its 4-dimensional space, with no gravity zones affecting its functionality. Future updates may integrate advanced AI capabilities and expand its dimensional framework to enhance the user experience.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-10T08:27:37.673529",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 39 recorded events, and 4 dimensions.",
       "category": "entity"
     }
   ]
