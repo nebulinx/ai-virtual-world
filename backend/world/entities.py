@@ -5655,3 +5655,26 @@ class TimeShifter(Entity):
 
 # Register the TimeShifter entity
 ENTITY_TYPES["TimeShifter"] = TimeShifter
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DimensionalGateway(Entity):
+    def __init__(self, position, age=0, dimensions=3):
+        super().__init__(position, age)
+        self.dimensions = dimensions
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic to dynamically change dimensions based on world state
+        # Example: Increase dimensions if a certain condition is met
+        if self.age % 10 == 0:
+            self.dimensions += 1
+        return self.to_dict()
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            "dimensions": self.dimensions
+        }
+
+ENTITY_TYPES["DimensionalGateway"] = DimensionalGateway
