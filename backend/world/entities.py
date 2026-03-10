@@ -5469,3 +5469,34 @@ class TimeDistortionField(Entity):
         }
 
 ENTITY_TYPES["TimeDistortionField"] = TimeDistortionField
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalManipulator(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        # Implement time manipulation logic here
+        # Example: Affecting the flow of time in specific zones
+        if self.age % 10 == 0:
+            self._ripple_effect(world_state)
+        return self.to_dict()
+
+    def _ripple_effect(self, world_state: Dict[str, Any]):
+        for zone, entities in world_state.items():
+            if 'time' in entities:
+                entities['time'] += 1  # Example effect: Increment time in each zone by 1
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TemporalManipulator",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TemporalManipulator"] = TemporalManipulator

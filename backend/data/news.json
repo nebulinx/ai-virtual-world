@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T18:57:53.063626",
-      "headline": "{ Floating Digital Beings Begin Floating Over Fabled Virtual Islands, body: Recent testing of new physics has introduced gravity zones that allow virtual avatars to float effortlessly over ancient, fabled digital islands. The enhanced physics engine is creating a sense of wonder and realism",
-      "body": "The simulation holds 0 entities, 21 recorded events, and 4 dimensions.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T19:04:51.082630",
       "headline": "Virtual Simulation Reflects Real-World Complexity",
       "body": "The virtual simulation currently features 21 active events across its dimensional planes, existing in a 4-dimensional space without any anomalies. The absence of recent events allows the system to maintain a stable equilibrium, where the interplay of forces continues to create a dynamic and intricate environment. This equilibrium mirrors real-world systems, reflecting the complexity of interactions across multiple dimensions, both in natural and digital contexts, ensuring a balanced state of operation.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-10T01:15:31.581229",
       "headline": "Virtual Simulation Continues to Evolve",
       "body": "The virtual simulation has seen 29 recent activities, including gameplay sessions, mod development, balancing updates, and performance optimizations. Mod developers have been actively contributing new features, while balancing teams have worked to refine player experiences. These efforts reflect the simulation's commitment to enhancing both gameplay and player engagement.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-10T01:24:14.707994",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 29 recorded events, and 4 dimensions.",
       "category": "entity"
     }
   ]
