@@ -6582,3 +6582,27 @@ class TemporalManipulator(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TemporalManipulator"] = TemporalManipulator
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalManipulator(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time manipulation logic here
+        # For example, alter time zones or dimensional structure
+        # This is a placeholder for actual time manipulation logic
+        new_world_state = world_state.copy()
+        # Example: Change the time zone of a location
+        if 'location' in new_world_state:
+            new_world_state['location']['time_zone'] = 'NewTimezone'
+        return new_world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            'position': self.position,
+            'properties': self.properties,
+            'age': self.age
+        }
+
+ENTITY_TYPES["TemporalManipulator"] = TemporalManipulator
