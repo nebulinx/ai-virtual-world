@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-10T01:15:31.581229",
-      "headline": "Virtual Simulation Continues to Evolve",
-      "body": "The virtual simulation has seen 29 recent activities, including gameplay sessions, mod development, balancing updates, and performance optimizations. Mod developers have been actively contributing new features, while balancing teams have worked to refine player experiences. These efforts reflect the simulation's commitment to enhancing both gameplay and player engagement.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-10T01:24:14.707994",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 29 recorded events, and 4 dimensions.",
@@ -296,6 +290,12 @@
     },
     {
       "timestamp": "2026-03-10T07:39:24.638569",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 38 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-10T07:48:01.508200",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 38 recorded events, and 4 dimensions.",
       "category": "entity"

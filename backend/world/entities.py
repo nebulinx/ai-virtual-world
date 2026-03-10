@@ -6745,3 +6745,58 @@ ENTITY_TYPES = {
     "TemporalAnomaly": TemporalAnomaly,
     "QuantumParticle": QuantumParticle
 }
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+class TimeLayer:
+    def __init__(self, gravity: float, terrain: str):
+        self.gravity = gravity
+        self.terrain = terrain
+
+class TemporalEntity(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int, time_layer: TimeLayer):
+        super().__init__(position, properties, age)
+        self.time_layer = time_layer
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Placeholder for entity update logic across different time layers
+        return self.to_dict()
+
+class TemporalVortex(TemporalEntity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int, time_layer: TimeLayer):
+        super().__init__(position, properties, age, time_layer)
+
+class QuantumAnomaly(TemporalEntity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int, time_layer: TimeLayer):
+        super().__init__(position, properties, age, time_layer)
+
+class CrystalFormation(TemporalEntity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int, time_layer: TimeLayer):
+        super().__init__(position, properties, age, time_layer)
+
+class EnergyVortex(TemporalEntity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int, time_layer: TimeLayer):
+        super().__init__(position, properties, age, time_layer)
+
+ENTITY_TYPES = {
+    "TemporalVortex": TemporalVortex,
+    "QuantumAnomaly": QuantumAnomaly,
+    "CrystalFormation": CrystalFormation,
+    "EnergyVortex": EnergyVortex
+}
