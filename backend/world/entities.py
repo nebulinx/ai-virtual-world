@@ -5774,3 +5774,24 @@ class TemporalAnomaly(Entity):
         }
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DimensionalEcho(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties, age)
+        self.ripple_radius = properties.get("ripple_radius", 10)
+        self.ripple_speed = properties.get("ripple_speed", 1)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_position = {
+            "x": self.position["x"] + self.ripple_speed * world_state["time_step"],
+            "y": self.position["y"] + self.ripple_speed * world_state["time_step"],
+            "z": self.position["z"] + self.ripple_speed * world_state["time_step"]
+        }
+        self.position = new_position
+        self.age += world_state["time_step"]
+        return self.to_dict()
+
+ENTITY_TYPES["DimensionalEcho"] = DimensionalEcho
