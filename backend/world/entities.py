@@ -6665,3 +6665,29 @@ class TemporalTraveler(Entity):
 
 # Register the new entity type
 ENTITY_TYPES["TemporalTraveler"] = TemporalTraveler
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeCycleEntity(Entity):
+    def __init__(self, position, properties=None, age=0):
+        super().__init__(position, properties, age)
+        self.time_loop = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.time_loop += 1
+        if self.time_loop % 10 == 0:
+            # Simulate time loop interaction
+            print(f"TimeCycleEntity at {self.position} is interacting with time loops.")
+        return super().update(world_state)
+
+    def to_dict(self):
+        return {
+            "type": "TimeCycleEntity",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "time_loop": self.time_loop
+        }
+
+ENTITY_TYPES["TimeCycleEntity"] = TimeCycleEntity
