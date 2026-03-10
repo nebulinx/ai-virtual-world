@@ -6849,3 +6849,46 @@ class TimeSpaceLayerEntity(Entity):
         }
 
 ENTITY_TYPES["TimeSpaceLayerEntity"] = TimeSpaceLayerEntity
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES: Dict[str, Any] = {}
+
+class AlternateRealityEntity(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int, reality_id: int):
+        super().__init__(position, properties, age)
+        self.reality_id = reality_id
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Example update logic: move to a new reality based on some condition
+        if world_state["event"] == "split":
+            self.reality_id += 1
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "reality_id": self.reality_id
+        }
+
+    def to_dict(self) -> Dict[str, Any]:
+        data = super().to_dict()
+        data["reality_id"] = self.reality_id
+        return data
+
+ENTITY_TYPES["AlternateRealityEntity"] = AlternateRealityEntity
