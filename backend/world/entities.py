@@ -6800,3 +6800,26 @@ ENTITY_TYPES = {
     "CrystalFormation": CrystalFormation,
     "EnergyVortex": EnergyVortex
 }
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalWarp(Entity):
+    def __init__(self, position: Dict[str, float], time_dilation: float):
+        super().__init__(position)
+        self.time_dilation = time_dilation
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Update the time dilation for entities in the zone
+        for entity_id, entity in world_state['entities'].items():
+            if entity['position'] == self.position:
+                entity['age'] += self.time_dilation
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            'time_dilation': self.time_dilation
+        }
+
+ENTITY_TYPES["TemporalWarp"] = TemporalWarp
