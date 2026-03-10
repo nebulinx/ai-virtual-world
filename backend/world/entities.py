@@ -7082,3 +7082,22 @@ class TimeInfluenceEntity(Entity):
         }
 
 ENTITY_TYPES["TimeInfluenceEntity"] = TimeInfluenceEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class DecisionPoint(Entity):
+    def __init__(self, id: str, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(id, position, properties)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        decisions = self.properties.get("decisions", [])
+        for decision in decisions:
+            choice = self.properties.get(f"decision_{decision}", None)
+            if choice is not None:
+                # Implement logic to create branching narratives and alternate realities
+                # based on the choice made.
+                pass
+        return self.to_dict()
+
+ENTITY_TYPES["DecisionPoint"] = DecisionPoint
