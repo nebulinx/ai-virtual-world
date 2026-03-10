@@ -5856,3 +5856,33 @@ class DimensionalReshaper(Entity):
         }
 
 ENTITY_TYPES["DimensionalReshaper"] = DimensionalReshaper
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class Timefold(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+        self.timeline = []
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_state = world_state.copy()
+        self.age += 1
+        # Simulate interaction with the world
+        if self.age % 5 == 0:
+            self.timeline.append(self.to_dict())
+            # Influence the world based on the timeline
+            new_state['world_events'].append(f"Timefold {self.id} influenced the world at {self.position}")
+        return new_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "id": self.id,
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "timeline": self.timeline
+        }
+
+ENTITY_TYPES["Timefold"] = Timefold
