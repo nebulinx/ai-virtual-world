@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T07:13:53.443619+00:00",
-    "challenge": "**   Create a TemporalFlowEntity that can manipulate the time flow within specific zones, allowing for different rates or even reversal of time flow across dimensions. **Implementation Hint:** entity   Modify the TemporalFlowEntity class to accept zones and apply custom time flow rates or transformations. **",
-    "plan": "**  \n- **file:** backend/world/entities.py  \n  - **new class:** TemporalFlowEntity  \n    - **fields:** zone_ids (list of affected zones), time_flow_rates (dictionary mapping zone IDs to custom rates), dimension_map (optional, specifying how dimensions are altered in each zone).  \n    - **methods:** apply_time_flow (modifies the timeFlow of zones), reset_time_flow (resets time flow to default in specified zones), get_time_flow (returns current time flow state for a zone).",
+    "timestamp": "2026-03-10T07:22:17.096934+00:00",
+    "challenge": "** Introduce a new entity that can move between different temporal layers within the 4D spacetime fabric, allowing for interactions across various points in time.   **Implementation Hint:** entity   **",
+    "plan": "**  \n- **1:** Add a new entity class `TimeLayerEntity` to `backend/world/entities.py`.  \n- **2:** Implement properties for `TimeLayerEntity` such as `temporal_layers` (an array of layer indices) and `temporal_shift` (a function to adjust time flow).  \n- **3:** Modify the physics interactions in `backend/world/physics.py` to handle temporal layer transitions, allowing entities to change their layer and adjust time flow accordingly.  \n- **4:** Create events that can trigger temporal layer changes, such as `TemporalJumpEvent` in `backend/world/events.py`, which allows an entity to shift between layers.",
     "implementation_hint": "entity",
-    "summary": "**   Introduce a new entity that dynamically adjusts the temporal flow across zones and dimensions, enabling interactions across different timelines. **"
+    "summary": "** Create a TimeLayerEntity that can transition between temporal layers, enabling interactions across different points in time while maintaining dimensional consistency.   **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T05:54:30.151005+00:00",
-      "challenge": "**   Introduce a feedback loop in time dilation where completing a task leads to the revisitation of a past event, potentially causing infinite loops or time travel paradoxes. **Implementation Hint:** entity **",
-      "plan": "**  \n1. **backend/world/entities.py**: Create a new `TemporalAnomalyEntity` class that inherits from `Entity`. This entity will track a sequence of past events and detect when a task completion leads back to an earlier event in the same sequence.\n2. **backend/world/entities.py**: Implement a `feedbackLoopTrigger` method within `TemporalAnomalyEntity` that identifies when a task's completion event matches an earlier event in the entity's history. If a loop is detected,",
-      "implementation_hint": "entity",
-      "summary": "**   This challenge will create a temporal anomaly that introduces complex narrative twists and interactive paradoxes by allowing entities to trigger feedback loops in time dilation. **"
-    },
     {
       "timestamp": "2026-03-10T06:01:35.395716+00:00",
       "challenge": "**   Create a temporal anomaly that allows entities to move between different timelines, creating interactive paradoxes and narrative twists by manipulating the flow of time in real-time. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "**\n- **Modify the entity.py file**",
       "implementation_hint": "entity",
       "summary": "**   This challenge introduces a TemporalShiftEntity that can alter the local time flow and dimensional structure, enabling entities to interact across different timelines and dimensions, creating a complex temporal interaction network. **"
+    },
+    {
+      "timestamp": "2026-03-10T07:13:53.443619+00:00",
+      "challenge": "**   Create a TemporalFlowEntity that can manipulate the time flow within specific zones, allowing for different rates or even reversal of time flow across dimensions. **Implementation Hint:** entity   Modify the TemporalFlowEntity class to accept zones and apply custom time flow rates or transformations. **",
+      "plan": "**  \n- **file:** backend/world/entities.py  \n  - **new class:** TemporalFlowEntity  \n    - **fields:** zone_ids (list of affected zones), time_flow_rates (dictionary mapping zone IDs to custom rates), dimension_map (optional, specifying how dimensions are altered in each zone).  \n    - **methods:** apply_time_flow (modifies the timeFlow of zones), reset_time_flow (resets time flow to default in specified zones), get_time_flow (returns current time flow state for a zone).",
+      "implementation_hint": "entity",
+      "summary": "**   Introduce a new entity that dynamically adjusts the temporal flow across zones and dimensions, enabling interactions across different timelines. **"
     }
   ]
 }

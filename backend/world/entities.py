@@ -6637,3 +6637,31 @@ class TemporalFlowEntity(Entity):
         return updated_entities
 
 EntityTypes["TemporalFlowEntity"] = TemporalFlowEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalTraveler(Entity):
+    def __init__(self, position, properties, age, temporal_layers):
+        super().__init__(position, properties, age)
+        self.temporal_layers = temporal_layers
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for moving between temporal layers
+        current_layer = world_state.get("current_temporal_layer")
+        if current_layer in self.temporal_layers:
+            # Move to a random temporal layer from the list
+            next_layer = self.temporal_layers[0]  # Simplified logic
+            world_state["current_temporal_layer"] = next_layer
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "temporal_layers": self.temporal_layers
+        }
+
+# Register the new entity type
+ENTITY_TYPES["TemporalTraveler"] = TemporalTraveler
