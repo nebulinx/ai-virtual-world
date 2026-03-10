@@ -5247,3 +5247,29 @@ class TemporalCurrent(Entity):
         }
 
 ENTITY_TYPES["TemporalCurrent"] = TemporalCurrent
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class EchoEntity(Entity):
+    def __init__(self, position, radius, time_effect):
+        super().__init__(position, properties={"radius": radius, "time_effect": time_effect})
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_world_state = world_state.copy()
+        radius = self.properties["radius"]
+        time_effect = self.properties["time_effect"]
+        
+        for entity in world_state["entities"].values():
+            distance = ((entity.position[0] - self.position[0])**2 + (entity.position[1] - self.position[1])**2)**0.5
+            if distance <= radius:
+                if time_effect == "slow":
+                    entity.age += 1
+                elif time_effect == "speed":
+                    entity.age -= 1
+        
+        self.age += 1
+        return new_world_state
+
+ENTITY_TYPES["EchoEntity"] = EchoEntity
