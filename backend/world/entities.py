@@ -5197,3 +5197,23 @@ class TemporalGateway(Entity):
         }
 
 ENTITY_TYPES["TemporalGateway"] = TemporalGateway
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalCurrent(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any] = {}):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age % 10 == 0:
+            self.warp_time_flow(world_state)
+        return self.to_dict()
+
+    def warp_time_flow(self, world_state: Dict[str, Any]):
+        # Implement time warping logic here
+        pass
+
+ENTITY_TYPES["TemporalCurrent"] = TemporalCurrent

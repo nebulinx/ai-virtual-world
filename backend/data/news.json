@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T17:30:23.814064",
-      "headline": "Stellar New Horizon: The Simulation Expands to 4 Dimensions",
-      "body": "The virtual simulation has reached a new milestone, expanding its dimensions to 4. A recent event saw the activation of the fourth dimension, marking a significant leap in the virtual world's capabilities. This expansion has introduced new possibilities for users to explore and interact within the simulation.",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T17:40:07.255158",
       "headline": "Bugs Affect Simulation Functionality",
       "body": "A recent bug in the virtual simulation system has caused unexpected interruptions in the simulation's operation. The bug has led to several entities being temporarily disabled or corrupted, resulting in data loss and system instability. Efforts are underway to identify and resolve the issue, with the goal of restoring normal functionality as soon as possible.",
@@ -297,6 +291,12 @@
     {
       "timestamp": "2026-03-09T23:58:53.614633",
       "headline": "{ Operational Readiness: Virtual Simulation Maintains Its Ground",
+      "body": "The simulation holds 0 entities, 27 recorded events, and 4 dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-10T00:06:19.109497",
+      "headline": "{ Vast",
       "body": "The simulation holds 0 entities, 27 recorded events, and 4 dimensions.",
       "category": "entity"
     }
