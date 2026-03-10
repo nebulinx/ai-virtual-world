@@ -5428,3 +5428,22 @@ class TimeManipulator(Entity):
         }
 
 ENTITY_TYPES["TimeManipulator"] = TimeManipulator
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class FourthDimensionalEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the update logic for interacting with the fourth spatial dimension
+        # Example: Alter physical dimensions' properties
+        for entity_id, entity in world_state['entities'].items():
+            if entity_id != self.id:
+                entity['properties']['temporal_shift'] = (self.age % 10) * 0.1
+        self.age += 1
+        return self.to_dict()
+
+ENTITY_TYPES["FourthDimensionalEntity"] = FourthDimensionalEntity
