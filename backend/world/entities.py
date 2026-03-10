@@ -5569,3 +5569,26 @@ class TimeRewind(Entity):
         }
 
 ENTITY_TYPES["TimeRewind"] = TimeRewind
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeTraveler(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time travel logic here
+        # For example, modify past events or influence probabilistic events
+        # For simplicity, let's just log the current state
+        print(f"TimeTraveler at {self.position} with properties {self.properties} is updating the world state.")
+        return world_state
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeTraveler"] = TimeTraveler
