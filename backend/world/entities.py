@@ -6942,3 +6942,22 @@ class MemoryEntity(Entity):
         }
 
 ENTITY_TYPES["MemoryEntity"] = MemoryEntity
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class NewEntity(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the update logic for the new entity
+        # Example: Move the entity in a specific direction
+        new_position = {
+            'x': self.position['x'] + 1,
+            'y': self.position['y'],
+            'z': self.position['z']
+        }
+        return {'position': new_position, 'properties': self.properties, 'age': self.age + 1}
+
+ENTITY_TYPES["NewEntity"] = NewEntity
