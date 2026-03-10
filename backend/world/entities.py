@@ -5551,3 +5551,21 @@ class TemporalRewinder(Entity):
         return self.to_dict()
 
 TemporalRewinder.ENTITY_TYPES["TemporalRewinder"] = TemporalRewinder
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeRewind(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time rewinding logic here
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TimeRewind",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeRewind"] = TimeRewind

@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T01:39:08.997921+00:00",
-    "challenge": "** Introduce an entity type capable of rewinding the flow of time, allowing players to revisit past events and alter the simulation's timeline dynamically. **Implementation Hint:** entity **",
-    "plan": "**\n1. **File to Modify:** backend/world/entities.py\n2. **Addition:** Introduce a new entity class `TimeRewwind` with methods to rewind time and control event flow.\n3. **How It Fits:** The `TimeRewwind` entity will allow players to interact with past events, creating a dynamic and unpredictable simulation where the outcome can be influenced by rewinding time.",
+    "timestamp": "2026-03-10T01:46:31.496176+00:00",
+    "challenge": "**   Create a new entity type, \"TimeRewind,\" which allows players to rewind time, altering the sequence and outcomes of past events in the simulation. **Implementation Hint:** entity **",
+    "plan": "- Implement in codebase (hint: entity)",
     "implementation_hint": "entity",
-    "summary": "** This challenge will revolve around creating a new entity type, \"TimeRewind,\" which enables players to rewind time, thereby altering the sequence and outcomes of past events in the simulation. **"
+    "summary": "**   Introduce a new entity type that provides players"
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T00:22:24.761186+00:00",
-      "challenge": "**Introduce a new entity type, \"Echo Entity,\" that creates time ripples, affecting the time flow in specific zones, potentially causing time to slow or speed up locally.** Implementation Hint: entity   This could allow for interactions where entities moving through affected zones experience time differently, creating loops or affecting the passage of time relative to other zones.",
-      "plan": "- **Modify entities.py**: Add a new `EchoEntity` class with properties for creating time ripples, adjusting time flow rates, and interacting with Temporal Guards.  \n- **",
-      "implementation_hint": "entity",
-      "summary": "This would add a dynamic element where time itself can be manipulated, leading to complex interactions and unexpected consequences for entities and the world's structure."
-    },
     {
       "timestamp": "2026-03-10T00:29:56.758322+00:00",
       "challenge": "Evolve the virtual world with a new feature.",
@@ -76,6 +69,13 @@
       "plan": "- entity: new class ProbField, which defines a probability field that affects entities in the world by introducing probabilistic events and outcomes.  \n- This field would allow entities to influence the probability of certain events, such as movement patterns, interactions, or environmental changes, adding a layer of complexity and unpredictability to the simulation.  \n- The ProbField would also have parameters like influence range, probability distribution, and entity interaction strength, making it customizable and immersive for players.",
       "implementation_hint": "entity",
       "summary": "Introduce a new probability field entity type that allows entities to interact with probabilistic events, altering their behavior and outcomes in the simulation."
+    },
+    {
+      "timestamp": "2026-03-10T01:39:08.997921+00:00",
+      "challenge": "** Introduce an entity type capable of rewinding the flow of time, allowing players to revisit past events and alter the simulation's timeline dynamically. **Implementation Hint:** entity **",
+      "plan": "**\n1. **File to Modify:** backend/world/entities.py\n2. **Addition:** Introduce a new entity class `TimeRewwind` with methods to rewind time and control event flow.\n3. **How It Fits:** The `TimeRewwind` entity will allow players to interact with past events, creating a dynamic and unpredictable simulation where the outcome can be influenced by rewinding time.",
+      "implementation_hint": "entity",
+      "summary": "** This challenge will revolve around creating a new entity type, \"TimeRewind,\" which enables players to rewind time, thereby altering the sequence and outcomes of past events in the simulation. **"
     }
   ]
 }
