@@ -6559,3 +6559,26 @@ class DimensionalDisruptor(Entity):
         }
 
 ENTITY_TYPES["DimensionalDisruptor"] = DimensionalDisruptor
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalManipulator(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age % 10 == 0:
+            # Warp spacetime
+            for entity in world_state['entities']:
+                if entity != self:
+                    # Temporal dilation
+                    entity.properties['time_dilation'] = max(0, entity.properties.get('time_dilation', 0) - 1)
+                    # Dimensional shift
+                    entity.position['x'] += 1
+                    entity.position['y'] += 1
+        return self.to_dict()
+
+ENTITY_TYPES["TemporalManipulator"] = TemporalManipulator
