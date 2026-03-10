@@ -5934,3 +5934,17 @@ class TemporalNode(Entity):
         }
 
 ENTITY_TYPES["TemporalNode"] = TemporalNode
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class NewEntityName(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the update logic for the new entity
+        # Example: Increase age by 1 each update
+        self.age += 1
+        return self.to_dict()
+
+ENTITY_TYPES["NewEntityName"] = NewEntityName
