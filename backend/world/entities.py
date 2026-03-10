@@ -5396,3 +5396,35 @@ class FifthDimensionEntity(Entity):
         }
 
 ENTITY_TYPES["FifthDimensionEntity"] = FifthDimensionEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeManipulator(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        super().__init__(position, properties, age)
+        self.time_factor = properties.get("time_factor", 1.0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Alter time flow in the area where the Time Manipulator is located
+        for entity_id, entity in world_state["entities"].items():
+            if self.is_nearby(entity):
+                entity["age"] += (self.time_factor - 1) * entity["age"]
+        return world_state
+
+    def is_nearby(self, entity: Dict[str, Any]) -> bool:
+        # Simple proximity check (Euclidean distance)
+        return abs(self.position["x"] - entity["position"]["x"]) < 10 and \
+               abs(self.position["y"] - entity["position"]["y"]) < 10
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TimeManipulator",
+            "position": self.position,
+            "properties": {
+                "time_factor": self.time_factor
+            },
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeManipulator"] = TimeManipulator
