@@ -5886,3 +5886,26 @@ class Timefold(Entity):
         }
 
 ENTITY_TYPES["Timefold"] = Timefold
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from backend.world.world_state import WorldState
+from typing import Dict, Any
+
+class TimeZoneAlterer(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.time_shift = properties.get('time_shift', 0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        current_time = world_state.get('time', 0)
+        new_time = current_time + self.time_shift
+        world_state['time'] = new_time
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            'time_shift': self.time_shift
+        }
+
+ENTITY_TYPES["TimeZoneAlterer"] = TimeZoneAlterer
