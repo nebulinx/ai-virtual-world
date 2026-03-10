@@ -6044,3 +6044,19 @@ class NewEntity(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["NewEntity"] = NewEntity
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalFunnel(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        # Apply temporal influence logic here
+        # For example, events in proximity to TemporalFunnel may speed up or slow down
+        return self.to_dict()
+
+ENTITY_TYPES["TemporalFunnel"] = TemporalFunnel
