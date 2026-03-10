@@ -6317,3 +6317,25 @@ ENTITY_TYPES = {
     "QuantumParticle": QuantumParticle,
     "DimensionalPortal": DimensionalPortal
 }
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeDilationZone(Entity):
+    def __init__(self, position: Dict[str, float], time_flow_rate: float):
+        super().__init__(position)
+        self.time_flow_rate = time_flow_rate
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += self.time_flow_rate
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "TimeDilationZone",
+            "position": self.position,
+            "time_flow_rate": self.time_flow_rate,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TimeDilationZone"] = TimeDilationZone
