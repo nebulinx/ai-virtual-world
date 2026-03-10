@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T04:35:58.674943+00:00",
-    "challenge": "**Introduce a Temporal Funnel that warps time and space within a specific zone, creating a region where events can be influenced by proximity and interactions with other entities.** Implementation Hint: entity",
-    "plan": "- backend/world/entities.py: Add a new static entity class \"TemporalFunnel\" with parameters for zone ID, radius of influence, and time dilation multiplier.\n- backend/world/physics.py: Modify the timeFlow mechanics for entities within the funnel's zone to apply a dynamic time dilation based on proximity.\n- backend/world/events.py: Add a new event handler for entities entering the funnel, allowing for interactive time manipulation (e.g., time jumps or spatial distortions).\n\nThis challenge will create an interactive temporal experience where using the funnel can alter the flow of time and space, adding new layers of complexity and engagement to the world.",
-    "implementation_hint": "entity",
-    "summary": "Introduce a new static entity type that warps time and space within its zone, allowing for interactive temporal experiences."
+    "timestamp": "2026-03-10T04:43:49.737059+00:00",
+    "challenge": "Create a dynamic time flow system where the speed of time in each zone is determined by the number and type of interactions between entities.",
+    "plan": "- Modify the physics module to introduce a new `Interaction` class that tracks when entities meet or interact within their zones.  \n- Add a function `calculateTimeFlow` in the physics module that adjusts the timeFlow of each zone based on the number and type of interactions occurring within it.  \n- Ensure that each entity has an `interactionCount` property that increments with each interaction, influencing the timeFlow calculation.",
+    "implementation_hint": "physics",
+    "summary": "Create a dynamic time flow system where the speed of time in each zone is determined by the number and type of interactions between entities."
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T03:20:50.453264+00:00",
-      "challenge": "**   Introduce a system where entities can create alternate timelines (Timefolds) that interact with the world, allowing for simultaneous or alternate realities that influence events and the physical dimensions. **Implementation Hint:** physics **",
-      "plan": "**\n- **Modify the physics module to handle time flow per zone.** Allow each zone to have its own time flow rate, which can be altered by entities.\n- **Create a new entity type, \"Timefold,\"** which allows for the creation of alternate timelines. These entities can manipulate time flow within their influence area.\n- **Implement functions in the physics module** that adjust the time flow rate of zones and handle the interactions between timelines created by Timefold entities.\n- **Enable Timefold entities to spawn in response to specific events,** which can trigger the appearance of alternate timelines that affect both the physical world and events across zones.",
-      "implementation_hint": "entity",
-      "summary": "**   This challenge aims to create a system where entities can alter the fabric of time, allowing for the emergence of alternate timelines that interact with the physical world, adding layers of complexity and unpredictability. **"
-    },
     {
       "timestamp": "2026-03-10T03:27:59.362740+00:00",
       "challenge": "**   Create a system where time zones can be dynamically altered by entities, allowing for the emergence of alternate timelines that interact with the physical world and influence one another. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "- Implement in codebase (hint: general)",
       "implementation_hint": "general",
       "summary": "Evolve the virtual world with a new feature."
+    },
+    {
+      "timestamp": "2026-03-10T04:35:58.674943+00:00",
+      "challenge": "**Introduce a Temporal Funnel that warps time and space within a specific zone, creating a region where events can be influenced by proximity and interactions with other entities.** Implementation Hint: entity",
+      "plan": "- backend/world/entities.py: Add a new static entity class \"TemporalFunnel\" with parameters for zone ID, radius of influence, and time dilation multiplier.\n- backend/world/physics.py: Modify the timeFlow mechanics for entities within the funnel's zone to apply a dynamic time dilation based on proximity.\n- backend/world/events.py: Add a new event handler for entities entering the funnel, allowing for interactive time manipulation (e.g., time jumps or spatial distortions).\n\nThis challenge will create an interactive temporal experience where using the funnel can alter the flow of time and space, adding new layers of complexity and engagement to the world.",
+      "implementation_hint": "entity",
+      "summary": "Introduce a new static entity type that warps time and space within its zone, allowing for interactive temporal experiences."
     }
   ]
 }
