@@ -5500,3 +5500,39 @@ class TemporalManipulator(Entity):
         }
 
 ENTITY_TYPES["TemporalManipulator"] = TemporalManipulator
+
+from typing import Dict, Any
+import random
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES = {}
+
+class ProbabilisticEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int, probability: float):
+        super().__init__(position, properties, age)
+        self.probability = probability
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if random.random() < self.probability:
+            # Implement probabilistic behavior here
+            self.properties["behavior"] = "probabilistic"
+        else:
+            self.properties["behavior"] = "default"
+        return self.to_dict()
+
+ENTITY_TYPES["ProbabilisticEntity"] = ProbabilisticEntity
