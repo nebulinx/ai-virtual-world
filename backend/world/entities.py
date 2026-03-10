@@ -7056,3 +7056,29 @@ class TimelineControl(Entity):
         return cls(data["position"], data.get("age", 0), data.get("paused", False), data.get("rewind_step", 0))
 
 ENTITY_TYPES["TimelineControl"] = TimelineControl
+
+from typing import Dict, Any
+from backend.world.entities import Entity, EntityFactory, ENTITY_TYPES
+
+class TimeInfluenceEntity(Entity):
+    def __init__(self, position, properties):
+        super().__init__(position, properties)
+        self.age = 0
+        self.time_influence = properties.get('time_influence', 1)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        world_state['time'] *= self.time_influence
+        self.age += 1
+        return world_state
+
+    @classmethod
+    def to_dict(cls):
+        return {
+            "type": "TimeInfluenceEntity",
+            "position": cls.position,
+            "properties": {
+                "time_influence": cls.time_influence
+            }
+        }
+
+ENTITY_TYPES["TimeInfluenceEntity"] = TimeInfluenceEntity
