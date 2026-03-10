@@ -6892,3 +6892,28 @@ class AlternateRealityEntity(Entity):
         return data
 
 ENTITY_TYPES["AlternateRealityEntity"] = AlternateRealityEntity
+
+from world.entities import Entity, ENTITY_TYPES
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        anomaly_position = self.position
+        anomaly_radius = self.properties.get("radius", 10)
+        anomaly_strength = self.properties.get("strength", 1)
+
+        # Warp time in the anomaly zone
+        for entity_id, entity in world_state["entities"].items():
+            entity_position = entity["position"]
+            distance = ((entity_position[0] - anomaly_position[0]) ** 2 + 
+                        (entity_position[1] - anomaly_position[1]) ** 2) ** 0.5
+
+            if distance <= anomaly_radius:
+                # Calculate time distortion
+                time_distortion = distance / anomaly_radius * anomaly_strength
+
+                # Update entity's age
+                entity["age"] += time_distortion
+
+        return world_state
+
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
