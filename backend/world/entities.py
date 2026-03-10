@@ -6423,3 +6423,20 @@ class TemporalSpatialZone(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TemporalSpatialZone"] = TemporalSpatialZone
+
+from backend.world.entities import Entity, ENTITY_TYPES, Position, Properties
+
+class TemporalWarp(Entity):
+    def __init__(self, position: Position, properties: Properties, age: float):
+        super().__init__(position, properties, age)
+        self.time_warp_factor = properties.get("time_warp_factor", 1.0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_age = self.age * self.time_warp_factor
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": new_age
+        }
+
+ENTITY_TYPES["TemporalWarp"] = TemporalWarp
