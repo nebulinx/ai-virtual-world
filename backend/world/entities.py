@@ -6355,3 +6355,30 @@ class TimeDimensionalCoupling(Entity):
         return {'position': self.position, 'age': self.age}
 
 ENTITY_TYPES["TimeDimensionalCoupling"] = TimeDimensionalCoupling
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class FeedbackLoop(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.history = []
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if 'task_completed' in world_state and world_state['task_completed']:
+            if self.position in self.history:
+                # Time dilation: revisit past event
+                return self.to_dict()
+            else:
+                self.history.append(self.position)
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "FeedbackLoop",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["FeedbackLoop"] = FeedbackLoop
