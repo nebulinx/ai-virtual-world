@@ -5976,3 +5976,28 @@ class TimeShifter(Entity):
         }
 
 ENTITY_TYPES["TimeShifter"] = TimeShifter
+
+from world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import time
+
+class TimeShifter(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.time_speed_factor = properties.get("time_speed_factor", 1.0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        start_time = time.time()
+        super().update(world_state)
+        elapsed_time = time.time() - start_time
+        adjusted_time = elapsed_time * self.time_speed_factor
+        time.sleep(adjusted_time - elapsed_time)  # Adjust the actual time elapsed
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "time_speed_factor": self.time_speed_factor
+        }
+
+ENTITY_TYPES["TimeShifter"] = TimeShifter
