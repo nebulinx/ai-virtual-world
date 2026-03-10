@@ -6505,3 +6505,31 @@ class HealingSpring(Entity):
         }
 
 ENTITY_TYPES["HealingSpring"] = HealingSpring
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+import random
+
+class TemporalAnomaly(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+        self.dilation_factor = properties.get("dilation_factor", 1.0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        for entity_id, entity in world_state["entities"].items():
+            if entity_id != self.id:
+                distance = self.calculate_distance(entity)
+                if distance < self.properties["radius"]:
+                    entity.age += (entity.age * self.dilation_factor) / 100
+        return world_state
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "type": "TemporalAnomaly",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
