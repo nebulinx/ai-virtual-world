@@ -7021,3 +7021,38 @@ class HistoricalChoiceEvent(Entity):
         }
 
 ENTITY_TYPES["HistoricalChoiceEvent"] = HistoricalChoiceEvent
+
+from world.entities import Entity, ENTITY_TYPES
+
+class TimelineControl(Entity):
+    def __init__(self, position, age=0, paused=False, rewind_step=0):
+        super().__init__(position, age)
+        self.paused = paused
+        self.rewind_step = rewind_step
+
+    def update(self, world_state):
+        if self.paused:
+            # Implement logic to pause the simulation
+            pass
+        else:
+            # Implement logic to continue the simulation
+            pass
+
+        if self.rewind_step > 0:
+            # Implement logic to rewind the simulation by rewind_step
+            pass
+
+        return {
+            "position": self.position,
+            "properties": {
+                "paused": self.paused,
+                "rewind_step": self.rewind_step
+            },
+            "age": self.age
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["position"], data.get("age", 0), data.get("paused", False), data.get("rewind_step", 0))
+
+ENTITY_TYPES["TimelineControl"] = TimelineControl
