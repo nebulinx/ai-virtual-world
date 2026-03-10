@@ -6823,3 +6823,29 @@ class TemporalWarp(Entity):
         }
 
 ENTITY_TYPES["TemporalWarp"] = TemporalWarp
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TimeSpaceLayerEntity(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int, layers: Dict[str, Any]):
+        super().__init__(position, properties, age)
+        self.layers = layers
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to handle time and space transitions
+        for layer, data in self.layers.items():
+            if layer in world_state:
+                # Perform interactions based on the current layer
+                self.properties = {**self.properties, **data}
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "layers": self.layers
+        }
+
+ENTITY_TYPES["TimeSpaceLayerEntity"] = TimeSpaceLayerEntity
