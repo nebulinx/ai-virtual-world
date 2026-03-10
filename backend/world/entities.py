@@ -6185,3 +6185,26 @@ class TemporalRipple(Entity):
         }
 
 ENTITY_TYPES["TemporalRipple"] = TemporalRipple
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DimensionalPortal(Entity):
+    def __init__(self, position, properties=None):
+        super().__init__(position, properties)
+        self.properties["connected_zone"] = None
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.properties["connected_zone"]:
+            self.position = world_state["zones"][self.properties["connected_zone"]]["position"]
+        return super().update(world_state)
+
+    def to_dict(self):
+        return {
+            "type": self.__class__.__name__,
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["DimensionalPortal"] = DimensionalPortal
