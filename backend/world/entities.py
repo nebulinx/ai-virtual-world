@@ -6483,3 +6483,25 @@ class TemporalRift(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["TemporalRift"] = TemporalRift
+
+from backend.world.entities import Entity, ENTITY_TYPES, Dict, Any
+
+class HealingSpring(Entity):
+    def __init__(self, position, properties=None):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement the logic for the HealingSpring entity
+        # For example, heal nearby entities or provide other effects
+        self.age += 1
+        return self.to_dict()
+
+    def to_dict(self):
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["HealingSpring"] = HealingSpring
