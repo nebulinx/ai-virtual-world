@@ -6339,3 +6339,19 @@ class TimeDilationZone(Entity):
         }
 
 ENTITY_TYPES["TimeDilationZone"] = TimeDilationZone
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeDimensionalCoupling(Entity):
+    def __init__(self, position, properties):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        position_change = self.properties.get('speed', 0) * (1 + self.properties.get('time_dilation', 0))
+        self.position = (self.position[0] + position_change, self.position[1] + position_change)
+        return {'position': self.position, 'age': self.age}
+
+ENTITY_TYPES["TimeDimensionalCoupling"] = TimeDimensionalCoupling
