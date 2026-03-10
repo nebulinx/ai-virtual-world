@@ -6147,3 +6147,41 @@ ENTITY_TYPES = {
     "TemporalAnomaly": TemporalAnomaly,
     "QuantumParticle": QuantumParticle
 }
+
+from backend.world.entities import Entity, ENTITY_TYPES, Vector3D
+
+class TemporalRipple(Entity):
+    def __init__(self, position: Vector3D, strength: float, duration: int):
+        super().__init__(position)
+        self.strength = strength
+        self.duration = duration
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.age < self.duration:
+            self.age += 1
+            for dx in range(-1, 2):
+                for dy in range(-1, 2):
+                    for dz in range(-1, 2):
+                        if dx == 0 and dy == 0 and dz == 0:
+                            continue
+                        neighbor_pos = Vector3D(self.position.x + dx, self.position.y + dy, self.position.z + dz)
+                        if neighbor_pos in world_state:
+                            neighbor_entity = world_state[neighbor_pos]
+                            if isinstance(neighbor_entity, TemporalAnomaly):
+                                neighbor_entity.strength += self.strength
+                            elif isinstance(neighbor_entity, CrystalFormation):
+                                neighbor_entity.age += int(self.strength * 10)
+        else:
+            del world_state[self.position]
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            "strength": self.strength,
+            "duration": self.duration,
+            "age": self.age
+        }
+
+ENTITY_TYPES["TemporalRipple"] = TemporalRipple
