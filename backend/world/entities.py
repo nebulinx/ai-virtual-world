@@ -5795,3 +5795,36 @@ class DimensionalEcho(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["DimensionalEcho"] = DimensionalEcho
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DimensionalRipple(Entity):
+    def __init__(self, position, radius, duration):
+        super().__init__(position)
+        self.radius = radius
+        self.duration = duration
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.age >= self.duration:
+            world_state['dimensions'].pop(self.position, None)
+        else:
+            # Alter the topology of the world
+            world_state['dimensions'][self.position] = {
+                'type': 'dimensional_ripple',
+                'radius': self.radius,
+                'age': self.age
+            }
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            'radius': self.radius,
+            'duration': self.duration,
+            'age': self.age
+        }
+
+ENTITY_TYPES["DimensionalRipple"] = DimensionalRipple

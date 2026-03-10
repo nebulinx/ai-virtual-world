@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T02:56:45.811556+00:00",
-    "challenge": "**   Introduce a Dimensional Echo entity that creates ripples in the dimensional fabric, warping time and space across zones, altering event sequences and topology. **Implementation Hint:** physics   **",
-    "plan": "**  \n- Introduce a new Physics class for Dimensional Echo entities.  \n- Implement methods to modify local and connected zone dimensionalities and time flow rates.  \n- Update event flow prediction algorithms to account for dimensional changes.  \n- Add effects on player movement and interactions, based on changing spacetime metrics.",
+    "timestamp": "2026-03-10T03:04:35.619657+00:00",
+    "challenge": "**   Create a mechanism where temporary dimensional ripples, triggered by specific events, alter the topology of the world's dimensions, creating a dynamic and unpredictable environment for players and events. **Implementation Hint:** entity **",
+    "plan": "- Implement in codebase (hint: entity)",
     "implementation_hint": "entity",
-    "summary": "** Create a physics-based mechanism where Dimensional Echo entities dynamically alter dimensionality and time flow, affecting event sequences across zones. **"
+    "summary": "**   Introduce a system where specific events trigger the creation of bubble entities that spawn in the world, creating temporary dimensional r"
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T01:39:08.997921+00:00",
-      "challenge": "** Introduce an entity type capable of rewinding the flow of time, allowing players to revisit past events and alter the simulation's timeline dynamically. **Implementation Hint:** entity **",
-      "plan": "**\n1. **File to Modify:** backend/world/entities.py\n2. **Addition:** Introduce a new entity class `TimeRewwind` with methods to rewind time and control event flow.\n3. **How It Fits:** The `TimeRewwind` entity will allow players to interact with past events, creating a dynamic and unpredictable simulation where the outcome can be influenced by rewinding time.",
-      "implementation_hint": "entity",
-      "summary": "** This challenge will revolve around creating a new entity type, \"TimeRewind,\" which enables players to rewind time, thereby altering the sequence and outcomes of past events in the simulation. **"
-    },
     {
       "timestamp": "2026-03-10T01:46:31.496176+00:00",
       "challenge": "**   Create a new entity type, \"TimeRewind,\" which allows players to rewind time, altering the sequence and outcomes of past events in the simulation. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "**  \n- **entity.py:** Add a new TemporalDistortionEntity class that modifies local time flow.  \n  - The entity will have properties like `timeFlow` (a multiplier for local time) and `timeShiftWindow` (a timeframe where time is distorted).  \n  - The entity's position will",
       "implementation_hint": "entity",
       "summary": "**   Introduce a Temporal Distortion Entity that warps time in its zone, creating unpredictable event sequences and altering the world's dimensional and temporal topology. **"
+    },
+    {
+      "timestamp": "2026-03-10T02:56:45.811556+00:00",
+      "challenge": "**   Introduce a Dimensional Echo entity that creates ripples in the dimensional fabric, warping time and space across zones, altering event sequences and topology. **Implementation Hint:** physics   **",
+      "plan": "**  \n- Introduce a new Physics class for Dimensional Echo entities.  \n- Implement methods to modify local and connected zone dimensionalities and time flow rates.  \n- Update event flow prediction algorithms to account for dimensional changes.  \n- Add effects on player movement and interactions, based on changing spacetime metrics.",
+      "implementation_hint": "entity",
+      "summary": "** Create a physics-based mechanism where Dimensional Echo entities dynamically alter dimensionality and time flow, affecting event sequences across zones. **"
     }
   ]
 }
