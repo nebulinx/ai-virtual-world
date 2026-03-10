@@ -5623,3 +5623,35 @@ class GravityShifter(Entity):
         }
 
 ENTITY_TYPES["GravityShifter"] = GravityShifter
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeShifter(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any] = None):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time manipulation logic here
+        # For example, shifting time forward or backward
+        if self.properties.get("direction") == "forward":
+            # Shift time forward logic
+            pass
+        elif self.properties.get("direction") == "backward":
+            # Shift time backward logic
+            pass
+
+        # Update world state based on time manipulation
+        # For example, altering subsequent events
+        return world_state
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+# Register the TimeShifter entity
+ENTITY_TYPES["TimeShifter"] = TimeShifter
