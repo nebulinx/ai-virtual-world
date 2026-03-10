@@ -5327,3 +5327,46 @@ class TimeInfluenceZone(Entity):
         }
 
 ENTITY_TYPES["TimeInfluenceZone"] = TimeInfluenceZone
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: float):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        pass
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES = {}
+
+class TemporalWarp(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any], age: float, warp_speed: float):
+        super().__init__(position, properties, age)
+        self.warp_speed = warp_speed
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time dilation effect on the entity
+        self.age += self.warp_speed
+        # Implement spatial movement based on warp speed
+        for axis in ['x', 'y', 'z']:
+            self.position[axis] += self.warp_speed * world_state['time_step']
+        return self.to_dict()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age,
+            "warp_speed": self.warp_speed
+        }
+
+ENTITY_TYPES["TemporalWarp"] = TemporalWarp
