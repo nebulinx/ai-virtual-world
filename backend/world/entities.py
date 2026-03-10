@@ -6253,3 +6253,32 @@ ENTITY_TYPES = {
     "QuantumParticle": QuantumParticle,
     "Zone": Zone
 }
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class EnergyVortex(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for EnergyVortex
+        pass
+
+class CrystalFormation(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for CrystalFormation
+        pass
+
+class TemporalAnomaly(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for TemporalAnomaly
+        pass
+
+class QuantumParticle(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for QuantumParticle
+        pass
+
+class NewEntity(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement update logic for NewEntity
+        pass
+
+ENTITY_TYPES["NewEntity"] = NewEntity

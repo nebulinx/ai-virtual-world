@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T05:16:03.056786+00:00",
-    "challenge": "Allow zones to dynamically connect to each other in any configuration, creating shortcut paths and alternate routes for entities to travel. Implementation Hint: entity",
-    "plan": "- entity/connection.py: Introduce a new Connection class that represents dynamic zone connections.\n- entity/connection.py: Define methods for creating, merging, and traversing connections.\n- physics.py: Implement logic to update time flow and dimension mappings when connections change.\n- events.py: Add events that trigger zone reconfigurations for world-building and gameplay.\n\nThis approach allows zones to dynamically reconfigure their connections, enabling exploration mechanics and story opportunities through alternate routes and parallel timelines.",
-    "implementation_hint": "entity",
-    "summary": "Enable zones to be connected in any possible configuration, allowing for dynamic exploration and alternate routes."
+    "timestamp": "2026-03-10T05:23:26.152345+00:00",
+    "challenge": "Evolve the virtual world with a new feature.",
+    "plan": "- Implement in codebase (hint: general)",
+    "implementation_hint": "general",
+    "summary": "Evolve the virtual world with a new feature."
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T03:58:31.944486+00:00",
-      "challenge": "**   Create a new type of entity called \"Time Shifters\" that can manipulate the time flow within specific zones, creating dynamic and unpredictable temporal effects across the world. **Implementation Hint:** entity **",
-      "plan": "**  \n1. **Modify entity:** Introduce a new entity class called `TimeShifter` in the `backend/world/entities.py` file.  \n2",
-      "implementation_hint": "entity",
-      "summary": "**   The goal is to introduce Time Shifters, entities that can alter the rate of time flow within their zone, leading to unpredictable interactions and events, enhancing the world's temporal complexity. **"
-    },
     {
       "timestamp": "2026-03-10T04:06:33.887012+00:00",
       "challenge": "**   Implement a system where Time Shifter entities can alter the rate of time flow within their zone, affecting both physical time and events, creating unpredictable temporal dynamics. **Implementation Hint:** entity **",
@@ -76,6 +69,13 @@
       "plan": "**  \n1. **backend/world/physics.py:**  \n   - Add a new class `DimensionalPortal` that defines properties such as `position`, `dimensions`, and `strength`.  \n   - Modify the `Zone` class to include interactions with `DimensionalPortal` instances, where each portal's activation or deactivation triggers dynamic changes to the dimensions of the affected zones.  \n   - Update the physics calculations to account for the dimensional expansion and contraction caused by portal activity.  \n   - Ensure that entities interacting with portals are subject to appropriate time flow adjustments based on the portal's properties.",
       "implementation_hint": "physics",
       "summary": "**   This challenge will introduce a new dimension of interactivity where entities can influence the fabric of reality by creating or traversing dimensional portals, which in turn affect the dimensions of surrounding zones, creating complex interactions and ripple effects. **"
+    },
+    {
+      "timestamp": "2026-03-10T05:16:03.056786+00:00",
+      "challenge": "Allow zones to dynamically connect to each other in any configuration, creating shortcut paths and alternate routes for entities to travel. Implementation Hint: entity",
+      "plan": "- entity/connection.py: Introduce a new Connection class that represents dynamic zone connections.\n- entity/connection.py: Define methods for creating, merging, and traversing connections.\n- physics.py: Implement logic to update time flow and dimension mappings when connections change.\n- events.py: Add events that trigger zone reconfigurations for world-building and gameplay.\n\nThis approach allows zones to dynamically reconfigure their connections, enabling exploration mechanics and story opportunities through alternate routes and parallel timelines.",
+      "implementation_hint": "entity",
+      "summary": "Enable zones to be connected in any possible configuration, allowing for dynamic exploration and alternate routes."
     }
   ]
 }
