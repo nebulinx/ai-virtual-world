@@ -6282,3 +6282,38 @@ class NewEntity(Entity):
         pass
 
 ENTITY_TYPES["NewEntity"] = NewEntity
+
+from typing import Dict, Any
+
+class Entity:
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        self.position = position
+        self.properties = properties
+        self.age = age
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        return self.to_dict()
+
+class DimensionalPortal(Entity):
+    def __init__(self, position: Dict[str, int], properties: Dict[str, Any], age: int = 0):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic to dynamically create or alter dimensions in target zones
+        # Influence time flow and create complex interactions
+        return super().update(world_state)
+
+ENTITY_TYPES = {
+    "EnergyVortex": EnergyVortex,
+    "CrystalFormation": CrystalFormation,
+    "TemporalAnomaly": TemporalAnomaly,
+    "QuantumParticle": QuantumParticle,
+    "DimensionalPortal": DimensionalPortal
+}

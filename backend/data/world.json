@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "timestamp": "2026-03-10T05:23:26.169249",
+  "timestamp": "2026-03-10T05:31:28.444173",
   "physics": {
     "gravity": {
       "default": -9.8,
@@ -163,6 +163,17 @@
           },
           "radius": 7.738063844177877,
           "time_factor": 0.18812672259586982
+        },
+        {
+          "type": "sphere",
+          "center": {
+            "x": 19.030409956813514,
+            "y": -46.090225235789894,
+            "z": -8.91605404549167,
+            "w": -5.168128479032461
+          },
+          "radius": 13.234643766728292,
+          "time_factor": 2.063711357347962
         }
       ]
     },
@@ -655,15 +666,24 @@
       "radius": 11.712715760745903,
       "duration": 50.734649786935776,
       "description": "Gravity fluctuation detected: -2.70 m/s\u00b2 in 11.7m radius"
+    },
+    {
+      "type": "temporal_distortion",
+      "timestamp": "2026-03-10T05:24:28.729184",
+      "position": {
+        "x": 19.030409956813514,
+        "y": -46.090225235789894,
+        "z": -8.91605404549167,
+        "w": -5.168128479032461
+      },
+      "time_factor": 2.063711357347962,
+      "radius": 13.234643766728292,
+      "duration": 29.46914560192582,
+      "description": "Temporal distortion: time flows 2.06x normal speed"
     }
   ],
   "anomalies": [],
   "evolution_log": [
-    {
-      "cycle": 179,
-      "timestamp": "2026-03-09T23:03:47.677903+00:00",
-      "summary": "**   Create a movable, temporal anomaly entity that warps the time flow of nearby zones, causing causality events and time loops.   **"
-    },
     {
       "cycle": 180,
       "timestamp": "2026-03-09T23:11:58.323639+00:00",
@@ -908,6 +928,11 @@
       "cycle": 229,
       "timestamp": "2026-03-10T05:23:26.168121+00:00",
       "summary": "Cycle 229"
+    },
+    {
+      "cycle": 230,
+      "timestamp": "2026-03-10T05:31:28.442807+00:00",
+      "summary": "**   Create a dynamic dimensional interface where entities can interact with portals, changing dimensions and affecting surrounding zones. **"
     }
   ]
 }
