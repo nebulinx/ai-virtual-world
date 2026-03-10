@@ -5592,3 +5592,34 @@ class TimeTraveler(Entity):
         }
 
 ENTITY_TYPES["TimeTraveler"] = TimeTraveler
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class GravityShifter(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.gravity_zones = properties.get("gravity_zones", [])
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        for zone in self.gravity_zones:
+            x, y = zone["position"]
+            radius = zone["radius"]
+            strength = zone["strength"]
+            for entity_id, entity in world_state["entities"].items():
+                if entity["type"] != "GravityShifter":
+                    distance = ((entity["position"]["x"] - x) ** 2 + (entity["position"]["y"] - y) ** 2) ** 0.5
+                    if distance <= radius:
+                        entity["position"]["x"] += (x - entity["position"]["x"]) * strength / distance
+                        entity["position"]["y"] += (y - entity["position"]["y"]) * strength / distance
+        return super().update(world_state)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": "GravityShifter",
+            "position": self.position,
+            "properties": self.properties,
+            "age": self.age
+        }
+
+ENTITY_TYPES["GravityShifter"] = GravityShifter

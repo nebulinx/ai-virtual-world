@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T01:54:08.062829+00:00",
-    "challenge": "**   Introduce a new entity type that allows players to rewind time, enabling them to alter the sequence and outcomes of past events in the simulation, while also providing a way to influence probabilistic events. **Implementation Hint:** entity **",
-    "plan": "**  \n1. **Modify File:** entity  \n2. **Add New Entity:** Create a new TimeRewwind entity type that extends or modifies the Entity class, allowing for time rewinding and probabilistic influence.  \n3. **Integrate Physics:** Update the physics system to handle time rewinding in conjunction with other physics entities and zones, ensuring consistent behavior in the fourth dimension.  \n4. **Event Hook:** Implement a method in the TimeRewind entity that allows it to modify the probability of events occurring in the past",
+    "timestamp": "2026-03-10T02:02:36.291221+00:00",
+    "challenge": "** Create a new entity type called \"GravityShifter\" that dynamically changes the gravity zones in the world, allowing for unexpected and shifting gameplay mechanics. **Implementation Hint:** physics **",
+    "plan": "**\n- **1. Create a new function in physics.py:** `modifyGravityZones`\n  - This function will allow the entity to temporarily or permanently alter the gravity settings of specific zones.\n- **2. Create a new entity class in entities.py:** `GravityShifter`\n  - The entity will inherit from `TimeRewind` and will have a method `applyGravityShift` that triggers `modifyGravityZones`.\n  - This method will accept parameters specifying which zones to modify and what gravity values to set.\n- **3. Implement zone activation/deactivation:**\n  - The `modifyGravityZones` function will update the `physics.gravity_zones` dictionary, allowing for zone-specific gravity changes.\n  - This will create a dynamic environment where zones can have varying gravity effects, leading to unpredictable gameplay.\n\nBy introducing the GravityShifter, players gain access to a new layer of creativity and challenge, allowing them to reshape the world's gravity in real-time.",
     "implementation_hint": "entity",
-    "summary": "**   Create a TimeRewind entity that combines time manipulation with probabilistic event control, giving players the ability to reshaped the simulation's timeline and outcomes. **"
+    "summary": "** Introduce a new entity type that can modify the gravity zones, creating unpredictable and evolving gameplay mechanics. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T00:37:04.688737+00:00",
-      "challenge": "**   Introduce a new feature where entities can influence the flow of time within specific zones, creating opportunities for time travel and concurrent time zones with varying speeds. **Implementation Hint:** entity **",
-      "plan": "**  \n1. **backend/world/entities.py** - Introduce a new TemporalCurrent entity type that can traverse through time zones and adjust their duration.  \n2. **backend/world/physics.py** - Modify the physics to allow time zones to have varying",
-      "implementation_hint": "entity",
-      "summary": "**   Extend the virtual world by enabling Temporal Current entities to manipulate time zones, allowing for dynamic time flow and interactions between entities and time zones. **"
-    },
     {
       "timestamp": "2026-03-10T00:44:44.539999+00:00",
       "challenge": "** Introduce a fourth temporal dimension where entities can warp through time, affecting their spatial movement and the world's structure. **Implementation Hint:** Physics **",
@@ -76,6 +69,13 @@
       "plan": "- Implement in codebase (hint: entity)",
       "implementation_hint": "entity",
       "summary": "**   Introduce a new entity type that provides players"
+    },
+    {
+      "timestamp": "2026-03-10T01:54:08.062829+00:00",
+      "challenge": "**   Introduce a new entity type that allows players to rewind time, enabling them to alter the sequence and outcomes of past events in the simulation, while also providing a way to influence probabilistic events. **Implementation Hint:** entity **",
+      "plan": "**  \n1. **Modify File:** entity  \n2. **Add New Entity:** Create a new TimeRewwind entity type that extends or modifies the Entity class, allowing for time rewinding and probabilistic influence.  \n3. **Integrate Physics:** Update the physics system to handle time rewinding in conjunction with other physics entities and zones, ensuring consistent behavior in the fourth dimension.  \n4. **Event Hook:** Implement a method in the TimeRewind entity that allows it to modify the probability of events occurring in the past",
+      "implementation_hint": "entity",
+      "summary": "**   Create a TimeRewind entity that combines time manipulation with probabilistic event control, giving players the ability to reshaped the simulation's timeline and outcomes. **"
     }
   ]
 }
