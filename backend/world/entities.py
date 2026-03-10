@@ -5828,3 +5828,31 @@ class DimensionalRipple(Entity):
         }
 
 ENTITY_TYPES["DimensionalRipple"] = DimensionalRipple
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from backend.world import world_state
+
+class DimensionalReshaper(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.dimensions = properties.get('dimensions', 4)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        new_dimensions = self.properties.get('dimensions', 4)
+        if new_dimensions != self.dimensions:
+            self.dimensions = new_dimensions
+            world_state = self._reshape_dimensions(world_state)
+        return world_state
+
+    def _reshape_dimensions(self, world_state):
+        # Implement logic to reshape dimensions
+        # This is a placeholder for actual logic
+        pass
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            'dimensions': self.dimensions
+        }
+
+ENTITY_TYPES["DimensionalReshaper"] = DimensionalReshaper
