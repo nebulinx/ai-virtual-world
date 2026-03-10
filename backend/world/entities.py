@@ -6400,3 +6400,26 @@ class TemporalAnomaly(Entity):
         return new_world_state
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TemporalSpatialZone(Entity):
+    def __init__(self, position, properties, age=0):
+        super().__init__(position, properties, age)
+        self.temporal_effect = properties.get('temporal_effect', 0)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Modify position based on some rule (e.g., moving diagonally)
+        new_position = (
+            self.position[0] + self.temporal_effect,
+            self.position[1] + self.temporal_effect
+        )
+        self.position = new_position
+        
+        # Adjust time passage
+        world_state['time'] += self.temporal_effect
+        
+        return self.to_dict()
+
+ENTITY_TYPES["TemporalSpatialZone"] = TemporalSpatialZone
