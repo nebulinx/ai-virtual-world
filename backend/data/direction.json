@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T05:54:30.151005+00:00",
-    "challenge": "**   Introduce a feedback loop in time dilation where completing a task leads to the revisitation of a past event, potentially causing infinite loops or time travel paradoxes. **Implementation Hint:** entity **",
-    "plan": "**  \n1. **backend/world/entities.py**: Create a new `TemporalAnomalyEntity` class that inherits from `Entity`. This entity will track a sequence of past events and detect when a task completion leads back to an earlier event in the same sequence.\n2. **backend/world/entities.py**: Implement a `feedbackLoopTrigger` method within `TemporalAnomalyEntity` that identifies when a task's completion event matches an earlier event in the entity's history. If a loop is detected,",
+    "timestamp": "2026-03-10T06:01:35.395716+00:00",
+    "challenge": "**   Create a temporal anomaly that allows entities to move between different timelines, creating interactive paradoxes and narrative twists by manipulating the flow of time in real-time. **Implementation Hint:** entity **",
+    "plan": "**  \n1. **backend/world/entities.py**: Introduce a new `TemporalAnomaly` class that allows entities to move between timelines.  \n2. **Code modification**: Add methods to `TemporalAnomaly` that handle time jumps, timeline switches, and event callbacks to alter time flow rates.  \n3. **Integration**: Ensure that `TemporalAnomaly` interacts with entities' behavior and age properties, creating a feedback loop where timeline movements affect the passage of time for affected entities.  \n\nThis challenge will create a rich narrative space where entities can traverse between timelines, affecting events and creating complex, interconnected storylines.",
     "implementation_hint": "entity",
-    "summary": "**   This challenge will create a temporal anomaly that introduces complex narrative twists and interactive paradoxes by allowing entities to trigger feedback loops in time dilation. **"
+    "summary": "**   Introduce a dynamic temporal anomaly that enables entities to interact with different timelines, creating unpredictable narrative outcomes and interactive paradoxes. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T04:35:58.674943+00:00",
-      "challenge": "**Introduce a Temporal Funnel that warps time and space within a specific zone, creating a region where events can be influenced by proximity and interactions with other entities.** Implementation Hint: entity",
-      "plan": "- backend/world/entities.py: Add a new static entity class \"TemporalFunnel\" with parameters for zone ID, radius of influence, and time dilation multiplier.\n- backend/world/physics.py: Modify the timeFlow mechanics for entities within the funnel's zone to apply a dynamic time dilation based on proximity.\n- backend/world/events.py: Add a new event handler for entities entering the funnel, allowing for interactive time manipulation (e.g., time jumps or spatial distortions).\n\nThis challenge will create an interactive temporal experience where using the funnel can alter the flow of time and space, adding new layers of complexity and engagement to the world.",
-      "implementation_hint": "entity",
-      "summary": "Introduce a new static entity type that warps time and space within its zone, allowing for interactive temporal experiences."
-    },
     {
       "timestamp": "2026-03-10T04:43:49.737059+00:00",
       "challenge": "Create a dynamic time flow system where the speed of time in each zone is determined by the number and type of interactions between entities.",
@@ -76,6 +69,13 @@
       "plan": "- Add a new `TimeDimensionCouplingZone` class in `backend/world/physics.py` that calculates an entity's effective dimensionality based on proximity to the zone.  \n- Create an `Entity` subclass that can be influenced by `TimeDimensionCouplingZone`, adjusting its aging rate and dimensional traversal abilities accordingly.  \n- Implement the `TimeDimensionCouplingZone` in `backend/world/world.json`, adding it to the `zones` array with customizable parameters like radius and time dilation effect.  \n- Test the interactions by placing entities within and outside of the zone to observe the unique effects on aging and dimensional perception.",
       "implementation_hint": "entity",
       "summary": "This feature will introduce a dynamic interaction where entities within a specified zone experience both time dilation and increased dimensional freedom, blending temporal and spatial dimensions in unique ways."
+    },
+    {
+      "timestamp": "2026-03-10T05:54:30.151005+00:00",
+      "challenge": "**   Introduce a feedback loop in time dilation where completing a task leads to the revisitation of a past event, potentially causing infinite loops or time travel paradoxes. **Implementation Hint:** entity **",
+      "plan": "**  \n1. **backend/world/entities.py**: Create a new `TemporalAnomalyEntity` class that inherits from `Entity`. This entity will track a sequence of past events and detect when a task completion leads back to an earlier event in the same sequence.\n2. **backend/world/entities.py**: Implement a `feedbackLoopTrigger` method within `TemporalAnomalyEntity` that identifies when a task's completion event matches an earlier event in the entity's history. If a loop is detected,",
+      "implementation_hint": "entity",
+      "summary": "**   This challenge will create a temporal anomaly that introduces complex narrative twists and interactive paradoxes by allowing entities to trigger feedback loops in time dilation. **"
     }
   ]
 }

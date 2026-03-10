@@ -6382,3 +6382,21 @@ class FeedbackLoop(Entity):
         }
 
 ENTITY_TYPES["FeedbackLoop"] = FeedbackLoop
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalAnomaly(Entity):
+    def __init__(self, position, properties, age):
+        super().__init__(position, properties, age)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Logic to handle temporal anomalies
+        # Example: Move entities between timelines
+        new_world_state = world_state.copy()
+        for entity_id, entity in new_world_state['entities'].items():
+            if entity['type'] == 'TemporalAnomaly':
+                # Implement logic to move entities between timelines
+                pass
+        return new_world_state
+
+ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
