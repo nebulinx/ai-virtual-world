@@ -6001,3 +6001,20 @@ class TimeShifter(Entity):
         }
 
 ENTITY_TYPES["TimeShifter"] = TimeShifter
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeVortex(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any]):
+        super().__init__(position, properties)
+        self.age = 0
+        self.target_zone = properties.get("target_zone", None)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        if self.target_zone in world_state:
+            self.position = world_state[self.target_zone]["position"]
+        self.age += 1
+        return self.to_dict()
+
+ENTITY_TYPES["TimeVortex"] = TimeVortex

@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T04:06:33.887012+00:00",
-    "challenge": "**   Implement a system where Time Shifter entities can alter the rate of time flow within their zone, affecting both physical time and events, creating unpredictable temporal dynamics. **Implementation Hint:** entity **",
-    "plan": "**\n\n- **1. Create TimeShifter Entity Class:**\n  - Add a new entity type `TimeShifter` with properties: baseTimeSpeed (default 1), timeSpeedMultiplier (default 1), activationDuration, and position.\n  - Include `isActive`",
+    "timestamp": "2026-03-10T04:13:59.669977+00:00",
+    "challenge": "** Introduce \"Time Vortices,\" entities that can create looping time portals between zones, allowing for causality bending and event repetition. **Implementation Hint:** entity **",
+    "plan": "**\n- **1. Create Time Vortex Entity Class:** Add a new entity class `TimeVortex` in `backend/world/entities.py` that inherits from `Entity`.\n- **2. Implement Time Loop Mechanism:** In `timeFlow.py`, modify the time flow calculation to allow for looped time zones when a Time Vortex is active.\n- **3. Create Vortex Zones:** Generate zones that connect to Time Vortex entities, allowing for event teleportation between zones.\n- **4. Enable Causality Bending:** Implement a behavior where entities can create Time Vortices, altering the timeline for other entities.\n\nThis adds a new dimension to time manipulation, expanding the world's temporal complexity.",
     "implementation_hint": "entity",
-    "summary": "**   Introduce Time Shifter entities that adjust the time flow rate in their zone, leading to dynamic and unpredictable interactions between zones and events. **"
+    "summary": "** Add Time Vortices that create looping temporal portals, enabling causality bending and event repetition. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T02:49:28.985692+00:00",
-      "challenge": "**   Create a new temporal anomaly entity that warps the flow of time across zones, causing events to happen out of order and affecting the world's topology. **Implementation Hint:** entity **",
-      "plan": "**  \n- **entity.py:** Add a new TemporalDistortionEntity class that modifies local time flow.  \n  - The entity will have properties like `timeFlow` (a multiplier for local time) and `timeShiftWindow` (a timeframe where time is distorted).  \n  - The entity's position will",
-      "implementation_hint": "entity",
-      "summary": "**   Introduce a Temporal Distortion Entity that warps time in its zone, creating unpredictable event sequences and altering the world's dimensional and temporal topology. **"
-    },
     {
       "timestamp": "2026-03-10T02:56:45.811556+00:00",
       "challenge": "**   Introduce a Dimensional Echo entity that creates ripples in the dimensional fabric, warping time and space across zones, altering event sequences and topology. **Implementation Hint:** physics   **",
@@ -76,6 +69,13 @@
       "plan": "**  \n1. **Modify entity:** Introduce a new entity class called `TimeShifter` in the `backend/world/entities.py` file.  \n2",
       "implementation_hint": "entity",
       "summary": "**   The goal is to introduce Time Shifters, entities that can alter the rate of time flow within their zone, leading to unpredictable interactions and events, enhancing the world's temporal complexity. **"
+    },
+    {
+      "timestamp": "2026-03-10T04:06:33.887012+00:00",
+      "challenge": "**   Implement a system where Time Shifter entities can alter the rate of time flow within their zone, affecting both physical time and events, creating unpredictable temporal dynamics. **Implementation Hint:** entity **",
+      "plan": "**\n\n- **1. Create TimeShifter Entity Class:**\n  - Add a new entity type `TimeShifter` with properties: baseTimeSpeed (default 1), timeSpeedMultiplier (default 1), activationDuration, and position.\n  - Include `isActive`",
+      "implementation_hint": "entity",
+      "summary": "**   Introduce Time Shifter entities that adjust the time flow rate in their zone, leading to dynamic and unpredictable interactions between zones and events. **"
     }
   ]
 }
