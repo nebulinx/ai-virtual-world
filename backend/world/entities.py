@@ -5536,3 +5536,18 @@ class ProbabilisticEntity(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["ProbabilisticEntity"] = ProbabilisticEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class TemporalRewinder(Entity):
+    def __init__(self, position, properties):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time rewinding logic here
+        # For example, allow players to revisit past events
+        self.age += 1
+        return self.to_dict()
+
+TemporalRewinder.ENTITY_TYPES["TemporalRewinder"] = TemporalRewinder

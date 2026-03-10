@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T01:31:30.037501+00:00",
-    "challenge": "Introduce a probability field that entities interact with, allowing them to alter their behavior based on probabilistic outcomes, adding uncertainty and complexity to the simulation.",
-    "plan": "- entity: new class ProbField, which defines a probability field that affects entities in the world by introducing probabilistic events and outcomes.  \n- This field would allow entities to influence the probability of certain events, such as movement patterns, interactions, or environmental changes, adding a layer of complexity and unpredictability to the simulation.  \n- The ProbField would also have parameters like influence range, probability distribution, and entity interaction strength, making it customizable and immersive for players.",
+    "timestamp": "2026-03-10T01:39:08.997921+00:00",
+    "challenge": "** Introduce an entity type capable of rewinding the flow of time, allowing players to revisit past events and alter the simulation's timeline dynamically. **Implementation Hint:** entity **",
+    "plan": "**\n1. **File to Modify:** backend/world/entities.py\n2. **Addition:** Introduce a new entity class `TimeRewwind` with methods to rewind time and control event flow.\n3. **How It Fits:** The `TimeRewwind` entity will allow players to interact with past events, creating a dynamic and unpredictable simulation where the outcome can be influenced by rewinding time.",
     "implementation_hint": "entity",
-    "summary": "Introduce a new probability field entity type that allows entities to interact with probabilistic events, altering their behavior and outcomes in the simulation."
+    "summary": "** This challenge will revolve around creating a new entity type, \"TimeRewind,\" which enables players to rewind time, thereby altering the sequence and outcomes of past events in the simulation. **"
   },
   "history": [
-    {
-      "timestamp": "2026-03-10T00:14:11.294155+00:00",
-      "challenge": "**   Introduce a new entity type, \"Temporal Current,\" which can traverse through time zones and potentially warp time flow",
-      "plan": "- Implement in codebase (hint: entity)",
-      "implementation_hint": "entity",
-      "summary": "**   Introduce a new entity type, \"Temporal Current,\" which can traverse through time zones and potentially warp time flow."
-    },
     {
       "timestamp": "2026-03-10T00:22:24.761186+00:00",
       "challenge": "**Introduce a new entity type, \"Echo Entity,\" that creates time ripples, affecting the time flow in specific zones, potentially causing time to slow or speed up locally.** Implementation Hint: entity   This could allow for interactions where entities moving through affected zones experience time differently, creating loops or affecting the passage of time relative to other zones.",
@@ -76,6 +69,13 @@
       "plan": "- backend/world/physics.py: Add a new entity type `TimeFlowManipulator` with properties for time modulation strength, duration, and zones of effect.  \n- backend/world/physics.py: Modify the physics engine to handle time flow modulation in different zones, potentially altering the perception of time for entities within those zones.  \n- backend/world/events.py: Introduce a new event type `TemporalModifierEvent` that allows for global time flow adjustments, creating a meta-layer of temporal control.  \n- backend/world/entities.py: Create a new entity type `TemporalAgent` that can",
       "implementation_hint": "physics",
       "summary": "This cycle aims to revolutionize the simulation by introducing a new dimension where time itself becomes a playable element, enabling players to reshape the fabric of spacetime."
+    },
+    {
+      "timestamp": "2026-03-10T01:31:30.037501+00:00",
+      "challenge": "Introduce a probability field that entities interact with, allowing them to alter their behavior based on probabilistic outcomes, adding uncertainty and complexity to the simulation.",
+      "plan": "- entity: new class ProbField, which defines a probability field that affects entities in the world by introducing probabilistic events and outcomes.  \n- This field would allow entities to influence the probability of certain events, such as movement patterns, interactions, or environmental changes, adding a layer of complexity and unpredictability to the simulation.  \n- The ProbField would also have parameters like influence range, probability distribution, and entity interaction strength, making it customizable and immersive for players.",
+      "implementation_hint": "entity",
+      "summary": "Introduce a new probability field entity type that allows entities to interact with probabilistic events, altering their behavior and outcomes in the simulation."
     }
   ]
 }

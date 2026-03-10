@@ -1,12 +1,6 @@
 {
   "latest": [
     {
-      "timestamp": "2026-03-09T19:12:30.243056",
-      "headline": "```json",
-      "body": "{ \"headline\": \"A New Era for the Virtual Realm\", \"body\": \"The virtual simulation continues to evolve in its 4-dimensional environment, currently hosting 21 distinct events without any recorded anomalies. While no significant issues have arisen, the system remains poised",
-      "category": "entity"
-    },
-    {
       "timestamp": "2026-03-09T19:20:18.698020",
       "headline": "Simulation status update",
       "body": "The simulation holds 0 entities, 21 recorded events, and 4 dimensions.",
@@ -298,6 +292,12 @@
       "timestamp": "2026-03-10T01:31:29.992995",
       "headline": "The Digital Universe Transforms Its Landscape",
       "body": "The virtual simulation has undergone a significant transformation as a bug in the core system was promptly resolved. This fix has led to the emergence of new user interfaces and gameplay mechanics, enhancing the overall experience for participants. Ongoing work focuses on refining these updates to ensure stability and optimize user interaction across all dimensions.",
+      "category": "entity"
+    },
+    {
+      "timestamp": "2026-03-10T01:39:08.945308",
+      "headline": "Simulation status update",
+      "body": "The simulation holds 0 entities, 30 recorded events, and 4 dimensions.",
       "category": "entity"
     }
   ]
