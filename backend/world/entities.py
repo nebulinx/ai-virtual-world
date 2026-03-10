@@ -6533,3 +6533,29 @@ class TemporalAnomaly(Entity):
         }
 
 ENTITY_TYPES["TemporalAnomaly"] = TemporalAnomaly
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class DimensionalDisruptor(Entity):
+    def __init__(self, position: Dict[str, float], properties: Dict[str, Any] = None):
+        super().__init__(position, properties)
+        self.age = 0
+        self.temporal_shift = properties.get('temporal_shift', 0)
+        self.permanent = properties.get('permanent', False)
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        self.age += 1
+        if self.permanent or self.age >= self.temporal_shift:
+            world_state['dimensions'] += 1 if not self.permanent else 0
+        return super().update(world_state)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **super().to_dict(),
+            'temporal_shift': self.temporal_shift,
+            'permanent': self.permanent,
+            'age': self.age
+        }
+
+ENTITY_TYPES["DimensionalDisruptor"] = DimensionalDisruptor
