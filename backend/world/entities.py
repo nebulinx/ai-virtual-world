@@ -5370,3 +5370,29 @@ class TemporalWarp(Entity):
         }
 
 ENTITY_TYPES["TemporalWarp"] = TemporalWarp
+
+from typing import Dict, Any
+from backend.world.entities import Entity, ENTITY_TYPES
+
+class FifthDimensionEntity(Entity):
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement logic for updating the entity in the fifth dimension
+        # For example, move the entity to a different zone based on its properties
+        new_position = self.position
+        if self.properties.get("move_to_dimension"):
+            new_dimension = self.properties["move_to_dimension"]
+            # Logic to find and move to the new dimension
+            # Update new_position based on the new dimension
+            pass
+        
+        # Update the entity's properties or state
+        new_properties = self.properties.copy()
+        new_properties["age"] += 1
+        
+        return {
+            "position": new_position,
+            "properties": new_properties,
+            "age": self.age + 1
+        }
+
+ENTITY_TYPES["FifthDimensionEntity"] = FifthDimensionEntity
