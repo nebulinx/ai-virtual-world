@@ -1,19 +1,12 @@
 {
   "latest": {
-    "timestamp": "2026-03-10T01:08:32.607799+00:00",
-    "challenge": "Create a new mechanic where entities can interact with a fourth spatial dimension, allowing them to temporarily alter the physical dimensions' properties and create complex spatial effects. Implementation Hint: entity",
-    "plan": "1. **backend/world/entities.py**: Add a new class `DimensionTraversalEntity` that inherits from `Entity`.  \n2. **Adding new methods**: Implement `dimensionTraversalMove` which allows entities to move along the fourth dimension and modify the time flow in the affected zones.  \n3. **Modifying time flow**: Update the time flow mechanics to depend on the entity's position in the fourth dimension, creating dynamic and interactive time effects.  \n4. **Allowing zone interactions**: When an entity moves through the fourth dimension, it can trigger events in the lower dimensions, causing unexpected spatial and",
+    "timestamp": "2026-03-10T01:15:31.616562+00:00",
+    "challenge": "Introduce an entity class that allows entities to create subjective time distortions, effectively giving them agency over the passage of time within specific zones or areas.",
+    "plan": "- entity.py: Add a new EntityTimeTwister class\n- physics.py: Modify timeFlow for affected dimensions when TimeTwister events occur\n- events.py: Add a new event type (TimeDistortionEvent) that triggers time flow modifications based on EntityTimeTwister behavior\n\nThis challenge will allow for creative exploration of time as a dynamic, interactive element rather than just a constant progression, adding depth to the simulation while keeping it fresh and engaging.",
     "implementation_hint": "entity",
-    "summary": "By introducing a fourth spatial dimension that entities can traverse, the simulation will experience unique interactions where entity movements in this dimension affect the lower dimensions' behavior and time flow."
+    "summary": "Create an entity type that enables manipulation of time flow, adding a new layer of agency and complexity to the simulation."
   },
   "history": [
-    {
-      "timestamp": "2026-03-09T23:51:03.613218+00:00",
-      "challenge": "**   Introduce a new entity type, \"Temporal Guard,\" capable of detecting and mitigating Temporal Shifters to prevent causality loops and maintain temporal stability. **Implementation Hint:** entity **",
-      "plan": "**\n1. **Create a new entity type:** TemporalGuard in entities.py.\n2. **Add detection mechanism:** The TemporalGuard entity will monitor for Temporal Shifters and initiate mitigation.\n3. **Implement buffer movement:** TemporalGuard will move entities through a buffer zone, ensuring safe navigation through temporal anomalies.\n4. **Ensure causality prevention:** TemporalGuard will prevent any changes from propagating back in time, maintaining temporal integrity.\n\nThis plan introduces a new entity type to handle temporal anomalies, ensuring the simulation remains",
-      "implementation_hint": "entity",
-      "summary": "**   Introduce a new entity type, \"Temporal Guard,\" to detect and resolve Temporal Shifters, ensuring temporal consistency and preventing causality paradoxes. **"
-    },
     {
       "timestamp": "2026-03-09T23:58:53.651946+00:00",
       "challenge": "**Introduce a new fifth dimension that functions as a time dimension, allowing entities to move through time in addition to space, creating temporal gateways and paradoxes that Temporal Guards must resolve.** Implementation Hint: entity",
@@ -76,6 +69,13 @@
       "plan": "- backend/world/events.py: Create a new event class for the Time Manipulator zone\n- Add an event type that triggers when an entity enters the zone\n- Modify the timeFlow property of the affected zones\n- Implement a function to calculate time effects on entities in the zone\n\nThis challenge introduces a dynamic interaction where entities can influence time flow, adding a layer of complexity and interactivity to the virtual world.",
       "implementation_hint": "entity",
       "summary": "Create a new event type that modifies time flow in the affected zones, enabling entities to influence the passage of time."
+    },
+    {
+      "timestamp": "2026-03-10T01:08:32.607799+00:00",
+      "challenge": "Create a new mechanic where entities can interact with a fourth spatial dimension, allowing them to temporarily alter the physical dimensions' properties and create complex spatial effects. Implementation Hint: entity",
+      "plan": "1. **backend/world/entities.py**: Add a new class `DimensionTraversalEntity` that inherits from `Entity`.  \n2. **Adding new methods**: Implement `dimensionTraversalMove` which allows entities to move along the fourth dimension and modify the time flow in the affected zones.  \n3. **Modifying time flow**: Update the time flow mechanics to depend on the entity's position in the fourth dimension, creating dynamic and interactive time effects.  \n4. **Allowing zone interactions**: When an entity moves through the fourth dimension, it can trigger events in the lower dimensions, causing unexpected spatial and",
+      "implementation_hint": "entity",
+      "summary": "By introducing a fourth spatial dimension that entities can traverse, the simulation will experience unique interactions where entity movements in this dimension affect the lower dimensions' behavior and time flow."
     }
   ]
 }

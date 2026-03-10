@@ -5447,3 +5447,25 @@ class FourthDimensionalEntity(Entity):
         return self.to_dict()
 
 ENTITY_TYPES["FourthDimensionalEntity"] = FourthDimensionalEntity
+
+from backend.world.entities import Entity, ENTITY_TYPES
+from typing import Dict, Any
+
+class TimeDistortionField(Entity):
+    def __init__(self, position, properties=None):
+        super().__init__(position, properties)
+        self.age = 0
+
+    def update(self, world_state: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement time distortion logic here
+        # For example, slowing down time in a specific area
+        world_state['time_dilation'] = 0.5  # Example dilation factor
+        return world_state
+
+    def to_dict(self):
+        return {
+            **super().to_dict(),
+            'age': self.age
+        }
+
+ENTITY_TYPES["TimeDistortionField"] = TimeDistortionField
